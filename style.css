@@ -1,44 +1,107 @@
 :root {
-  --bg: #efe3c2;
-  --cd: #fff9e6;
-  --fg: #2b190c;
-  --sb: #7c5c36;
-  --bl: #8b2318;
-  --gr: #2e8b57;
-  --or: #c2410c;
-  --sp: #d8be8a;
-  --gd: #c58f24;
-  --hb: #6e2918;
-  --jd: #1f6f5c;
-  --bamboo-dk: #7a4f26;
-  --bamboo-md: #b68347;
-  --bamboo-lt: #dfc088;
-  --thanaka: #f7e7a8;
-  --gold-hi: #ffe28a;
-  --sh: 0 4px 12px rgba(92, 54, 20, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  --bg: #dfce9f;
+  --cd: #f9ecc9;
+  --fg: #2b180a;
+  --sb: #634424;
+  --bl: #7a2315;
+  --gr: #4c8c3b;
+  --or: #b8370b;
+  --sp: #c49c59;
+  --gd: #c89628;
+  --hb: #683c1e;
+  --jd: #2c6829;
+  --bamboo-1: #946b38;
+  --bamboo-2: #c9a05d;
+  --bamboo-3: #e8cb8e;
+  --bamboo-line: #4e3315;
+  --card-top: #fcf2d8;
+  --card-bot: #f2dfb1;
+  --card-inner: #d4a656;
+  --btn-top: #fdf5de;
+  --btn-bot: #eed7a1;
+  --btn-fg: #4b1a0c;
+  --pri-top: #9e2d1c;
+  --pri-bot: #6e1b10;
+  --pri-fg: #fff5d6;
+  --bar-bg: #462b12;
+  --bar-border: #d5ab63;
+  --wood-1: #966b3a;
+  --wood-2: #865c2e;
+  --wood-3: #734c23;
+  --sh: 0 3px 8px rgba(58, 35, 12, 0.2), inset 0 1px 0 rgba(255, 250, 230, 0.7);
   color-scheme: light dark;
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+/* Dark Mode: ညဘက် မီးအိမ်နွေးနွေးနှင့် သစ်သားညိုမှောင် အရောင်အတွဲအစပ် */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #1c140c;
-    --cd: #2c1e12;
-    --fg: #f7ebd0;
-    --sb: #c2a278;
-    --bl: #f3b562;
-    --sp: #593e24;
-    --hb: #4a1e12;
-    --or: #ffb86b;
-    --bamboo-dk: #4d3117;
-    --bamboo-md: #7c532a;
-    --bamboo-lt: #a87b46;
-    --thanaka: #5e4b1f;
-    --gold-hi: #ffd97d;
-    --sh: 0 6px 16px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(255, 224, 150, 0.1);
+    --bg: #181009;
+    --cd: #2b1b10;
+    --fg: #f8ebd0;
+    --sb: #d6b687;
+    --bl: #f5b963;
+    --gr: #58a649;
+    --or: #ff9d5c;
+    --sp: #6e4a27;
+    --gd: #e2ad3b;
+    --hb: #3a1f11;
+    --jd: #3a8336;
+    --bamboo-1: #5a3a1c;
+    --bamboo-2: #87592c;
+    --bamboo-3: #ad773e;
+    --bamboo-line: #120a05;
+    --card-top: #2f1e12;
+    --card-bot: #22150c;
+    --card-inner: #8c612b;
+    --btn-top: #382415;
+    --btn-bot: #27180d;
+    --btn-fg: #f9e4b4;
+    --pri-top: #8f2618;
+    --pri-bot: #5d150c;
+    --pri-fg: #fff2cf;
+    --bar-bg: #140c06;
+    --bar-border: #96682f;
+    --wood-1: #3b2514;
+    --wood-2: #311e10;
+    --wood-3: #26170c;
+    --sh: 0 4px 12px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 218, 138, 0.12);
   }
+}
+
+:root[data-theme="dark"] {
+  --bg: #181009;
+  --cd: #2b1b10;
+  --fg: #f8ebd0;
+  --sb: #d6b687;
+  --bl: #f5b963;
+  --gr: #58a649;
+  --or: #ff9d5c;
+  --sp: #6e4a27;
+  --gd: #e2ad3b;
+  --hb: #3a1f11;
+  --jd: #3a8336;
+  --bamboo-1: #5a3a1c;
+  --bamboo-2: #87592c;
+  --bamboo-3: #ad773e;
+  --bamboo-line: #120a05;
+  --card-top: #2f1e12;
+  --card-bot: #22150c;
+  --card-inner: #8c612b;
+  --btn-top: #382415;
+  --btn-bot: #27180d;
+  --btn-fg: #f9e4b4;
+  --pri-top: #8f2618;
+  --pri-bot: #5d150c;
+  --pri-fg: #fff2cf;
+  --bar-bg: #140c06;
+  --bar-border: #96682f;
+  --wood-1: #3b2514;
+  --wood-2: #311e10;
+  --wood-3: #26170c;
+  --sh: 0 4px 12px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 218, 138, 0.12);
 }
 
 * {
@@ -49,15 +112,14 @@ html,
 body {
   height: 100%;
   margin: 0;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(247, 231, 168, 0.55), transparent 60%),
-    var(--bg);
+  background: var(--bg);
   color: var(--fg);
   font: 16px/1.65 -apple-system, "Noto Sans Myanmar", "Padauk", sans-serif;
   overflow: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Outer Bamboo & Rattan Frame around Game App */
+/* ဘေးနှစ်ဖက် ဝါးဆစ်တိုင်များပါသော အဓိက App ဘောင် */
 #app {
   max-width: 430px;
   margin: 0 auto;
@@ -66,90 +128,117 @@ body {
   flex-direction: column;
   background: var(--bg);
   position: relative;
-  border-left: 5px solid var(--bamboo-md);
-  border-right: 5px solid var(--bamboo-md);
-  box-shadow:
-    inset 0 0 0 2px var(--bamboo-dk),
-    0 8px 28px rgba(43, 25, 12, 0.25);
+  padding-left: 14px;
+  padding-right: 14px;
+  box-sizing: border-box;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
 }
 
-/* Top Gold-Festoon / Village Banner Strip */
+/* ဘယ်/ညာ ဝါးဆစ်တိုင် ဂရပ်ဖစ် */
+#app::before,
+#app::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 14px;
+  z-index: 4;
+  pointer-events: none;
+  background-color: var(--bamboo-2);
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--bamboo-line) 0%,
+      var(--bamboo-2) 32%,
+      var(--bamboo-3) 56%,
+      var(--bamboo-1) 88%,
+      var(--bamboo-line) 100%
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='120'%3E%3Crect x='0' y='56' width='14' height='4' fill='%232e1b09'/%3E%3Crect x='0' y='60' width='14' height='2.5' fill='%23f5df9f' fill-opacity='.45'/%3E%3Crect x='0' y='62.5' width='14' height='2' fill='%232e1b09'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+}
+#app::before {
+  left: 0;
+}
+#app::after {
+  right: 0;
+}
+
+/* ထိပ်ဆုံး ပန်းခွေရွှေတန်း Banner */
 #ib {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      #b98124 0px,
-      #d6a33b 18px,
-      #b98124 36px
-    );
-  color: #2b190c;
+  padding: 6px 10px;
+  background-color: #4d2e14;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ccircle cx='18' cy='18' r='13' stroke='%23d8a83e' stroke-width='1.5' fill='none'/%3E%3Ccircle cx='18' cy='18' r='8' stroke='%23f4d378' stroke-width='1' fill='none'/%3E%3Cpath d='M18 5C21 11 25 15 31 18C25 21 21 25 18 31C15 25 11 21 5 18C11 15 15 11 18 5Z' stroke='%23d8a83e' stroke-width='1.1' fill='none'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, #5c3718, #3d220d);
+  background-size: 34px 34px, 100% 100%;
+  color: #fcebc0;
   font-size: 13px;
   font-weight: 700;
-  border-bottom: 2px solid var(--bamboo-dk);
+  border-bottom: 3px solid var(--bamboo-2);
+  box-shadow: inset 0 -1px 0 var(--bamboo-line);
 }
 #ib[hidden] {
   display: none;
 }
 #ib span {
   flex: 1;
+  color: #fcebc0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
 }
 #ib button {
   width: auto;
   margin: 0;
   padding: 4px 12px;
-  border: 1.5px solid var(--gold-hi);
-  border-radius: 14px;
-  background: linear-gradient(180deg, #5d2b18, #3d1b0e);
-  color: #fff6dc;
+  border: 2px solid var(--gd);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #6b3f1d, #44250e);
+  color: #fff4d2;
   font: inherit;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-  transition: transform 0.15s ease, filter 0.2s ease;
-}
-#ib button:hover {
-  filter: brightness(1.12);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+  transition: transform 0.15s ease;
 }
 #ib button:active {
   transform: scale(0.94);
 }
 
-/* Village Pavilion Header with Woven Bamboo Border */
+/* ကျေးလက်အိမ်မိုးနှင့် သစ်သား Header */
 #hd {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
+  gap: 10px;
+  padding: 10px 12px;
   background:
-    radial-gradient(circle at 80% 15%, rgba(247, 231, 168, 0.2), transparent 50%),
-    linear-gradient(180deg, #7c351d, #5c2312);
-  color: #fff4d2;
+    linear-gradient(180deg, rgba(88, 166, 73, 0.18) 0%, transparent 32%),
+    linear-gradient(180deg, #734220, #4d2911);
+  color: #fff5d6;
   position: relative;
-  border-bottom: 3px solid var(--bamboo-md);
-  box-shadow: inset 0 -2px 0 var(--bamboo-dk);
+  border-bottom: 4px solid var(--bamboo-2);
+  box-shadow: inset 0 2px 0 rgba(255, 224, 150, 0.18), inset 0 -1px 0 var(--bamboo-line);
 }
 #hd small {
   display: block;
-  color: #f3d69b;
+  color: #f3d79b;
   font-size: 12px;
   line-height: 1.4;
 }
 #hd b {
   font-family: "Noto Serif Myanmar", "Noto Sans Myanmar", serif;
-  font-size: 16px;
-  letter-spacing: 0.2px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  font-size: 17px;
+  color: #fff6da;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 .nm {
   min-width: 0;
 }
 
-/* Cute Folk Character Avatar Medallion */
+/* ဇာတ်ကောင်ပုံ Medallion */
 .av {
   width: 56px;
   height: 56px;
@@ -158,32 +247,11 @@ body {
   border-radius: 50%;
   overflow: hidden;
   position: relative;
-  padding: 2.5px;
-  background:
-    radial-gradient(circle at 30% 25%, #ffe699, #b77c20 82%);
-  box-shadow:
-    0 0 0 2px var(--bamboo-dk),
-    0 3px 8px rgba(0, 0, 0, 0.35);
-  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.av::before {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg 75deg,
-    rgba(255, 235, 160, 0.8) 95deg,
-    transparent 120deg 255deg,
-    rgba(255, 235, 160, 0.6) 275deg,
-    transparent 300deg 360deg
-  );
-  animation: haloSpin 8s linear infinite;
-  pointer-events: none;
-}
-.av:hover {
-  transform: scale(1.05);
+  padding: 2px;
+  background: linear-gradient(145deg, #ffe294, #b57a1e);
+  border: 2.5px solid var(--bamboo-line);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s ease;
 }
 .av:active {
   transform: scale(0.92);
@@ -193,177 +261,156 @@ body {
   height: 100%;
   display: block;
   border-radius: 50%;
-  background: var(--thanaka);
-  position: relative;
-  z-index: 1;
-  animation: bob 3.4s ease-in-out infinite;
+  background: #f9e6b3;
+  animation: bob 3.5s ease-in-out infinite;
 }
 
-/* Header Pill Button (Currency / Mode) */
+/* ပိုက်ဆံ/ခလုတ် Pill — စာသားအရောင်ကို နောက်ခံနဲ့ အမြဲပြတ်သားစေရန် ထိန်းညှိထားသည် */
 #hd .m {
   margin-left: auto;
-  background: linear-gradient(180deg, #fff6da, #e9cb8b);
-  border: 2px solid var(--bamboo-dk);
-  color: #3a1d0c;
+  background: linear-gradient(180deg, var(--btn-top), var(--btn-bot));
+  border: 2px solid var(--bamboo-2);
+  color: var(--btn-fg);
   padding: 5px 11px;
-  border-radius: 14px;
+  border-radius: 10px;
   font-weight: 700;
   font-size: 12px;
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.22), inset 0 1px 0 #fff;
-  transition: transform 0.15s ease, filter 0.2s ease;
-}
-#hd .m:hover {
-  filter: brightness(1.04);
+  box-shadow: inset 0 0 0 1px rgba(200, 150, 40, 0.45), 0 2px 4px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease;
 }
 #hd .m:active {
   transform: scale(0.94);
 }
 
-/* Woven Bamboo & Lotus Fretwork Strip */
+/* ကြာပွင့်နှင့် စိမ်းလန်းသော ဇာပန်းတန်း */
 .kn {
-  height: 13px;
+  height: 18px;
   flex: none;
-  background:
-    linear-gradient(180deg, rgba(122, 79, 38, 0.22), rgba(247, 231, 168, 0.25)),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='13'%3E%3Cpath d='M0 6.5Q9 0.5 18 6.5T36 6.5' stroke='%239b6629' stroke-width='1.5' fill='none'/%3E%3Cpath d='M18 2.5L21.5 6.5L18 10.5L14.5 6.5Z' fill='%23c58f24' fill-opacity='.55'/%3E%3Ccircle cx='9' cy='6.5' r='1.5' fill='%238b2318'/%3E%3Ccircle cx='27' cy='6.5' r='1.5' fill='%232e8b57'/%3E%3C/svg%3E")
-    repeat-x center;
-  border-bottom: 1px solid rgba(122, 79, 38, 0.35);
+  background-color: var(--wood-2);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='18'%3E%3Cpath d='M0 16C6 6 18 6 24 16C30 6 42 6 48 16' stroke='%234c7c34' stroke-width='2.2' fill='%23639943' fill-opacity='.55'/%3E%3Cpath d='M24 3C28 8 30 12 24 16C18 12 20 8 24 3Z' fill='%23f3c68f' stroke='%238c3b2b' stroke-width='1'/%3E%3Cpath d='M16 9C20 10 22 13 24 16C20 15 17 13 16 9Z' fill='%23e8a57c'/%3E%3Cpath d='M32 9C28 10 26 13 24 16C28 15 31 13 32 9Z' fill='%23e8a57c'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: center;
+  border-top: 1px solid var(--bamboo-line);
+  border-bottom: 2px solid var(--bamboo-line);
 }
 
-/* Stat / Attribute Bar with Rattan Trim */
+/* Stat / Attribute Bar */
 #st {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5px 14px;
-  padding: 8px 14px 10px;
+  gap: 5px 12px;
+  padding: 7px 10px 8px;
   background:
-    linear-gradient(180deg, var(--cd), color-mix(in srgb, var(--cd) 88%, var(--sp)));
-  box-shadow: var(--sh);
-  border-bottom: 2px solid var(--bamboo-md);
+    repeating-linear-gradient(
+      180deg,
+      var(--wood-1) 0px,
+      var(--wood-2) 14px,
+      var(--wood-3) 15px
+    );
+  border-bottom: 3px solid var(--bamboo-2);
+  box-shadow: inset 0 1px 0 rgba(255, 232, 180, 0.22);
   position: relative;
   z-index: 1;
 }
 .b {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-size: 12px;
 }
 .b span {
-  width: 62px;
-  color: var(--sb);
-  font-weight: 600;
+  width: 60px;
+  color: #fff6dc;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
 }
 .b i {
   flex: 1;
-  height: 9px;
-  background: #e7d8b5;
-  border: 1.5px solid var(--bamboo-dk);
+  height: 10px;
+  background: var(--bar-bg);
+  border: 1.5px solid var(--bar-border);
   border-radius: 999px;
   overflow: hidden;
-  position: relative;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.65);
 }
 .b u {
   display: block;
   height: 100%;
   border-radius: 999px;
-  position: relative;
-  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.3s ease;
-}
-.b u::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.35) 50%,
-    transparent 100%
-  );
-  transform: translateX(-100%);
-  animation: barSheen 3.8s ease-in-out infinite;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.35), inset 0 -2px 0 rgba(0, 0, 0, 0.28);
+  transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .b em {
   width: 38px;
   text-align: right;
   font-style: normal;
-  font-variant-numeric: tabular-nums;
+  color: #fff6dc;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
 }
 .b.lo em {
   color: var(--or);
-  font-weight: 700;
   animation: dangerBlink 1.3s ease-in-out infinite;
 }
-.b.lo u {
-  filter: saturate(1.4) brightness(0.92);
-}
 
-/* Rural Paddy & Palm-Leaf Playfield Canvas */
+/* ပင်မစာမျက်နှာ နောက်ခံ */
 #ct {
   flex: 1;
   overflow-y: auto;
-  padding: 12px 14px 18px;
+  padding: 10px 10px 16px;
   scroll-behavior: smooth;
   overscroll-behavior: contain;
   background-color: var(--bg);
   background-image:
-    radial-gradient(circle at 15% 8%, rgba(247, 231, 168, 0.65), transparent 42%),
-    radial-gradient(circle at 88% 92%, rgba(46, 139, 87, 0.12), transparent 45%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cpath d='M0 54Q18 44 36 54T72 54' stroke='%238a6d4b' stroke-opacity='.11' stroke-width='1.2' fill='none'/%3E%3Cpath d='M0 64Q18 54 36 64T72 64' stroke='%232e8b57' stroke-opacity='.1' stroke-width='1.1' fill='none'/%3E%3Cpath d='M36 10C41 18 41 24 36 30C31 24 31 18 36 10Z' fill='%23c58f24' fill-opacity='.09'/%3E%3Ccircle cx='12' cy='16' r='1.6' fill='%23c58f24' fill-opacity='.16'/%3E%3Ccircle cx='60' cy='22' r='1.4' fill='%238b2318' fill-opacity='.12'/%3E%3C/svg%3E");
+    radial-gradient(circle at 50% 18%, rgba(200, 150, 40, 0.16), transparent 68%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 30Q15 24 30 30T60 30' stroke='%23b8862b' stroke-opacity='.14' fill='none'/%3E%3Cpath d='M0 48Q15 42 30 48T60 48' stroke='%2358a649' stroke-opacity='.11' fill='none'/%3E%3C/svg%3E");
 }
 #ct::-webkit-scrollbar {
-  width: 5px;
-}
-#ct::-webkit-scrollbar-track {
-  background: transparent;
+  width: 4px;
 }
 #ct::-webkit-scrollbar-thumb {
-  background: var(--bamboo-md);
+  background: var(--bamboo-2);
   border-radius: 999px;
 }
 #ct.in {
   animation: tabin 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Charming Folk Scroll Card with Bamboo & Lotus Corners */
+/* ရွှေပန်းခွေထောင့်ပါ Card (.c) */
 .c {
   position: relative;
-  background:
-    linear-gradient(180deg, rgba(255, 252, 240, 0.85), rgba(255, 249, 230, 0.96));
-  border: 2px solid var(--bamboo-md);
-  border-radius: 16px;
-  padding: 12px 15px;
-  margin: 10px 0;
-  box-shadow: var(--sh), inset 0 0 0 1px rgba(197, 143, 36, 0.25);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.c:hover {
-  border-color: var(--bamboo-dk);
-  transform: translateY(-1px);
+  background: linear-gradient(180deg, var(--card-top), var(--card-bot));
+  color: var(--fg);
+  border: 2px solid var(--bamboo-2);
+  border-radius: 10px;
+  padding: 11px 14px;
+  margin: 7px 0;
+  box-shadow:
+    inset 0 0 0 1.5px var(--card-inner),
+    var(--sh);
+  transition: transform 0.18s ease;
 }
 .c::before,
 .c::after {
   content: "";
   position: absolute;
-  width: 26px;
-  height: 26px;
-  opacity: 0.85;
+  width: 28px;
+  height: 28px;
   pointer-events: none;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Cpath d='M2 24C2 11 10 2 24 2' stroke='%239b6629' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3Cpath d='M3 16C5 10 10 5 16 3' stroke='%23c58f24' stroke-width='1.2' fill='none'/%3E%3Cpath d='M6 6C9 6 11 8 11 11C8 11 6 9 6 6Z' fill='%232e8b57' fill-opacity='.65'/%3E%3Ccircle cx='3.5' cy='3.5' r='1.8' fill='%238b2318'/%3E%3C/svg%3E")
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M2 26C2 12 10 3 26 2' stroke='%23c89628' stroke-width='1.8' fill='none'/%3E%3Cpath d='M3 18C6 11 11 6 18 3' stroke='%23e2ad3b' stroke-width='1.3' fill='none'/%3E%3Cpath d='M6 12C6 8 9 6 13 6' stroke='%23c89628' stroke-width='1.2' fill='none'/%3E%3Ccircle cx='5' cy='5' r='2' fill='%23e2ad3b'/%3E%3C/svg%3E")
     no-repeat;
 }
 .c::before {
-  top: 3px;
-  left: 3px;
+  top: 2px;
+  left: 2px;
 }
 .c::after {
-  bottom: 3px;
-  right: 3px;
+  bottom: 2px;
+  right: 2px;
   transform: rotate(180deg);
 }
 
@@ -372,196 +419,164 @@ body {
 .c b,
 .sh b {
   font-family: "Noto Serif Myanmar", "Noto Sans Myanmar", serif;
-  letter-spacing: 0.2px;
 }
 
-/* Rural Festival / Chapter Hero Card */
 .hero {
   text-align: center;
-  padding: 22px 16px;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(247, 231, 168, 0.7), transparent 65%),
-    var(--cd);
-  border-color: var(--bamboo-dk);
+  padding: 18px 14px;
+  border-width: 2.5px;
 }
 .hero h2 {
-  margin: 8px 0 4px;
+  margin: 6px 0 4px;
   color: var(--bl);
 }
-.hero::before,
-.hero::after {
-  width: 32px;
-  height: 32px;
-  background-size: contain;
-}
 
-/* Narrative / Event Log Cards */
+/* ဇာတ်လမ်းစာကြောင်း Card များ */
 #ct > div:not(.y):not(.c) {
-  background: var(--cd);
-  border: 1.5px solid rgba(182, 131, 71, 0.55);
-  border-left: 4px solid var(--bamboo-md);
-  border-radius: 12px;
-  padding: 9px 12px;
+  position: relative;
+  background: linear-gradient(180deg, var(--card-top), var(--card-bot));
+  color: var(--fg);
+  border: 2px solid var(--bamboo-2);
+  border-radius: 9px;
+  padding: 8px 12px;
   margin: 6px 0;
   font-size: 15px;
-  box-shadow: 0 2px 5px rgba(92, 54, 20, 0.07);
-  transition: transform 0.16s ease, border-color 0.2s ease;
-}
-#ct > div:not(.y):not(.c):hover {
-  border-color: var(--bamboo-dk);
+  box-shadow:
+    inset 0 0 0 1.5px var(--card-inner),
+    0 2px 5px rgba(0, 0, 0, 0.18);
 }
 
 .n {
-  animation: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: rise 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-/* Wooden / Bamboo Choice Buttons */
+/* ရွေးချယ်စရာ ခလုတ်များ — Light & Dark နှစ်မျိုးလုံး စာသားထင်ရှားစေရန် */
 #ct button,
 #md button {
   display: block;
   width: 100%;
-  margin: 7px 0;
-  padding: 12px 14px;
+  margin: 6px 0;
+  padding: 11px 14px;
   font: inherit;
-  color: var(--bl);
-  background:
-    linear-gradient(180deg, #fffdf6, #f5e7c4);
-  border: 1.5px solid var(--bamboo-md);
-  border-radius: 14px;
+  font-weight: 600;
+  color: var(--btn-fg);
+  background: linear-gradient(180deg, var(--btn-top), var(--btn-bot));
+  border: 2px solid var(--bamboo-2);
+  border-radius: 10px;
   cursor: pointer;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 3px 0 rgba(122, 79, 38, 0.22), 0 2px 6px rgba(0, 0, 0, 0.06);
-  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: inset 0 0 0 1px rgba(200, 150, 40, 0.35), 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.14s ease, filter 0.2s ease, border-color 0.2s ease;
 }
 #ct button:hover,
 #md button:hover {
-  border-color: var(--bamboo-dk);
-  box-shadow: 0 4px 0 rgba(122, 79, 38, 0.28), var(--sh);
-  transform: translateY(-1px);
+  border-color: var(--gd);
+  filter: brightness(1.05);
 }
 #ct button:active,
 #md button:active {
-  transform: translateY(1px) scale(0.98);
-  box-shadow: 0 1px 0 rgba(122, 79, 38, 0.2);
+  transform: scale(0.97);
 }
 
-/* Primary Action Button */
+/* Primary ခလုတ် */
 #ct button.pri,
 #md button.pri {
-  background: linear-gradient(180deg, #9f2b1c, #741b12);
-  border: 1.5px solid var(--bamboo-dk);
-  color: #fff6dc;
+  background: linear-gradient(180deg, var(--pri-top), var(--pri-bot));
+  border-color: var(--gd);
+  color: var(--pri-fg);
   font-weight: 700;
-  box-shadow: 0 3px 0 #47100a, 0 4px 10px rgba(116, 27, 18, 0.28);
-}
-#ct button.pri::after,
-#md button.pri::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 235, 165, 0.3),
-    transparent
-  );
-  transform: skewX(-20deg);
-  animation: btnSweep 4.5s ease-in-out infinite;
-  pointer-events: none;
-}
-#ct button.pri:hover,
-#md button.pri:hover {
-  border-color: var(--gold-hi);
+  box-shadow: inset 0 1px 0 rgba(255, 224, 150, 0.32), 0 3px 6px rgba(0, 0, 0, 0.35);
 }
 
+/* အသက်နှင့် ခုနှစ် ခေါင်းစဉ်စာတန်း (.y) */
 .y {
   color: var(--sb);
-  font-size: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
   text-align: center;
-  margin-top: 14px;
-  letter-spacing: 0.3px;
-}
-.y::before,
-.y::after {
-  content: " ✿ ";
-  color: var(--gr);
-  opacity: 0.8;
+  margin: 10px 0 6px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
 }
 .r {
   color: var(--or);
-  font-weight: 600;
+  font-weight: 700;
 }
 small {
   color: var(--sb);
 }
 
-/* Bottom Action Dock & Cute Jade Age/Action Badge */
+/* အောက်ခြေ အသက် +၁ ခလုတ် အပိုင်း (#dk) */
 #dk {
   display: none;
   align-items: center;
-  gap: 12px;
-  padding: 9px 14px;
+  gap: 10px;
+  padding: 9px 12px;
   background:
-    linear-gradient(180deg, #f8eccf, #ead5a8);
-  border-top: 2px solid var(--bamboo-md);
-  box-shadow: 0 -3px 10px rgba(92, 54, 20, 0.1);
+    repeating-linear-gradient(
+      180deg,
+      #4b2d15 0px,
+      #3b220f 16px,
+      #2c180a 17px
+    );
+  color: #fff4d2;
+  border-top: 3px solid var(--bamboo-2);
+  box-shadow: inset 0 1px 0 rgba(255, 224, 150, 0.18);
+}
+#dk small {
+  color: #e8cb8e;
 }
 .bs {
   flex: 1;
 }
+
+/* အစိမ်းရောင် အဝိုင်းခလုတ် (+ အသက်) */
 .ag {
-  width: 66px;
-  height: 66px;
+  width: 64px;
+  height: 64px;
   flex: none;
   border-radius: 50%;
-  border: 3px solid var(--bamboo-dk);
+  border: 3px solid #f7e4b2;
   background:
-    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.35), transparent 55%),
-    linear-gradient(135deg, #3ba369, var(--gr) 58%, var(--jd));
-  color: #fffdf6;
+    radial-gradient(circle at 35% 30%, #6fc24c, var(--gr) 62%, var(--jd));
+  color: #ffffff;
   font-size: 28px;
   font-weight: 700;
   font-family: inherit;
   line-height: 1;
   cursor: pointer;
   box-shadow:
-    0 4px 0 #184e41,
-    0 6px 14px rgba(31, 111, 92, 0.35);
-  transition: transform 0.15s ease, opacity 0.3s ease, box-shadow 0.2s ease;
+    0 0 0 2px #2b180a,
+    0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s ease, opacity 0.3s ease;
 }
 .ag small {
   display: block;
   font-size: 11px;
-  font-weight: 600;
-  color: #fff8e3;
+  font-weight: 700;
+  color: #ffffff;
   margin-top: 1px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 .ag:not(:disabled) {
   animation: pulse 2.4s ease-in-out infinite;
 }
 .ag:active:not(:disabled) {
-  transform: translateY(2px) scale(0.92);
-  box-shadow: 0 2px 0 #184e41;
+  transform: scale(0.91);
 }
 .ag:disabled {
-  opacity: 0.38;
+  opacity: 0.4;
   cursor: not-allowed;
-  filter: grayscale(0.4);
 }
 
-/* Bottom Woven Bamboo Navigation Bar */
+/* အောက်ဆုံး ကြိမ်ယက်ထည် Tab Bar (#tb) */
 #tb {
   display: flex;
   position: relative;
-  background:
-    linear-gradient(180deg, #f5e6c4, #e4cb97);
-  border-top: 3px solid var(--bamboo-md);
-  box-shadow: inset 0 1px 0 var(--bamboo-dk);
+  background-color: var(--wood-2);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Crect width='12' height='12' fill='%23b57e40' fill-opacity='.55' stroke='%2342270f' stroke-width='1.2'/%3E%3Crect x='12' y='12' width='12' height='12' fill='%23b57e40' fill-opacity='.55' stroke='%2342270f' stroke-width='1.2'/%3E%3Crect x='12' y='0' width='12' height='12' fill='%238c5b27' fill-opacity='.55' stroke='%2342270f' stroke-width='1.2'/%3E%3Crect x='0' y='12' width='12' height='12' fill='%238c5b27' fill-opacity='.55' stroke='%2342270f' stroke-width='1.2'/%3E%3C/svg%3E");
+  border-top: 3px solid var(--bamboo-2);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
 }
 #tb::after {
   content: "";
@@ -569,23 +584,21 @@ small {
   top: 0;
   left: calc(var(--i, 0) * 20%);
   width: 20%;
-  height: 3px;
-  background: linear-gradient(90deg, var(--gr), var(--gd), var(--bl));
-  border-radius: 0 0 4px 4px;
-  transition: left 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+  height: 3.5px;
+  background: var(--gd);
+  box-shadow: 0 1px 5px rgba(226, 173, 59, 0.65);
+  transition: left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 #tb b {
   flex: 1;
   text-align: center;
-  font-size: 10px;
+  font-size: 10.5px;
   padding: 7px 0 6px;
-  color: var(--sb);
+  color: #f6e7c4;
   cursor: pointer;
-  font-weight: 600;
-  transition: color 0.25s ease, transform 0.15s ease;
-}
-#tb b:hover {
-  color: var(--fg);
+  font-weight: 700;
+  text-shadow: 0 1px 2px #1c1008, 0 0 5px rgba(0, 0, 0, 0.75);
+  transition: transform 0.15s ease, color 0.2s ease;
 }
 #tb b:active {
   transform: scale(0.92);
@@ -593,15 +606,14 @@ small {
 #tb b span {
   display: block;
   font-size: 20px;
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
+  transition: transform 0.22s ease;
 }
 #tb .on {
-  color: var(--bl);
-  font-weight: 700;
+  color: #ffe28a;
 }
 #tb .on span {
-  transform: translateY(-2px) scale(1.14);
-  filter: drop-shadow(0 2px 3px rgba(197, 143, 36, 0.45));
+  transform: translateY(-2px) scale(1.12);
 }
 
 /* Toast Notification */
@@ -610,23 +622,23 @@ small {
   left: 50%;
   bottom: 150px;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #4b2412, #2b190c);
-  color: #fff6dc;
-  border: 2px solid var(--bamboo-lt);
+  background: #2b180a;
+  color: #fff4d2;
+  border: 2px solid var(--gd);
   padding: 8px 16px;
-  border-radius: 14px;
+  border-radius: 12px;
   font-size: 13px;
   max-width: 80%;
   z-index: 9;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
   animation: toast 2.2s ease both;
 }
 
-/* Bottom Sheet Modal */
+/* Modal Sheet */
 #md {
   position: fixed;
   inset: 0;
-  background: rgba(28, 16, 8, 0.52);
+  background: rgba(12, 7, 3, 0.65);
   backdrop-filter: blur(2px);
   display: flex;
   align-items: flex-end;
@@ -635,20 +647,17 @@ small {
   animation: fade 0.25s ease;
 }
 .sh {
-  background:
-    radial-gradient(circle at 50% 0%, rgba(247, 231, 168, 0.55), transparent 55%),
-    var(--bg);
+  background: var(--bg);
+  color: var(--fg);
   width: 100%;
   max-width: 430px;
-  border-top: 4px solid var(--bamboo-md);
-  border-left: 3px solid var(--bamboo-md);
-  border-right: 3px solid var(--bamboo-md);
-  border-radius: 22px 22px 0 0;
+  border-top: 4px solid var(--bamboo-2);
+  border-radius: 20px 20px 0 0;
   padding: 16px 14px 18px;
   max-height: 85%;
   overflow-y: auto;
   box-sizing: border-box;
-  box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.5);
   animation: up 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -660,163 +669,63 @@ small {
   margin: -6px 0 0 -6px;
   border-radius: 50%;
   border: 1.5px solid var(--gd);
-  background: radial-gradient(circle, rgba(247, 231, 168, 0.7), rgba(197, 143, 36, 0.15));
+  background: rgba(226, 173, 59, 0.4);
   pointer-events: none;
   z-index: 99;
-  animation: rp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: rp 0.55s ease-out forwards;
 }
 
-/* Form Inputs */
 input:not([type="range"]) {
   width: 100%;
   box-sizing: border-box;
   margin-top: 6px;
   padding: 10px 12px;
   font: inherit;
-  border: 1.5px solid var(--bamboo-md);
-  border-radius: 12px;
+  border: 2px solid var(--bamboo-2);
+  border-radius: 10px;
   background: var(--cd);
   color: var(--fg);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-input:not([type="range"]):focus {
-  outline: none;
-  border-color: var(--bamboo-dk);
-  box-shadow: 0 0 0 3px rgba(197, 143, 36, 0.22);
 }
 
-/* Animations */
 @keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
 }
-
 @keyframes tabin {
-  from {
-    opacity: 0;
-    transform: translateX(14px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+  from { opacity: 0; transform: translateX(14px); }
+  to { opacity: 1; transform: none; }
 }
-
 @keyframes up {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: none;
-  }
+  from { transform: translateY(100%); }
+  to { transform: none; }
 }
-
 @keyframes fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-
 @keyframes pulse {
-  0%,
-  100% {
-    box-shadow:
-      0 0 0 0 rgba(46, 139, 87, 0.45),
-      0 4px 0 #184e41;
-  }
-  50% {
-    box-shadow:
-      0 0 0 10px rgba(197, 143, 36, 0),
-      0 5px 0 #184e41;
-  }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(111, 194, 76, 0.55), 0 0 0 2px #2b180a; }
+  50% { box-shadow: 0 0 0 9px rgba(111, 194, 76, 0), 0 0 0 2px #2b180a; }
 }
-
 @keyframes bob {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2.5px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
 }
-
-@keyframes haloSpin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes barSheen {
-  0%,
-  65% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(220%);
-  }
-}
-
-@keyframes btnSweep {
-  0%,
-  68% {
-    left: -120%;
-  }
-  100% {
-    left: 160%;
-  }
-}
-
 @keyframes dangerBlink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.55;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
 }
-
 @keyframes toast {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, 10px) scale(0.96);
-  }
-  12%,
-  85% {
-    opacity: 1;
-    transform: translate(-50%, 0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -4px) scale(0.98);
-  }
+  0% { opacity: 0; transform: translate(-50%, 10px); }
+  12%, 85% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; }
 }
-
 @keyframes rp {
-  from {
-    transform: scale(1);
-    opacity: 0.95;
-  }
-  to {
-    transform: scale(11.5);
-    opacity: 0;
-  }
+  from { transform: scale(1); opacity: 0.9; }
+  to { transform: scale(10); opacity: 0; }
 }
-
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;

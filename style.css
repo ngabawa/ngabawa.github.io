@@ -1,18 +1,21 @@
 :root {
-  --bg: #f6eedb;
-  --cd: #fffcf3;
-  --fg: #2b1608;
-  --sb: #8a6d4b;
-  --bl: #8c1c13;
+  --bg: #efe3c2;
+  --cd: #fff9e6;
+  --fg: #2b190c;
+  --sb: #7c5c36;
+  --bl: #8b2318;
   --gr: #2e8b57;
   --or: #c2410c;
-  --sp: #e6d6ae;
-  --gd: #c8961e;
-  --hb: #6d1a1a;
+  --sp: #d8be8a;
+  --gd: #c58f24;
+  --hb: #6e2918;
   --jd: #1f6f5c;
-  --gold-hi: #f6d57a;
-  --gold-lo: #9a6914;
-  --sh: 0 4px 14px rgba(109, 26, 26, 0.12), 0 1px 0 rgba(200, 150, 30, 0.25);
+  --bamboo-dk: #7a4f26;
+  --bamboo-md: #b68347;
+  --bamboo-lt: #dfc088;
+  --thanaka: #f7e7a8;
+  --gold-hi: #ffe28a;
+  --sh: 0 4px 12px rgba(92, 54, 20, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.55);
   color-scheme: light dark;
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
@@ -21,17 +24,20 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #150d08;
-    --cd: #241710;
-    --fg: #f6e8c8;
-    --sb: #b89a72;
-    --bl: #f0b060;
-    --sp: #4a3320;
-    --hb: #3b0f0f;
+    --bg: #1c140c;
+    --cd: #2c1e12;
+    --fg: #f7ebd0;
+    --sb: #c2a278;
+    --bl: #f3b562;
+    --sp: #593e24;
+    --hb: #4a1e12;
     --or: #ffb86b;
+    --bamboo-dk: #4d3117;
+    --bamboo-md: #7c532a;
+    --bamboo-lt: #a87b46;
+    --thanaka: #5e4b1f;
     --gold-hi: #ffd97d;
-    --gold-lo: #7c5210;
-    --sh: 0 6px 18px rgba(0, 0, 0, 0.52), 0 1px 0 rgba(240, 176, 96, 0.16);
+    --sh: 0 6px 16px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(255, 224, 150, 0.1);
   }
 }
 
@@ -44,13 +50,14 @@ body {
   height: 100%;
   margin: 0;
   background:
-    radial-gradient(circle at 50% 0%, rgba(200, 150, 30, 0.14), transparent 55%),
+    radial-gradient(circle at 50% 0%, rgba(247, 231, 168, 0.55), transparent 60%),
     var(--bg);
   color: var(--fg);
   font: 16px/1.65 -apple-system, "Noto Sans Myanmar", "Padauk", sans-serif;
   overflow: hidden;
 }
 
+/* Outer Bamboo & Rattan Frame around Game App */
 #app {
   max-width: 430px;
   margin: 0 auto;
@@ -59,22 +66,30 @@ body {
   flex-direction: column;
   background: var(--bg);
   position: relative;
-  box-shadow: 0 0 40px rgba(27, 13, 5, 0.22);
+  border-left: 5px solid var(--bamboo-md);
+  border-right: 5px solid var(--bamboo-md);
+  box-shadow:
+    inset 0 0 0 2px var(--bamboo-dk),
+    0 8px 28px rgba(43, 25, 12, 0.25);
 }
 
-/* Install / Notice Banner — Gold Leaf Strip */
+/* Top Gold-Festoon / Village Banner Strip */
 #ib {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 6px 14px;
-  background: linear-gradient(90deg, #b8862b, #e2b448 50%, #b8862b);
-  background-size: 200% 100%;
-  animation: goldShift 6s linear infinite;
-  color: #2b1608;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #b98124 0px,
+      #d6a33b 18px,
+      #b98124 36px
+    );
+  color: #2b190c;
   font-size: 13px;
-  font-weight: 600;
-  border-bottom: 1px solid rgba(43, 22, 8, 0.2);
+  font-weight: 700;
+  border-bottom: 2px solid var(--bamboo-dk);
 }
 #ib[hidden] {
   display: none;
@@ -86,38 +101,41 @@ body {
   width: auto;
   margin: 0;
   padding: 4px 12px;
-  border: 1px solid rgba(246, 238, 219, 0.35);
+  border: 1.5px solid var(--gold-hi);
   border-radius: 14px;
-  background: #2b1608;
-  color: #fbf4e2;
+  background: linear-gradient(180deg, #5d2b18, #3d1b0e);
+  color: #fff6dc;
   font: inherit;
   font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, filter 0.2s ease;
 }
 #ib button:hover {
-  background: #42220d;
+  filter: brightness(1.12);
 }
 #ib button:active {
   transform: scale(0.94);
 }
 
-/* Royal Lacquer Header */
+/* Village Pavilion Header with Woven Bamboo Border */
 #hd {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 10px 14px;
   background:
-    radial-gradient(circle at 88% 20%, rgba(246, 213, 122, 0.18), transparent 45%),
-    linear-gradient(135deg, #7d1d18, #581210 65%, #3f0c0b);
-  color: #f8e7b4;
+    radial-gradient(circle at 80% 15%, rgba(247, 231, 168, 0.2), transparent 50%),
+    linear-gradient(180deg, #7c351d, #5c2312);
+  color: #fff4d2;
   position: relative;
-  border-bottom: 1px solid rgba(200, 150, 30, 0.45);
+  border-bottom: 3px solid var(--bamboo-md);
+  box-shadow: inset 0 -2px 0 var(--bamboo-dk);
 }
 #hd small {
   display: block;
-  color: #e8c98a;
+  color: #f3d69b;
   font-size: 12px;
   line-height: 1.4;
 }
@@ -125,28 +143,28 @@ body {
   font-family: "Noto Serif Myanmar", "Noto Sans Myanmar", serif;
   font-size: 16px;
   letter-spacing: 0.2px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
 }
 .nm {
   min-width: 0;
 }
 
-/* Medallion Avatar with Rotating Gold Halo */
+/* Cute Folk Character Avatar Medallion */
 .av {
-  width: 54px;
-  height: 54px;
+  width: 56px;
+  height: 56px;
   flex: none;
   cursor: pointer;
   border-radius: 50%;
   overflow: hidden;
   position: relative;
-  background: radial-gradient(circle at 35% 30%, #f5d376, #9d6c16 78%);
-  padding: 2px;
+  padding: 2.5px;
+  background:
+    radial-gradient(circle at 30% 25%, #ffe699, #b77c20 82%);
   box-shadow:
-    0 0 0 1.5px var(--gd),
-    0 0 14px rgba(200, 150, 30, 0.35),
-    inset 0 0 6px rgba(0, 0, 0, 0.4);
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+    0 0 0 2px var(--bamboo-dk),
+    0 3px 8px rgba(0, 0, 0, 0.35);
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .av::before {
   content: "";
@@ -155,20 +173,17 @@ body {
   border-radius: 50%;
   background: conic-gradient(
     from 0deg,
-    transparent 0deg 65deg,
-    rgba(255, 224, 130, 0.75) 85deg,
-    transparent 110deg 230deg,
-    rgba(255, 224, 130, 0.55) 250deg,
-    transparent 280deg 360deg
+    transparent 0deg 75deg,
+    rgba(255, 235, 160, 0.8) 95deg,
+    transparent 120deg 255deg,
+    rgba(255, 235, 160, 0.6) 275deg,
+    transparent 300deg 360deg
   );
-  animation: haloSpin 9s linear infinite;
+  animation: haloSpin 8s linear infinite;
   pointer-events: none;
 }
 .av:hover {
-  transform: scale(1.04);
-  box-shadow:
-    0 0 0 2px var(--gold-hi),
-    0 0 18px rgba(246, 213, 122, 0.5);
+  transform: scale(1.05);
 }
 .av:active {
   transform: scale(0.92);
@@ -178,54 +193,55 @@ body {
   height: 100%;
   display: block;
   border-radius: 50%;
+  background: var(--thanaka);
   position: relative;
   z-index: 1;
-  animation: bob 3.8s ease-in-out infinite;
+  animation: bob 3.4s ease-in-out infinite;
 }
 
-/* Header Mode / Theme Pill */
+/* Header Pill Button (Currency / Mode) */
 #hd .m {
   margin-left: auto;
-  background: rgba(255, 232, 175, 0.14);
-  border: 1px solid rgba(246, 213, 122, 0.35);
-  color: #fce9ba;
+  background: linear-gradient(180deg, #fff6da, #e9cb8b);
+  border: 2px solid var(--bamboo-dk);
+  color: #3a1d0c;
   padding: 5px 11px;
   border-radius: 14px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 12px;
   white-space: nowrap;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.22), inset 0 1px 0 #fff;
+  transition: transform 0.15s ease, filter 0.2s ease;
 }
 #hd .m:hover {
-  background: rgba(255, 232, 175, 0.24);
-  border-color: rgba(246, 213, 122, 0.65);
+  filter: brightness(1.04);
 }
 #hd .m:active {
-  background: rgba(255, 232, 175, 0.34);
   transform: scale(0.94);
 }
 
-/* Burmese Kan-ote Wave & Pearl Fretwork Divider */
+/* Woven Bamboo & Lotus Fretwork Strip */
 .kn {
-  height: 12px;
+  height: 13px;
   flex: none;
   background:
-    linear-gradient(180deg, rgba(109, 26, 26, 0.18), transparent),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='12'%3E%3Cpath d='M0 6Q8 -1 16 6T32 6' stroke='%23c8961e' stroke-width='1.5' fill='none'/%3E%3Cpath d='M8 6L11 3L14 6L11 9Z' fill='%23c8961e' fill-opacity='.45'/%3E%3Ccircle cx='24' cy='6' r='1.5' fill='%238c1c13'/%3E%3C/svg%3E")
+    linear-gradient(180deg, rgba(122, 79, 38, 0.22), rgba(247, 231, 168, 0.25)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='13'%3E%3Cpath d='M0 6.5Q9 0.5 18 6.5T36 6.5' stroke='%239b6629' stroke-width='1.5' fill='none'/%3E%3Cpath d='M18 2.5L21.5 6.5L18 10.5L14.5 6.5Z' fill='%23c58f24' fill-opacity='.55'/%3E%3Ccircle cx='9' cy='6.5' r='1.5' fill='%238b2318'/%3E%3Ccircle cx='27' cy='6.5' r='1.5' fill='%232e8b57'/%3E%3C/svg%3E")
     repeat-x center;
+  border-bottom: 1px solid rgba(122, 79, 38, 0.35);
 }
 
-/* Stat / Attribute Gauges Bar */
+/* Stat / Attribute Bar with Rattan Trim */
 #st {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5px 16px;
-  padding: 7px 14px 9px;
+  gap: 5px 14px;
+  padding: 8px 14px 10px;
   background:
-    linear-gradient(180deg, var(--cd), color-mix(in srgb, var(--cd) 92%, var(--sp)));
+    linear-gradient(180deg, var(--cd), color-mix(in srgb, var(--cd) 88%, var(--sp)));
   box-shadow: var(--sh);
-  border-bottom: 1px solid var(--sp);
+  border-bottom: 2px solid var(--bamboo-md);
   position: relative;
   z-index: 1;
 }
@@ -238,23 +254,24 @@ body {
 .b span {
   width: 62px;
   color: var(--sb);
-  font-weight: 500;
+  font-weight: 600;
 }
 .b i {
   flex: 1;
-  height: 8px;
-  background: var(--bg);
-  border: 1px solid rgba(184, 134, 43, 0.25);
+  height: 9px;
+  background: #e7d8b5;
+  border: 1.5px solid var(--bamboo-dk);
   border-radius: 999px;
   overflow: hidden;
   position: relative;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18);
 }
 .b u {
   display: block;
   height: 100%;
   border-radius: 999px;
   position: relative;
-  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.16);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.3s ease;
 }
 .b u::after {
@@ -264,18 +281,18 @@ body {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.32) 50%,
+    rgba(255, 255, 255, 0.35) 50%,
     transparent 100%
   );
   transform: translateX(-100%);
-  animation: barSheen 3.6s ease-in-out infinite;
+  animation: barSheen 3.8s ease-in-out infinite;
 }
 .b em {
   width: 38px;
   text-align: right;
   font-style: normal;
   font-variant-numeric: tabular-nums;
-  font-weight: 600;
+  font-weight: 700;
 }
 .b.lo em {
   color: var(--or);
@@ -283,10 +300,10 @@ body {
   animation: dangerBlink 1.3s ease-in-out infinite;
 }
 .b.lo u {
-  filter: saturate(1.45) brightness(0.92);
+  filter: saturate(1.4) brightness(0.92);
 }
 
-/* Main Scrollable Game Stage with Bagan Lattice Pattern */
+/* Rural Paddy & Palm-Leaf Playfield Canvas */
 #ct {
   flex: 1;
   overflow-y: auto;
@@ -295,8 +312,9 @@ body {
   overscroll-behavior: contain;
   background-color: var(--bg);
   background-image:
-    radial-gradient(circle at 50% 15%, rgba(200, 150, 30, 0.08), transparent 60%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M32 4L60 32L32 60L4 32Z' stroke='%23b8862b' stroke-opacity='.09' stroke-width='1' fill='none'/%3E%3Cpath d='M0 32Q16 18 32 32T64 32' stroke='%23b8862b' stroke-opacity='.07' fill='none'/%3E%3Ccircle cx='32' cy='32' r='2' fill='%238c1c13' fill-opacity='.11'/%3E%3Ccircle cx='32' cy='4' r='1.3' fill='%23b8862b' fill-opacity='.14'/%3E%3Ccircle cx='32' cy='60' r='1.3' fill='%23b8862b' fill-opacity='.14'/%3E%3C/svg%3E");
+    radial-gradient(circle at 15% 8%, rgba(247, 231, 168, 0.65), transparent 42%),
+    radial-gradient(circle at 88% 92%, rgba(46, 139, 87, 0.12), transparent 45%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cpath d='M0 54Q18 44 36 54T72 54' stroke='%238a6d4b' stroke-opacity='.11' stroke-width='1.2' fill='none'/%3E%3Cpath d='M0 64Q18 54 36 64T72 64' stroke='%232e8b57' stroke-opacity='.1' stroke-width='1.1' fill='none'/%3E%3Cpath d='M36 10C41 18 41 24 36 30C31 24 31 18 36 10Z' fill='%23c58f24' fill-opacity='.09'/%3E%3Ccircle cx='12' cy='16' r='1.6' fill='%23c58f24' fill-opacity='.16'/%3E%3Ccircle cx='60' cy='22' r='1.4' fill='%238b2318' fill-opacity='.12'/%3E%3C/svg%3E");
 }
 #ct::-webkit-scrollbar {
   width: 5px;
@@ -305,38 +323,38 @@ body {
   background: transparent;
 }
 #ct::-webkit-scrollbar-thumb {
-  background: rgba(184, 134, 43, 0.35);
+  background: var(--bamboo-md);
   border-radius: 999px;
 }
 #ct.in {
   animation: tabin 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Burmese Lacquer Scroll Card with Kan-ote Corner Flourishes */
+/* Charming Folk Scroll Card with Bamboo & Lotus Corners */
 .c {
   position: relative;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 28%),
-    var(--cd);
-  border: 1px solid var(--sp);
+    linear-gradient(180deg, rgba(255, 252, 240, 0.85), rgba(255, 249, 230, 0.96));
+  border: 2px solid var(--bamboo-md);
   border-radius: 16px;
   padding: 12px 15px;
-  margin: 9px 0;
-  box-shadow: var(--sh);
-  transition: transform 0.2s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  margin: 10px 0;
+  box-shadow: var(--sh), inset 0 0 0 1px rgba(197, 143, 36, 0.25);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .c:hover {
-  border-color: rgba(200, 150, 30, 0.55);
+  border-color: var(--bamboo-dk);
+  transform: translateY(-1px);
 }
 .c::before,
 .c::after {
   content: "";
   position: absolute;
-  width: 24px;
-  height: 24px;
-  opacity: 0.72;
+  width: 26px;
+  height: 26px;
+  opacity: 0.85;
   pointer-events: none;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M2 22C2 10 10 2 22 2' stroke='%23b8862b' stroke-width='1.7' fill='none' stroke-linecap='round'/%3E%3Cpath d='M2 15C2 8.5 6.5 5 12 5' stroke='%23b8862b' stroke-width='1.1' fill='none' stroke-linecap='round'/%3E%3Cpath d='M5 2C8.5 2 12 4.5 13 8' stroke='%23c8961e' stroke-width='1' fill='none'/%3E%3Ccircle cx='3.5' cy='3.5' r='1.8' fill='%238c1c13'/%3E%3C/svg%3E")
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Cpath d='M2 24C2 11 10 2 24 2' stroke='%239b6629' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3Cpath d='M3 16C5 10 10 5 16 3' stroke='%23c58f24' stroke-width='1.2' fill='none'/%3E%3Cpath d='M6 6C9 6 11 8 11 11C8 11 6 9 6 6Z' fill='%232e8b57' fill-opacity='.65'/%3E%3Ccircle cx='3.5' cy='3.5' r='1.8' fill='%238b2318'/%3E%3C/svg%3E")
     no-repeat;
 }
 .c::before {
@@ -357,44 +375,47 @@ body {
   letter-spacing: 0.2px;
 }
 
-/* Royal Shrine / Chapter Hero Card */
+/* Rural Festival / Chapter Hero Card */
 .hero {
   text-align: center;
   padding: 22px 16px;
   background:
-    radial-gradient(circle at 50% 0%, rgba(200, 150, 30, 0.16), transparent 65%),
+    radial-gradient(circle at 50% 0%, rgba(247, 231, 168, 0.7), transparent 65%),
     var(--cd);
-  border-color: rgba(200, 150, 30, 0.45);
+  border-color: var(--bamboo-dk);
 }
 .hero h2 {
   margin: 8px 0 4px;
   color: var(--bl);
-  text-shadow: 0 1px 0 rgba(200, 150, 30, 0.25);
 }
 .hero::before,
 .hero::after {
   width: 32px;
   height: 32px;
   background-size: contain;
-  opacity: 0.85;
 }
 
-/* Narrative / Event Log Lines */
+/* Narrative / Event Log Cards */
 #ct > div:not(.y):not(.c) {
   background: var(--cd);
-  border-left: 3px solid rgba(200, 150, 30, 0.45);
+  border: 1.5px solid rgba(182, 131, 71, 0.55);
+  border-left: 4px solid var(--bamboo-md);
   border-radius: 12px;
   padding: 9px 12px;
-  margin: 5px 0;
+  margin: 6px 0;
   font-size: 15px;
-  box-shadow: 0 1px 4px rgba(43, 22, 8, 0.05);
+  box-shadow: 0 2px 5px rgba(92, 54, 20, 0.07);
+  transition: transform 0.16s ease, border-color 0.2s ease;
+}
+#ct > div:not(.y):not(.c):hover {
+  border-color: var(--bamboo-dk);
 }
 
 .n {
   animation: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-/* Choice & Action Buttons */
+/* Wooden / Bamboo Choice Buttons */
 #ct button,
 #md button {
   display: block;
@@ -404,38 +425,36 @@ body {
   font: inherit;
   color: var(--bl);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent 60%),
-    var(--cd);
-  border: 1px solid var(--sp);
+    linear-gradient(180deg, #fffdf6, #f5e7c4);
+  border: 1.5px solid var(--bamboo-md);
   border-radius: 14px;
   cursor: pointer;
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(43, 22, 8, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 3px 0 rgba(122, 79, 38, 0.22), 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 #ct button:hover,
 #md button:hover {
-  border-color: var(--gd);
-  box-shadow: var(--sh);
+  border-color: var(--bamboo-dk);
+  box-shadow: 0 4px 0 rgba(122, 79, 38, 0.28), var(--sh);
   transform: translateY(-1px);
 }
 #ct button:active,
 #md button:active {
-  transform: scale(0.97);
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 1px 0 rgba(122, 79, 38, 0.2);
 }
 
-/* Primary Quest / Seal Button in Royal Crimson & Gold */
+/* Primary Action Button */
 #ct button.pri,
 #md button.pri {
-  background: linear-gradient(135deg, #a32c1b, #761915 65%, #56110e);
-  border: 1px solid var(--gd);
-  color: #fbeed0;
+  background: linear-gradient(180deg, #9f2b1c, #741b12);
+  border: 1.5px solid var(--bamboo-dk);
+  color: #fff6dc;
   font-weight: 700;
-  box-shadow:
-    0 4px 12px rgba(118, 25, 21, 0.32),
-    inset 0 1px 0 rgba(255, 224, 140, 0.38);
+  box-shadow: 0 3px 0 #47100a, 0 4px 10px rgba(116, 27, 18, 0.28);
 }
 #ct button.pri::after,
 #md button.pri::after {
@@ -448,7 +467,7 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 232, 165, 0.28),
+    rgba(255, 235, 165, 0.3),
     transparent
   );
   transform: skewX(-20deg);
@@ -458,9 +477,6 @@ body {
 #ct button.pri:hover,
 #md button.pri:hover {
   border-color: var(--gold-hi);
-  box-shadow:
-    0 6px 16px rgba(118, 25, 21, 0.42),
-    0 0 12px rgba(200, 150, 30, 0.28);
 }
 
 .y {
@@ -468,13 +484,13 @@ body {
   font-size: 12px;
   text-align: center;
   margin-top: 14px;
-  letter-spacing: 0.35px;
+  letter-spacing: 0.3px;
 }
 .y::before,
 .y::after {
-  content: " ✦ ";
-  color: var(--gd);
-  opacity: 0.75;
+  content: " ✿ ";
+  color: var(--gr);
+  opacity: 0.8;
 }
 .r {
   color: var(--or);
@@ -484,16 +500,16 @@ small {
   color: var(--sb);
 }
 
-/* Action Dock & Jade / Gold Trigger Medallion */
+/* Bottom Action Dock & Cute Jade Age/Action Badge */
 #dk {
   display: none;
   align-items: center;
   gap: 12px;
   padding: 9px 14px;
   background:
-    linear-gradient(180deg, var(--cd), color-mix(in srgb, var(--cd) 90%, var(--sp)));
-  border-top: 1px solid rgba(200, 150, 30, 0.35);
-  box-shadow: 0 -4px 14px rgba(27, 13, 5, 0.08);
+    linear-gradient(180deg, #f8eccf, #ead5a8);
+  border-top: 2px solid var(--bamboo-md);
+  box-shadow: 0 -3px 10px rgba(92, 54, 20, 0.1);
 }
 .bs {
   flex: 1;
@@ -503,10 +519,10 @@ small {
   height: 66px;
   flex: none;
   border-radius: 50%;
-  border: 3px solid var(--gd);
+  border: 3px solid var(--bamboo-dk);
   background:
-    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.28), transparent 55%),
-    linear-gradient(135deg, #359c63, var(--gr) 55%, var(--jd));
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.35), transparent 55%),
+    linear-gradient(135deg, #3ba369, var(--gr) 58%, var(--jd));
   color: #fffdf6;
   font-size: 28px;
   font-weight: 700;
@@ -514,41 +530,38 @@ small {
   line-height: 1;
   cursor: pointer;
   box-shadow:
-    0 4px 14px rgba(31, 111, 92, 0.38),
-    inset 0 1px 2px rgba(255, 255, 255, 0.45);
+    0 4px 0 #184e41,
+    0 6px 14px rgba(31, 111, 92, 0.35);
   transition: transform 0.15s ease, opacity 0.3s ease, box-shadow 0.2s ease;
 }
 .ag small {
   display: block;
   font-size: 11px;
-  font-weight: 500;
-  color: #f6eedb;
+  font-weight: 600;
+  color: #fff8e3;
   margin-top: 1px;
 }
 .ag:not(:disabled) {
   animation: pulse 2.4s ease-in-out infinite;
 }
-.ag:hover:not(:disabled) {
-  box-shadow:
-    0 6px 18px rgba(31, 111, 92, 0.48),
-    0 0 14px rgba(200, 150, 30, 0.35);
-}
 .ag:active:not(:disabled) {
-  transform: scale(0.9);
+  transform: translateY(2px) scale(0.92);
+  box-shadow: 0 2px 0 #184e41;
 }
 .ag:disabled {
-  opacity: 0.35;
+  opacity: 0.38;
   cursor: not-allowed;
-  filter: grayscale(0.45);
+  filter: grayscale(0.4);
 }
 
-/* Bottom Navigation Tab Bar with Sliding Gold-Crimson Indicator */
+/* Bottom Woven Bamboo Navigation Bar */
 #tb {
   display: flex;
   position: relative;
-  background: var(--cd);
-  border-top: 1px solid var(--sp);
-  box-shadow: 0 -2px 10px rgba(27, 13, 5, 0.06);
+  background:
+    linear-gradient(180deg, #f5e6c4, #e4cb97);
+  border-top: 3px solid var(--bamboo-md);
+  box-shadow: inset 0 1px 0 var(--bamboo-dk);
 }
 #tb::after {
   content: "";
@@ -557,9 +570,8 @@ small {
   left: calc(var(--i, 0) * 20%);
   width: 20%;
   height: 3px;
-  background: linear-gradient(90deg, var(--gd), var(--bl), var(--gd));
+  background: linear-gradient(90deg, var(--gr), var(--gd), var(--bl));
   border-radius: 0 0 4px 4px;
-  box-shadow: 0 2px 8px rgba(200, 150, 30, 0.45);
   transition: left 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 #tb b {
@@ -569,7 +581,7 @@ small {
   padding: 7px 0 6px;
   color: var(--sb);
   cursor: pointer;
-  font-weight: 400;
+  font-weight: 600;
   transition: color 0.25s ease, transform 0.15s ease;
 }
 #tb b:hover {
@@ -589,25 +601,24 @@ small {
 }
 #tb .on span {
   transform: translateY(-2px) scale(1.14);
-  filter: drop-shadow(0 2px 4px rgba(200, 150, 30, 0.35));
+  filter: drop-shadow(0 2px 3px rgba(197, 143, 36, 0.45));
 }
 
-/* Floating Toast Notification */
+/* Toast Notification */
 .ts {
   position: fixed;
   left: 50%;
   bottom: 150px;
   transform: translateX(-50%);
-  background:
-    linear-gradient(135deg, rgba(43, 22, 8, 0.95), rgba(88, 18, 16, 0.95));
-  color: #fbeed0;
-  border: 1px solid rgba(200, 150, 30, 0.55);
+  background: linear-gradient(135deg, #4b2412, #2b190c);
+  color: #fff6dc;
+  border: 2px solid var(--bamboo-lt);
   padding: 8px 16px;
   border-radius: 14px;
   font-size: 13px;
   max-width: 80%;
   z-index: 9;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.32);
   animation: toast 2.2s ease both;
 }
 
@@ -615,7 +626,7 @@ small {
 #md {
   position: fixed;
   inset: 0;
-  background: rgba(16, 8, 4, 0.55);
+  background: rgba(28, 16, 8, 0.52);
   backdrop-filter: blur(2px);
   display: flex;
   align-items: flex-end;
@@ -625,29 +636,31 @@ small {
 }
 .sh {
   background:
-    radial-gradient(circle at 50% 0%, rgba(200, 150, 30, 0.14), transparent 55%),
+    radial-gradient(circle at 50% 0%, rgba(247, 231, 168, 0.55), transparent 55%),
     var(--bg);
   width: 100%;
   max-width: 430px;
-  border-top: 2px solid var(--gd);
+  border-top: 4px solid var(--bamboo-md);
+  border-left: 3px solid var(--bamboo-md);
+  border-right: 3px solid var(--bamboo-md);
   border-radius: 22px 22px 0 0;
   padding: 16px 14px 18px;
   max-height: 85%;
   overflow-y: auto;
   box-sizing: border-box;
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.3);
   animation: up 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Tap Ripple Effect */
+/* Tap Ripple */
 .rp {
   position: fixed;
   width: 12px;
   height: 12px;
   margin: -6px 0 0 -6px;
   border-radius: 50%;
-  border: 1.5px solid var(--gold-hi);
-  background: radial-gradient(circle, rgba(246, 213, 122, 0.55), rgba(184, 134, 43, 0.15));
+  border: 1.5px solid var(--gd);
+  background: radial-gradient(circle, rgba(247, 231, 168, 0.7), rgba(197, 143, 36, 0.15));
   pointer-events: none;
   z-index: 99;
   animation: rp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -660,7 +673,7 @@ input:not([type="range"]) {
   margin-top: 6px;
   padding: 10px 12px;
   font: inherit;
-  border: 1px solid var(--sp);
+  border: 1.5px solid var(--bamboo-md);
   border-radius: 12px;
   background: var(--cd);
   color: var(--fg);
@@ -668,8 +681,8 @@ input:not([type="range"]) {
 }
 input:not([type="range"]):focus {
   outline: none;
-  border-color: var(--gd);
-  box-shadow: 0 0 0 3px rgba(200, 150, 30, 0.2);
+  border-color: var(--bamboo-dk);
+  box-shadow: 0 0 0 3px rgba(197, 143, 36, 0.22);
 }
 
 /* Animations */
@@ -717,13 +730,13 @@ input:not([type="range"]):focus {
   0%,
   100% {
     box-shadow:
-      0 0 0 0 rgba(46, 139, 87, 0.52),
-      0 4px 14px rgba(31, 111, 92, 0.35);
+      0 0 0 0 rgba(46, 139, 87, 0.45),
+      0 4px 0 #184e41;
   }
   50% {
     box-shadow:
-      0 0 0 11px rgba(200, 150, 30, 0),
-      0 6px 18px rgba(31, 111, 92, 0.45);
+      0 0 0 10px rgba(197, 143, 36, 0),
+      0 5px 0 #184e41;
   }
 }
 
@@ -740,15 +753,6 @@ input:not([type="range"]):focus {
 @keyframes haloSpin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-@keyframes goldShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 200% 50%;
   }
 }
 

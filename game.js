@@ -24,7 +24,7 @@ const CAR=[
 ["သူနာပြု","သူနာပြုကျောင်းသား|သူနာပြု|အကြီးတန်းသူနာပြု|ဝဒ်ခန်းမှူး/ဆရာမကြီး|သူနာပြုညွှန်ကြားရေးမှူး",MU,2200,18,1],
 ["စားဖိုမှူး","မီးဖိုချောင်လက်ထောက်|စားဖိုမှူးလက်ထောက်|ပိုင်းခြားစားဖိုမှူး|ဒုတိယစားဖိုမှူး|စားဖိုမှူးချုပ်",ANY,1600,18,0],
 ["သတင်းထောက်/မီဒီယာ","သတင်းထောက်အလုပ်သင်|သတင်းထောက်ငယ်|အကြီးတန်းသတင်းထောက်|ဒုတိယအယ်ဒီတာ|အယ်ဒီတာချုပ်",MU,1800,18,0],
-["ဂရပ်ဖစ်ဒီဇိုင်နာ","ဒီဇိုင်းအလုပ်သင်|ဒီဇိုင်နာငယ်|ဂရပ်ဖစ်ဒီဇိုင်နာ|အကြီးတန်းဒီဇိုင်နာ|ဖန်တီးမှုညွှန်ကြားရေးမှူး",MU,2500,18,0],
+["ဂရပ်ဖစ်ဒီဇိုင်နာ","ဒီဇိုင်းအလုပ်သင်|ဒီဇိုင်းငယ်|ဂရပ်ဖစ်ဒီဇိုင်နာ|အကြီးတန်းဒီဇိုင်နာ|ဖန်တီးမှုညွှန်ကြားရေးမှူး",MU,2500,18,0],
 ["HR (လူ့စွမ်းအားအရင်းအမြစ်)","HR အလုပ်သင်|HR လက်ထောက်|HR အရာရှိ|HR မန်နေဂျာ|HR အကြီးအကဲ",DG,3000,18,0],
 ["အရောင်းနှင့် စျေးကွက်","အရောင်းကိုယ်စားလှယ်|အရောင်းအရာရှိ|ဧရိယာအရောင်းမန်နေဂျာ|ဒေသမန်နေဂျာ|အရောင်းအကြီးအကဲ",MU,2200,18,0],
 ["ဟိုတယ်/ဧည့်ဝန်ဆောင်မှု","အလုပ်သင်|ဧည့်ကြိုကောင်တာဝန်ထမ်း|ကြီးကြပ်သူ|တာဝန်ကျမန်နေဂျာ|ဟိုတယ်အထွေထွေမန်နေဂျာ",MU,2000,18,0],
@@ -43,24 +43,35 @@ const J=[["လယ်ယာ/လုပ်သားအလုပ်",()=>1,800],["�
 const BZ=[["စားသောက်ဆိုင်",3000],["ဆိုင်ကယ်/လျှပ်စစ်ပြင်ဆိုင်",2000],["အွန်လိုင်းရောင်းချရေး",1500]];
 const AC=[["ဘာသာစကား သင်ယူ (အင်္ဂလိပ်)",{w:1,lang:1,m:-100}],["တရားထိုင်",{s:4}],["ကျန်းမာစွာ စားသောက်",{h:3,m:-150}],["ဆိုင်ကဟင်းချည်း စားသောက်",{h:-2,m:50}],["စည်းကမ်းကျ အိပ်စက်အနားယူ",{h:2,s:2}],["ညဉ့်နက်အထိ ဖုန်းကစား",{h:-3,s:-1}],["လမ်းလျှောက်/အားကစား",{h:3,l:2,s:1}],["စာဖတ်",{w:2}],["စေတနာ့ဝန်ထမ်း",{s:2,f:2}],["အချိန်ပိုင်းအလုပ်",{m:400,h:-1}],["ကိုယ်လက်သန့်ရှင်း/အလှပြင်",{l:3,m:-100}],["ဆေးလိပ်/အရက်သောက်",{h:-5,s:1,l:-2,m:-150}]];
 let S=null,TB=0;
+
+function animEl(el, cls, ms=450){
+  if(!el)return;
+  el.classList.remove(cls);
+  void el.offsetWidth;
+  el.classList.add(cls);
+  setTimeout(()=>el.classList.remove(cls), ms);
+}
+function shakeScreen(){animEl($("app")||$("ct"), "shake", 420)}
+function glowGold(el){animEl(el||$("st"), "flash-gold", 700)}
+
 function start(){S=null;$("hd").innerHTML="";$("st").innerHTML="";$("st").dataset.k="";$("tb").innerHTML="";$("dk").style.display="none";let v=0;try{v=localStorage.getItem("mml5")}catch(e){}
-let ct=$("ct");ct.innerHTML=`<div class="c hero n">${logo(96)}<h2>ငါ့ဘဝ - မြန်မာ</h2><small>၁၉၂၀ မှ ၂၀၂၆ အထိ မြန်မာ့သမိုင်းနှင့်အတူ ဘဝတစ်ခုချင်းစီကို နှစ်စဉ်ရွေးချယ်၍ မျိုးဆက်ပေါင်းများစွာ လက်ဆင့်ကမ်းပါ။</small></div>`+(v?`<button class="pri n" onclick="ld()">▶ ဆက်ကစားမည်</button>`:"")+`<div class="c n"><small>ဇာတ်ကောင်အမည် (မမွေးဖွားမီ ပြင်ဆင်နိုင်သည်)</small><input id="nmIn" maxlength="20" placeholder="အမည်ရိုက်ထည့်ပါ (ဗလာထားလျှင် အလိုအလျောက်ပေးမည်)"></div><button class="pri n" onclick="init();mus(MO)">🪷 ၁၉၂၀ မှ ဘဝစတင်မည်</button><button class="n" onclick="inst()">📲 ဂိမ်းကို ဖုန်းထဲ ထည့်သွင်းမည် (အခမဲ့)</button>`+RULES;ct.classList.remove("in");void ct.offsetWidth;ct.classList.add("in")}
+let ct=$("ct");ct.innerHTML=`<div class="c hero n">${logo(96)}<h2>ငါ့ဘဝ - မြန်မာ</h2><small>၁၉၂၀ မှ ၂၀၂၆ အထိ မြန်မာ့သမိုင်းနဲ့အတူ ဘဝတစ်ခုချင်းစီကို နှစ်စဉ်ရွေးချယ်ပြီး မျိုးဆက်ပေါင်းများစွာ လက်ဆင့်ကမ်းသွားပါ။</small></div>`+(v?`<button class="pri n" onclick="ld()">▶ ဆက်ကစားမယ်</button>`:"")+`<div class="c n"><small>ဇာတ်ကောင်အမည် (မမွေးဖွားမီ ပြင်နိုင်တယ်)</small><input id="nmIn" maxlength="20" placeholder="အမည်ထည့်ပါ (မထည့်ရင် ကိုယ့်ဟာကိုယ် ရွေးပေးမယ်)"></div><button class="pri n" onclick="init();mus(MO)">🪷 ၁၉၂၀ ကနေ ဘဝစမယ်</button><button class="n" onclick="inst()">📲 ဖုန်းထဲ ထည့်သွင်းမယ် (အခမဲ့)</button>`+RULES;ct.classList.remove("in");void ct.offsetWidth;ct.classList.add("in")}
 function init(i){let g=R(2),e=R(8),r=R(10)<7?0:1+R(3),f=R(3),rg=R(10)<4?0:R(10)<7?1:2,y=1920+R(3),d=(e?1:0)+(r?1:0)+(f==0?1:0)+(rg?1:0);
 S={y,y0:y,a:0,g,e,r,f,rg,sys:y<2012?10:12,sk:R(3),d,w:50+R(21)-d*3,h:60+R(31),l:30+R(61),s:50+R(21)-d*2,fm:null,m:0,fw:[300,2000,10000][f],c:0,k:0,sc:0,dr:0,uni:0,deg:0,mar:0,ma:0,role:"",rgm:"",st:"",mu:0,mk:0,mj:0,uy:0,job:null,lang:0,ex:0,T:5,ev:null,L:[],kids:[],sr:50,ef:0,mf:0,rr:0,vr:0,trips:0,hb:{},dt:0,cz:{},lg:LGI(),gold:0,car:0,house:0,rt:0,pp:0,pa:0,ab:null,fr:[],co:[],pt:null,inl:null,dy:0,bh:[],yb:null,yi:0,dep:0,cdm:0,gv:0,lsy:{},ins:{},sm:{},lf:{h:f?1:0,d:f?1:0,c:f?1:0},ad:0,ae:0,ct:[],exc:{},pe:0,nm:(($("nmIn")&&$("nmIn").value.trim())||pn(g,y,1,e)),gen:(LIN.gen=1),end:0};S.par=[{n:"ဦး"+pn(0,y-30,1),r:"ဖခင်",by:y-22-R(10),rel:70,al:1},{n:"ဒေါ်"+pn(1,y-28,1),r:"မိခင်",by:y-20-R(8),rel:75,al:1}];S.town=town(e,rg);
-lg(`<b>မွေးဖွားမှု</b>: ${g?"အမျိုးသမီး":"အမျိုးသား"} · ${ETH[e]} · ${REL[r]} · ${FAM[f]}အိမ်ထောင်စု · ${S.town} (${RGN[rg]}) · မွေးနှစ် ${y} · ခက်ခဲမှု ${"⭐".repeat(d+1)} · ပညာရေးစနစ် ${S.sys}တန်း`);TB=0;view()}
+lg(`<b>မွေးဖွားတယ်</b> · ${g?"အမျိုးသမီး":"အမျိုးသား"} · ${ETH[e]} · ${REL[r]} · ${FAM[f]}အိမ်ထောင်စု · ${S.town} (${RGN[rg]}) · မွေးနှစ် ${y} · ခက်ခဲမှု ${"⭐".repeat(d+1)} · ${S.sys}တန်းစနစ်`);TB=0;view();glowGold($("st"))}
 function lg(t,c){if(S.L.length>200)S.L.shift();S.L.push(`<div class="${c||""}">${t}</div>`)}
-function ap(fx){fx=typeof fx=="function"?fx():fx;let o=[];for(let k in fx){let v=fx[k];if(k=="f")k="fm";if(k=="fm"&&S.fm===null)continue;let t=(k=="m"&&S.a<16)?"fw":k;S[t]=(S[t]||0)+v;if(ST.includes(k))S[k]=cl(S[k]);if(N[k]&&v)o.push(k=="m"?"ငွေ "+(v>0?"+":"")+K(v):N[k]+(v>0?" +":" ")+v)}return o.join("၊ ")}
+function ap(fx){fx=typeof fx=="function"?fx():fx;let o=[],bad=0,good=0;for(let k in fx){let v=fx[k];if(k=="f")k="fm";if(k=="fm"&&S.fm===null)continue;let t=(k=="m"&&S.a<16)?"fw":k;S[t]=(S[t]||0)+v;if(ST.includes(k))S[k]=cl(S[k]);if(v<0)bad++;if(v>0)good++;if(N[k]&&v)o.push(k=="m"?"ငွေ "+(v>0?"+":"")+K(v):N[k]+(v>0?" +":" ")+v)}if(bad>=2)shakeScreen();else if(good>=2)glowGold($("st"));return o.join("၊ ")}
 window.alert=m=>{let d=document.createElement("div");d.className="ts";d.textContent=m;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)};
 const BN=n=>String(n).replace(/\d/g,d=>"၀၁၂၃၄၅၆၇၈၉"[d]);
 const K=v=>{let k=Math.round(v*1000),s=k<0?"-":"";k=Math.abs(k);if(k<100000)return s+BN(k.toLocaleString("en-US"))+" ကျပ်";let l=Math.floor(k/100000),t=Math.floor(k%100000/10000);return s+BN(l.toLocaleString("en-US"))+"သိန်း"+(t?" "+BN(t)+"သောင်း":"")};
 function mv(v,l){S.m+=v;if(S.yb){S.yb.it[l]=(S.yb.it[l]||0)+v;if(v>0&&["လုပ်ခလစာ","လုပ်ငန်းအမြတ်","ပြည်ပလုပ်ခ"].includes(l))S.yi=(S.yi||0)+v}}
 function fin(){if(S.yb&&S.a>=16){let sum=Object.values(S.yb.it).reduce((a,b)=>a+b,0),net=S.m-S.yb.m0;S.bh.push({a:S.a,y:S.y,it:S.yb.it,ot:net-sum,net});if(S.bh.length>40)S.bh.shift()}S.yb={m0:S.m,it:{}};S.yi=0;S.lsy={}}
-function sheet(h){let d=document.createElement("div");d.id="md";d.onclick=e=>{if(e.target==d)d.remove()};d.innerHTML=`<div class="sh">${h}<button onclick="this.closest('#md').remove()">ပိတ်မည်</button></div>`;document.body.appendChild(d)}
-function bud(){if(S.a<16)return sheet(`<div class="c">အသက် ၁၆ မပြည့်မီ ကိုယ်ပိုင်ငွေ မရှိပါ။ မိဘထံမှ တောင်းသုံးရသည်။</div>`);
+function sheet(h){let d=document.createElement("div");d.id="md";d.onclick=e=>{if(e.target==d)d.remove()};d.innerHTML=`<div class="sh">${h}<button onclick="this.closest('#md').remove()">ပိတ်မယ်</button></div>`;document.body.appendChild(d)}
+function bud(){if(S.a<16)return sheet(`<div class="c">အသက် ၁၆ မပြည့်သေးတော့ ကိုယ့်ဘာသာ ငွေမကိုင်ရသေးဘူး။ မိဘဆီက တောင်းသုံးရတယ်။</div>`);
 let cur=S.yb?{a:S.a,y:S.y,it:S.yb.it,net:S.m-S.yb.m0,ot:S.m-S.yb.m0-Object.values(S.yb.it).reduce((a,b)=>a+b,0)}:null,L=(cur?[cur]:[]).concat(S.bh.slice().reverse().slice(0,15));
-sheet(`<b>💰 ငွေကြေးမှတ်တမ်း</b><div class="c">လက်ကျန်ငွေ ${K(S.m)}<br>စုစုပေါင်း ပိုင်ဆိုင်မှု ${K(NW(S))}</div>`+L.map((r,i)=>`<div class="c"><b>${r.y} (အသက် ${r.a})${i==0&&cur?" - ယခုနှစ်":""}</b> · ${r.net>=0?"+":""}${K(r.net)}`+Object.entries(r.it).map(([k,v])=>`<br><small>${k}: ${v>=0?"+":""}${K(v)}</small>`).join("")+(Math.abs(r.ot)>=1?`<br><small>အခြား (လုပ်ဆောင်ချက်/ဖြစ်ရပ်/ဝယ်ယူမှု): ${r.ot>=0?"+":""}${K(r.ot)}</small>`:"")+`</div>`).join(""))}
+sheet(`<b>💰 ငွေစာရင်း</b><div class="c">လက်ကျန်ငွေ ${K(S.m)}<br>စုစုပေါင်း ပိုင်ဆိုင်မှု ${K(NW(S))}</div>`+L.map((r,i)=>`<div class="c"><b>${r.y} (အသက် ${r.a})${i==0&&cur?" - ဒီနှစ်":""}</b> · ${r.net>=0?"+":""}${K(r.net)}`+Object.entries(r.it).map(([k,v])=>`<br><small>${k}: ${v>=0?"+":""}${K(v)}</small>`).join("")+(Math.abs(r.ot)>=1?`<br><small>အခြား (လုပ်ဆောင်ချက်/ဖြစ်ရပ်/ဝယ်ယူမှု): ${r.ot>=0?"+":""}${K(r.ot)}</small>`:"")+`</div>`).join(""))}
 let DP=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();DP=e});
-function inst(){if(DP){DP.prompt();DP=null}else sheet(`<b>📲 Install လုပ်နည်း</b><div class="c">iPhone/iPad - Safari ၏ Share ခလုတ် → "Add to Home Screen"<br>Android - Chrome ၏ ⋮ menu → "Install app" သို့မဟုတ် "Add to Home screen"<br>ကွန်ပျူတာ - လိပ်စာဘားရှိ Install အိုင်ကွန်ကို နှိပ်ပါ</div>`)}
+function inst(){if(DP){DP.prompt();DP=null}else sheet(`<b>📲 ဖုန်းထဲ ထည့်သွင်းနည်း</b><div class="c">iPhone/iPad - Safari ရဲ့ Share ခလုတ် → "Add to Home Screen"<br>Android - Chrome ရဲ့ ⋮ menu → "Install app" (သို့မဟုတ် "Add to Home screen")<br>ကွန်ပျူတာ - လိပ်စာဘားက Install အိုင်ကွန်ကို နှိပ်ပါ</div>`)}
 if("serviceWorker" in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 let AM=-1,LS=-1;
 function cart(z){let a=S.a,k=Math.min(1,.5+a/24),old=a>60,m=!S.g,sk=["#f2c9a0","#e0a874","#c98a56"][S.sk],hc=old?"#e8e8e8":"#222",ad=a>=18,sd=S.s>60?"M42 58q8 9 16 0":S.s<30?"M43 62q7-6 14 0":"M44 60h12",ck=m?"#f6a8a0":"#f3e9a0";
@@ -70,58 +81,59 @@ let hair=m?(ad?`<ellipse cx="50" cy="28" rx="23" ry="11" fill="#f4a6c0"/><circle
 return `<svg width="${z}" height="${z}" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#ffe3a8" stroke="#c8961e" stroke-width="3" stroke-dasharray="1 5" stroke-linecap="round"/><g transform="translate(50 100) scale(${k}) translate(-50 -100)">${body}${face}${hair}</g></svg>`}
 function pf(){let d=document.createElement("div");d.id="md";d.onclick=e=>{if(e.target==d)d.remove()};
 let ed=S.deg?MJ[S.deg-1].n+" ဘွဲ့ရ":S.uni?MJ[S.mj-1].n+" ကျောင်းသား":S.dr?"ကျောင်းထွက်":S.mu?"အခြေခံပညာအောင်":"ကျောင်းသား/ကလေး";
-d.innerHTML=`<div class="sh"><div style="text-align:center">${cart(150)}<br><b style="font-size:20px">${S.nm}</b><br><small>မျိုးဆက် ${S.gen} · အသက် ${S.a} · ${S.y}</small></div><div class="c">${S.g?"အမျိုးသမီး":"အမျိုးသား"} · ${ETH[S.e]} · ${REL[S.r]}<br>${FAM[S.f]}အိမ်ထောင်စု · ${S.town||""} (${RGN[S.rg]})<br>ခက်ခဲမှု ${"⭐".repeat(S.d+1)}</div><div class="c">📚 ${ed}<br>💼 ${S.job?S.job.n:"အလုပ်မရှိ"}${S.role?" · "+S.role:""}<br>🗣️ အင်္ဂလိပ်အဆင့် ${S.lg?S.lg.EN.lv:0}<br>💰 ${S.a<16?"မိဘထံမှ တောင်းသုံးရသည်":K(S.m)}<br>🏠 ${S.house?"အိမ်ခြံရှိ":"အိမ်မရှိ"} · 🚗 ${S.car?"ကားရှိ":"ကားမရှိ"} · 🥇 ${K(S.gold||0)}<br>💍 ${S.mar?"အိမ်ထောင်ရှိ":"လူပျို/အပျို"} · 👶 သားသမီး ${S.kids.length}</div><div class="c"><small>${RG(S.y)}</small></div><button onclick="this.closest('#md').remove()">ပိတ်မည်</button></div>`;document.body.appendChild(d)}
-const RULES=`<div class="c n"><b>📜 ဂိမ်းစည်းမျဉ်းများ</b><br><small>မီတာ ၄ ခု (ကျန်းမာရေး၊ ရုပ်ရည်၊ စိတ်ခွန်အား၊ ဉာဏ်ပညာ) ကို ၅၀% အောက် မကျစေပါနှင့်။<br>• ကျန်းမာရေး ၅၀% အောက် - နာတာရှည်ရောဂါဖြစ်နိုင်ပြီး ဆေးကုသစရိတ် ကုန်သည်။<br>• ဉာဏ်ပညာ ၅၀% အောက် - စာမေးပွဲကျပြီး ရာထူးတိုးမရ။<br>• စိတ်ခွန်အား ၅၀% အောက် - သူငယ်ချင်းနှင့် မိသားစု ချစ်ခင်မှု နှစ်စဉ် ၁၀% ကျသည်။<br>• စိတ်ခွန်အား ၂၀% အောက် - စိတ်ကျရောဂါဖြစ်ပြီး ၅၀% အထက် မပြန်တက်မချင်း မီတာအားလုံး နှစ်စဉ် ၁၀% ကျသည်။<br>• ရုပ်ရည် ၅၀% အောက် - ချစ်သူနှင့် သူငယ်ချင်းရရန် ခက်ခဲသည်။<br>• သားသမီး၏ ချစ်ခင်မှု ၈၀% ကျော်မှ နောက်မျိုးဆက်အဖြစ် ဆက်ကစားနိုင်သည်။ မဟုတ်လျှင် ၁၉၂၀ မှ ပြန်စရမည်။</small></div>`;
+d.innerHTML=`<div class="sh"><div style="text-align:center">${cart(150)}<br><b style="font-size:20px">${S.nm}</b><br><small>မျိုးဆက် ${S.gen} · အသက် ${S.a} · ${S.y}</small></div><div class="c">${S.g?"အမျိုးသမီး":"အမျိုးသား"} · ${ETH[S.e]} · ${REL[S.r]}<br>${FAM[S.f]}အိမ်ထောင်စု · ${S.town||""} (${RGN[S.rg]})<br>ခက်ခဲမှု ${"⭐".repeat(S.d+1)}</div><div class="c">📚 ${ed}<br>💼 ${S.job?S.job.n:"အလုပ်မရှိ"}${S.role?" · "+S.role:""}<br>🗣️ အင်္ဂလိပ် ${S.lg?S.lg.EN.lv:0}<br>💰 ${S.a<16?"မိဘဆီက တောင်းသုံးရတယ်":K(S.m)}<br>🏠 ${S.house?"အိမ်ခြံရှိ":"အိမ်မရှိ"} · 🚗 ${S.car?"ကားရှိ":"ကားမရှိ"} · 🥇 ${K(S.gold||0)}<br>💍 ${S.mar?"အိမ်ထောင်ရှိ":"လူပျို/အပျို"} · 👶 သားသမီး ${S.kids.length}</div><div class="c"><small>${RG(S.y)}</small></div><button onclick="this.closest('#md').remove()">ပိတ်မယ်</button></div>`;document.body.appendChild(d)}
+const RULES=`<div class="c n"><b>📜 ကစားနည်းစည်းမျဉ်း</b><br><small>မီတာ ၄ ခု (ကျန်းမာရေး၊ ရုပ်ရည်၊ စိတ်ခွန်အား၊ ဉာဏ်ပညာ) ကို ၅၀% အောက် မကျအောင် ထိန်းပါ။<br>• ကျန်းမာရေး ၅၀% အောက်ရောက်ရင် - ရောဂါဝင်လွယ်ပြီး ဆေးဖိုးကုန်တတ်တယ်။<br>• ဉာဏ်ပညာ ၅၀% အောက်ရောက်ရင် - စာမေးပွဲကျနိုင်ပြီး ရာထူးတိုးဖို့ ခက်တယ်။<br>• စိတ်ခွန်အား ၅၀% အောက်ရောက်ရင် - သူငယ်ချင်းနဲ့ မိသားစု ချစ်ခင်မှု နှစ်စဉ် ၁၀% လျော့တယ်။<br>• စိတ်ခွန်အား ၂၀% အောက်ရောက်ရင် - စိတ်ကျရောဂါ ဝင်ပြီး ၅၀% ပြန်မတက်မချင်း မီတာအားလုံး နှစ်စဉ် ၁၀% ကျတယ်။<br>• ရုပ်ရည် ၅၀% အောက်ရောက်ရင် - ချစ်သူနဲ့ သူငယ်ချင်းရဖို့ ခက်တယ်။<br>• သားသမီးနဲ့ ချစ်ခင်မှု ၈၀% ကျော်မှ နောက်မျိုးဆက်အဖြစ် ဆက်ကစားလို့ ရမယ်။ မဟုတ်ရင် ၁၉၂၀ ကနေ ပြန်စရမယ်။</small></div>`;
 const logo=z=>`<img src="icon-192.png" width="${z}" height="${z}" alt="လိုဂို" style="border-radius:22%">`;
 function ibar(){try{if(!matchMedia("(display-mode: standalone)").matches&&!navigator.standalone)$("ib").hidden=false}catch(e){}}
-function propUI(){let P=ACT[7][2];return `<div class="c"><b>🏠 ပိုင်ဆိုင်မှု စီမံခန့်ခွဲမှု</b><br><small>အိမ်ခြံ ${S.house?"ရှိ":"မရှိ"} · ကား ${S.car?"ရှိ":"မရှိ"} · ရွှေ ${K(S.gold||0)}<br>စုစုပေါင်း ပိုင်ဆိုင်မှု ${K(NW(S))}</small></div>`+P.map((x,j)=>S.a>=x[2]?`<button onclick="prop(${j})">${x[0]}</button>`:"").join("")}
-function prop(j){let x=ACT[7][2][j],r=x[1]();if(r===false)return;let s=ap(r);lg("🏠 "+x[0]+(s?` (${s})`:""));view()}
+function propUI(){let P=ACT[7][2];return `<div class="c"><b>🏠 ပိုင်ဆိုင်မှု</b><br><small>အိမ်ခြံ ${S.house?"ရှိ":"မရှိ"} · ကား ${S.car?"ရှိ":"မရှိ"} · ရွှေ ${K(S.gold||0)}<br>စုစုပေါင်း ပိုင်ဆိုင်မှု ${K(NW(S))}</small></div>`+P.map((x,j)=>S.a>=x[2]?`<button onclick="prop(${j})">${x[0]}</button>`:"").join("")}
+function prop(j){let x=ACT[7][2][j],r=x[1]();if(r===false)return;let s=ap(r);lg("🏠 "+x[0]+(s?` (${s})`:""));sfx("cash");view();glowGold($("st"))}
 function bars(){let C={w:"#ff9f0a",h:"#34c759",l:"#af52de",s:"#0a84ff",fm:"#ff375f"},ks=ST.filter(k=>k!="fm"||S.fm!==null),key=ks.join(),st=$("st");
-$("hd").innerHTML=`<div class="av" onclick="pf()">${cart(54)}</div><div class="nm"><b>${S.nm}</b><small>မျိုးဆက် ${BN(S.gen)} · အသက် ${BN(S.a)} · ${BN(S.y)}</small><small>${RG(S.y)}</small></div><span class="m" onclick="bud()">${S.a<16?"👪 မိဘမှ ပံ့ပိုး":"💰 "+K(S.m)} ›</span>`;
+$("hd").innerHTML=`<div class="av" onclick="pf()">${cart(54)}</div><div class="nm"><b>${S.nm}</b><small>မျိုးဆက် ${BN(S.gen)} · အသက် ${BN(S.a)} · ${BN(S.y)}</small><small>${RG(S.y)}</small></div><span class="m" onclick="bud()">${S.a<16?"👪 မိဘပံ့ပိုး":"💰 "+K(S.m)} ›</span>`;
 if(st.dataset.k!=key||st.innerHTML==""){st.dataset.k=key;st.innerHTML=ks.map(k=>`<div class="b" data-k="${k}"><span>${N[k]}</span><i><u style="background:${C[k]};width:0"></u></i><em></em></div>`).join("");void st.offsetWidth}
 ks.forEach(k=>{let r=st.querySelector(`[data-k="${k}"]`),v=Math.round(S[k]);r.querySelector("u").style.width=v+"%";r.querySelector("em").textContent=BN(v)+"%";r.classList.toggle("lo",v<50)})}
 function view(an){bars();$("tb").style.setProperty("--i",TB);$("tb").innerHTML=[["ဘဝ","📜"],["ပညာ/အလုပ်","💼"],["လုပ်ဆောင်ချက်","⚡"],["လူမှုရေး","👥"],["ဆက်တင်","⚙️"]].map((x,i)=>`<b class="${TB==i?"on":""}" onclick="TB=${i};AM=-1;LS=-1;TV='';ED='';view(1)"><span>${x[1]}</span>${x[0]}</b>`).join("");
 let ct=$("ct");ct.innerHTML=[feed,t3,acts,fam,sett][TB]();if(an){ct.classList.remove("in");void ct.offsetWidth;ct.classList.add("in")}
 $("dk").style.display=TB==0?"flex":"none";dock();if(TB==0)ct.scrollTop=ct.scrollHeight;sv()}
-function dock(){$("dk").innerHTML=`<div class="bs"><b>ယခုနှစ်၏ လှုပ်ရှားမှု ${BN(S.T)}/၅</b><br><small>${S.ev?"ဖြစ်ရပ်ကို ဦးစွာ ဆုံးဖြတ်ပါ":S.end?"ဘဝ ပြီးဆုံးပြီ":"အသက် +၁ နှိပ်၍ နောက်တစ်နှစ်သို့"}</small></div><button class="ag" ${S.ev||S.end?"disabled":""} onclick="next()">+<small>အသက်</small></button>`}
+function dock(){$("dk").innerHTML=`<div class="bs"><b>ဒီနှစ် လှုပ်ရှားမှု ${BN(S.T)}/၅</b><br><small>${S.ev?"ဖြစ်လာတဲ့ကိစ္စကို အရင်ဆုံးဖြတ်ပါ":S.end?"ဘဝ ပြီးဆုံးသွားပြီ":"အသက် +၁ နှိပ်ပြီး နောက်တစ်နှစ်သွားမယ်"}</small></div><button class="ag" ${S.ev||S.end?"disabled":""} onclick="next()">+<small>အသက်</small></button>`}
 function sv(f){try{if(S&&(f||!S.ev)){S.L=S.L.slice(-120);localStorage.setItem("mml5",JSON.stringify({S,LIN}))}}catch(e){}}
-function ld(){try{let d=JSON.parse(localStorage.getItem("mml5"));S=d.S;LIN=d.LIN;S.eo=null;TB=0;AM=-1;mus(MO);view()}catch(e){start()}}
+function ld(){try{let d=JSON.parse(localStorage.getItem("mml5"));S=d.S;LIN=d.LIN;S.eo=null;TB=0;AM=-1;mus(MO);view();glowGold($("st"))}catch(e){start()}}
 function feed(){let L=S.L.slice(-60),b=S.L.length-L.length,h=L.map((x,i)=>b+i>=(S.rn||0)?x.replace('<div class="','<div class="n '):x).join("");S.rn=S.L.length;
-if(S.end){let ok=S.kids.map((k,i)=>[k,i]).filter(x=>x[0].rel>80);h+=ok.length?ok.map(x=>`<button onclick="hr(${x[1]})">▶ ${x[0].n} အဖြစ် ဆက်ကစားမည် (အသက် ${S.y-x[0].by} · ❤️${Math.round(x[0].rel)}%)</button>`).join(""):'<button class="pri" onclick="start()">၁၉၂၀ မှ ပြန်စမည်</button>'}
+if(S.end){let ok=S.kids.map((k,i)=>[k,i]).filter(x=>x[0].rel>80);h+=ok.length?ok.map(x=>`<button class="pri" onclick="hr(${x[1]})">▶ ${x[0].n} အဖြစ် ဆက်ကစားမယ် (အသက် ${S.y-x[0].by} · ❤️${Math.round(x[0].rel)}%)</button>`).join(""):'<button class="pri" onclick="start()">၁၉၂၀ ကနေ ပြန်စမယ်</button>'}
 else if(S.ev)h+=`<div class="c n"><b>${S.ev.t}</b></div>`+S.ev.o.map((x,i)=>`<button onclick="pk(${i})">${x[0]}</button>`).join("");return h}
 function acts(){if(AM==3)return lgui();if(AM==7)return lfui();
-if(AM<0)return `<div class="c">ယခုနှစ်၏ လှုပ်ရှားမှု <b>${BN(S.T)}/၅</b><br><small>သင့်အသက်အရွယ်နှင့် ကိုက်ညီသော လုပ်ဆောင်ချက်များသာ ပေါ်မည်</small></div>`+ACT.map((c,i)=>(i==3?S.a>=10:c[2].some(x=>S.a>=x[2]))&&(!c[1].startsWith("NUG")||(S.y>=2021&&S.y<=2029))?`<button onclick="AM=${i};view()">${c[0]} ${c[1]} ›</button>`:"").join("");
-let c=ACT[AM];return `<button onclick="AM=-1;view()">‹ နောက်သို့</button><div class="c"><b>${c[0]} ${c[1]}</b> · ယခုနှစ်၏ လှုပ်ရှားမှု ${BN(S.T)}/၅</div>`+c[2].map((x,j)=>S.a>=x[2]?`<button onclick="use(ACT[${AM}][2][${j}][1],ACT[${AM}][2][${j}][0])">${x[0]}</button>`:"").join("")}
+if(AM<0)return `<div class="c">ဒီနှစ် လှုပ်ရှားမှု <b>${BN(S.T)}/၅</b><br><small>ကိုယ့်အသက်နဲ့ လိုက်တဲ့ လုပ်ဆောင်ချက်တွေပဲ ပေါ်မယ်</small></div>`+ACT.map((c,i)=>(i==3?S.a>=10:c[2].some(x=>S.a>=x[2]))&&(!c[1].startsWith("NUG")||(S.y>=2021&&S.y<=2029))?`<button onclick="AM=${i};view()">${c[0]} ${c[1]} ›</button>`:"").join("");
+let c=ACT[AM];return `<button onclick="AM=-1;view()">‹ နောက်သို့</button><div class="c"><b>${c[0]} ${c[1]}</b> · ဒီနှစ် လှုပ်ရှားမှု ${BN(S.T)}/၅</div>`+c[2].map((x,j)=>S.a>=x[2]?`<button onclick="use(ACT[${AM}][2][${j}][1],ACT[${AM}][2][${j}][0])">${x[0]}</button>`:"").join("")}
 function fam(){let h=`<div class="c"><b>👪 မိဘများ</b></div>`,P=S.pt;
-(S.par||[]).forEach((p,i)=>{let a=S.y-p.by;h+=p.al?`<div class="c">${p.r} ${p.n} · ${a} နှစ်<br>❤️ ချစ်ခင်မှု ${Math.round(p.rel)}%</div><button onclick="pa(${i})">အချိန်ပေး ဂရုစိုက်သည်</button>`:`<div class="c">🕯️ ${p.r} ${p.n} (ကွယ်လွန်)</div>`});
-if(S.a>=16){if(P){h+=`<div class="c"><b>${P.st=="m"?"💑 ဇနီး/ခင်ပွန်း":P.st=="e"?"💍 စေ့စပ်ထားသူ":"❤️ ချစ်သူ"}</b> ${P.n}${P.nat!="မြန်မာ"?` (${P.nat}နိုင်ငံသား)`:""}<br>ချစ်ခင်မှု ${Math.round(S.sr)}%</div><button onclick="pt(0)">အချိန်ပေးသည်</button>`;
-if(P.st=="d"&&S.sr>=60&&S.a>=18)h+=S.g?`<small>ချစ်ခင်မှုလုံလောက်လျှင် သူက လက်ထပ်ရန် ပြောလာနိုင်သည်။</small>`:`<button onclick="pt(1)">💍 လက်ထပ်ရန် ကမ်းလှမ်းမည် (လက်စွပ်နှင့် စေ့စပ်ခ ${K(2000)})</button>`;
-if(P.st=="e")h+=`<button onclick="pt(5)">🎊 မင်္ဂလာပွဲ ကျင်းပမည်${S.g?"":" ("+K(1000)+")"}</button>`;
-h+=P.st=="m"?`<button onclick="pt(3)">ကွာရှင်းမည်</button>`:`<button onclick="pt(4)">အဆက်ဖြတ်မည်</button>`;
-if(P.st=="m"&&S.inl)h+=`<div class="c">👵 ယောက္ခမ/ယောက္ခထီး အိမ်ထောင်စု ❤️ ${Math.round(S.inl.rel)}%</div><button onclick="pt(2)">အချိန်ပေးသည်</button>`}
-else h+=`<button onclick="dt()">💘 ချစ်သူရှာမည် (တစ်နှစ်တစ်ကြိမ် · ~${dc()}%)</button>`}
-S.kids.forEach((k,i)=>{let a=S.y-k.by;h+=`<div class="c"><b>${k.g?"👧":"👦"} ${k.n}</b> · ${a} နှစ်<br>❤️ ချစ်ခင်မှု ${Math.round(k.rel)}% · 🧠 ${Math.round(k.q)}% · 📚 ပညာ ${Math.floor(k.edu)}</div><button onclick="ka(${i},0)">အချိန်ပေးသည်</button><button onclick="ka(${i},1)">စကားပြော နားထောင်သည်</button>`+(a>=5&&a<=22?`<button onclick="ka(${i},2)">ပညာရေး ထောက်ပံ့သည် (ငွေ -800)</button>`:"")});
-h+=`<div class="c"><b>🧑‍🤝‍🧑 သူငယ်ချင်းများ</b></div>`+(S.fr.length?S.fr.map((f,i)=>`<button onclick="fa(${i})">${f.n} ❤️${Math.round(f.rel)}% · အချိန်ပေးမည်</button>`).join(""):"<small>သူငယ်ချင်း မရှိသေးပါ</small>");
-if(S.co.length)h+=`<div class="c"><b>💼 လုပ်ဖော်ကိုင်ဖက်များ</b></div>`+S.co.map((f,i)=>`<button onclick="ca(${i})">${f.n} ❤️${Math.round(f.rel)}% · အတူထမင်းစားမည်</button>`).join("");
-return h+`<div class="c r">💡 သေဆုံးသောအခါ သားသမီးအား ချစ်ခင်မှု ၈၀% ကျော်မှ နောက်မျိုးဆက်အဖြစ် ဆက်ကစားနိုင်ပြီး အမွေ ${K(NW(S)*.9)} ရမည်။ မဟုတ်လျှင် ၁၉၂၀ မှ ပြန်စရမည်။</div>`}
-function ka(i,t){if(S.T<=0)return alert("ယခုနှစ်၏ လှုပ်ရှားမှု မကျန်တော့ပါ");if(t==2&&S.m<800)return alert("ငွေမလောက်ပါ");let k=S.kids[i];if(t==0){k.rel=cl(k.rel+6);k.q=cl(k.q+1)}if(t==1){k.rel=cl(k.rel+4);k.q=cl(k.q+3)}if(t==2){k.edu=Math.min(10,k.edu+1);k.q=cl(k.q+1)}use(t==2?{m:-800}:{s:1},k.n+" - "+["အချိန်ပေးသည်","စကားပြောနားထောင်သည်","ပညာရေးထောက်ပံ့သည်"][t])}
-function fa(i){if(S.T<=0)return alert("ယခုနှစ်၏ လှုပ်ရှားမှု မကျန်တော့ပါ");S.fr[i].rel=cl(S.fr[i].rel+8);use({s:2},S.fr[i].n+" နှင့် အချိန်ပေးသည်")}
-function ca(i){if(S.T<=0)return alert("ယခုနှစ်၏ လှုပ်ရှားမှု မကျန်တော့ပါ");S.co[i].rel=cl(S.co[i].rel+8);use({s:1},S.co[i].n+" နှင့် အတူထမင်းစားသည်")}
+(S.par||[]).forEach((p,i)=>{let a=S.y-p.by;h+=p.al?`<div class="c">${p.r} ${p.n} · ${a} နှစ်<br>❤️ ချစ်ခင်မှု ${Math.round(p.rel)}%</div><button onclick="pa(${i})">အချိန်ပေး ဂရုစိုက်မယ်</button>`:`<div class="c">🕯️ ${p.r} ${p.n} (ကွယ်လွန်)</div>`});
+if(S.a>=16){if(P){h+=`<div class="c"><b>${P.st=="m"?"💑 ဇနီး/ခင်ပွန်း":P.st=="e"?"💍 စေ့စပ်ထားသူ":"❤️ ချစ်သူ"}</b> ${P.n}${P.nat!="မြန်မာ"?` (${P.nat}နိုင်ငံသား)`:""}<br>ချစ်ခင်မှု ${Math.round(S.sr)}%</div><button onclick="pt(0)">အချိန်ပေးမယ်</button>`;
+if(P.st=="d"&&S.sr>=60&&S.a>=18)h+=S.g?`<small>ချစ်ခင်မှုများရင် သူ့ဘက်က လက်ထပ်ဖို့ ပြောလာနိုင်တယ်။</small>`:`<button onclick="pt(1)">💍 လက်ထပ်ခွင့်တောင်းမယ် (လက်စွပ်နဲ့ စေ့စပ်ခ ${K(2000)})</button>`;
+if(P.st=="e")h+=`<button onclick="pt(5)">🎊 မင်္ဂလာပွဲ လုပ်မယ်${S.g?"":" ("+K(1000)+")"}</button>`;
+h+=P.st=="m"?`<button onclick="pt(3)">ကွာရှင်းမယ်</button>`:`<button onclick="pt(4)">လမ်းခွဲမယ်</button>`;
+if(P.st=="m"&&S.inl)h+=`<div class="c">👵 ယောက္ခမအိမ်ထောင်စု ❤️ ${Math.round(S.inl.rel)}%</div><button onclick="pt(2)">အချိန်ပေးမယ်</button>`}
+else h+=`<button onclick="dt()">💘 ချစ်သူရှာမယ် (တစ်နှစ်တစ်ခါ · ~${dc()}%)</button>`}
+S.kids.forEach((k,i)=>{let a=S.y-k.by;h+=`<div class="c"><b>${k.g?"👧":"👦"} ${k.n}</b> · ${a} နှစ်<br>❤️ ချစ်ခင်မှု ${Math.round(k.rel)}% · 🧠 ${Math.round(k.q)}% · 📚 ပညာ ${Math.floor(k.edu)}</div><button onclick="ka(${i},0)">အချိန်ပေးမယ်</button><button onclick="ka(${i},1)">စကားပြော နားထောင်ပေးမယ်</button>`+(a>=5&&a<=22?`<button onclick="ka(${i},2)">ကျောင်းစရိတ် ထောက်ပံ့မယ် (ငွေ -800)</button>`:"")});
+h+=`<div class="c"><b>🧑‍🤝‍🧑 သူငယ်ချင်းများ</b></div>`+(S.fr.length?S.fr.map((f,i)=>`<button onclick="fa(${i})">${f.n} ❤️${Math.round(f.rel)}% · အချိန်ပေးမယ်</button>`).join(""):"<small>သူငယ်ချင်း မရှိသေးဘူး</small>");
+if(S.co.length)h+=`<div class="c"><b>💼 လုပ်ဖော်ကိုင်ဖက်များ</b></div>`+S.co.map((f,i)=>`<button onclick="ca(${i})">${f.n} ❤️${Math.round(f.rel)}% · အတူထမင်းစားမယ်</button>`).join("");
+return h+`<div class="c r">💡 ကိုယ်ဆုံးသွားရင် သားသမီးနဲ့ ချစ်ခင်မှု ၈၀% ကျော်မှ နောက်မျိုးဆက် ဆက်ကစားလို့ရပြီး အမွေ ${K(NW(S)*.9)} ရမယ်။ မဟုတ်ရင် ၁၉၂၀ ကနေ ပြန်စရမယ်။</div>`}
+function ka(i,t){if(S.T<=0)return alert("ဒီနှစ် လှုပ်ရှားမှု ကုန်သွားပြီ");if(t==2&&S.m<800)return alert("ငွေမလောက်ဘူး");let k=S.kids[i];if(t==0){k.rel=cl(k.rel+6);k.q=cl(k.q+1)}if(t==1){k.rel=cl(k.rel+4);k.q=cl(k.q+3)}if(t==2){k.edu=Math.min(10,k.edu+1);k.q=cl(k.q+1)}use(t==2?{m:-800}:{s:1},k.n+" - "+["အချိန်ပေး","စကားပြောနားထောင်","ပညာရေးထောက်ပံ့"][t])}
+function fa(i){if(S.T<=0)return alert("ဒီနှစ် လှုပ်ရှားမှု ကုန်သွားပြီ");S.fr[i].rel=cl(S.fr[i].rel+8);use({s:2},S.fr[i].n+" နဲ့ အချိန်ပေး")}
+function ca(i){if(S.T<=0)return alert("ဒီနှစ် လှုပ်ရှားမှု ကုန်သွားပြီ");S.co[i].rel=cl(S.co[i].rel+8);use({s:1},S.co[i].n+" နဲ့ အတူထမင်းစား")}
 const NATS=["ထိုင်း","ဂျပန်","ကိုရီးယား","စင်ကာပူ","အမေရိကန်"];
 const dc=()=>Math.max(5,Math.min(80,Math.round(70-(S.a-16)*1.6+S.l*.2+S.s*.1-(S.l<50?20:0))));
-function dt(){if(S.dy==S.y)return alert("ဤနှစ်တွင် ချစ်သူရှာပြီးပြီ");S.dy=S.y;if(R(100)>=dc()){lg("💔 ဤနှစ်တွင် သင့်တော်သူ မတွေ့ရပါ။ အသက်ကြီးလာလျှင် အခွင့်အလမ်း ပိုနည်းလာသည်။");return view()}
-let ss=R(100)<(S.y>=2100?12:S.y>=2040?8:0),g=ss?S.g:(S.g?0:1),fo=S.ab?R(10)<7:R(10)<1,nat=fo?(S.ab?S.ab.d:NATS[R(5)]):"မြန်မာ";S.pt={n:pn(g,S.y-S.a+R(7)-3),g,nat,st:"d"};S.sr=50+R(25);lg(`💘 ${S.pt.n} ${nat!="မြန်မာ"?"("+nat+"နိုင်ငံသား) ":""}နှင့် ချစ်သူဖြစ်လာသည်။`,"r");view()}
+function dt(){if(S.dy==S.y)return alert("ဒီနှစ် ချစ်သူရှာပြီးပြီ");S.dy=S.y;if(R(100)>=dc()){sfx("bad");lg("💔 ဒီနှစ်တော့ ဖူးစာမဆုံသေးဘူး။ အသက်ကြီးလာရင် အခွင့်အလမ်း ပိုနည်းလာတတ်တယ်။");return view()}
+let ss=R(100)<(S.y>=2100?12:S.y>=2040?8:0),g=ss?S.g:(S.g?0:1),fo=S.ab?R(10)<7:R(10)<1,nat=fo?(S.ab?S.ab.d:NATS[R(5)]):"မြန်မာ";S.pt={n:pn(g,S.y-S.a+R(7)-3),g,nat,st:"d"};S.sr=50+R(25);sfx("good");lg(`💘 ${S.pt.n} ${nat!="မြန်မာ"?"("+nat+"နိုင်ငံသား) ":""}နဲ့ ချစ်သူဖြစ်သွားပြီ။`,"r");view();glowGold($("st"))}
 function pt(t){let P=S.pt;if(!P)return;
-if(t==0||t==2){if(S.T<=0)return alert("ယခုနှစ်၏ လှုပ်ရှားမှု မကျန်တော့ပါ");if(t==0){S.sr=cl(S.sr+8);return use({s:2},P.n+" နှင့် အချိန်ပေးသည်")}S.inl.rel=cl(S.inl.rel+8);return use({s:1},"ယောက္ခမအိမ်ထောင်စုနှင့် အချိန်ပေးသည်")}
-if(t==1){if(S.m<2000)return alert("စေ့စပ်စရိတ်အတွက် ငွေမလောက်ပါ");mv(-2000,"လက်စွပ်နှင့် စေ့စပ်စရိတ်");if(R(100)<S.sr*.9+(S.m>8000?5:0)){P.st="e";S.sr=cl(S.sr+5);lg(`💍 ${P.n} က လက်ခံသည်။ စေ့စပ်ပြီး`,"r")}else{S.sr=cl(S.sr-15);lg(`💔 ${P.n} က ငြင်းပယ်သည်။`,"r");if(R(10)<3)S.pt=null}return view()}
-if(t==5){if(!S.g){if(S.m<1000)return alert("မင်္ဂလာပွဲစရိတ် ငွေမလောက်ပါ");mv(-1000,"မင်္ဂလာပွဲစရိတ်")}P.st="m";S.mar=1;S.ma=S.a;S.inl={rel:S.a>=18&&S.a<=23?40:60};if(S.a>=18&&S.a<=23)(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel-10)));S.sr=cl(S.sr+8);lg(`🎊 ${P.n} နှင့် လက်ထပ်သည်။`,"r");return view()}
-if(t==4){S.pt=null;lg("အဆက်ဖြတ်သည်။");ap({s:-4});return view()}
+if(t==0||t==2){if(S.T<=0)return alert("ဒီနှစ် လှုပ်ရှားမှု ကုန်သွားပြီ");if(t==0){S.sr=cl(S.sr+8);return use({s:2},P.n+" နဲ့ အချိန်ပေး")}S.inl.rel=cl(S.inl.rel+8);return use({s:1},"ယောက္ခမအိမ်ထောင်စုနဲ့ အချိန်ပေး")}
+if(t==1){if(S.m<2000)return alert("စေ့စပ်စရိတ် ငွေမလောက်ဘူး");mv(-2000,"လက်စွပ်နဲ့ စေ့စပ်စရိတ်");if(R(100)<S.sr*.9+(S.m>8000?5:0)){P.st="e";S.sr=cl(S.sr+5);sfx("levelup");lg(`💍 ${P.n} က လက်ခံလိုက်ပြီ။ စေ့စပ်ပြီးပြီ`,"r");glowGold($("st"))}else{S.sr=cl(S.sr-15);sfx("bad");lg(`💔 ${P.n} က ငြင်းလိုက်တယ်။`,"r");shakeScreen();if(R(10)<3)S.pt=null}return view()}
+if(t==5){if(!S.g){if(S.m<1000)return alert("မင်္ဂလာပွဲစရိတ် ငွေမလောက်ဘူး");mv(-1000,"မင်္ဂလာပွဲစရိတ်")}P.st="m";S.mar=1;S.ma=S.a;S.inl={rel:S.a>=18&&S.a<=23?40:60};if(S.a>=18&&S.a<=23)(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel-10)));S.sr=cl(S.sr+8);sfx("levelup");lg(`🎊 ${P.n} နဲ့ လက်ထပ်လိုက်ပြီ။`,"r");glowGold($("st"));return view()}
+if(t==4){S.pt=null;lg("လမ်းခွဲလိုက်တယ်။");sfx("bad");ap({s:-4});return view()}
 if(t==3)divorce(0)}
-function divorce(a){mv(-Math.round(S.m*.3),"ကွာရှင်းမှုကြောင့် ဥစ္စာခွဲဝေမှု");S.kids.forEach(k=>k.rel=cl(k.rel-10));S.mar=0;S.pt=null;S.inl=null;ap({s:-8});lg(a?"💔 ချစ်ခင်မှုကုန်၍ ကွာရှင်းလိုက်ရသည်။":"💔 ကွာရှင်းလိုက်သည်။","r");view()}
-function pa(i){if(S.T<=0)return alert("ယခုနှစ်၏ လှုပ်ရှားမှု မကျန်တော့ပါ");let p=S.par[i];p.rel=cl(p.rel+6);use({s:1},p.r+"နှင့် အချိန်ပေးသည်")}
-function sett(){return `<div class="c n"><b>🎵 ဂီတ</b></div><button onclick="mus(!MO);view()">${MO?"🔊 ဂီတ ပိတ်မည်":"🔈 ဂီတ ဖွင့်မည်"}</button><div class="c">အသံ <input type="range" min="0" max="100" value="${MV*100}" oninput="vol(this.value)" style="width:75%"></div><button onclick="SO=!SO;view()">${SO?"🔔 အသံပြုလုပ်ချက်များ ပိတ်မည်":"🔕 အသံပြုလုပ်ချက်များ ဖွင့်မည်"}</button><button onclick="sv(1);alert('သိမ်းပြီးပါပြီ')">💾 ဂိမ်းသိမ်းမည်</button><button class="pri" onclick="inst()">📲 ဂိမ်းကို ဖုန်းထဲ ထည့်သွင်းမည်</button><button onclick="start()">🆕 ဂိမ်းအသစ် (၁၉၂၀ မှ)</button>`+RULES+`<div class="c"><b>ℹ️ ဂိမ်းအကြောင်း</b><br><small>ဤဂိမ်းသည် BitLife ဂိမ်းမှ စိတ်ကူးရ၍ ဖန်တီးထားခြင်းဖြစ်ပြီး မြန်မာပြည်သူများအတွက် မျှော်လင့်ချက်နှင့် ပျော်ရွှင်မှု ပေးရန် ရည်ရွယ်သည်။<br><br>နှစ်စဉ် အရေးကြီးသော ဘဝဆုံးဖြတ်ချက်များကို ချ၍ ကိုယ့်ဇာတ်ကောင်နှင့် မျိုးဆက်များကို ပြောင်းလဲစေသည်။ ဤဂိမ်းမှ အောက်ပါအချက်များကို သင်ယူနိုင်သည်။<br>၁။ တည်ငြိမ်သောဘဝအတွက် ပညာရေးသည် အရေးကြီးသည်။<br>၂။ ကျန်းမာရေး၊ စိတ်ခံစားမှု၊ ရုပ်ရည်၊ ဉာဏ်ပညာကို ငွေကြေးနှင့် အချိန်အကန့်အသတ်ဖြင့် မျှတအောင် ထိန်းရခြင်းသည် မလွယ်ကူပါ။<br>၃။ ကောင်းမှု၊ ဆိုးမှု အားလုံးတွင် အကျိုးဆက်ရှိသည်။<br>၄။ ဘဝသည် ကိုယ့်ကိုယ်ကို တိုးတက်စေခြင်း၊ မိသားစုကို ပံ့ပိုးခြင်းနှင့် လူ့အဖွဲ့အစည်းကို ကူညီခြင်း ဖြစ်သည်။<br><br>၁၉၂၀ မှ ၂၀၂၆ အထိ မြန်မာ့သမိုင်း၊ ပညာရေးစနစ်၊ နေထိုင်မှုပုံစံနှင့် စီးပွားရေးကို အခြေခံထားသည်။ ၂၀၂၆ နောက်ပိုင်း အနာဂတ်သည် ဖန်တီးသူ၏ စိတ်ကူးဖြစ်သည်။ သမိုင်းဖြစ်ရပ်များကို ပညာရပ်ဆိုင်ရာ ရင်းမြစ်များနှင့် တိုက်ဆိုင်စစ်ဆေးပါ။</small></div>`}
+function divorce(a){mv(-Math.round(S.m*.3),"ကွာရှင်းမှု ဥစ္စာခွဲဝေ");S.kids.forEach(k=>k.rel=cl(k.rel-10));S.mar=0;S.pt=null;S.inl=null;sfx("bad");ap({s:-8});lg(a?"💔 အဆင်မပြေတော့လို့ ကွာရှင်းလိုက်ရတယ်။":"💔 ကွာရှင်းလိုက်တယ်။","r");shakeScreen();view()}
+function pa(i){if(S.T<=0)return alert("ဒီနှစ် လှုပ်ရှားမှု ကုန်သွားပြီ");let p=S.par[i];p.rel=cl(p.rel+6);use({s:1},p.r+"နဲ့ အချိန်ပေး")}
+
+function sett(){return `<div class="c n"><b>🎵 အသံနှင့် ဂီတ</b></div><button onclick="mus(!MO);view()">${MO?"🔊 နောက်ခံဂီတ ပိတ်မယ်":"🔈 နောက်ခံဂီတ ဖွင့်မယ်"}</button><div class="c">အသံအတိုးအကျယ် <input type="range" min="0" max="100" value="${Math.round(MV*100)}" oninput="vol(this.value)" style="width:75%"></div><button onclick="SO=!SO;view()">${SO?"🔔 Sound Effect ပိတ်မယ်":"🔕 Sound Effect ဖွင့်မယ်"}</button><button onclick="sv(1);alert('သိမ်းပြီးပါပြီ')">💾 ဂိမ်းသိမ်းမယ်</button><button class="pri" onclick="inst()">📲 ဖုန်းထဲ ထည့်သွင်းမယ်</button><button onclick="start()">🆕 ဂိမ်းအသစ် (၁၉၂၀ ကနေ)</button>`+RULES+`<div class="c"><b>ℹ️ ဂိမ်းအကြောင်း</b><br><small>ဒီဂိမ်းလေးက BitLife ဂိမ်းကို စိတ်ကူးယူပြီး မြန်မာ့သမိုင်းနဲ့ ဘဝဖြတ်သန်းမှုတွေကို မျှော်လင့်ချက်နဲ့ ပျော်ရွှင်မှု ပေးနိုင်အောင် ဖန်တီးထားတာပါ။<br><br>နှစ်စဉ် ဘဝဆုံးဖြတ်ချက်တွေ ချပြီး ကိုယ့်ဇာတ်ကောင်နဲ့ မျိုးဆက်တွေကို ဖြတ်သန်းစေမယ်။ ဒီဂိမ်းကနေ ရနိုင်မယ့် အတွေးအမြင်တွေကတော့—<br>၁။ တည်ငြိမ်တဲ့ ဘဝတစ်ခုအတွက် ပညာရေးက အရေးပါတယ်။<br>၂။ ကျန်းမာရေး၊ စိတ်ခွန်အား၊ ရုပ်ရည်၊ ဉာဏ်ပညာကို ငွေနဲ့ အချိန်အကန့်အသတ်ကြား မျှတအောင် ထိန်းရတာ မလွယ်ဘူး။<br>၃။ လုပ်သမျှ အလုပ်တိုင်းမှာ အကျိုးဆက် ရှိတယ်။<br>၄။ ဘဝဆိုတာ ကိုယ့်ကိုယ်ကို တိုးတက်အောင် လုပ်ခြင်း၊ မိသားစုကို ပံ့ပိုးခြင်းနဲ့ ပတ်ဝန်းကျင်ကို ကူညီခြင်းပါပဲ။<br><br>၁၉၂၀ ကနေ ၂၀၂၆ အထိ မြန်မာ့သမိုင်း၊ ပညာရေးစနစ်၊ နေထိုင်မှုနဲ့ စီးပွားရေးကို အခြေခံထားပြီး ၂၀၂၆ နောက်ပိုင်းကိုတော့ စိတ်ကူးယဉ် ဖန်တီးထားတာ ဖြစ်ပါတယ်။ သမိုင်းအချက်အလက်တွေကို စာအုပ်/ရင်းမြစ်တွေနဲ့ ထပ်မံတိုက်ဆိုင်ကြည့်နိုင်ပါတယ်။</small></div>`}
 function pk(i){let x=S.ev.o[i],s=ap(x[1]);lg("➜ "+x[0]+(s?` (${s})`:""));if(x[2])lg(x[2],"r");sfx(/\+/.test(s||"")&&!/ -/.test(s||"")?"good":/ -/.test(s||"")?"bad":"click");S.ev=null;view()}
-function use(fx,l){if(S.T<=0)return alert("ယခုနှစ်၏ လှုပ်ရှားမှု မကျန်တော့ပါ");let r=typeof fx=="function"?fx():fx;if(r===false)return;S.T--;if(r.f>0)S.gd=(S.gd||0)+1;let s=ap(r);lg("• "+l+(s?` (${s})`:""));view()}
+function use(fx,l){if(S.T<=0)return alert("ဒီနှစ် လှုပ်ရှားမှု ကုန်သွားပြီ");let r=typeof fx=="function"?fx():fx;if(r===false)return;S.T--;if(r.f>0)S.gd=(S.gd||0)+1;let s=ap(r);lg("• "+l+(s?` (${s})`:""));sfx(r.m&&Math.abs(r.m)>=500?"cash":/\+/.test(s||"")&&!/ -/.test(s||"")?"good":"click");view()}
 let TV="",ED="";
 const GATE={0:{3:2,4:3},2:{3:1},3:{2:2,3:3,4:3,5:4}};
 const STD=1500;
@@ -130,115 +142,115 @@ const ADV=[["ဘွဲ့လွန်လက်မှတ် (PGD)",1,500,1],["မ
 const CERTS=[["စာရင်းကိုင်လက်မှတ်သင်တန်း",1,300,"acc"],["IT လက်မှတ်သင်တန်း",1,400,"it"],["သူနာပြုသင်တန်း",2,500,"nurse"],["သတင်းမီဒီယာသင်တန်း",1,300,"media"],["ဂရပ်ဖစ်ဒီဇိုင်းသင်တန်း",1,350,"design"],["ဟိုတယ်/ဧည့်ဝန်ဆောင်သင်တန်း",1,300,"hotel"],["ခရီးသွားလမ်းညွှန်လိုင်စင်သင်တန်း",1,300,"tour"],["ရေကြောင်းသင်တန်း",2,600,"sea"],["ချက်ပြုတ်ရေးသင်တန်း",1,250,"chef"]];
 const HM=(...k)=>()=>S.deg&&k.includes(MJ[S.deg-1].j),CT=id=>()=>(S.ct||[]).includes(id),OR=(...f)=>()=>f.some(x=>x());
 CAR[2][2]=HM("tch");CAR[8][2]=OR(HM("biz"),CT("acc"));CAR[11][2]=OR(HM("sci","eng"),CT("it"));CAR[13][2]=CT("nurse");CAR[15][2]=OR(HM("art"),CT("media"));CAR[16][2]=OR(HM("art"),CT("design"));CAR[17][2]=HM("biz");CAR[19][2]=OR(MU,CT("hotel"));CAR[20][2]=CT("tour");CAR[24][2]=()=>HM("sci","eng")()&&S.lang>=2;CAR[25][2]=OR(CT("sea"),HM("eng"));
-const LF={h:[["ဧည့်ခန်း/အခန်းသေးငှားနေမည်",400],["တိုက်ခန်းငှားနေမည်",900],["အဆင့်မြင့်နေအိမ်ငှားမည်",2200]],d:[["ရိုးရှင်းသောအစားအသောက်",250],["ပုံမှန်အစားအသောက်",450],["အဆင့်မြင့်အစားအသောက်",900]],c:[["ရိုးရိုးအဝတ်အစား",60],["ပုံမှန်အဝတ်အစား",150],["ခေတ်ဆန်အဝတ်အစား",400]]};
+const LF={h:[["အခန်းငယ်ငှားနေမယ်",400],["တိုက်ခန်းငှားနေမယ်",900],["အိမ်ကောင်းငှားနေမယ်",2200]],d:[["ရိုးရိုးစားမယ်",250],["ပုံမှန်စားမယ်",450],["ကောင်းကောင်းစားမယ်",900]],c:[["ရိုးရိုးဝတ်မယ်",60],["ပုံမှန်ဝတ်မယ်",150],["လှလှပပဝတ်မယ်",400]]};
 function living(){let L=S.lf||{h:1,d:1,c:1},e=EM(),f=e*(S.ab?1+.25*S.ab.mu:1),st=(S.uni&&S.a<26)?.4:1,tot=Math.round(((S.house?150:LF.h[L.h][1])+LF.d[L.d][1]+LF.c[L.c][1])*f*(S.mar?1.4:1)*st);
-mv(-tot,"လူနေစရိတ် (အိမ်၊ အစား၊ အဝတ်)");ap({h:L.d-1,l:L.c-1,s:S.house?0:L.h-1});
-if(S.mar&&S.pt)mv(Math.round(1100*e),"အိမ်ထောင်ဖက်၏ ဝင်ငွေ");
-S.kids.forEach(k=>{if(S.y-k.by<18)mv(-Math.round(350*e),"ကလေးစောင့်ရှောက်စရိတ်")});
+mv(-tot,"လူနေစရိတ် (အိမ်၊ စား၊ ဝတ်)");ap({h:L.d-1,l:L.c-1,s:S.house?0:L.h-1});
+if(S.mar&&S.pt)mv(Math.round(1100*e),"အိမ်ထောင်ဖက် ဝင်ငွေ");
+S.kids.forEach(k=>{if(S.y-k.by<18)mv(-Math.round(350*e),"ကလေးစရိတ်")});
 if(S.a>=25)(S.par||[]).forEach(p=>{if(p.al&&S.y-p.by>60)mv(-Math.round(200*e),"မိဘထောက်ပံ့စရိတ်")})}
 function eduYear(){let m=S.ab?2*(S.ab.sc?.4:1):1,c;
 if(S.uni&&S.a>=16){let t=Math.round(500*EM()*m);if(!S.ab&&S.a<26&&S.fw>=t){S.fw-=t}else mv(-t,"တက္ကသိုလ်စရိတ်")}
-let e=S.ae;if(e){c=e.k=="a"?ADV[e.i]:CERTS[e.i];mv(-Math.round(c[2]*EM()*m),"ပညာသင်စရိတ် - "+c[0]);e.n++;S.w=cl(S.w+1);
-if(e.n>=c[1]){if(e.k=="a"){if(S.w<50&&R(100)<40){e.n--;lg("စာမေးပွဲကျ၍ တစ်နှစ်ထပ်တက်ရသည်။","r")}else{S.ad=Math.max(S.ad,c[3]);S.ae=0;lg(`🎓 ${c[0]} ရရှိသည်။`,"r")}}else{S.ct.push(c[3]);S.ae=0;lg(`📜 ${c[0]} ပြီးမြောက်သည်။`,"r")}}}}
-function aenr(k,i){if(S.ae)return alert("လက်ရှိသင်တန်းကို ဦးစွာ ပြီးပါ");if(S.uni)return alert("တက္ကသိုလ်ပညာ ဦးစွာ ပြီးပါ");let c=k=="a"?ADV[i]:CERTS[i];
-if(k=="a"){if(!S.deg)return alert("ရိုးရိုးဘွဲ့ လိုအပ်သည်");if(S.job)return alert("ပညာသင်ရန် အလုပ်ကို ဦးစွာ ထွက်ပါ");if(S.ad<[0,0,2,3][i])return alert("ယခင်အဆင့်ဘွဲ့ လိုအပ်သည်");if(S.ad>=c[3])return alert("ရပြီးသား ဖြစ်သည်")}
-else{if(S.ct.includes(c[3]))return alert("ရပြီးသား ဖြစ်သည်");if(c[3]=="nurse"&&!S.mu)return alert("ဆယ်တန်းအောင်ရန် လိုသည်")}
-if(S.m<c[2]*EM()*(S.ab?2*(S.ab.sc?.4:1):1))return alert("ပညာသင်စရိတ် မလောက်ပါ");S.ae={k,i,n:0};lg(`📚 ${c[0]} စတင်တက်ရောက်သည်။`,"r");view()}
-function cvCard(){return `<div class="c"><b>📄 ကိုယ်ရေးရာဇဝင် (CV)</b><br>ပညာ - ${S.deg?MJ[S.deg-1].n+" ဘွဲ့"+(S.ad?" · "+["","ဘွဲ့လွန်လက်မှတ်","မဟာဘွဲ့","ပါရဂူဘွဲ့","ပါရဂူလွန်သုတေသန"][S.ad]:""):S.mu?"အခြေခံပညာအောင်":"မအောင်သေး"}<br>လက်မှတ်သင်တန်း - ${(S.ct||[]).length?CERTS.filter(c=>S.ct.includes(c[3])).map(c=>c[0]).join("၊ "):"မရှိ"}<br>အလုပ်အတွေ့အကြုံ ${BN(S.ex)} နှစ် · ပြည်ပအတွေ့အကြုံ ${S.rt?"ရှိ":"မရှိ"}<br>တူရိယာ - ${INS.filter(x=>insLv(x[0])>0).map(x=>x[1]+" အဆင့် "+BN(insLv(x[0]))).join("၊ ")||"မရှိ"}<br>လူမှုကွန်ယက် ကြည့်ရှုသူ ${BN(smTotal())}<br>ဘာသာစကား - ${LG.filter(g=>S.lg[g[1]].lv).map(g=>S.lg[g[1]].best).join("၊ ")||"လက်မှတ်မရှိ"}</div>`}
-function bachUI(){if(S.deg)return `<div class="c">ရိုးရိုးဘွဲ့ ရပြီးသား ဖြစ်သည်။ မဟာဘွဲ့/ပါရဂူကို နောက်မီနူးတွင် ရွေးပါ။</div>`;if(S.uni)return `<div class="c">လက်ရှိ တက္ကသိုလ်တက်နေသည်။</div>`;if(!S.mu)return `<div class="c">ဆယ်တန်း/ဆယ့်နှစ်တန်း အောင်မှ လျှောက်နိုင်သည်။</div>`;
-return `<div class="c"><b>ဘာသာရပ်ရွေးရန်</b> (စာမေးပွဲရမှတ် ${BN(S.mk)}/၆၀၀)<br><small>🏙️ မြို့ကြီးတက္ကသိုလ်များသည် ဒေသမှလာသူအတွက် စရိတ်ပိုများသည်။</small></div>`+MJ.map((m,i)=>`<button onclick="ua(${i})">${m.n} (အနည်းဆုံး ${BN(Math.round((m.min-(S.y>=2030?5:0))*6))}/၆၀၀)${m.c?" 🏙️":""}</button>`).join("")}
-function mastUI(){if(!S.deg)return `<div class="c">ရိုးရိုးဘွဲ့ ရပြီးမှ ဘွဲ့လွန်ပညာ တက်နိုင်သည်။</div>`;let m=S.ab?2*(S.ab.sc?.4:1):1;return `<div class="c"><b>🏛️ ဘွဲ့လွန်ပညာ</b><br><small>ဘွဲ့မြင့်လေ ရာထူးတိုးရာတွင် အားသာသည်။ အချို့ရာထူးမြင့်အတွက် မရမနေ လိုအပ်သည်။ သင်ကြားစဉ် အလုပ်မလုပ်နိုင်ပါ။</small></div>`+ADV.map((c,i)=>`<button onclick="aenr('a',${i})">${S.ad>=c[3]?"✔ ":""}${c[0]} (${BN(c[1])} နှစ်၊ တစ်နှစ်လျှင် ${K(c[2]*EM()*m)})</button>`).join("")}
-function certUI(){let m=S.ab?2*(S.ab.sc?.4:1):1;return `<div class="c"><b>📜 လက်မှတ်သင်တန်းများ</b><br><small>အလုပ်တစ်ချို့ကို လျှောက်ရန် သက်ဆိုင်ရာ လက်မှတ်လိုသည်။ အလုပ်လုပ်ရင်း တက်နိုင်သည်။</small></div>`+CERTS.map((c,i)=>`<button onclick="aenr('c',${i})">${S.ct.includes(c[3])?"✔ ":""}${c[0]} (${BN(c[1])} နှစ်၊ တစ်နှစ်လျှင် ${K(c[2]*EM()*m)})</button>`).join("")}
-function jobUI(){let a=S.a;if(a<16)return `<div class="c">အသက် ၁၆ နှစ်မှ အချိန်ပိုင်းအလုပ်/အလုပ်သင်၊ ၁၈ နှစ်မှ အမြဲတမ်းအလုပ် လုပ်နိုင်သည်။</div>`;
-if(S.job)return `<div class="c">လက်ရှိအလုပ် - ${S.job.n}<br><small>အလုပ်ပြောင်းလိုပါက အလုပ်ထွက်ပြီးမှ လျှောက်နိုင်သည်။</small></div>`;
+let e=S.ae;if(e){c=e.k=="a"?ADV[e.i]:CERTS[e.i];mv(-Math.round(c[2]*EM()*m),"သင်တန်းစရိတ် - "+c[0]);e.n++;S.w=cl(S.w+1);
+if(e.n>=c[1]){if(e.k=="a"){if(S.w<50&&R(100)<40){e.n--;sfx("bad");lg("စာမေးပွဲကျလို့ တစ်နှစ်ထပ်တက်ရတယ်။","r");shakeScreen()}else{S.ad=Math.max(S.ad,c[3]);S.ae=0;sfx("levelup");lg(`🎓 ${c[0]} ရရှိပြီ။`,"r");glowGold($("st"))}}else{S.ct.push(c[3]);S.ae=0;sfx("levelup");lg(`📜 ${c[0]} ပြီးသွားပြီ။`,"r");glowGold($("st"))}}}}
+function aenr(k,i){if(S.ae)return alert("လက်ရှိသင်တန်းကို အရင်ပြီးအောင် တက်ပါ");if(S.uni)return alert("တက္ကသိုလ်ကို အရင်ပြီးအောင် တက်ပါ");let c=k=="a"?ADV[i]:CERTS[i];
+if(k=="a"){if(!S.deg)return alert("ရိုးရိုးဘွဲ့ ရပြီးမှ တက်လို့ရမယ်");if(S.job)return alert("ပညာသင်ဖို့ အလုပ်ကနေ အရင်ထွက်ပါ");if(S.ad<[0,0,2,3][i])return alert("အရင်အဆင့်ဘွဲ့ လိုတယ်");if(S.ad>=c[3])return alert("ဒီဘွဲ့ ရပြီးသား ဖြစ်နေပြီ")}
+else{if(S.ct.includes(c[3]))return alert("ဒီလက်မှတ် ရပြီးသား ဖြစ်နေပြီ");if(c[3]=="nurse"&&!S.mu)return alert("ဆယ်တန်းအောင်မှ တက်လို့ရမယ်")}
+if(S.m<c[2]*EM()*(S.ab?2*(S.ab.sc?.4:1):1))return alert("သင်တန်းစရိတ် ငွေမလောက်ဘူး");S.ae={k,i,n:0};sfx("good");lg(`📚 ${c[0]} စတက်ပြီ။`,"r");view()}
+function cvCard(){return `<div class="c"><b>📄 ကိုယ်ရေးရာဇဝင် (CV)</b><br>ပညာ - ${S.deg?MJ[S.deg-1].n+" ဘွဲ့"+(S.ad?" · "+["","ဘွဲ့လွန်လက်မှတ်","မဟာဘွဲ့","ပါရဂူဘွဲ့","ပါရဂူလွန်သုတေသန"][S.ad]:""):S.mu?"အခြေခံပညာအောင်":"မအောင်သေး"}<br>သင်တန်းလက်မှတ် - ${(S.ct||[]).length?CERTS.filter(c=>S.ct.includes(c[3])).map(c=>c[0]).join("၊ "):"မရှိ"}<br>အလုပ်အတွေ့အကြုံ ${BN(S.ex)} နှစ် · နိုင်ငံခြားအတွေ့အကြုံ ${S.rt?"ရှိ":"မရှိ"}<br>တူရိယာ - ${INS.filter(x=>insLv(x[0])>0).map(x=>x[1]+" အဆင့် "+BN(insLv(x[0]))).join("၊ ")||"မရှိ"}<br>လူမှုကွန်ယက် ကြည့်ရှုသူ ${BN(smTotal())}<br>ဘာသာစကား - ${LG.filter(g=>S.lg[g[1]].lv).map(g=>S.lg[g[1]].best).join("၊ ")||"လက်မှတ်မရှိ"}</div>`}
+function bachUI(){if(S.deg)return `<div class="c">ရိုးရိုးဘွဲ့ ရပြီးသားပါ။ မဟာဘွဲ့/ပါရဂူကို နောက်မီနူးမှာ ရွေးပါ။</div>`;if(S.uni)return `<div class="c">တက္ကသိုလ် တက်နေတုန်းပါ။</div>`;if(!S.mu)return `<div class="c">ဆယ်တန်း/ဆယ့်နှစ်တန်း အောင်မှ လျှောက်လို့ရမယ်။</div>`;
+return `<div class="c"><b>ဘာသာရပ်ရွေးရန်</b> (စာမေးပွဲရမှတ် ${BN(S.mk)}/၆၀၀)<br><small>🏙️ မြို့ကြီးတက္ကသိုလ်ဆိုရင် နယ်ကလာသူအတွက် စရိတ်ပိုများတယ်။</small></div>`+MJ.map((m,i)=>`<button onclick="ua(${i})">${m.n} (အနည်းဆုံး ${BN(Math.round((m.min-(S.y>=2030?5:0))*6))}/၆၀၀)${m.c?" 🏙️":""}</button>`).join("")}
+function mastUI(){if(!S.deg)return `<div class="c">ရိုးရိုးဘွဲ့ ရပြီးမှ ဘွဲ့လွန် တက်လို့ရမယ်။</div>`;let m=S.ab?2*(S.ab.sc?.4:1):1;return `<div class="c"><b>🏛️ ဘွဲ့လွန်ပညာ</b><br><small>ဘွဲ့မြင့်လေ ရာထူးတိုးဖို့ အားသာလေပဲ။ ကျောင်းတက်နေတုန်းတော့ အလုပ်မလုပ်ရဘူး။</small></div>`+ADV.map((c,i)=>`<button onclick="aenr('a',${i})">${S.ad>=c[3]?"✔ ":""}${c[0]} (${BN(c[1])} နှစ်၊ တစ်နှစ် ${K(c[2]*EM()*m)})</button>`).join("")}
+function certUI(){let m=S.ab?2*(S.ab.sc?.4:1):1;return `<div class="c"><b>📜 လက်မှတ်သင်တန်းများ</b><br><small>အလုပ်တချို့ လျှောက်ဖို့ ဒီလက်မှတ်တွေ လိုတယ်။ အလုပ်လုပ်ရင်း တက်လို့ရတယ်။</small></div>`+CERTS.map((c,i)=>`<button onclick="aenr('c',${i})">${S.ct.includes(c[3])?"✔ ":""}${c[0]} (${BN(c[1])} နှစ်၊ တစ်နှစ် ${K(c[2]*EM()*m)})</button>`).join("")}
+function jobUI(){let a=S.a;if(a<16)return `<div class="c">အသက် ၁၆ နှစ်ကျော်မှ အချိန်ပိုင်း/အလုပ်သင်၊ ၁၈ နှစ်ကျော်မှ အမြဲတမ်းအလုပ် လုပ်လို့ရမယ်။</div>`;
+if(S.job)return `<div class="c">လက်ရှိအလုပ် - ${S.job.n}<br><small>အလုပ်ပြောင်းချင်ရင် အရင်ထွက်ပြီးမှ လျှောက်ပါ။</small></div>`;
 let ok=J.map((j,i)=>[j,i]).filter(([j,i])=>j[1]()&&a>=(j[3]||18));
-return `<div class="c"><b>💼 အလုပ်လျှောက်ရန်</b><br><small>ကိုယ်ရေးရာဇဝင် (CV) နှင့် ကိုက်ညီသော အလုပ်များသာ ပေါ်သည်။ ${S.ab?"ပြည်ပတွင် အခြေခံအဆင့်မှ စရမည်။":""}</small></div>`+ok.map(([j,i])=>`<button onclick="ja(${i},0)">${j[0]} (လက်ခံနိုင်ခြေ ~${BN(Math.max(5,ch(i,0)-(S.ab?20:0)))}%)</button>`).join("")+ok.filter(([j,i])=>i>2&&a>=18).map(([j,i])=>`<button onclick="ja(${i},1)">${j[0]} - လာဘ်ပေး၍ လျှောက်</button>`).join("")+(a>=18&&!S.ab?`<div class="c"><b>🏪 လုပ်ငန်းတည်ထောင်</b></div>`+BZ.map((b,i)=>`<button onclick="bz(${i})">${b[0]} (ရင်းနှီး ${K(b[1])})</button>`).join(""):"")}
-function foreignUI(){let a=S.a,x="";if(a<18)return `<div class="c">အသက် ၁၈ နှစ်မှ ပတ်စပို့ လျှောက်နိုင်သည်။</div>`;
-x+=`<div class="c"><b>🛂 ပတ်စပို့</b><br>`+(S.pp?(ppv()?`သက်တမ်း ${BN(S.pe)} ခုနှစ်အထိ`:"သက်တမ်းကုန်ပြီ"):S.pa?"လျှောက်ထားပြီး စောင့်နေရသည်":"မရှိသေးပါ")+`</div>`;
-if(!S.pp&&!S.pa)x+=`<button onclick="pp0()">ပတ်စပို့ လျှောက်မည် (၁သိန်း ၅သောင်း)</button>`;
-if(!S.pp&&S.pa)x+=`<button onclick="pp1()">လာဘ်ပေး၍ အမြန်ရယူမည် (အဂတိ)</button>`;
-if(S.pp&&!ppv())x+=`<button onclick="pp2()">ပတ်စပို့ သက်တမ်းတိုးမည် (၆သောင်း)</button>`;
+return `<div class="c"><b>💼 အလုပ်လျှောက်ရန်</b><br><small>ကိုယ့် CV နဲ့ ကိုက်တဲ့ အလုပ်တွေပဲ ပေါ်မယ်။ ${S.ab?"နိုင်ငံခြားမှာတော့ အခြေခံအဆင့်ကနေ စရမယ်။":""}</small></div>`+ok.map(([j,i])=>`<button onclick="ja(${i},0)">${j[0]} (ရနိုင်ခြေ ~${BN(Math.max(5,ch(i,0)-(S.ab?20:0)))}%)</button>`).join("")+ok.filter(([j,i])=>i>2&&a>=18).map(([j,i])=>`<button onclick="ja(${i},1)">${j[0]} - လာဘ်ပေးပြီး လျှောက်</button>`).join("")+(a>=18&&!S.ab?`<div class="c"><b>🏪 ကိုယ်ပိုင်လုပ်ငန်း ထောင်မယ်</b></div>`+BZ.map((b,i)=>`<button onclick="bz(${i})">${b[0]} (ရင်းနှီး ${K(b[1])})</button>`).join(""):"")}
+function foreignUI(){let a=S.a,x="";if(a<18)return `<div class="c">အသက် ၁၈ နှစ်ပြည့်မှ ပတ်စပို့ လျှောက်လို့ရမယ်။</div>`;
+x+=`<div class="c"><b>🛂 ပတ်စပို့</b><br>`+(S.pp?(ppv()?`သက်တမ်း ${BN(S.pe)} ခုနှစ်အထိ`:"သက်တမ်းကုန်သွားပြီ"):S.pa?"လျှောက်ထားပြီး စောင့်နေတုန်း":"မရှိသေးဘူး")+`</div>`;
+if(!S.pp&&!S.pa)x+=`<button onclick="pp0()">ပတ်စပို့ လျှောက်မယ် (၁သိန်း ၅သောင်း)</button>`;
+if(!S.pp&&S.pa)x+=`<button onclick="pp1()">လာဘ်ပေးပြီး အမြန်ထုတ်မယ်</button>`;
+if(S.pp&&!ppv())x+=`<button onclick="pp2()">ပတ်စပို့ သက်တမ်းတိုးမယ် (၆သောင်း)</button>`;
 if(S.ab)return x+abPanel();
-if(ppv()){x+=`<div class="c"><b>✈️ နိုင်ငံခြားသွားမည်</b></div>`;DS.forEach((d,i)=>{x+=`<button onclick="trip(${i})">အပျော်ခရီး - ${d[0]} (${K(d[1]*.6)} · ဗီဇာ ~${BN(vz(i,'t'))}%)</button>`;if(ok2(d)){x+=`<button onclick="go(${i},'w')">အလုပ်သွားမည် - ${d[0]} (${K(d[1])} · ဗီဇာ ~${BN(vz(i,'w'))}%)</button>`;if(i)x+=`<button onclick="go(${i},'s')">ပညာတော်သင် လျှောက်မည် - ${d[0]} (ဗီဇာ ~${BN(vz(i,'s'))}%)</button>`}else x+=`<small>${d[0]} - ဘာသာစကားလက်မှတ် လိုအပ်သည်</small>`})}
+if(ppv()){x+=`<div class="c"><b>✈️ နိုင်ငံခြားသွားမယ်</b></div>`;DS.forEach((d,i)=>{x+=`<button onclick="trip(${i})">အပျော်ခရီး - ${d[0]} (${K(d[1]*.6)} · ဗီဇာ ~${BN(vz(i,'t'))}%)</button>`;if(ok2(d)){x+=`<button onclick="go(${i},'w')">အလုပ်သွားမယ် - ${d[0]} (${K(d[1])} · ဗီဇာ ~${BN(vz(i,'w'))}%)</button>`;if(i)x+=`<button onclick="go(${i},'s')">ပညာတော်သင် လျှောက်မယ် - ${d[0]} (ဗီဇာ ~${BN(vz(i,'s'))}%)</button>`}else x+=`<small>${d[0]} - ဘာသာစကားလက်မှတ် လိုတယ်</small>`})}
 return x}
 const ppv=()=>S.pp&&S.y<S.pe;
-function pp2(){if(S.m<60)return alert("ငွေမလောက်ပါ");mv(-60,"ပတ်စပို့ သက်တမ်းတိုးခ");S.pe=S.y+5;lg("🛂 ပတ်စပို့ သက်တမ်း ၅ နှစ် တိုးပြီးပြီ။");view()}
+function pp2(){if(S.m<60)return alert("ငွေမလောက်ဘူး");mv(-60,"ပတ်စပို့ သက်တမ်းတိုးခ");S.pe=S.y+5;sfx("good");lg("🛂 ပတ်စပို့ သက်တမ်း ၅ နှစ် တိုးပြီးသွားပြီ။");view();glowGold($("st"))}
 function t3(){let a=S.a,h='<div class="c"><b>အခြေအနေ</b><br>';
-if(a>=6&&!S.mu&&!S.dr)h+=`ကျောင်းသား - ${S.mf?"စာမေးပွဲ ပြန်ဖြေရန် ပြင်ဆင်နေသည်":"အတန်း "+Math.min(a-5,S.sys)}${S.st?" · "+(S.st=="s"?"သိပ္ပံတွဲ":"ဝိဇ္ဇာတွဲ"):""}`;
+if(a>=6&&!S.mu&&!S.dr)h+=`ကျောင်းသား - ${S.mf?"စာမေးပွဲ ပြန်ဖြေဖို့ ပြင်နေတယ်":"အတန်း "+Math.min(a-5,S.sys)}${S.st?" · "+(S.st=="s"?"သိပ္ပံတွဲ":"ဝိဇ္ဇာတွဲ"):""}`;
 else if(S.uni)h+=`တက္ကသိုလ်ကျောင်းသား - ${MJ[S.mj-1].n} (${BN(S.uy)}/${BN(MJ[S.mj-1].d)} နှစ်)`;
 else h+=S.deg?"ဘွဲ့ရ - "+MJ[S.deg-1].n:S.dr?"ကျောင်းထွက်":S.mu?"ဆယ်တန်း/ဆယ့်နှစ်တန်းအောင်":"ကလေးဘဝ";
 if(S.ae){let c=S.ae.k=="a"?ADV[S.ae.i]:CERTS[S.ae.i];h+=`<br>📚 ${c[0]} (${BN(S.ae.n)}/${BN(c[1])} နှစ်)`}
-h+=`<br>💼 ${S.job?S.job.n+(S.job.b?"":" ("+K(S.job.s*EM())+"/နှစ်)"):"အလုပ်မရှိ"}${S.ab?"<br>🌏 "+S.ab.d+"တွင် နေထိုင်နေသည်":""}</div>`;
-if(TV=="")return h+(a>=6&&!S.mu&&!S.dr?["စာကြိုးစားလေ့လာ","ကျူရှင်တက် (-၂သိန်း)","အတန်းပြင်ပ လှုပ်ရှားမှု","ကျောင်းထွက်မည်"].concat(S.mf?["စာမေးပွဲ ပြန်ဖြေမည် (နောက်နှစ်)"]:[]).map(x=>`<button onclick='sch("${x}")'>${x}</button>`).join(""):S.uni?["စာကြိုးစားလေ့လာ","အလုပ်သင် (+၃သိန်း)","ကလပ်/လူမှုရေးလှုပ်ရှားမှု","စာမေးပွဲတွင် လာဘ်ပေး"].map((x,i)=>`<button onclick="un(${i})">${x}</button>`).join(""):"")+(S.dr&&!S.mu&&a<=45?`<button onclick="reschool()">📚 ရိုးရိုးအခြေခံပညာကျောင်း ပြန်တက်မည်</button>`:"")+(S.job?`<button onclick="jw(0)">ကြိုးစားလုပ်ကိုင်</button><button onclick="jw(1)">အလုပ်ထွက်</button>`:"")+cvCard()+`<button class="pri" onclick="TV='edu';view(1)">🎓 ပညာရေး ›</button><button class="pri" onclick="TV='job';view(1)">💼 အလုပ်အကိုင် ›</button><button class="pri" onclick="TV='abr';view(1)">✈️ နိုင်ငံခြား ›</button>`;
+h+=`<br>💼 ${S.job?S.job.n+(S.job.b?"":" ("+K(S.job.s*EM())+"/နှစ်)"):"အလုပ်မရှိ"}${S.ab?"<br>🌏 "+S.ab.d+"မှာ ရောက်နေတယ်":""}</div>`;
+if(TV=="")return h+(a>=6&&!S.mu&&!S.dr?["စာကြိုးစားမယ်","ကျူရှင်တက်မယ် (-၂သိန်း)","ကျောင်းပြင်ပ လှုပ်ရှားမယ်","ကျောင်းထွက်မယ်"].concat(S.mf?["စာမေးပွဲ ပြန်ဖြေမယ် (နောက်နှစ်)"]:[]).map(x=>`<button onclick='sch("${x}")'>${x}</button>`).join(""):S.uni?["စာကြိုးစားမယ်","အလုပ်သင်လုပ်မယ် (+၃သိန်း)","ကလပ်/လူမှုရေး လုပ်မယ်","စာမေးပွဲမှာ လာဘ်ပေးမယ်"].map((x,i)=>`<button onclick="un(${i})">${x}</button>`).join(""):"")+(S.dr&&!S.mu&&a<=45?`<button onclick="reschool()">📚 ကျောင်းပြန်တက်မယ်</button>`:"")+(S.job?`<button onclick="jw(0)">အလုပ်ကြိုးစားမယ်</button><button onclick="jw(1)">အလုပ်ထွက်မယ်</button>`:"")+cvCard()+`<button class="pri" onclick="TV='edu';view(1)">🎓 ပညာရေး ›</button><button class="pri" onclick="TV='job';view(1)">💼 အလုပ်အကိုင် ›</button><button class="pri" onclick="TV='abr';view(1)">✈️ နိုင်ငံခြား ›</button>`;
 let bk=`<button onclick="${TV=="edu"&&ED?"ED=''":"TV=''"};view(1)">‹ နောက်သို့</button>`;
 if(TV=="job")return bk+cvCard()+jobUI();if(TV=="abr")return bk+cvCard()+foreignUI();
 if(ED=="b")return bk+bachUI();if(ED=="m")return bk+mastUI();if(ED=="c")return bk+certUI();
 return bk+`<button class="pri" onclick="ED='b';view(1)">🎓 ရိုးရိုးဘွဲ့ (တက္ကသိုလ်) ›</button><button class="pri" onclick="ED='m';view(1)">🏛️ မဟာဘွဲ့ / ပါရဂူ ›</button><button class="pri" onclick="ED='c';view(1)">📜 လက်မှတ်သင်တန်းများ ›</button>`+cvCard()}
-function sch(l){if(l.startsWith("စာမေးပွဲ ပြန်ဖြေမည်")){S.rr=1;lg("နောက်နှစ် စာမေးပွဲ ပြန်ဖြေရန် စာရင်းသွင်းသည်။");return view()}if(l.startsWith("ကျောင်းထွက်")){S.dr=1;lg("ကျောင်းထွက်ခဲ့သည်။ ပညာမရှိဘဲ ဝေးဝေးမသွားနိုင်ပါ။","r");return view()}
-let m={"စာကြိုးစားလေ့လာ":{w:2,sc:2},"ကျူရှင်တက် (-၂သိန်း)":{w:3,sc:2,m:-200},"အတန်းပြင်ပ လှုပ်ရှားမှု":{s:2,l:1}}[l];if(S.T>0&&m.sc)S.ef++;use(m,l)}
-function un(i){let f=[{w:3,sc:1},{m:300,s:1},{s:2,f:1},{c:1,m:-300}][i];if(i==3)lg("လာဘ်ပေး၍ ဂုဏ်သိက္ခာကျသည်။","r");use(f,["စာလေ့လာ","အလုပ်သင်","လူမှုရေး","လာဘ်ပေး"][i])}
+function sch(l){if(l.startsWith("စာမေးပွဲ ပြန်ဖြေမယ်")){S.rr=1;lg("နောက်နှစ် စာမေးပွဲ ပြန်ဖြေဖို့ စာရင်းသွင်းလိုက်ပြီ။");return view()}if(l.startsWith("ကျောင်းထွက်မယ်")){S.dr=1;sfx("bad");lg("ကျောင်းထွက်လိုက်ပြီ။ ပညာမရှိရင် ခရီးဝေးဖို့ ခက်တတ်တယ်။","r");shakeScreen();return view()}
+let m={"စာကြိုးစားမယ်":{w:2,sc:2},"ကျူရှင်တက်မယ် (-၂သိန်း)":{w:3,sc:2,m:-200},"ကျောင်းပြင်ပ လှုပ်ရှားမယ်":{s:2,l:1}}[l];if(S.T>0&&m.sc)S.ef++;use(m,l)}
+function un(i){let f=[{w:3,sc:1},{m:300,s:1},{s:2,f:1},{c:1,m:-300}][i];if(i==3){sfx("bad");lg("လာဘ်ပေးလိုက်လို့ ဂုဏ်သိက္ခာ ကျသွားတယ်။","r");shakeScreen()}use(f,["စာလေ့လာ","အလုပ်သင်","လူမှုရေး","လာဘ်ပေး"][i])}
 function ua(i){let m=MJ[i],fd=S.y>=2030,q=m.min-(fd?5:0);
-if(m.s!="*"&&m.s!=S.st)return alert("သင်၏တွဲ (သိပ္ပံ/ဝိဇ္ဇာ) နှင့် မကိုက်ပါ။");
-if(m.c&&S.rg&&S.m<4000&&!fd&&!S.ab)return alert("မြို့ကြီးတက္ကသိုလ်သို့ ပြောင်းရွှေ့ရန် ငွေမလောက်ပါ။ (၂၀၃၀ နောက် ဖက်ဒရယ်စနစ်တွင် ပိုလွယ်ကူမည်)");
-if(S.mk/6<q){lg(`${m.n} - အမှတ်မပြည့်၍ လျှောက်ထားမှု ပယ်ချခံရသည်။`,"r");return view()}
-S.uni=1;S.mj=i+1;S.uy=0;S.m-=m.c&&S.rg?800:300;lg(`🎓 ${m.n} တက္ကသိုလ် ဝင်ခွင့်ရသည်။`);view()}
+if(m.s!="*"&&m.s!=S.st)return alert("ကိုယ့်တွဲ (သိပ္ပံ/ဝိဇ္ဇာ) နဲ့ မကိုက်ဘူး။");
+if(m.c&&S.rg&&S.m<4000&&!fd&&!S.ab)return alert("မြို့ကြီးတက္ကသိုလ် ပြောင်းတက်ဖို့ ငွေမလောက်ဘူး။ (၂၀၃၀ နောက် ဖက်ဒရယ်စနစ်မှာ ပိုလွယ်လာမယ်)");
+if(S.mk/6<q){sfx("bad");lg(`${m.n} - အမှတ်မမီလို့ လျှောက်လွှာ ပယ်ချခံရတယ်။`,"r");shakeScreen();return view()}
+S.uni=1;S.mj=i+1;S.uy=0;S.m-=m.c&&S.rg?800:300;sfx("levelup");lg(`🎓 ${m.n} တက္ကသိုလ် ဝင်ခွင့်ရပြီ။`);view();glowGold($("st"))}
 function ja(i,b){let j=J[i],p=ch(i,b)-(S.ab?20:0);if(b){S.c++;S.m-=500}
-if(R(100)<p){let cid=i>=3?i-3:-1;S.job={cid,lvl:0,y:0,p:0,abroad:S.ab?1:0,gov:cid>=0?CAR[cid][5]:0,s:Math.round((cid>=0?pay(cid,0):j[2])*(S.a<18?.5:1)*(S.ab?S.ab.mu:1)),n:(S.ab?S.ab.d+" - ":"")+(cid>=0?jn(cid,0):j[0]+(S.a<18?" (အချိန်ပိုင်း)":""))};S.co=[];if(cid>=0&&CAR[cid][6]&&S.fm===null)S.fm=20;lg("✅ "+S.job.n+" အလုပ်ရသည်။")}else lg("❌ "+j[0]+" လျှောက်ထားမှု မအောင်မြင်ပါ။","r");view()}
-function bz(i){let b=BZ[i];if(S.m<b[1])return alert("ရင်းနှီးငွေ မလုံလောက်ပါ။");mv(-b[1],"လုပ်ငန်းရင်းနှီးမြှုပ်နှံ");S.job={n:b[0]+" - "+BLD[0],s:0,b:1,cap:b[1],lvl:0,pf:0};S.co=[];lg("🏪 "+b[0]+" တည်ထောင်သည်။");view()}
-function jw(q){if(q){lg("အလုပ်ထွက်သည်။");S.job=null;S.co=[];return view()}if(S.T<=0)return alert("ယခုနှစ်၏ လှုပ်ရှားမှု မကျန်ပါ");S.T--;S.job.p++;S.w=cl(S.w+1);lg("• အလုပ်တွင် ကြိုးစားသည်။");view()}
+if(R(100)<p){let cid=i>=3?i-3:-1;S.job={cid,lvl:0,y:0,p:0,abroad:S.ab?1:0,gov:cid>=0?CAR[cid][5]:0,s:Math.round((cid>=0?pay(cid,0):j[2])*(S.a<18?.5:1)*(S.ab?S.ab.mu:1)),n:(S.ab?S.ab.d+" - ":"")+(cid>=0?jn(cid,0):j[0]+(S.a<18?" (အချိန်ပိုင်း)":""))};S.co=[];if(cid>=0&&CAR[cid][6]&&S.fm===null)S.fm=20;sfx("levelup");lg("✅ "+S.job.n+" အလုပ်ရပြီ။");glowGold($("st"))}else{sfx("bad");lg("❌ "+j[0]+" လျှောက်တာ မအောင်မြင်ဘူး။","r");shakeScreen()}view()}
+function bz(i){let b=BZ[i];if(S.m<b[1])return alert("ရင်းနှီးငွေ မလောက်ဘူး။");mv(-b[1],"လုပ်ငန်းရင်းနှီးမြှုပ်နှံ");S.job={n:b[0]+" - "+BLD[0],s:0,b:1,cap:b[1],lvl:0,pf:0};S.co=[];sfx("levelup");lg("🏪 "+b[0]+" လုပ်ငန်းစထောင်ပြီ။");view();glowGold($("st"))}
+function jw(q){if(q){sfx("bad");lg("အလုပ်ထွက်လိုက်ပြီ။");S.job=null;S.co=[];return view()}if(S.T<=0)return alert("ဒီနှစ် လှုပ်ရှားမှု ကုန်သွားပြီ");S.T--;S.job.p++;S.w=cl(S.w+1);sfx("good");lg("• အလုပ်မှာ ကြိုးစားလုပ်ကိုင်တယ်။");view()}
 const H={
-1920:{t:"ရန်ကုန်တက္ကသိုလ်အက်ဥပဒေကို ကျောင်းသားများ ကန့်ကွက်ပြီး သပိတ်မှောက်သည်။",o:[["သပိတ်တွင် ပါဝင်မည်",{s:4,f:2}],["စာဆက်လေ့လာမည်",{w:3}]]},
-1930:{t:"ကျေးလက်တွင် စီးပွားပျက်ကပ်နှင့် ဆရာစံ ပုန်ကန်မှု ဖြစ်ပေါ်သည်။",o:[["ရွာတွင် အဆင်ပြေရာ လုပ်ကိုင်မည်",{m:-200}],["မြို့သို့ အလုပ်ရှာရွှေ့မည်",{m:-300,s:-2}]]},
-1942:{t:"ဂျပန်တပ်များ သိမ်းပိုက်ပြီး စစ်ပွဲကြောင့် ဘဝ ပျက်စီးသည်။",o:[["ရွာတောသို့ ရှောင်တိမ်းမည်",{h:-4,s:2}],["မြို့တွင် ဆက်နေမည်",{h:-8,m:-300}]]},
-1948:{t:"၁၉၄၈ ဇန်နဝါရီ ၄ ရက် လွတ်လပ်ရေးရသည်။ သို့သော် ပြည်တွင်းပဋိပက္ခ စတင်သည်။",o:[["တိုင်းပြည်ထူထောင်ရေးအတွက် အလုပ်လုပ်မည်",{s:5,f:2}],["မိသားစုကိုသာ ကြည့်မည်",{m:100}]]},
-1962:{t:"၁၉၆၂ မတ်လ စစ်တပ်က အာဏာသိမ်းပြီး စီးပွားရေးကို နိုင်ငံပိုင်သိမ်းသည်။",o:[["အခြေအနေနှင့် လိုက်လျောညီထွေ နေမည်",{m:-300}],["ပညာကို ဆက်လေ့လာမည်",{w:3,m:-200}]]},
-1974:{t:"ဦးသန့်ဈာပနအရေး ကျောင်းသားအရေးအခင်း ဖြစ်ပေါ်သည်။",o:[["အရေးတွင် ပါဝင်မည်",{s:3,h:-6,f:3}],["စာကိုသာ အာရုံစိုက်မည်",{w:3}]]},
-1988:{t:"၈၈၈၈ ဒီမိုကရေစီအရေးတော်ပုံ ဖြစ်ပေါ်ပြီး စစ်တပ်က ဖြိုခွင်းသည်။ တက္ကသိုလ်များ ပိတ်ထားသည်။",o:[["ဒီမိုကရေစီအရေးတွင် ပါဝင်မည်",{s:5,h:-10,f:3}],["ကျောင်းပိတ်နေစဉ် စာဖတ်မည်",{w:3}],["အိမ်ရှောင်နေမည်",{s:-3}]]},
-1990:{t:"ရွေးကောက်ပွဲတွင် NLD အနိုင်ရသော်လည်း အာဏာမလွှဲပါ။",o:[["မျှော်လင့်ချက်မပျက်ဘဲ ကြိုးစားမည်",{s:4}],["စိတ်ပျက်၍ နေမည်",{s:-5}]]},
-1996:{t:"ကျောင်းသားဆန္ဒပြမှုများကြောင့် တက္ကသိုလ်များ ထပ်ခါထပ်ခါ ပိတ်ခံရသည်။",o:[["ကိုယ်ပိုင် စာလေ့လာမည်",{w:3}],["အချိန်ကုန်ခံမည်",{w:-2,s:-2}]]},
-2007:{t:"သံဃာများ ဦးဆောင်သော ရွှေဝါရောင်တော်လှန်ရေး ဖြစ်ပွားသည်။",o:[["ထောက်ခံအလှူပေးမည်",{s:3,m:-150}],["စောင့်ကြည့်မည်",{}]]},
-2008:{t:"မေလတွင် နာဂစ်ဆိုင်ကလုန်း တိုက်ခတ်ပြီး ဧရာဝတီတိုင်း ပျက်စီးသည်။",o:[["ကူညီရေးတွင် ပါဝင်မည်",{s:5,f:3,m:-200}],["ကိုယ့်မိသားစုကိုသာ ကာကွယ်မည်",{h:1}]]},
-2011:{t:"ပြုပြင်ပြောင်းလဲရေး စတင်ပြီး လွတ်လပ်ခွင့်များ တိုးလာသည်။",o:[["အခွင့်အလမ်းကို ရယူမည်",{m:300,s:3}],["သတိထားစောင့်ကြည့်မည်",{}]]},
-2015:{t:"ရွေးကောက်ပွဲတွင် NLD ကြီးမားစွာ အနိုင်ရသည်။",o:[["မျှော်လင့်ချက်ဖြင့် ကြိုးစားမည်",{s:4,m:200}]]},
-2020:{t:"ကိုဗစ်-၁၉ ကူးစက်ရောဂါကြောင့် ကျောင်းများပိတ်၊ စီးပွားရေးကျသည်။ (ဆယ်တန်းစနစ်မှ ဆယ့်နှစ်တန်းစနစ်သို့ ကူးပြောင်းမှုလည်း ဤခေတ်ဝန်းကျင်တွင်)",o:[["စာအုပ်/အွန်လိုင်းဖြင့် လေ့လာမည်",{w:5,m:-100}],["ဖုန်းကစားမည်",{w:-6,s:-2}],["မိသားစုအလုပ်ကူမည်",{m:200,h:-3}]]},
-2021:{t:"၂၀၂၁ ဖေဖော်ဝါရီ ၁ ရက် စစ်တပ်က အာဏာသိမ်းသည်။ ပညာရေးနှင့် စီးပွားရေး ယိုင်နဲ့သည်။",o:[["အခက်အခဲထဲ ပညာဆက်ရှာမည်",{w:4,s:3,m:-300}],["ဒုက္ခရောက်သူများကို ကူမည်",{s:5,m:-200,f:3}],["စီးပွားရေးသာ အာရုံစိုက်မည်",{m:200,s:-3}]]},
-2022:{t:"လက်နက်ကိုင် ပဋိပက္ခများ ပြင်းထန်လာပြီး လူအများ နေရပ်စွန့်ခွာရသည်။",o:[["လုံခြုံသောမြို့သို့ ပြောင်းမည်",{m:-500,h:3}],["ရပ်ရွာတွင် နေမည်",{h:-8,s:3}],["နိုင်ငံခြားထွက်ရန် ကြိုးစားမည်",{m:-1500,w:2}]]},
-2023:{t:"မေလတွင် မိုခါ ဆိုင်ကလုန်း တိုက်ခတ်ပြီး ရခိုင်ဒေသ ပျက်စီးသည်။",o:[["အလှူ/လူအားဖြင့် ကူမည်",{s:5,m:-200,f:3}],["မိသားစုကိုသာ ကာကွယ်မည်",{h:2}]]},
-2024:{t:"စက်တင်ဘာတွင် ယာဂီ တိုင်ဖုန်းကြောင့် ရေကြီးမှု ကြီးမားစွာ ဖြစ်သည်။",o:[["အိမ်နီးချင်းကို ကူညီမည်",{s:4,f:3,m:-300}],["ပိုင်ဆိုင်မှုကိုသာ စောင့်မည်",{h:-6,m:-500}]]},
-2025:{t:"မတ် ၂၈ ရက် ဆာကိုင်းအနီး ငလျင်ကြီး လှုပ်ခတ်ပြီး ပျက်စီးမှုများစွာ ဖြစ်သည်။",o:[["ကယ်ဆယ်ရေးတွင် ပါဝင်မည်",{s:5,h:-3,f:4}],["လှူဒါန်းမည်",{m:-300,s:3,f:2}],["ကိုယ့်ကိုယ်ကိုသာ ကာကွယ်မည်",{h:1}]]},
-2026:{t:"ရေကြီးမှု ထပ်မံဖြစ်ပေါ်သည်။ (ဖန်တီးသူ သတ်မှတ်ချက်)",o:[["ရပ်ရွာနှင့်အတူ ပြန်လည်ထူထောင်မည်",{s:4,f:3,m:-200}],["ကိုယ်ပိုင်အကာအကွယ်သာ လုပ်မည်",{h:-2}]]},
-2030:{t:"ဖက်ဒရယ်ဒီမိုကရေစီ ပြုပြင်ရေးခေတ် စတင်သည်။ (စိတ်ကူးဇာတ်လမ်း) ပညာရေး ပိုမိုလွတ်လပ်ပြီး တက္ကသိုလ်များ ဒေသအလိုက် ဖွင့်လှစ်သည်။",o:[["ပညာနှင့် အတူ တိုင်းပြည်ပြန်လည်တည်ဆောက်မည်",{s:6,w:3,f:3}]]}};
+1920:{t:"ရန်ကုန်တက္ကသိုလ်အက်ဥပဒေကို ကျောင်းသားတွေ ကန့်ကွက်ပြီး သပိတ်မှောက်နေကြတယ်။",o:[["သပိတ်ထဲ ပါဝင်မယ်",{s:4,f:2}],["စာဆက်လေ့လာမယ်",{w:3}]]},
+1930:{t:"ကျေးလက်မှာ စီးပွားပျက်ကပ်နဲ့အတူ ဆရာစံ ပုန်ကန်မှု ဖြစ်နေတယ်။",o:[["ရွာမှာ အဆင်ပြေသလို လုပ်ကိုင်မယ်",{m:-200}],["မြို့တက်ပြီး အလုပ်ရှာမယ်",{m:-300,s:-2}]]},
+1942:{t:"ဂျပန်တပ်တွေ ဝင်လာပြီး စစ်ဒဏ်ကြောင့် ပတ်ဝန်းကျင်တစ်ခုလုံး ထိခိုက်ပျက်စီးနေတယ်။",o:[["ရွာတောဘက် ရှောင်တိမ်းမယ်",{h:-4,s:2}],["မြို့မှာ ဆက်နေမယ်",{h:-8,m:-300}]]},
+1948:{t:"၁၉၄၈ ဇန်နဝါရီ ၄ ရက် လွတ်လပ်ရေး ရပြီ။ ဒါပေမဲ့ ပြည်တွင်းပဋိပက္ခတွေလည်း စနေတယ်။",o:[["တိုင်းပြည်ပြန်ထူထောင်ဖို့ ကြိုးစားမယ်",{s:5,f:2}],["မိသားစုကိုပဲ ကြည့်မယ်",{m:100}]]},
+1962:{t:"၁၉၆၂ မတ်လမှာ စစ်တပ်က အာဏာသိမ်းပြီး စီးပွားရေးကို နိုင်ငံပိုင်သိမ်းလိုက်တယ်။",o:[["အခြေအနေအတိုင်း လိုက်နေမယ်",{m:-300}],["ပညာကို ဆက်လေ့လာမယ်",{w:3,m:-200}]]},
+1974:{t:"ဦးသန့်ဈာပနအရေး ကျောင်းသားအရေးအခင်း ဖြစ်ပေါ်နေတယ်။",o:[["အရေးအခင်းမှာ ပါဝင်မယ်",{s:3,h:-6,f:3}],["စာကိုပဲ အာရုံစိုက်မယ်",{w:3}]]},
+1988:{t:"၈၈၈၈ ဒီမိုကရေစီအရေးတော်ပုံ ဖြစ်ပြီး စစ်တပ်က ဖြိုခွင်းတယ်။ တက္ကသိုလ်တွေလည်း ပိတ်ထားတယ်။",o:[["ဒီမိုကရေစီအရေးမှာ ပါဝင်မယ်",{s:5,h:-10,f:3}],["ကျောင်းပိတ်တုန်း စာဖတ်မယ်",{w:3}],["အိမ်ရှောင်နေမယ်",{s:-3}]]},
+1990:{t:"ရွေးကောက်ပွဲမှာ NLD အနိုင်ရပေမဲ့ အာဏာမလွှဲဘူး။",o:[["မျှော်လင့်ချက်မပျက်ဘဲ ကြိုးစားမယ်",{s:4}],["စိတ်ပျက်ပြီး နေမယ်",{s:-5}]]},
+1996:{t:"ကျောင်းသားဆန္ဒပြမှုတွေကြောင့် တက္ကသိုလ်တွေ မကြာခဏ ပိတ်ခံရတယ်။",o:[["ကိုယ့်ဟာကိုယ် စာလေ့လာမယ်",{w:3}],["အချိန်ကုန်ခံလိုက်မယ်",{w:-2,s:-2}]]},
+2007:{t:"သံဃာတော်တွေ ဦးဆောင်တဲ့ ရွှေဝါရောင်တော်လှန်ရေး ဖြစ်ပွားတယ်။",o:[["ထောက်ခံအလှူ ထည့်မယ်",{s:3,m:-150}],["စောင့်ကြည့်နေမယ်",{}]]},
+2008:{t:"မေလမှာ နာဂစ်မုန်တိုင်း တိုက်ခတ်ပြီး ဧရာဝတီတိုင်း အကြီးအကျယ် ပျက်စီးသွားတယ်။",o:[["ကူညီကယ်ဆယ်ရေးမှာ ပါဝင်မယ်",{s:5,f:3,m:-200}],["ကိုယ့်မိသားစုကိုပဲ ကာကွယ်မယ်",{h:1}]]},
+2011:{t:"ပြုပြင်ပြောင်းလဲရေး စတင်ပြီး လွတ်လပ်ခွင့်တွေ နည်းနည်းပွင့်လာတယ်။",o:[["အခွင့်အလမ်းကို ဖမ်းဆုပ်မယ်",{m:300,s:3}],["သတိထား စောင့်ကြည့်မယ်",{}]]},
+2015:{t:"ရွေးကောက်ပွဲမှာ NLD အပြတ်အသတ် အနိုင်ရသွားတယ်။",o:[["မျှော်လင့်ချက်နဲ့ ကြိုးစားမယ်",{s:4,m:200}]]},
+2020:{t:"ကိုဗစ်-၁၉ ကူးစက်ရောဂါကြောင့် ကျောင်းတွေပိတ်ပြီး စီးပွားရေးလည်း ထိခိုက်တယ်။ (၁၀ တန်းကနေ ၁၂ တန်းစနစ် ပြောင်းတဲ့ကာလဝန်းကျင်)",o:[["စာအုပ်/အွန်လိုင်းကနေ လေ့လာမယ်",{w:5,m:-100}],["ဖုန်းပဲ ကစားနေမယ်",{w:-6,s:-2}],["မိသားစုအလုပ် ဝိုင်းကူမယ်",{m:200,h:-3}]]},
+2021:{t:"၂၀၂၁ ဖေဖော်ဝါရီ ၁ ရက်မှာ စစ်တပ်က အာဏာသိမ်းလိုက်တယ်။ ပညာရေးနဲ့ စီးပွားရေးလည်း ယိုင်နဲ့သွားတယ်။",o:[["အခက်အခဲကြားက ပညာဆက်ရှာမယ်",{w:4,s:3,m:-300}],["ဒုက္ခရောက်သူတွေကို ကူညီမယ်",{s:5,m:-200,f:3}],["စီးပွားရေးကိုပဲ အာရုံစိုက်မယ်",{m:200,s:-3}]]},
+2022:{t:"လက်နက်ကိုင်ပဋိပက္ခတွေ ပြင်းထန်လာပြီး လူအများ နေရပ်စွန့်ခွာနေရတယ်။",o:[["လုံခြုံတဲ့မြို့ကို ပြောင်းမယ်",{m:-500,h:3}],["ရပ်ရွာမှာ ဆက်နေမယ်",{h:-8,s:3}],["နိုင်ငံခြားထွက်ဖို့ ကြိုးစားမယ်",{m:-1500,w:2}]]},
+2023:{t:"မေလမှာ မိုခါဆိုင်ကလုန်း တိုက်ခတ်ပြီး ရခိုင်ဒေသ ပျက်စီးဆုံးရှုံးတယ်။",o:[["အလှူ/လူအားနဲ့ ကူညီမယ်",{s:5,m:-200,f:3}],["မိသားစုကိုပဲ ကာကွယ်မယ်",{h:2}]]},
+2024:{t:"စက်တင်ဘာမှာ ယာဂီတိုင်ဖုန်းကြောင့် ရေကြီးမှု ကြီးကြီးမားမား ဖြစ်ပွားတယ်။",o:[["အိမ်နီးချင်းတွေကို ဝိုင်းကူမယ်",{s:4,f:3,m:-300}],["ပိုင်ဆိုင်မှုကိုပဲ စောင့်မယ်",{h:-6,m:-500}]]},
+2025:{t:"မတ် ၂၈ ရက်မှာ စစ်ကိုင်းအနီး ငလျင်ကြီး လှုပ်ခတ်ပြီး ပျက်စီးမှုများစွာ ဖြစ်သွားတယ်။",o:[["ကယ်ဆယ်ရေးမှာ ပါဝင်မယ်",{s:5,h:-3,f:4}],["လှူဒါန်းမယ်",{m:-300,s:3,f:2}],["ကိုယ့်ကိုယ်ကိုပဲ ကာကွယ်မယ်",{h:1}]]},
+2026:{t:"ရေကြီးမှု ထပ်ဖြစ်ပြန်တယ်။ (ဂိမ်းဖန်တီးသူ စိတ်ကူး)",o:[["ရပ်ရွာနဲ့အတူ ပြန်ထူထောင်မယ်",{s:4,f:3,m:-200}],["ကိုယ်ပိုင်အကာအကွယ်ပဲ လုပ်မယ်",{h:-2}]]},
+2030:{t:"ဖက်ဒရယ်ဒီမိုကရေစီ ပြုပြင်ရေးခေတ် စတင်ပြီ။ (စိတ်ကူးဇာတ်လမ်း) ပညာရေး ပိုလွတ်လပ်လာပြီး တက္ကသိုလ်တွေ ဒေသအလိုက် ပွင့်လင်းလာတယ်။",o:[["ပညာနဲ့အတူ တိုင်းပြည်ပြန်တည်ဆောက်မယ်",{s:6,w:3,f:3}]]}};
 function mk(t,o){return{t,o}}
 const E=[
 {a:[17,31],id:"yt",c:()=>S.mar&&S.ma>=18&&S.ma<=23&&S.a<S.ma+9,wt:3},
-{a:[25,60],c:()=>S.job&&!S.job.b,t:"အလုပ်ခွင်တွင် လာဘ်ယူရန် အခွင့်အရေးပေါ်လာသည်။",o:[["ငြင်းပယ်မည်",{s:4,f:3}],["လက်ခံမည်",{m:5000,c:1,f:-15}]]},
-{a:[14,40],t:"သူငယ်ချင်းများက ရိုက်ပွဲ/မူးယစ်ဆေး/ခိုးယူမှုတွင် ပါဝင်ရန် ဖိတ်သည်။",o:[["ငြင်းပယ်မည်",{s:3,w:1}],["ပါဝင်မည်",{k:1,h:-8,s:-8,m:500},"ပြစ်မှုလမ်းက ဘဝကို ဆင်းရဲစေသည်။"]]},
-{a:[22,90],c:()=>S.job&&S.job.cid>=0&&CAR[S.job.cid][6],wt:2,t:"လူထုက သင့်ကို ယုံကြည်သည်။ အလှူငွေ ကိုင်တွယ်ခွင့်ရသည်။",o:[["ရိုးသားစွာ ဝန်ဆောင်မည်",{f:8,s:3}],["ကိုယ်ကျိုးအတွက် သုံးမည်",{m:3000,c:1,f:-25}]]},
-{a:[60,100],t:"အသက်ကြီးသောကာလ ရောက်ပြီ။",o:[["ကျန်းမာရေးကို ဂရုစိုက်မည်",{h:5}],["မြေးများကို စာသင်ပေးမည်",{s:4,w:1}]]},
-{a:[15,70],c:()=>S.y>=2030,wt:3,t:"ပြုပြင်ပြောင်းလဲရေးကာလတွင် နိုင်ငံပြန်လည်တည်ဆောက်ရန် အခွင့်အလမ်းများ ပေါ်လာသည်။",o:[["ကျွမ်းကျင်မှုဖြင့် ပါဝင်မည်",()=>S.deg?{m:3000,s:5,f:3}:{m:1200,s:3,f:1},"ပညာရှိသူအတွက် အခွင့်အလမ်း ပိုများသည်။"],["စေတနာ့ဝန်ထမ်း/စာသင်မည်",{s:6,f:5}]]},
-{a:[18,35],c:()=>S.y>=2024&&S.y<2030&&(S.g==0||S.a<=27),wt:2,t:"စစ်မှုထမ်းဥပဒေအရ ခေါ်ယူမှုကို ရင်ဆိုင်ရသည်။",o:[["ပုန်းရှောင်မည်",{m:-1000,s:-5}],["ပြည်ပထွက်ရန် ကြိုးစားမည်",{m:-3000}],["ပညာဆက်ယူ၍ ရွှေ့ဆိုင်းမည်",{w:3,m:-500}]]}];
+{a:[25,60],c:()=>S.job&&!S.job.b,t:"အလုပ်ခွင်မှာ လာဘ်ယူဖို့ အခွင့်အရေးပေါ်လာတယ်။",o:[["ငြင်းပယ်မယ်",{s:4,f:3}],["လက်ခံမယ်",{m:5000,c:1,f:-15}]]},
+{a:[14,40],t:"သူငယ်ချင်းတွေက ရိုက်ပွဲ/မူးယစ်ဆေး/ခိုးယူမှုထဲ ပါဖို့ ခေါ်နေတယ်။",o:[["ငြင်းမယ်",{s:3,w:1}],["ပါဝင်မယ်",{k:1,h:-8,s:-8,m:500},"ပြစ်မှုလမ်းက ဘဝကို ချောက်ထဲဆွဲချတတ်တယ်။"]]},
+{a:[22,90],c:()=>S.job&&S.job.cid>=0&&CAR[S.job.cid][6],wt:2,t:"လူထုက ယုံကြည်လို့ အလှူငွေ ကိုင်တွယ်ခွင့်ရတယ်။",o:[["ရိုးရိုးသားသား ဝန်ဆောင်မယ်",{f:8,s:3}],["ကိုယ်ကျိုးအတွက် သုံးမယ်",{m:3000,c:1,f:-25}]]},
+{a:[60,100],t:"အသက်ကြီးပိုင်း ရောက်လာပြီ။",o:[["ကျန်းမာရေးကို ဂရုစိုက်မယ်",{h:5}],["မြေးတွေကို စာသင်ပေးမယ်",{s:4,w:1}]]},
+{a:[15,70],c:()=>S.y>=2030,wt:3,t:"ပြုပြင်ပြောင်းလဲရေးကာလမှာ နိုင်ငံပြန်တည်ဆောက်ဖို့ အခွင့်အလမ်းတွေ ပေါ်လာတယ်။",o:[["ကျွမ်းကျင်မှုနဲ့ ပါဝင်မယ်",()=>S.deg?{m:3000,s:5,f:3}:{m:1200,s:3,f:1},"ပညာရှိသူအတွက် အခွင့်အလမ်း ပိုများတယ်။"],["စေတနာ့ဝန်ထမ်း/စာသင်မယ်",{s:6,f:5}]]},
+{a:[18,35],c:()=>S.y>=2024&&S.y<2030&&(S.g==0||S.a<=27),wt:2,t:"စစ်မှုထမ်းဥပဒေအရ ခေါ်ယူမှုနဲ့ ကြုံလာရတယ်။",o:[["ပုန်းရှောင်နေမယ်",{m:-1000,s:-5}],["နိုင်ငံခြားထွက်ဖို့ ကြိုးစားမယ်",{m:-3000}],["ကျောင်းဆက်တက်ပြီး ရွှေ့ဆိုင်းမယ်",{w:3,m:-500}]]}];
 function rl(r){S.role=r;S.fm=30;return{s:2}}
-function yt(){let T=[mk("ယောက္ခမနှင့် အတူနေရင်း စကားများသည်။",[["သည်းခံမည်",{s:-4}],["သီးခြားနေမည်",{m:-800}]]),mk("ကလေးမွေးပြီး ပညာ/အလုပ်ကို ဆက်မလုပ်နိုင်ပါ။",[["ဆက်ရန်",()=>({m:-1000,w:-3,dr:1,s:S.g?-6:-3})]]),mk("အိမ်ထောင်ရေးတွင် ဖောက်ပြန်မှု ပြဿနာ ပေါ်သည်။",[["ဝန်ခံ၍ ပြင်မည်",{s:-3}],["လျှို့ဝှက်ထားမည်",{s:-10,l:-3}]]),mk("ငွေမလောက်၍ ကောင်းသောအလုပ် လွတ်သွားသည်။",[["ဆက်ရန်",{m:-1500,s:-5}]])][R(4)];return T}
+function yt(){let T=[mk("ယောက္ခမနဲ့ အတူနေရင်း စကားများမိတယ်။",[["သည်းခံမယ်",{s:-4}],["ခွဲနေမယ်",{m:-800}]]),mk("ကလေးမွေးပြီး ပညာ/အလုပ်ကို ဆက်မလုပ်နိုင်တော့ဘူး။",[["ဆက်သွားမယ်",()=>({m:-1000,w:-3,dr:1,s:S.g?-6:-3})]]),mk("အိမ်ထောင်ရေးမှာ ဖောက်ပြန်မှု ပြဿနာ ပေါ်လာတယ်။",[["ဝန်ခံပြီး ပြင်မယ်",{s:-3}],["ဖုံးကွယ်ထားမယ်",{s:-10,l:-3}]]),mk("ငွေမလောက်လို့ အလုပ်ကောင်းတစ်ခု လက်လွတ်သွားတယ်။",[["ဆက်သွားမယ်",{m:-1500,s:-5}]])][R(4)];return T}
 function pick(){let ma=S.sys==10?16:17;if(S.job&&S.job.gov&&S.y>=2021&&S.y<=2029&&!S.cdm)return cdmEv();if(S.pt&&S.pt.st=="m"&&S.sr<30&&R(100)<25)return chEv();if(S.pt&&S.pt.st=="m"&&S.pt.nat!="မြန်မာ"&&!S.ab&&R(100)<25)return fpEv();
-if(S.c>=3&&!S.ar)return mk("အဂတိတိုက်ဖျက်ရေးက ဖမ်းဆီးသည်။ အလုပ်၊ ငွေနှင့် ဂုဏ်သိက္ခာ ပျက်စီးသည်။",[["ဆက်ရန်",()=>{S.ar=1;S.m=0;S.job=null;if(S.fm!==null)S.fm=0;return{s:-30,h:-10}},"လာဘ်စားခြင်းက ဂုဏ်သိက္ခာကို သုညသို့ ဆွဲချသည်။"]]);
-if(S.k>=2){S.k=0;return mk("ပြစ်မှုကျူးလွန်၍ ထောင်ကျသည်။",[["ဆက်ရန်",()=>{S.job=null;return{h:-15,s:-20,w:-5,m:-1000,l:-5}},"အကြမ်းဖက်မှုက ဘဝကို ဆင်းရဲစေသည်။"]])}
-if(S.a==ma-2&&!S.dr&&!S.st)return mk("တွဲရွေးချယ်ရမည်။ (သင့်ရွေးချယ်မှုက တက္ကသိုလ်ဘာသာရပ်ကို ကန့်သတ်မည်)",[["သိပ္ပံတွဲ",()=>{S.st="s";return{}}],["ဝိဇ္ဇာတွဲ",()=>{S.st="a";return{}}]]);
-if(S.rg==1&&S.f==0&&S.a>=8&&S.a<=ma&&!S.dr&&R(10)<2)return mk("ဆင်းရဲသော ကျေးလက်မိသားစုအတွက် ကျောင်းစရိတ် ခက်ခဲလာသည်။",[["မိသားစုကို ကူ၍ ဆက်တက်မည်",{m:200,h:-2,w:1}],["ကျောင်းထွက်မည်",()=>{S.dr=1;return{m:300}},"ပညာမရှိဘဲ ဝေးဝေးမသွားနိုင်ပါ။"]]);
+if(S.c>=3&&!S.ar)return mk("အဂတိတိုက်ဖျက်ရေးက ဖမ်းလိုက်ပြီ။ အလုပ်၊ ငွေနဲ့ ဂုဏ်သိက္ခာပါ ပျက်စီးသွားတယ်။",[["ဆက်သွားမယ်",()=>{S.ar=1;S.m=0;S.job=null;if(S.fm!==null)S.fm=0;shakeScreen();return{s:-30,h:-10}},"လာဘ်စားမှုက ဂုဏ်သိက္ခာကို သုညအထိ ဆွဲချတယ်။"]]);
+if(S.k>=2){S.k=0;return mk("ပြစ်မှုကျူးလွန်မိလို့ ထောင်ကျသွားတယ်။",[["ဆက်သွားမယ်",()=>{S.job=null;shakeScreen();return{h:-15,s:-20,w:-5,m:-1000,l:-5}},"ပြစ်မှုလမ်းက ဘဝကို ခက်ခဲစေတယ်။"]])}
+if(S.a==ma-2&&!S.dr&&!S.st)return mk("တွဲရွေးရမယ့်အချိန် ရောက်ပြီ။ (ရွေးတဲ့တွဲအပေါ် မူတည်ပြီး တက္ကသိုလ်ဘာသာရပ် ကွဲမယ်)",[["သိပ္ပံတွဲ",()=>{S.st="s";return{}}],["ဝိဇ္ဇာတွဲ",()=>{S.st="a";return{}}]]);
+if(S.rg==1&&S.f==0&&S.a>=8&&S.a<=ma&&!S.dr&&R(10)<2)return mk("ဆင်းရဲတဲ့ ကျေးလက်မိသားစုမှာ ကျောင်းစရိတ် ခက်ခဲလာတယ်။",[["မိသားစုကို ကူရင်း ဆက်တက်မယ်",{m:200,h:-2,w:1}],["ကျောင်းထွက်မယ်",()=>{S.dr=1;return{m:300}},"ပညာမရှိရင် ခရီးဝေးဖို့ ခက်တတ်တယ်။"]]);
 if(H[S.y])return hv(H[S.y]);
 let dz=R(100)<16?dis():null;if(dz)return dz;let hb=S.a>=12&&R(100)<18?habEv():null;if(hb)return hb;let L=E.filter(e=>S.a>=e.a[0]&&S.a<=e.a[1]&&(!e.c||e.c())),p=[];L.forEach(e=>{for(let i=0;i<(e.wt||1);i++)p.push(e)});
 if(!p.length||R(10)<4)return null;let e=p[R(p.length)];return e.id=="yt"?yt():e}
 function next(){let ma=S.sys==10?16:17;fin();sfx("age");S.a++;S.y++;S.T=(S.rg==2&&S.y>=2021&&S.y<2030)?4:5;era();
 let rg=RG(S.y);if(rg!=S.rgm){S.rgm=rg;lg("🏛️ "+rg,"r")}
 lg(`အသက် ${S.a} (${S.y}) · ${SE[R(12)]}`,'y');yearly();
-if(S.a>=6&&!S.mu&&!S.dr){S.sc++;S.w=cl(S.w+1);if(S.rg==2&&S.y>=2021&&S.y<2030&&R(10)<4){S.sc--;lg("ကျောင်းပိတ်ခံရသည်။","r")}}
+if(S.a>=6&&!S.mu&&!S.dr){S.sc++;S.w=cl(S.w+1);if(S.rg==2&&S.y>=2021&&S.y<2030&&R(10)<4){S.sc--;lg("ကျောင်းပိတ်ခံရတယ်။","r")}}
 if(S.a==ma&&!S.dr)matric();if(S.rr&&!S.mu&&!S.dr){S.rr=0;matric()}
-if(S.uni){if([1988,1996,2000,2021].includes(S.y))lg("တက္ကသိုလ်ပိတ်၍ ပညာသင်နှစ် မတိုးပါ။","r");else{S.uy++;S.w=cl(S.w+2)}if(S.uy>=MJ[S.mj-1].d&&S.w<50&&R(100)<50){S.uy--;lg("စာမေးပွဲကျ၍ တစ်နှစ်ထပ်တက်ရသည်။","r")}else if(S.uy>=MJ[S.mj-1].d){S.deg=S.mj;S.uni=0;lg("🎓 ဘွဲ့ရသည်။")}}
+if(S.uni){if([1988,1996,2000,2021].includes(S.y))lg("တက္ကသိုလ်ပိတ်ထားလို့ ပညာသင်နှစ် မတိုးဘူး။","r");else{S.uy++;S.w=cl(S.w+2)}if(S.uy>=MJ[S.mj-1].d&&S.w<50&&R(100)<50){S.uy--;lg("စာမေးပွဲကျလို့ တစ်နှစ်ထပ်တက်ရတယ်။","r")}else if(S.uy>=MJ[S.mj-1].d){S.deg=S.mj;S.uni=0;sfx("levelup");lg("🎓 ဘွဲ့ရပြီ။");glowGold($("st"))}}
 if(S.job)jobYear();
 if(S.a>=18)living();upkeep();if(S.m<0)S.m=0;if(S.m<=0&&S.a>=18)S.s=cl(S.s-3);
-let y=S.y;if(y<1948)S.s=cl(S.s-1);if(y>=1948&&y<1962)S.s=cl(S.s+1);if(y>=1962&&y<2011)mv(-Math.round(S.m*.03),"ငွေကြေးတန်ဖိုးကျ");if(y>=2021&&y<2030){mv(-Math.round(S.m*.07),"ငွေကြေးတန်ဖိုးကျ (ဈေးနှုန်းမြင့်)");S.s=cl(S.s-1)}if(y>=2030)S.s=cl(S.s+2);
+let y=S.y;if(y<1948)S.s=cl(S.s-1);if(y>=1948&&y<1962)S.s=cl(S.s+1);if(y>=1962&&y<2011)mv(-Math.round(S.m*.03),"ငွေတန်ဖိုးကျ");if(y>=2021&&y<2030){mv(-Math.round(S.m*.07),"ငွေတန်ဖိုးကျ (ဈေးနှုန်းတက်)");S.s=cl(S.s-1)}if(y>=2030)S.s=cl(S.s+2);
 if(S.a>45)S.l=cl(S.l-1);if(S.a>55)S.h=cl(S.h-1);
 rules();depr();if(S.h<=0||(S.a>70&&R(100)<(S.a-70)*4)||S.a>105)return end();
-S.ev=pick()||kidEv();if(S.ev&&S.ev.o.length>1)S.ev.o=shuf(S.ev.o.slice());if(S.ev)setTimeout(()=>sfx("event"),250);if(!S.ev)lg("ယနှစ် အေးဆေးစွာ ကုန်ဆုံးသည်။");view()}
+S.ev=pick()||kidEv();if(S.ev&&S.ev.o.length>1)S.ev.o=shuf(S.ev.o.slice());if(S.ev)setTimeout(()=>sfx("event"),240);if(!S.ev)lg("ဒီနှစ်တော့ အေးအေးဆေးဆေး ကုန်ဆုံးသွားတယ်။");view()}
 let LIN={gen:1,max:0};
 const NM=[[1950,"ဘသင် ဘမောင် တင်ဦး ကျော်စိန် မြင့်သိန်း ရွှေကျော် စံရွှေ သိန်းဖေ အောင်ကျော် ဘိုးကျော် လှမောင် သန်းထွန်း စိန်ဝင်း ဘခင် မောင်လှ ဘစိန်".split(" "),"ခင်မေ မြမြ အေးအေး ရွှေစင် ကြည်ကြည် ခင်ညွန့် ညွန့်ညွန့် စန်းစန်း တင်တင် ခင်စု ဝင်းဝင်း မိုးမိုး သန်းသန်း ခင်ခင်ကြီး အေးမြင့် မြင့်မြင့်".split(" ")],
 [1980,"မြင့်ဦး စိုးမင်း ဝင်းဇော် သန့်ဇင် ကျော်သူ ဇော်မင်း ထွန်းထွန်း လှိုင် ဝင်းမောင် အောင်သူ ကျော်ထွန်း စောလွင် မျိုးမင်း သူရိန် ဇော်ဇော် ကျော်ကျော်".split(" "),"မိုးမိုး ဝါဝါ နီနီ ခင်မာလာ နွယ်နွယ် သန်းသန်းအေး ရွှေရည် ဖြူဖြူ သီတာ မေမေ ခင်ခင် ကြည်ကြည်ဝင်း မြင့်မြင့်ခိုင် ခင်သူ ထားထား အိအိ".split(" ")],
@@ -251,48 +263,47 @@ function pn(g,by,nu,e){by=by||(S?S.y-S.a:1990);e=e===undefined?(S?S.e:0):e;let L
 const TW={c:["ရန်ကုန်","မန္တလေး","နေပြည်တော်","ပဲခူး","မော်လမြိုင်","ပုသိမ်"],r:["ပျဉ်းမနား","မိတ္ထီလာ","ပခုက္ကူ","ရွှေဘို","မုံရွာ","တောင်ငူ","ပြည်","မကွေး"],x:["မြဝတီ","လိုင်ဇာ","ဖလမ်း","ကျိုင်းတုံ","မြောက်ဦး","ဘူးသီးတောင်"]};
 const ETW={1:["တောင်ကြီး","လားရှိုး","ကျိုင်းတုံ"],2:["ဖားအံ","မြဝတီ","ကော့ကရိတ်"],3:["မြစ်ကြီးနား","ဗန်းမော်","ပူတာအို"],4:["စစ်တွေ","ကျောက်ဖြူ","မြောက်ဦး"],5:["မော်လမြိုင်","ရေး","သထုံ"],6:["ဟားခါး","ဖလမ်း","ထန်တလန်"]};
 const town=(e,rg)=>{let a=(e>0&&e<7&&R(10)<7)?ETW[e]:(rg==0?TW.c:rg==1?TW.r:TW.x);return a[R(a.length)]};
-const EA=[[1920,"",1],[2030,"စစ်တပ်အတွင်း စစ်သားများနှင့် စစ်မိသားစုများ၏ တော်လှန်မှုကြောင့် တပ်မတော် ပြုပြင်ပြောင်းလဲသည်။ အာဏာရှင်များ ထောင်ကျသည်။ ယာယီဖက်ဒရယ်ဒီမိုကရေစီအစိုးရက ရွေးကောက်ပွဲကျင်းပပြီး အရပ်သားပါတီ အနိုင်ရသည်။ နိုင်ငံအမည်ကို ဖက်ဒရယ်ဒီမိုကရေစီ မြန်မာနိုင်ငံဟု ပြောင်းသည်။",1.1],[2040,"ပါတီစုံစနစ်အရ အရပ်သားပါတီ ကွဲသွားပြီး တိုးတက်ရေးပါတီ အနိုင်ရသည်။ လိင်တူအိမ်ထောင်ပြုခွင့် ပြုလိုက်၍ ဘာသာရေးခေါင်းဆောင်များ ဒေါသထွက်သည်။ အင်္ဂလိပ်ဘာသာကို နောက်ထပ်တရားဝင်ဘာသာစကား ထားသဖြင့် ရှေးရိုးစွဲပါတီများ မကျေနပ်ပါ။ တရုတ်နှင့် စီးပွားရေးဆက်ဆံရေး တိုးတက်ပြီး အိန္ဒိယ၊ ဂျပန်၊ ကိုရီးယား၊ ရုရှားတို့နှင့်လည်း ဆက်ဆံရေး ကောင်းမြဲဖြစ်သည်။ ပညာရေးနှင့် ကျောက်မျက်ရတနာလုပ်ငန်းကို အဓိကထားသည်။",1.8],[2050,"မြန်မာသည် အာဆီယံတွင် အတည်ငြိမ်ဆုံးနှင့် ငြိမ်းချမ်းဆုံးနိုင်ငံ ဖြစ်လာသည်။ ကျောက်မျက်နှင့် ရွှေပန်းထိမ်သုတေသနကဏ္ဍသည် ကမ္ဘာတွင် ထူးခြားသည်။ ပညာရေးသည် စရိတ်အသက်သာဆုံးဖြစ်ပြီး အာဆီယံတွင် စင်ကာပူအပြီး ဒုတိယအကောင်းဆုံး ဖြစ်သည်။ စီးပွားရေးတိုးတက်သော်လည်း ရှေးရိုးစွဲပါတီနှင့် တိုးတက်ရေးပါတီအကြား နိုင်ငံရေးခွဲခြားမှု မြင့်မားသည်။",3],[2100,"မြန်မာသည် အခြေခံအဆောက်အအုံ၊ နည်းပညာနှင့် သုတေသနတွင် အာရှ၏ ဖွံ့ဖြိုးပြီးနိုင်ငံ ဖြစ်လာသည်။ ခရီးသွားလုပ်ငန်း ခိုင်မာပြီး LGBTQ+ ၏ ကောင်းကင်ဘုံနှင့် မင်္ဂလာခရီးအတွက် နာမည်ကြီးသည်။",5.5],[2200,"ဥရောပနိုင်ငံများအကြား စစ်ဖြစ်သော်လည်း မြန်မာသည် ဘက်မလိုက်ဘဲ ရပ်တည်သည်။ တည်ငြိမ်သော်လည်း စီးပွားရေး ထိခိုက်သည်။",4.2],[2300,"မြန်မာသည် ယနေ့ဂျပန်နိုင်ငံနှင့် ဆင်တူသော ငြိမ်းချမ်းပြီး ပြည့်စုံသောနိုင်ငံ ဖြစ်သည်။",6.5]];
+const EA=[[1920,"",1],[2030,"တပ်မတော်ထဲက စစ်သားတွေနဲ့ စစ်မိသားစုတွေရဲ့ တော်လှန်မှုကြောင့် ပြုပြင်ပြောင်းလဲမှု ဖြစ်လာတယ်။ အာဏာရှင်တွေ ထောင်ကျပြီး ယာယီဖက်ဒရယ်ဒီမိုကရေစီအစိုးရက ရွေးကောက်ပွဲ လုပ်ပေးလို့ အရပ်သားပါတီ အနိုင်ရတယ်။ နိုင်ငံအမည်ကိုလည်း ဖက်ဒရယ်ဒီမိုကရေစီ မြန်မာနိုင်ငံလို့ ပြောင်းလိုက်တယ်။",1.1],[2040,"ပါတီစုံစနစ်မှာ အရပ်သားပါတီ နှစ်ခြမ်းကွဲသွားပြီး တိုးတက်ရေးပါတီ အနိုင်ရတယ်။ လိင်တူအိမ်ထောင်ပြုခွင့် ခွင့်ပြုလိုက်လို့ ဘာသာရေးခေါင်းဆောင်တွေ မကျေမနပ် ဖြစ်ကြတယ်။ အင်္ဂလိပ်ဘာသာကိုပါ ရုံးသုံးဘာသာ ထားလိုက်လို့ ရှေးရိုးစွဲပါတီတွေကလည်း ဝေဖန်ကြတယ်။ တရုတ်နဲ့ စီးပွားရေး ပိုကောင်းလာပြီး အိန္ဒိယ၊ ဂျပန်၊ ကိုရီးယား၊ ရုရှားတို့နဲ့လည်း ဆက်ဆံရေး ကောင်းနေဆဲပဲ။ ပညာရေးနဲ့ ကျောက်မျက်ရတနာလုပ်ငန်းကို အဓိက ဦးစားပေးလာတယ်။",1.8],[2050,"မြန်မာနိုင်ငံဟာ အာဆီယံမှာ အတည်ငြိမ်ဆုံးနဲ့ အငြိမ်းချမ်းဆုံး နိုင်ငံ ဖြစ်လာတယ်။ ကျောက်မျက်နဲ့ ရွှေပန်းထိမ် သုတေသနကဏ္ဍကလည်း ကမ္ဘာမှာ ထူးခြားလာတယ်။ ပညာရေးစရိတ် သက်သာပြီး အာဆီယံမှာ စင်ကာပူပြီးရင် ဒုတိယအကောင်းဆုံး ဖြစ်လာတယ်။ စီးပွားရေး တိုးတက်လာပေမဲ့ ရှေးရိုးစွဲပါတီနဲ့ တိုးတက်ရေးပါတီကြား နိုင်ငံရေးအကွဲအပြဲတော့ ရှိနေတုန်းပဲ။",3],[2100,"မြန်မာနိုင်ငံဟာ အခြေခံအဆောက်အအုံ၊ နည်းပညာနဲ့ သုတေသနမှာ အာရှရဲ့ ဖွံ့ဖြိုးပြီးနိုင်ငံ ဖြစ်လာတယ်။ ခရီးသွားလုပ်ငန်း အားကောင်းပြီး LGBTQ+ တွေအတွက် နေထိုင်ရ လွတ်လပ်ငြိမ်းချမ်းတဲ့ နေရာအဖြစ် နာမည်ကြီးလာတယ်။",5.5],[2200,"ဥရောပနိုင်ငံတွေကြား စစ်ဖြစ်နေပေမဲ့ မြန်မာနိုင်ငံကတော့ ဘက်မလိုက်ဘဲ ရပ်တည်တယ်။ ငြိမ်းချမ်းတည်ငြိမ်ပေမဲ့ စီးပွားရေးတော့ နည်းနည်း ထိခိုက်တယ်။",4.2],[2300,"မြန်မာနိုင်ငံဟာ ဒီနေ့ ဂျပန်နိုင်ငံလိုပဲ ငြိမ်းချမ်းပြီး ပြည့်စုံတဲ့ နိုင်ငံတစ်ခု ဖြစ်လာပြီ။",6.5]];
 const EM=()=>{let m=1;EA.forEach(e=>{if(S.y>=e[0])m=e[2]});return m};
 function era(){let e=EA.filter(e=>S.y>=e[0]).pop();if(e&&e!=S.eo){S.eo=e;if(e[1])lg("🌏 "+e[1],"r")}
 S.kids.forEach(k=>{k.rel=cl(k.rel-1);let g=S.y-k.by;if(g>=6&&g<=17)k.edu=Math.min(10,k.edu+(S.f>=1||S.m>3000?.6:.3))});S.sr=cl(S.sr-1);parents()}
-const KV=[["စာမေးပွဲရလဒ် မကောင်းဘဲ ပြန်လာသည်။",[["ကြိုးစားမှုကို ချီးကျူး၍ အကြောင်းရင်းကို အတူရှာမည်",8,5,"ကြိုးစားမှုကို ချီးကျူးခြင်းက သင်ယူလိုစိတ်ကို တိုးစေသည်။"],["ဆူပူ၍ အခြားကလေးနှင့် နှိုင်းယှဉ်မည်",-10,-3,"နှိုင်းယှဉ်ခြင်းက ကလေး၏ ယုံကြည်မှုကို ထိခိုက်စေသည်။"],["မမေးဘဲ လျစ်လျူရှုမည်",-4,-1,"ဂရုမစိုက်မှုက ဝေးကွာမှုကို ဖြစ်စေသည်။"]]],
-["ကလေးက လိမ်ညာခဲ့သည်ကို တွေ့သည်။",[["အေးအေးဆေးဆေး မေး၍ အမှန်ပြောခွင့်ပေးမည်",7,4,"ပြစ်ဒဏ်ကြောက်ခြင်းထက် ယုံကြည်မှုကို တည်ဆောက်ပါ။"],["ရိုက်နှက်မည်",-15,-5,"ရိုက်နှက်ခြင်းက ကြောက်ရွံ့မှုကိုသာ ဖြစ်စေပြီး ဆက်ဆံရေးကို ပျက်စေသည်။"],["မမြင်ချင်ယောင်ဆောင်မည်",-3,-2,"စည်းကမ်းမရှိသော ပြုစုပျိုးထောင်မှုက အကျင့်ကို ခိုင်မာစေသည်။"]]],
-["ကလေးက ဖုန်းကို အလွန်အကျွံ ကစားနေသည်။",[["အတူ စည်းကမ်းချမှတ်၍ ကိုယ်တိုင်လည်း လိုက်နာမည်",6,4,"ကလေးများသည် လူကြီးလုပ်ပုံကို အတုယူသည်။"],["ဖုန်းကို ချက်ချင်း သိမ်းယူမည်",-8,0,"အကြောင်းမရှင်းဘဲ ပိတ်ပင်ခြင်းက ဆန့်ကျင်မှုကို တိုးစေသည်။"]]],
-["ကလေးက စိတ်ဆိုး၍ ငိုနေသည်။",[["ဖြတ်မပြောဘဲ နားထောင်၍ ခံစားချက်ကို အသိအမှတ်ပြုမည်",8,4,"နားထောင်ခြင်းက ဆက်သွယ်ရေးစွမ်းရည်၏ အခြေခံ ဖြစ်သည်။"],["\"ငြိမ်ငြိမ်နေ\" ဟု ပြောမည်",-6,-2,"ခံစားချက်ကို ဖိနှိပ်ခြင်းက စိတ်ဖိစီးမှုကို တိုးစေသည်။"]]],
-["ကျောင်းစရိတ် ပိုခက်ခဲလာသည်။",[["ကိုယ့်အသုံးစရိတ်လျှော့၍ ပညာရေးကို ထောက်ပံ့မည်",3,2,"ပညာရေးက ကလေး၏ အနာဂတ်ကို ပြောင်းစေသည်။",{m:-1000}],["ကျောင်းဆက်မထောက်ပံ့နိုင်ဟု ပြောမည်",-6,-3,"ပညာမရှိဘဲ ဝေးဝေးမသွားနိုင်ပါ။"]]],
-["ဆယ်ကျော်သက်က ချစ်သူရှိ၍ ကျောင်းထွက်ချင်သည်။",[["နားထောင်၍ အနာဂတ်ကို အတူစဉ်းစားမည်",8,4,"ခွင့်မပြုသော်လည်း ကြင်နာစွာ ရှင်းပြခြင်းက ပိုထိရောက်သည်။"],["တားမြစ်၍ စကားမပြောတော့ပါ",-14,-4,"အဆက်အသွယ်ဖြတ်ခြင်းက ကလေးကို ပိုအဝေးရောက်စေသည်။"]]]];
+const KV=[["စာမေးပွဲရလဒ် မကောင်းဘဲ ပြန်လာတယ်။",[["ကြိုးစားထားတာကို ချီးကျူးပြီး အကြောင်းရင်းကို အတူရှာမယ်",8,5,"ကြိုးစားအားထုတ်မှုကို အသိအမှတ်ပြုပေးရင် ကလေးက စိတ်ဓာတ်တက်တယ်။"],["ဆူပြီး တခြားကလေးနဲ့ နှိုင်းယှဉ်မယ်",-10,-3,"နှိုင်းယှဉ်ခံရရင် ကလေးက ကိုယ့်ကိုယ်ကို ယုံကြည်မှု လျော့တတ်တယ်။"],["မမေးဘဲ ဒီအတိုင်း ထားလိုက်မယ်",-4,-1,"ဂရုမစိုက်မိရင် ကလေးနဲ့ ဝေးကွာသွားတတ်တယ်။"]]],
+["ကလေးက လိမ်ညာထားတာ သိလိုက်ရတယ်။",[["အေးအေးဆေးဆေး မေးပြီး အမှန်ပြောခွင့်ပေးမယ်",7,4,"ကြောက်အောင်ခြောက်တာထက် ယုံကြည်မှု တည်ဆောက်ပေးတာ ပိုကောင်းတယ်။"],["ရိုက်မယ်",-15,-5,"ရိုက်နှက်ရင် ကြောက်စိတ်ပဲ ကျန်ပြီး ဆက်ဆံရေး ထိခိုက်တယ်။"],["မသိချင်ယောင် ဆောင်နေမယ်",-3,-2,"လွှတ်ထားလိုက်ရင် အကျင့်ဆိုး ဖြစ်သွားနိုင်တယ်။"]]],
+["ကလေးက ဖုန်းကို အရမ်းကစားနေတယ်။",[["အတူတူ စည်းကမ်းလုပ်ပြီး ကိုယ်တိုင်လည်း လိုက်နာမယ်",6,4,"ကလေးတွေက လူကြီးလုပ်ပုံကို အတုယူတတ်တယ်။"],["ဖုန်းကို ချက်ချင်း သိမ်းလိုက်မယ်",-8,0,"အကြောင်းမရှင်းဘဲ သိမ်းလိုက်ရင် ပိုဆန့်ကျင်ချင်လာတယ်။"]]],
+["ကလေးက စိတ်ဆိုးပြီး ငိုနေတယ်။",[["ကြားဖြတ်မပြောဘဲ နားထောင်ပေးပြီး ခံစားချက်ကို နားလည်ပေးမယ်",8,4,"နားထောင်ပေးတာက နားလည်မှုရဖို့ အကောင်းဆုံးလမ်းပဲ။"],["\"ငြိမ်ငြိမ်နေ\" လို့ ပြောမယ်",-6,-2,"ခံစားချက်ကို ဖိထားရင် စိတ်ပိုပင်ပန်းစေတယ်။"]]],
+["ကျောင်းစရိတ် ပိုခက်ခဲလာတယ်။",[["ကိုယ့်အသုံးစရိတ်လျှော့ပြီး ကလေးပညာရေးကို ထောက်ပံ့မယ်",3,2,"ပညာရေးက ကလေးရဲ့ အနာဂတ်ကို ပြောင်းလဲပေးနိုင်တယ်။",{m:-1000}],["ကျောင်းဆက်မထားနိုင်တော့ဘူးလို့ ပြောမယ်",-6,-3,"ပညာမရှိရင် ခရီးဝေးဖို့ ခက်တတ်တယ်။"]]],
+["ဆယ်ကျော်သက်အရွယ်မှာ ချစ်သူရပြီး ကျောင်းထွက်ချင်နေတယ်။",[["နားထောင်ပေးပြီး အနာဂတ်အတွက် အတူတူ စဉ်းစားကြည့်မယ်",8,4,"ကြင်ကြင်နာနာ ရှင်းပြတာက အတင်းတားတာထက် ပိုထိရောက်တယ်။"],["တားပြီး စကားမပြောတော့ဘူး",-14,-4,"စကားမပြောဘဲ နေလိုက်ရင် ကလေးက ပိုဝေးသွားတတ်တယ်။"]]]];
 function kidEv(){let ks=S.kids.filter(k=>S.y-k.by>=3&&S.y-k.by<=19);if(!ks.length||R(10)<4)return null;let k=ks[R(ks.length)],T=KV[R(KV.length)];
 return {t:`${k.n} (${S.y-k.by} နှစ်) - ${T[0]}`,o:T[1].map(x=>[x[0],()=>{k.rel=cl(k.rel+x[1]);k.q=cl(k.q+x[2]);return x[4]||{}},x[3]])}}
-E.push({a:[20,42],c:()=>S.mar&&S.kids.length<3&&(S.y<2300||R(10)<3),wt:2,t:"သားသမီးရရှိရန် အချိန်ကျလာသည်။",o:[["ကလေးရယူမည်",()=>{let g=R(2),n=pn(g,S.y);S.kids.push({n,g,by:S.y,rel:70,q:50,edu:0});lg("👶 "+n+" မွေးဖွားသည်။ (အမည်ကို ဇနီး/ခင်ပွန်းနှင့် တိုင်ပင်ရမည်)");setTimeout(()=>nameKid(S.kids.length-1),400);return{m:-500,s:2}}],["နောက်မှ စဉ်းစားမည်",{}]]});
-H[1938]={t:"၁၃၀၀ ပြည့်နှစ် အရေးအခင်း - ရေနံမြေလုပ်သားနှင့် ကျောင်းသားများ သပိတ်မှောက်သည်။",o:[["ထောက်ခံမည်",{s:3,f:2}],["မိသားစုကိုသာ ကြည့်မည်",{m:100}]]};
-H[1947]={t:"၁၉၄၇ ပင်လုံစာချုပ်ကို လက်မှတ်ထိုးပြီး ဗိုလ်ချုပ်အောင်ဆန်း လုပ်ကြံခံရသည်။",o:[["ပြည်ထောင်စုအတွက် မျှော်လင့်မည်",{s:3}],["စိုးရိမ်ပူပန်မည်",{s:-3}]]};
-H[1987]={t:"၁၉၈၇ တွင် ငွေစက္ကူများ တရားမဝင်ကြေညာ၍ စုဆောင်းငွေ ဆုံးရှုံးသည်။",o:[["လက်ခံ၍ အစမှ ပြန်စမည်",()=>({m:-Math.round(S.m*.5),s:-3})]]};
-function end(){S.end=1;LIN.max=Math.max(LIN.max,S.y);lg(`⚰️ ${S.nm} - အသက် ${S.a} နှစ်တွင် ဘဝအဆုံးသတ်သည်။ (${S.y})`,"y");
-lg(S.deg?"🎓 ပညာ - "+MJ[S.deg-1].n+" ဘွဲ့ရ၍ အခွင့်အလမ်းများ ရခဲ့သည်။":S.dr?"📚 ပညာ - ကျောင်းထွက်ခဲ့၍ ဝေးဝေးမသွားနိုင်ခဲ့ပါ။":"📚 ပညာ - အခြေခံပညာ ရခဲ့သည်။");
-if(S.c)lg(`⚖️ အဂတိ ${S.c} ကြိမ် - ဂုဏ်သိက္ခာ ကျဆင်းစေသည်။`);if(S.ar||S.k)lg("⛓️ ပြစ်မှု/အဂတိကြောင့် ဘဝ ဆင်းရဲခဲ့သည်။");
-
-lg(S.kids.some(k=>k.rel>80)?"👨‍👩‍👧 အမွေဆက်ခံမည့် သားသမီးကို ရွေးပါ။ ချစ်ခင်မှုနှင့် အမွေက သူ၏ ဘဝကို သတ်မှတ်မည်။":(S.kids.length?"💔 သားသမီးနှင့် ချစ်ခင်မှု ၈၀% မပြည့်၍ နောက်မျိုးဆက်ကို ဆက်ကစားခွင့် မရပါ။ ၁၉၂၀ မှ ပြန်စရမည်။":"💨 သင်သေဆုံးပြီးသောအခါ သင့်ချမ်းသာမှုနှင့် ငွေကြေးများ ပျောက်ကွယ်သွားသည်။ မျိုးဆက်လည်း ပြတ်သွားသည်။"),"r");
-lg("🪷 မြန်မာပြည်ကို ပြန်လည်တည်ဆောက်နိုင်သည်။ ပညာ၊ သမာဓိနှင့် စေတနာရှိသူများ၏ လက်ထဲတွင် အနာဂတ်ရှိသည်။","r");TB=0;view()}
+E.push({a:[20,42],c:()=>S.mar&&S.kids.length<3&&(S.y<2300||R(10)<3),wt:2,t:"သားသမီးယူဖို့ အချိန်ကျလာပြီ။",o:[["ကလေးယူမယ်",()=>{let g=R(2),n=pn(g,S.y);S.kids.push({n,g,by:S.y,rel:70,q:50,edu:0});sfx("levelup");lg("👶 "+n+" မွေးလာပြီ။ (အမည်ကို အိမ်ထောင်ဖက်နဲ့ တိုင်ပင်ရမယ်)");setTimeout(()=>nameKid(S.kids.length-1),400);return{m:-500,s:2}}],["နောက်မှ စဉ်းစားမယ်",{}]]});
+H[1938]={t:"၁၃၀၀ ပြည့် အရေးတော်ပုံ - ရေနံမြေလုပ်သားတွေနဲ့ ကျောင်းသားတွေ သပိတ်မှောက်နေကြတယ်။",o:[["ထောက်ခံမယ်",{s:3,f:2}],["မိသားစုကိုပဲ ကြည့်မယ်",{m:100}]]};
+H[1947]={t:"၁၉၄၇ ပင်လုံစာချုပ် လက်မှတ်ထိုးပြီးနောက် ဗိုလ်ချုပ်အောင်ဆန်း လုပ်ကြံခံလိုက်ရတယ်။",o:[["ပြည်ထောင်စုအတွက် မျှော်လင့်မယ်",{s:3}],["စိုးရိမ်ပူပန်မယ်",{s:-3}]]};
+H[1987]={t:"၁၉၈၇ မှာ ငွေစက္ကူတွေ တရားမဝင် ကြေညာခံရလို့ စုထားတဲ့ငွေတွေ ဆုံးရှုံးသွားတယ်။",o:[["လက်ခံပြီး အစကနေ ပြန်စမယ်",()=>({m:-Math.round(S.m*.5),s:-3})]]};
+function end(){S.end=1;LIN.max=Math.max(LIN.max,S.y);sfx("bad");lg(`⚰️ ${S.nm} - အသက် ${S.a} နှစ်မှာ ဘဝခရီး ပြီးဆုံးသွားပြီ။ (${S.y})`,"y");
+lg(S.deg?"🎓 ပညာ - "+MJ[S.deg-1].n+" ဘွဲ့ရခဲ့လို့ အခွင့်အလမ်းကောင်းတွေ ရခဲ့တယ်။":S.dr?"📚 ပညာ - ကျောင်းထွက်ခဲ့ရလို့ ခရီးဝေးဖို့ ခက်ခဲ့တယ်။":"📚 ပညာ - အခြေခံပညာ ရခဲ့တယ်။");
+if(S.c)lg(`⚖️ အဂတိ ${S.c} ကြိမ် - ဂုဏ်သိက္ခာ ကျဆင်းစေခဲ့တယ်။`);if(S.ar||S.k)lg("⛓️ ပြစ်မှု/အဂတိကြောင့် ဘဝ ခက်ခဲခဲ့တယ်။");
+lg(S.kids.some(k=>k.rel>80)?"👨‍👩‍👧 အမွေဆက်ခံမယ့် သားသမီးကို ရွေးပါ။ ချစ်ခင်မှုနဲ့ အမွေက သူ့ဘဝကို ပုံဖော်သွားမယ်။":(S.kids.length?"💔 သားသမီးနဲ့ ချစ်ခင်မှု ၈၀% မပြည့်လို့ နောက်မျိုးဆက် ဆက်ကစားခွင့် မရဘူး။ ၁၉၂၀ ကနေ ပြန်စရမယ်။":"💨 ကိုယ်ဆုံးသွားတဲ့အခါ ပိုင်ဆိုင်မှုတွေ ကျန်မနေတော့ဘဲ မျိုးဆက်လည်း ပြတ်သွားပြီ။"),"r");
+lg("🪷 မြန်မာပြည်ကို ပြန်တည်ဆောက်လို့ ရပါသေးတယ်။ ပညာ၊ သမာဓိနဲ့ စေတနာရှိသူတွေရဲ့ လက်ထဲမှာ အနာဂတ် ရှိနေတယ်။","r");TB=0;view()}
 function hr(i){let k=S.kids[i],p=S,a=p.y-k.by,e=Math.floor(k.edu),inh=Math.round(NW(p)*(k.rel>=50?.9:.45)),q=k.q;LIN.gen++;
 S=Object.assign({},p,{a,g:k.g,nm:k.n,w:cl(Math.round(30+q*.4+e*3)),h:cl(65+R(25)),l:30+R(60),s:cl(Math.round(35+q*.3+k.rel*.2)),fm:null,m:a>=16?inh:0,f:inh>8000?2:inh>2000?1:0,c:0,k:0,ar:0,sc:e*2,dr:a>=12&&e<2?1:0,mu:a>=17&&e>=3?1:0,mk:Math.min(580,200+e*40),ef:e*2,mf:(a>=17&&e==2)?1:0,rr:0,vr:0,trips:0,st:R(2)?"s":"a",uni:0,deg:a>=22&&e>=6?1+R(7):0,mj:0,uy:0,mar:0,ma:0,sr:50,role:"",job:null,lang:0,hb:{},dt:0,cz:{},lg:LGI(),gold:0,car:0,house:0,rt:0,pp:0,pa:0,ab:null,fw:inh,ins:{},sm:{},town:p.town,lf:{h:inh>2000?1:0,d:inh>2000?1:0,c:inh>2000?1:0},ad:0,ae:0,ct:[],exc:{},pe:0,fr:[],co:[],pt:null,inl:null,dy:0,bh:[],yb:null,yi:0,dep:0,cdm:0,gv:0,lsy:{},ex:0,T:5,ev:null,L:[],kids:[],end:0,par:[{n:p.nm,r:p.g?"မိခင်":"ဖခင်",by:p.y-p.a,rel:k.rel,al:0},{n:(p.g?"ဦး":"ဒေါ်")+pn(p.g?0:1,p.y-p.a-28,1),r:p.g?"ဖခင်":"မိခင်",by:p.y-p.a+R(4)-2,rel:60,al:R(2)}],gen:LIN.gen,sk:R(3),sys:k.by<2012?10:12,rgm:""});
-lg(`🪷 ${S.nm} အဖြစ် ဆက်ကစားသည် - မျိုးဆက် ${S.gen}`,"y");lg(`အသက် ${a} · အမွေ ${K(inh)} ရရှိသည်။`);TB=0;view()}
-const BUY=(c,f)=>()=>S.m<c?(alert("ငွေမလောက်ပါ"),false):f(c);
-const NG=f=>()=>(S.y<2021||S.y>2029)?(alert("ဤကာလတွင် မရှိပါ"),false):(typeof f=="function"?f():f);
+sfx("levelup");lg(`🪷 ${S.nm} အဖြစ် ဆက်ကစားပြီ - မျိုးဆက် ${S.gen}`,"y");lg(`အသက် ${a} · အမွေ ${K(inh)} ရရှိတယ်။`);TB=0;view();glowGold($("st"))}
+const BUY=(c,f)=>()=>S.m<c?(alert("ငွေမလောက်ဘူး"),false):f(c);
+const NG=f=>()=>(S.y<2021||S.y>2029)?(alert("ဒီကာလမှာ မရှိဘူး"),false):(typeof f=="function"?f():f);
 const ACT=[
-["🥗","အစားအသောက်",[["ဟင်းသီးဟင်းရွက်၊ ငါး၊ ပဲ စားမည်",()=>{S.dt++;return{h:3,m:-150}},1],["ရေများများ သောက်မည်",{h:1},1],["ဆီကြော်/မုန့်များ စားမည်",()=>{S.dt--;return{h:-2,s:1,m:-80}},1]]],
-["🏃","လေ့ကျင့်ခန်း",[["လမ်းလျှောက်မည်",{h:2,l:1,s:1},2],["ကစားကွင်းတွင် ပြေးကစားမည်",{h:3,s:1},3],["ယောဂ/ကိုယ်လက်လှုပ်ရှားမှု",{h:2,s:2},8],["ဘောလုံး/အားကစား",{h:3,l:2,s:1},8],["ကျန်းမာရေး စစ်ဆေးမည်",{h:2,m:-300},1],["ဆိုးသောအကျင့်ကို ဖြတ်ရန် ကြိုးစားမည်",()=>{let ks=Object.keys(S.hb).filter(k=>S.hb[k]);if(!ks.length)return alert("ဖြတ်ရန် အကျင့်မရှိပါ"),false;if(R(100)<30+S.s*.5){S.hb[ks[0]]=0;lg("ဆိုးသောအကျင့်ကို ဖြတ်နိုင်ခဲ့သည် ✅","r")}else lg("မအောင်မြင်သေးပါ ❌","r");return{s:1}},12]]],
-["🧠","စိတ်နှင့်ဉာဏ်",[["စာဖတ်မည်",{w:2},4],["ပုံပြင်/ပန်းချီ/ဂီတ လေ့ကျင့်မည်",{w:1,s:2},4],["ပဟေဠိ/ဉာဏ်စမ်း ကစားမည်",{w:2},5],["တရားထိုင်မည်",{s:4},7]]],
+["🥗","အစားအသောက်",[["ဟင်းသီးဟင်းရွက်၊ ငါး၊ ပဲ စားမယ်",()=>{S.dt++;return{h:3,m:-150}},1],["ရေများများ သောက်မယ်",{h:1},1],["ဆီကြော်/မုန့်တွေ စားမယ်",()=>{S.dt--;return{h:-2,s:1,m:-80}},1]]],
+["🏃","လေ့ကျင့်ခန်း",[["လမ်းလျှောက်မယ်",{h:2,l:1,s:1},2],["ကွင်းထဲ ပြေးကစားမယ်",{h:3,s:1},3],["ယောဂ/ကိုယ်လက်လှုပ်ရှား လုပ်မယ်",{h:2,s:2},8],["ဘောလုံး/အားကစား လုပ်မယ်",{h:3,l:2,s:1},8],["ကျန်းမာရေး စစ်ဆေးမယ်",{h:2,m:-300},1],["အကျင့်ဆိုး ဖြတ်ဖို့ ကြိုးစားမယ်",()=>{let ks=Object.keys(S.hb).filter(k=>S.hb[k]);if(!ks.length)return alert("ဖြတ်စရာ အကျင့်ဆိုး မရှိဘူး"),false;if(R(100)<30+S.s*.5){S.hb[ks[0]]=0;sfx("good");lg("အကျင့်ဆိုး ဖြတ်နိုင်သွားပြီ ✅","r");glowGold($("st"))}else{sfx("bad");lg("မအောင်မြင်သေးဘူး ❌","r")}return{s:1}},12]]],
+["🧠","စိတ်နဲ့ဉာဏ်",[["စာဖတ်မယ်",{w:2},4],["ပုံဆွဲ/ဂီတ လေ့ကျင့်မယ်",{w:1,s:2},4],["ပဟေဠိ/ဉာဏ်စမ်း ကစားမယ်",{w:2},5],["တရားထိုင်မယ်",{s:4},7]]],
 ["🗣️","ဘာသာစကား",[]],
-["💄","ရုပ်ရည်",[["သနပ်ခါးလိမ်း၊ ကိုယ်လက်သန့်ရှင်းမည်",{l:3,m:-60},10],["ဆံပင်/အဝတ်အစား ပြင်ဆင်မည်",{l:3,m:-150},13]]],
-["👥","လူမှုရေး",[["သူငယ်ချင်းနှင့် တွေ့ဆုံမည်",{s:3},10],["ဘုန်းကြီးကျောင်း/ဘုရား အလှူပေးမည်",{s:3,f:2,m:-100},10],["စေတနာ့ဝန်ထမ်းလုပ်မည်",{s:2,f:3},14]]],
-["💰","ငွေရေးကြေးရေး",[["အချိန်ပိုင်းအလုပ်လုပ်မည်",{m:400,h:-1},16],["ရွှေ/ဘဏ်တွင် စုမည် (၅%)",()=>({m:Math.round(S.m*.05)}),16],["ရင်းနှီးမြှုပ်နှံမည် (အန္တရာယ်ရှိ)",()=>R(2)?{m:Math.round(S.m*.15)}:{m:-Math.round(S.m*.1)},18]]],
-["🏠","နေထိုင်မှုနှင့် ပိုင်ဆိုင်မှု",[["ရွှေဝယ်မည် (၅သိန်း)",BUY(500,c=>{S.gold=(S.gold||0)+500;return{m:-c}}),16],["ရွှေရောင်းမည်",()=>{let g=S.gold||0;if(!g)return alert("ရွှေမရှိပါ"),false;S.gold=0;return{m:g}},16],["လက်ဝတ်ရတနာဝယ်မည် (၃သိန်း)",BUY(300,c=>({m:-c,l:3,s:1})),16],["ကားဝယ်မည် (၆၀သိန်း)",BUY(6000,c=>{if(S.car)return alert("ကားရှိပြီးသား"),false;S.car=1;return{m:-c,s:3}}),18],["ကားရောင်းမည်",()=>{if(!S.car)return alert("ကားမရှိပါ"),false;S.car=0;return{m:4000}},18],["အိမ်ခြံဝယ်မည် (၁၅၀သိန်း)",BUY(15000,c=>{if(S.house)return alert("အိမ်ရှိပြီးသား"),false;S.house=1;return{m:-c,s:5}}),18],["အိမ်ခြံရောင်းမည်",()=>{if(!S.house)return alert("အိမ်မရှိပါ"),false;S.house=0;return{m:12000}},18]]],["🕊️","NUG နှင့် ရပ်ရွာလှုပ်ရှားမှု",[["NUG ပညာရေး/ကျန်းမာရေး ဝန်ဆောင်မှုတွင် စေတနာ့ဝန်ထမ်းလုပ်မည်",NG(()=>R(100)<5?{h:-10,s:-8}:{s:3,f:3,w:1,m:-100}),16],["NUG သို့ ရန်ပုံငွေလှူမည်",NG({m:-300,s:2,f:2}),16],["CDM ဝန်ထမ်းများကို ကူညီထောက်ပံ့မည်",NG({m:-200,s:3,f:2}),16],["အွန်လိုင်းမှ ကလေးများကို စာသင်ပေးမည်",NG({w:1,s:3,f:2}),16]]]];
+["💄","ရုပ်ရည်",[["သနပ်ခါးလိမ်း၊ ကိုယ်လက်သန့်ရှင်းမယ်",{l:3,m:-60},10],["ဆံပင်/အဝတ်အစား ပြင်ဆင်မယ်",{l:3,m:-150},13]]],
+["👥","လူမှုရေး",[["သူငယ်ချင်းနဲ့ တွေ့မယ်",{s:3},10],["ဘုန်းကြီးကျောင်း/ဘုရား လှူမယ်",{s:3,f:2,m:-100},10],["စေတနာ့ဝန်ထမ်း လုပ်မယ်",{s:2,f:3},14]]],
+["💰","ငွေရေးကြေးရေး",[["အချိန်ပိုင်းအလုပ် လုပ်မယ်",{m:400,h:-1},16],["ရွှေ/ဘဏ်မှာ စုမယ် (၅%)",()=>({m:Math.round(S.m*.05)}),16],["ရင်းနှီးမြှုပ်နှံမယ် (အန္တရာယ်ရှိ)",()=>R(2)?{m:Math.round(S.m*.15)}:{m:-Math.round(S.m*.1)},18]]],
+["🏠","နေထိုင်မှုနဲ့ ပိုင်ဆိုင်မှု",[["ရွှေဝယ်မယ် (၅သိန်း)",BUY(500,c=>{S.gold=(S.gold||0)+500;return{m:-c}}),16],["ရွှေရောင်းမယ်",()=>{let g=S.gold||0;if(!g)return alert("ရွှေမရှိဘူး"),false;S.gold=0;return{m:g}},16],["လက်ဝတ်ရတနာ ဝယ်မယ် (၃သိန်း)",BUY(300,c=>({m:-c,l:3,s:1})),16],["ကားဝယ်မယ် (၆၀သိန်း)",BUY(6000,c=>{if(S.car)return alert("ကားရှိပြီးသားပဲ"),false;S.car=1;return{m:-c,s:3}}),18],["ကားရောင်းမယ်",()=>{if(!S.car)return alert("ကားမရှိဘူး"),false;S.car=0;return{m:4000}},18],["အိမ်ခြံဝယ်မယ် (၁၅၀သိန်း)",BUY(15000,c=>{if(S.house)return alert("အိမ်ရှိပြီးသားပဲ"),false;S.house=1;return{m:-c,s:5}}),18],["အိမ်ခြံရောင်းမယ်",()=>{if(!S.house)return alert("အိမ်မရှိဘူး"),false;S.house=0;return{m:12000}},18]]],["🕊️","NUG နဲ့ ရပ်ရွာလှုပ်ရှားမှု",[["NUG ပညာရေး/ကျန်းမာရေးမှာ စေတနာ့ဝန်ထမ်း လုပ်မယ်",NG(()=>R(100)<5?{h:-10,s:-8}:{s:3,f:3,w:1,m:-100}),16],["NUG ရန်ပုံငွေ လှူမယ်",NG({m:-300,s:2,f:2}),16],["CDM ဝန်ထမ်းတွေကို ကူညီမယ်",NG({m:-200,s:3,f:2}),16],["အွန်လိုင်းကနေ ကလေးတွေကို စာသင်ပေးမယ်",NG({w:1,s:3,f:2}),16]]]];
 const NW=p=>(p.m||0)+(p.gold||0)+(p.house?15000:0)+(p.car?3000:0);
 const LG=[["အင်္ဂလိပ် (IELTS)","EN","IELTS",[],0],["အင်္ဂလိပ် (TOEFL)","E2","TOEFL",[],1990],["ဂျပန်","JP","JLPT",[],1990],["ကိုရီးယား","KR","TOPIK",[],2000],["တရုတ်","CN","HSK",[],1990],["ပြင်သစ်","FR","DELF",[],0],["ဂျာမန်","DE","Goethe",[],1990],["ထိုင်း","TH","ထိုင်းစာ",[],0]];
 const LGI=()=>({EN:{p:0,lv:0},JP:{p:0,lv:0},KR:{p:0,lv:0},CN:{p:0,lv:0},FR:{p:0,lv:0},DE:{p:0,lv:0},E2:{p:0,lv:0},TH:{p:0,lv:0}});
 const certs=()=>Object.values(S.lg||{}).reduce((a,x)=>a+x.lv,0);
 const ch=(i,b)=>Math.max(5,Math.min(95,Math.round(20+S.w*.25+Math.min(S.ex,5)*2+Math.min((S.exc[i-3]||0)*4,20)+Math.min(certs()*3,9)+S.ad*3+(S.deg?15:S.mu?6:0)+(S.rt?10:0)+(i<3?25:0)+(b?35:0))));
-const INFO={EN:"IELTS ရမှတ် ၃.၅–၈.၀ · ကမ္ဘာ့ပျမ်းမျှ ၆.၀ · တက္ကသိုလ်အများစု ၆.၀–၆.၅ လို",E2:"TOEFL iBT ၀–၁၂၀ · ပျမ်းမျှ ၈၆–၈၈ · တက္ကသိုလ်အများစု ၇၂–၉၄၊ ထိပ်တန်း ၉၅–၁၁၃",JP:"JLPT N5–N1 · အောင်မှတ် N5 ၈၀၊ N4 ၉၀၊ N3 ၉၅၊ N2 ၉၀၊ N1 ၁၀၀ (အမြင့်ဆုံး ၁၈၀) · အောင်ချက် N5 ၅၀% ခန့်၊ N1 ၂၉–၃၂%",KR:"TOPIK I (၀–၂၀၀) အဆင့် ၁–၂ · TOPIK II (၀–၃၀၀) အဆင့် ၃–၆ · II ပျမ်းမျှ ၁၄၅–၁၅၅",CN:"HSK ၁–၆ · ၆၀% အောင် (၁–၂ အဆင့် ၂၀၀ မှတ်၊ ၃–၆ အဆင့် ၃၀၀ မှတ်)",FR:"DELF A1–B2 · ၁၀၀ မှတ်တွင် ၅၀ အောင် (အပိုင်းတစ်ခု ၅/၂၅) · ပျမ်းမျှအောင်ချက် ၆၀–၈၅%",DE:"Goethe A1–B2 · ၁၀၀ မှတ်တွင် ၆၀ အောင် · ပျမ်းမျှ ၇၀–၇၅",TH:"ထိုင်းစာ - ဂိမ်းဒီဇိုင်း အဆင့် ၃ ဆင့်၊ အောင်မှတ် ၆၀/၁၀၀"};
+const INFO={EN:"IELTS ရမှတ် ၃.၅–၈.၀ · ကမ္ဘာ့ပျမ်းမျှ ၆.၀ · တက္ကသိုလ်အများစု ၆.၀–၆.၅ လို",E2:"TOEFL iBT ၀–၁၂၀ · ပျမ်းမျှ ၈၆–၈၈ · တက္ကသိုလ်အများစု ၇၂–၉၄၊ ထိပ်တန်း ၉၅–၁၁၃",JP:"JLPT N5–N1 · အောင်မှတ် N5 ၈၀၊ N4 ၉၀၊ N3 ၉၅၊ N2 ၉၀၊ N1 ၁၀၀ (အမြင့်ဆုံး ၁၈၀) · အောင်ချက် N5 ၅၀% ခန့်၊ N1 ၂၉–၃၂%",KR:"TOPIK I (၀–၂၀၀) အဆင့် ၁–၂ · TOPIK II (၀–၃၀၀) အဆင့် ၃–၆ · II ပျမ်းမျှ ၁၄၅–၁၅၅",CN:"HSK ၁–၆ · ၆၀% အောင် (၁–၂ အဆင့် ၂၀၀ မှတ်၊ ၃–၆ အဆင့် ၃၀၀ မှတ်)",FR:"DELF A1–B2 · ၁၀၀ မှတ်မှာ ၅၀ အောင် (တစ်ပိုင်း ၅/၂၅) · ပျမ်းမျှအောင်ချက် ၆၀–၈၅%",DE:"Goethe A1–B2 · ၁၀၀ မှတ်မှာ ၆၀ အောင် · ပျမ်းမျှ ၇၀–၇၅",TH:"ထိုင်းစာ - ဂိမ်းဒီဇိုင်း အဆင့် ၃ ဆင့်၊ အောင်မှတ် ၆၀/၁၀၀"};
 const EX={EN:{s:1,min:3.5,max:8,st:.5,tr:[5,6.5,7.5],fee:300},E2:{s:1,min:0,max:120,st:1,tr:[72,94,105],fee:280},
 JP:{t:[["N5",180,80,0,1],["N4",180,90,8,1],["N3",180,95,16,2],["N2",180,90,24,2],["N1",180,100,32,3]],fee:150},
 KR:{t:[["TOPIK I",200,80,0,1],["TOPIK II",300,120,16,2]],fee:150},
@@ -301,62 +312,181 @@ FR:{t:[["A1",100,50,0,1],["A2",100,50,6,1],["B1",100,50,14,2],["B2",100,50,22,3]
 DE:{t:[["A1",100,60,0,1],["A2",100,60,6,1],["B1",100,60,14,2],["B2",100,60,22,3]],fee:200},
 TH:{t:[["အခြေခံ",100,60,0,1],["အလယ်",100,60,12,2],["အဆင့်မြင့်",100,60,24,3]],fee:100}};
 const perf=(s,df)=>Math.max(0,Math.min(100,15+s.p*5+S.w*.3+R(15)-7-(S.w<50?10:0)-df));
-function lgui(){if(LS<0)return `<button onclick="AM=-1;view()">‹ နောက်သို့</button><div class="c"><b>🗣️ ဘာသာစကားများ</b><br><small>ဘာသာစကားတစ်ခုကို နှိပ်၍ လေ့လာ/စာမေးပွဲဖြေပါ</small></div>`+LG.map((g,i)=>`<button onclick="LS=${i};view()">${g[0]} · ${S.lg[g[1]].best||"လက်မှတ်မရှိ"}</button>`).join("");
-let g=LG[LS],s=S.lg[g[1]],E=EX[g[1]],h=`<button onclick="LS=-1;view()">‹ ဘာသာစကားများ</button><div class="c"><b>${g[0]}</b> · ${s.best||"လက်မှတ်မရှိ"} · လေ့လာမှု ${BN(Math.floor(s.p))}<br><small>${INFO[g[1]]}</small><br>ယခုနှစ်၏ လှုပ်ရှားမှု ${BN(S.T)}/၅</div><button onclick="ls(${LS})">📖 လေ့လာမည်</button>`;
-if(E.s)return h+`<button class="pri" onclick="ex(${LS},0)">📝 စာမေးပွဲဖြေမည် (${K(E.fee)}) · ရမှတ်သည် လေ့လာမှုနှင့် ဉာဏ်ပညာပေါ်မူတည်သည်</button>`;
-return h+E.t.map((t,j)=>`<button onclick="ex(${LS},${j})">${s.ps&&s.ps[t[0]]?"✔ ":""}${t[0]} ဖြေမည် (အောင်မှတ် ${BN(t[2])}/${BN(t[1])} · ${K(E.fee)})</button>`).join("")}
-function ls(i){if(S.T<=0)return alert("ယခုနှစ်၏ လှုပ်ရှားမှု မကျန်တော့ပါ");let k=LG[i][1];S.lsy=S.lsy||{};let f=Object.keys(S.lsy),m=(f.length==0||f[0]==k)?1:.2;S.lsy[k]=1;if(S.lg[k].lv==0&&LG.filter(g=>S.lg[g[1]].lv>=1).length>=3)m*=.2;S.lg[k].p+=m;use({w:1},LG[i][0]+" လေ့လာသည်")}
-function ex(i,ti){if(S.T<=0)return alert("ယခုနှစ်၏ လှုပ်ရှားမှု မကျန်တော့ပါ");let g=LG[i],k=g[1],s=S.lg[k],E=EX[k];if((S.a<16?S.fw:S.m)<E.fee)return alert("ငွေမလောက်ပါ");S.T--;ap({m:-E.fee});s.ps=s.ps||{};
-if(E.s){let p=perf(s,0),sc=Math.max(E.min,Math.min(E.max,Math.round((E.min+(E.max-E.min)*p/100)/E.st)*E.st)),f=E.st<1?sc.toFixed(1):sc;if(!s.sc||sc>s.sc){s.sc=sc;s.best=g[2]+" "+f}let tr=E.tr.filter(x=>sc>=x).length;if(tr>s.lv)s.lv=tr;lg(`📝 ${g[2]} ရမှတ် ${f} / ${E.max}`,"r");sfx(sc>=E.tr[0]?"good":"bad")}
+function lgui(){if(LS<0)return `<button onclick="AM=-1;view()">‹ နောက်သို့</button><div class="c"><b>🗣️ ဘာသာစကားများ</b><br><small>နှိပ်ပြီး လေ့လာတာပဲဖြစ်ဖြစ် စာမေးပွဲဖြေတာပဲဖြစ်ဖြစ် လုပ်လို့ရတယ်</small></div>`+LG.map((g,i)=>`<button onclick="LS=${i};view()">${g[0]} · ${S.lg[g[1]].best||"လက်မှတ်မရှိ"}</button>`).join("");
+let g=LG[LS],s=S.lg[g[1]],E=EX[g[1]],h=`<button onclick="LS=-1;view()">‹ ဘာသာစကားများ</button><div class="c"><b>${g[0]}</b> · ${s.best||"လက်မှတ်မရှိ"} · လေ့လာမှု ${BN(Math.floor(s.p))}<br><small>${INFO[g[1]]}</small><br>ဒီနှစ် လှုပ်ရှားမှု ${BN(S.T)}/၅</div><button onclick="ls(${LS})">📖 လေ့လာမယ်</button>`;
+if(E.s)return h+`<button class="pri" onclick="ex(${LS},0)">📝 စာမေးပွဲဖြေမယ် (${K(E.fee)}) · ရမှတ်က လေ့လာမှုနဲ့ ဉာဏ်ပညာပေါ် မူတည်မယ်</button>`;
+return h+E.t.map((t,j)=>`<button onclick="ex(${LS},${j})">${s.ps&&s.ps[t[0]]?"✔ ":""}${t[0]} ဖြေမယ် (အောင်မှတ် ${BN(t[2])}/${BN(t[1])} · ${K(E.fee)})</button>`).join("")}
+function ls(i){if(S.T<=0)return alert("ဒီနှစ် လှုပ်ရှားမှု ကုန်သွားပြီ");let k=LG[i][1];S.lsy=S.lsy||{};let f=Object.keys(S.lsy),m=(f.length==0||f[0]==k)?1:.2;S.lsy[k]=1;if(S.lg[k].lv==0&&LG.filter(g=>S.lg[g[1]].lv>=1).length>=3)m*=.2;S.lg[k].p+=m;use({w:1},LG[i][0]+" လေ့လာ")}
+function ex(i,ti){if(S.T<=0)return alert("ဒီနှစ် လှုပ်ရှားမှု ကုန်သွားပြီ");let g=LG[i],k=g[1],s=S.lg[k],E=EX[k];if((S.a<16?S.fw:S.m)<E.fee)return alert("ငွေမလောက်ဘူး");S.T--;ap({m:-E.fee});s.ps=s.ps||{};
+if(E.s){let p=perf(s,0),sc=Math.max(E.min,Math.min(E.max,Math.round((E.min+(E.max-E.min)*p/100)/E.st)*E.st)),f=E.st<1?sc.toFixed(1):sc;if(!s.sc||sc>s.sc){s.sc=sc;s.best=g[2]+" "+f}let tr=E.tr.filter(x=>sc>=x).length;if(tr>s.lv)s.lv=tr;lg(`📝 ${g[2]} ရမှတ် ${f} / ${E.max}`,"r");if(sc>=E.tr[0]){sfx("good");glowGold($("st"))}else{sfx("bad");shakeScreen()}}
 else{let t=E.t[ti],sc=Math.round(perf(s,t[3])/100*t[1]),pass=sc>=t[2],tr=t[4];if(k=="KR"&&ti==1&&sc>=190)tr=3;
-if(pass){s.ps[t[0]]=1;if(tr>=s.lv)s.best=g[2]+" "+t[0];if(tr>s.lv)s.lv=tr}lg(`📝 ${g[2]} ${t[0]} ရမှတ် ${BN(sc)}/${BN(t[1])} (အောင်မှတ် ${BN(t[2])}) - ${pass?"အောင်မြင်သည် 🏅":"မအောင်ပါ ❌"}`,"r");sfx(pass?"good":"bad")}
+if(pass){s.ps[t[0]]=1;if(tr>=s.lv)s.best=g[2]+" "+t[0];if(tr>s.lv)s.lv=tr;glowGold($("st"))}else shakeScreen();lg(`📝 ${g[2]} ${t[0]} ရမှတ် ${BN(sc)}/${BN(t[1])} (အောင်မှတ် ${BN(t[2])}) - ${pass?"အောင်ပြီ 🏅":"မအောင်ဘူး ❌"}`,"r");sfx(pass?"good":"bad")}
 S.lang=Math.max(S.lg.EN.lv,S.lg.E2.lv);view()}
 const DS=[["ထိုင်း",300,1.3,null],["ဂျပန်",1200,3,["JP",1]],["ကိုရီးယား",1000,3,["KR",1]],["စင်ကာပူ",800,4,["EN",2]],["ဂျာမနီ",1500,3,["DE",2]],["ပြင်သစ်",1500,3,["FR",1]],["တရုတ်",900,2.5,["CN",1]]];
 const ok2=d=>!d[3]||(d[3][0]=="EN"?S.lang:S.lg[d[3][0]].lv)>=d[3][1];
-function pp0(){if(S.m<150)return alert("ငွေမလောက်ပါ");S.m-=150;S.pa=S.y;S.pd=S.y>=2030?0:(S.e?1:0)+(S.r?1:0)+(S.y>=2021?1:0)+R(2);lg("🛂 ပတ်စပို့ လျှောက်ထားသည်။ စောင့်ရမည့်ကာလသည် လူမျိုး၊ ဘာသာနှင့် ခေတ်ပေါ်မူတည်သည်။");if(!S.pd){S.pp=1;S.pe=S.y+5;lg("🛂 ပတ်စပို့ ရရှိသည်။")}view()}
-function pp1(){if(S.m<400)return alert("ငွေမလောက်ပါ");S.m-=400;S.c++;S.pp=1;S.pe=S.y+5;lg("🛂 လာဘ်ပေး၍ ပတ်စပို့ရသည်။ ဂုဏ်သိက္ခာ ကျဆင်းသည်။","r");view()}
+function pp0(){if(S.m<150)return alert("ငွေမလောက်ဘူး");S.m-=150;S.pa=S.y;S.pd=S.y>=2030?0:(S.e?1:0)+(S.r?1:0)+(S.y>=2021?1:0)+R(2);lg("🛂 ပတ်စပို့ လျှောက်ထားလိုက်ပြီ။ စောင့်ရမယ့်အချိန်က လူမျိုး၊ ဘာသာနဲ့ ခေတ်အခြေအနေပေါ် မူတည်တယ်။");if(!S.pd){S.pp=1;S.pe=S.y+5;sfx("levelup");lg("🛂 ပတ်စပို့ ရပြီ။");glowGold($("st"))}else sfx("cash");view()}
+function pp1(){if(S.m<400)return alert("ငွေမလောက်ဘူး");S.m-=400;S.c++;S.pp=1;S.pe=S.y+5;sfx("bad");lg("🛂 လာဘ်ပေးပြီး ပတ်စပို့ ထုတ်လိုက်တယ်။ ဂုဏ်သိက္ခာ ကျသွားတယ်။","r");shakeScreen();view()}
 const vz=(i,t)=>{let d=DS[i],c=(t=="t"?70:t=="w"?55:45)+(certs()>=2?10:0)+(S.deg?10:0)+(S.trips>0?8:0)+(S.m>=d[1]*3?10:0)-Math.min(S.vr*10,30);return Math.max(10,Math.min(95,c))};
-function visa(i,t,fee){if(S.m<fee)return alert("ဗီဇာကြေးအတွက် ငွေမလောက်ပါ"),false;S.m-=fee;if(R(100)<vz(i,t))return true;S.vr++;lg(`🛂 ${DS[i][0]} ဗီဇာ ပယ်ချခံရသည်။ ကြေးပြန်မရပါ။ ဗီဇာပယ်ချမှု များလာလျှင် နောက်ထပ်လျှောက်ရာတွင် ပိုခက်သည်။`,"r");view();return false}
-function trip(i){let d=DS[i],c=d[1]*.6;if(!ppv())return alert("ပတ်စပို့ သက်တမ်းကုန်ပြီ");if(S.m<c+80)return alert("ငွေမလောက်ပါ");if(!visa(i,"t",80))return;lg(`🧳 ${d[0]}သို့ အပျော်ခရီးသွားသည် (${ap({m:-c,s:8,h:2})})`);S.trips++;view()}
-function go(i,t){let d=DS[i];if(!ppv())return alert("ပတ်စပို့ သက်တမ်းကုန်ပြီ - အရင် သက်တမ်းတိုးပါ");if(S.job)return alert("လက်ရှိအလုပ်ကို ဦးစွာထွက်ပါ");if(S.uni||S.ae)return alert("လက်ရှိပညာသင်ကြားမှုကို ဦးစွာ ပြီးပါ");
-if(t=="s"){if(!S.mu)return alert("အခြေခံပညာ အောင်ရန်လိုသည်");let p=20+S.w*.4+certs()*6+S.mk/6*.3;if(R(100)>=p){lg(`❌ ${d[0]} ပညာတော်သင် မရပါ။`,"r");return view()}if(!visa(i,"s",100))return;S.ab={d:d[0],n:0,mu:d[2],sc:1};lg(`🎓 ${d[0]} ပညာတော်သင်နှင့် ဗီဇာ ရရှိသည်! ပညာရေးမီနူးတွင် သင်ကြားမည့်ဘာသာရပ်ကို ရွေးပါ။`,"r");return view()}
-if(S.m<d[1]+120)return alert("ငွေမလောက်ပါ");if(!visa(i,"w",120))return;S.m-=d[1];S.ab={d:d[0],n:0,mu:d[2]};S.job={cid:-1,lvl:0,y:0,p:0,abroad:1,gov:0,s:Math.round(1100*d[2]),n:d[0]+" - အခြေခံလုပ်သား"};S.co=[];lg(`✈️ ${d[0]}သို့ အလုပ်ဗီဇာဖြင့် သွားသည်။ အလုပ်အကိုင်မီနူးတွင် CV နှင့်ကိုက်ညီသော အလုပ်ကို လျှောက်နိုင်သည်။`,"r");view()}
-function abPanel(){let b=S.ab,fm=S.mar||S.kids.length;return `<div class="c"><b>🌏 ${b.d}တွင် နေထိုင်နေသည်</b><br>နေထိုင်သည့်နှစ် ${BN(b.n)} · မိသားစု ${b.fam?"အတူနေသည်":"မြန်မာပြည်တွင် ကျန်ခဲ့သည်"}<br><small>ပညာရေးနှင့် အလုပ်အကိုင်မီနူးတွင် ပြည်ပ၌ ဆက်လက်သင်ကြား/လုပ်ကိုင်နိုင်သည်။ အဝေးကွာနေလျှင် မိသားစုနှင့် ချစ်ခင်မှု နှစ်စဉ် ကျဆင်းသည်။</small></div><button onclick="rmt(0)">📞 မိသားစုနှင့် ဗီဒီယိုခေါ်ဆိုမည်</button><button onclick="rmt(1)">💸 မိသားစုထံ ငွေပို့မည် (၃သိန်း)</button>`+(fm&&!b.fam?`<button onclick="fv()">👪 မိသားစုကို ခေါ်ယူမည် (ဗီဇာ + ၅သိန်း)</button>`:"")+`<button onclick="ret()">🏠 မြန်မာပြည်သို့ ပြန်လာမည်</button>`+(b.n>=5?`<button onclick="cit()">🛂 ${b.d} နိုင်ငံသားခံယူမည် (ဂိမ်းပြီးဆုံးမည်)</button>`:`<small>နိုင်ငံသားခံယူခွင့်ကို ၅ နှစ်နေထိုင်ပြီးမှ ရမည် (ဂိမ်းဒီဇိုင်း)</small>`)}
-function rmt(t){use(()=>{let v=t?8:6;S.kids.forEach(k=>k.rel=cl(k.rel+v));S.sr=cl(S.sr+v);(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel+v)));return t?{m:-300,s:1}:{s:2}},t?"မိသားစုထံ ငွေပို့သည်":"ဗီဒီယိုခေါ်ဆိုသည်")}
-function fv(){if(S.m<500)return alert("ငွေမလောက်ပါ");S.m-=500;let c=60+(S.ab.t=="w"?10:0)+(S.deg?10:0);if(R(100)<c){S.ab.fam=1;lg("👪 မိသားစုဗီဇာ ရ၍ အတူနေလာသည်။ ကလေးများနှင့် ချစ်ခင်မှု မကျတော့ပါ။","r")}else lg("❌ မိသားစုဗီဇာ ပယ်ချခံရသည်။","r");view()}
-function ret(){S.ab=null;S.rt=1;if(S.job&&S.job.abroad)S.job=null;if(S.pt&&S.pt.nat!="မြန်မာ")lg("⚠️ နိုင်ငံခြားသား အိမ်ထောင်ဖက်ဖြစ်သဖြင့် မြန်မာပြည်တွင် နေထိုင်ခွင့်ပြဿနာများ ကြုံနိုင်သည်။","r");lg(`🏠 မြန်မာပြည်သို့ ပြန်လာသည် (${ap({s:5})})။ ပြည်ပအတွေ့အကြုံကြောင့် အလုပ်လျှောက်ရာတွင် အခွင့်အလမ်းပိုများသည်။`,"r");view()}
-function cit(){S.end=1;S.kids=[];lg("🌏 နိုင်ငံခြားတွင် နိုင်ငံသားခံယူလိုက်ပြီ။ သင့်ဇာတ်လမ်းသည် ဤနေရာတွင် ပြီးဆုံးသည်။ မြန်မာပြည်၏ အနာဂတ်ကို မြင်လိုပါက ပြန်လာခြင်းက ဇာတ်လမ်းကို ဆက်စေသည်။","r");view()}
-const HB={smoke:["ဆေးလိပ်သောက်ရန်",{h:-2,m:-120},"ဆေးလိပ်"],alc:["အရက်သောက်ရန်",{h:-2,s:-1,m:-200},"အရက်"],gam:["ကံစမ်းမဲ/လောင်းကစားရန်",{m:-400,s:-1},"လောင်းကစား"],drug:["မူးယစ်ဆေးသုံးရန်",{h:-5,m:-500,s:-3},"မူးယစ်ဆေး"]};
+function visa(i,t,fee){if(S.m<fee)return alert("ဗီဇာကြေး ငွေမလောက်ဘူး"),false;S.m-=fee;if(R(100)<vz(i,t))return true;S.vr++;sfx("bad");lg(`🛂 ${DS[i][0]} ဗီဇာ ကျသွားတယ်။ ပိုက်ဆံပြန်မရဘူး။ ဗီဇာကျတာ များလာရင် နောက်ထပ်လျှောက်ရတာ ပိုခက်လာမယ်။`,"r");shakeScreen();view();return false}
+function trip(i){let d=DS[i],c=d[1]*.6;if(!ppv())return alert("ပတ်စပို့ သက်တမ်းကုန်နေပြီ");if(S.m<c+80)return alert("ငွေမလောက်ဘူး");if(!visa(i,"t",80))return;sfx("levelup");lg(`🧳 ${d[0]}ကို အပျော်ခရီး ထွက်လိုက်တယ် (${ap({m:-c,s:8,h:2})})`);S.trips++;view();glowGold($("st"))}
+function go(i,t){let d=DS[i];if(!ppv())return alert("ပတ်စပို့ သက်တမ်းကုန်နေပြီ - အရင် သက်တမ်းတိုးပါ");if(S.job)return alert("လက်ရှိအလုပ်ကနေ အရင်ထွက်ပါ");if(S.uni||S.ae)return alert("ကျောင်း/သင်တန်းကို အရင်ပြီးအောင် တက်ပါ");
+if(t=="s"){if(!S.mu)return alert("အခြေခံပညာ အောင်မှ လျှောက်လို့ရမယ်");let p=20+S.w*.4+certs()*6+S.mk/6*.3;if(R(100)>=p){sfx("bad");lg(`❌ ${d[0]} ပညာတော်သင် မရခဲ့ဘူး။`,"r");shakeScreen();return view()}if(!visa(i,"s",100))return;S.ab={d:d[0],n:0,mu:d[2],sc:1};sfx("levelup");lg(`🎓 ${d[0]} ပညာတော်သင်နဲ့ ဗီဇာ ရပြီ! ပညာရေးမီနူးမှာ ကိုယ်တက်ချင်တဲ့ ဘာသာရပ် ရွေးပါ။`,"r");glowGold($("st"));return view()}
+if(S.m<d[1]+120)return alert("ငွေမလောက်ဘူး");if(!visa(i,"w",120))return;S.m-=d[1];S.ab={d:d[0],n:0,mu:d[2]};S.job={cid:-1,lvl:0,y:0,p:0,abroad:1,gov:0,s:Math.round(1100*d[2]),n:d[0]+" - အခြေခံလုပ်သား"};S.co=[];sfx("levelup");lg(`✈️ ${d[0]}ကို အလုပ်ဗီဇာနဲ့ ထွက်လာပြီ။ အလုပ်မီနူးမှာ CV နဲ့ ကိုက်တဲ့ အလုပ် ထပ်လျှောက်လို့ရတယ်။`,"r");glowGold($("st"));view()}
+function abPanel(){let b=S.ab,fm=S.mar||S.kids.length;return `<div class="c"><b>🌏 ${b.d}မှာ နေနေတယ်</b><br>နေတာ ${BN(b.n)} နှစ်ရှိပြီ · မိသားစု ${b.fam?"အတူနေတယ်":"မြန်မာပြည်မှာ ကျန်ခဲ့တယ်"}<br><small>ပညာရေးနဲ့ အလုပ်မီနူးမှာ နိုင်ငံခြားကနေ ဆက်တက်/ဆက်လုပ်လို့ရတယ်။ ဝေးနေရင် မိသားစုနဲ့ ချစ်ခင်မှု နှစ်စဉ် နည်းနည်းလျော့တယ်။</small></div><button onclick="rmt(0)">📞 မိသားစုကို ဗီဒီယိုခေါ်မယ်</button><button onclick="rmt(1)">💸 မိသားစုဆီ ငွေလွှဲမယ် (၃သိန်း)</button>`+(fm&&!b.fam?`<button onclick="fv()">👪 မိသားစုကို ခေါ်မယ် (ဗီဇာ + ၅သိန်း)</button>`:"")+`<button onclick="ret()">🏠 မြန်မာပြည် ပြန်လာမယ်</button>`+(b.n>=5?`<button onclick="cit()">🛂 ${b.d} နိုင်ငံသားခံယူမယ် (ဂိမ်းပြီးမယ်)</button>`:`<small>နိုင်ငံသားခံယူခွင့်က ၅ နှစ်နေပြီးမှ ရမယ်</small>`)}
+function rmt(t){use(()=>{let v=t?8:6;S.kids.forEach(k=>k.rel=cl(k.rel+v));S.sr=cl(S.sr+v);(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel+v)));return t?{m:-300,s:1}:{s:2}},t?"မိသားစုဆီ ငွေလွှဲ":"ဗီဒီယိုခေါ်")}
+function fv(){if(S.m<500)return alert("ငွေမလောက်ဘူး");S.m-=500;let c=60+(S.ab.t=="w"?10:0)+(S.deg?10:0);if(R(100)<c){S.ab.fam=1;sfx("levelup");lg("👪 မိသားစုဗီဇာ ရလို့ အတူနေရပြီ။ ကလေးတွေနဲ့ ချစ်ခင်မှု မလျော့တော့ဘူး။","r");glowGold($("st"))}else{sfx("bad");lg("❌ မိသားစုဗီဇာ ကျသွားတယ်။","r");shakeScreen()}view()}
+function ret(){S.ab=null;S.rt=1;if(S.job&&S.job.abroad)S.job=null;if(S.pt&&S.pt.nat!="မြန်မာ")lg("⚠️ နိုင်ငံခြားသား အိမ်ထောင်ဖက် ဖြစ်နေတော့ မြန်မာပြည်မှာ နေထိုင်ခွင့်/ဥပဒေပိုင်း ကြုံရနိုင်တယ်။","r");sfx("good");lg(`🏠 မြန်မာပြည် ပြန်ရောက်ပြီ (${ap({s:5})})။ နိုင်ငံခြားအတွေ့အကြုံ ရှိထားတော့ အလုပ်လျှောက်ရတာ ပိုအားသာတယ်။`,"r");glowGold($("st"));view()}
+function cit(){S.end=1;S.kids=[];sfx("levelup");lg("🌏 နိုင်ငံခြားမှာ နိုင်ငံသား ခံယူလိုက်ပြီ။ ကိုယ့်ဇာတ်လမ်းက ဒီမှာပဲ ပြီးသွားပြီ။ မြန်မာပြည်ရဲ့ အနာဂတ်ကို ဆက်ကြည့်ချင်ရင် ပြန်လာမှ ရမယ်။","r");view()}
+const HB={smoke:["ဆေးလိပ်သောက်ဖို့",{h:-2,m:-120},"ဆေးလိပ်"],alc:["အရက်သောက်ဖို့",{h:-2,s:-1,m:-200},"အရက်"],gam:["ကံစမ်းမဲ/လောင်းကစားလုပ်ဖို့",{m:-400,s:-1},"လောင်းကစား"],drug:["မူးယစ်ဆေးသုံးဖို့",{h:-5,m:-500,s:-3},"မူးယစ်ဆေး"]};
 function habEv(){let ks=Object.keys(HB).filter(k=>!S.hb[k]);if(!ks.length)return null;let k=ks[R(ks.length)],h=HB[k];
-return {t:`သူငယ်ချင်း/အသိုင်းအဝိုင်းက ${h[0]} တိုက်တွန်းသည်။`,o:[["ရှောင်ကြဉ်မည်",{s:2},"ငြင်းဆန်ရခက်သော်လည်း ကိုယ့်ကျန်းမာရေးကို ကာကွယ်ပေးသည်။"],["လိုက်လုပ်ကြည့်မည်",()=>{S.hb[k]=1;if(k=="drug")S.k++;return{s:1}},"အကျင့်ဖြစ်သွားပါက နှစ်စဉ် ငွေကုန်ပြီး ကျန်းမာရေး ထိခိုက်သည်။"]]}}
-const DZ=[["သွေးလွန်တုပ်ကွေး","a",()=>1,300,3],["ငှက်ဖျား","a",()=>S.rg>0,200,3],["တီဘီ (ဆေး ၆လ ပုံမှန်သောက်ရမည်)","a",()=>S.a>=8,500,6],
+return {t:`သူငယ်ချင်း/အသိုင်းအဝိုင်းက ${h[0]} တိုက်တွန်းနေတယ်။`,o:[["ငြင်းပြီး ရှောင်မယ်",{s:2},"ငြင်းရခက်ပေမဲ့ ကိုယ့်ကျန်းမာရေးကို ကာကွယ်ရာ ရောက်တယ်။"],["စမ်းကြည့်မယ်",()=>{S.hb[k]=1;if(k=="drug")S.k++;return{s:1}},"အကျင့်ပါသွားရင် နှစ်စဉ် ငွေလည်းကုန်၊ ကျန်းမာရေးလည်း ထိခိုက်မယ်။"]]}}
+const DZ=[["သွေးလွန်တုပ်ကွေး","a",()=>1,300,3],["ငှက်ဖျား","a",()=>S.rg>0,200,3],["တီဘီ (ဆေး ၆ လ ပုံမှန်သောက်ရမယ်)","a",()=>S.a>=8,500,6],
 ["သွေးတိုးရောဂါ","c",()=>S.a>=35&&R(100)<30+(S.dt<-2?25:0)-(S.dt>3?15:0)+(S.hb.smoke?10:0)],["ဆီးချိုရောဂါ","c",()=>S.a>=35&&R(100)<25+(S.dt<-2?30:0)-(S.dt>3?15:0)],["အဆုတ်ရောဂါ (ဆေးလိပ်ကြောင့်)","c",()=>S.hb.smoke&&S.a>=35],["အသည်းရောဂါ (အရက်ကြောင့်)","c",()=>S.hb.alc&&S.a>=30],["နှလုံးရောဂါ","c",()=>S.a>=50&&R(100)<40]];
 function dis(){S.cz=S.cz||{};let L=DZ.filter(d=>(d[1]=="a"||S.cz[d[0]]===undefined)&&d[2]());if(!L.length)return null;let d=L[R(L.length)],n=d[0];
-if(d[1]=="a")return {t:`🤒 ${n} ဖြစ်သည်။ (ရက်တိုရောဂါ - စောစီးကုသလျှင် စရိတ်နည်း၍ ပြန်ကောင်းနိုင်သည်)`,o:[["ချက်ချင်း ဆေးကုမည်",{h:-2,m:-d[3]},"စောစီးကုသခြင်းက စရိတ်လည်းနည်း၊ ပြန်ကောင်းနိုင်သည်။"],["အိမ်တွင် စောင့်ကြည့်မည်",()=>R(100)<d[4]*5?{h:-25,m:-d[3]*5}:{h:-6},"နောက်ကျကုသခြင်းက ပိုဆိုးပြီး စရိတ်ကြီးနိုင်သည်။"]]};
-return {t:`🩺 ${n} ရှိကြောင်း တွေ့ရှိသည်။ (ရေရှည်ရောဂါ - ဆေးသောက်လျှင် ထိန်းနိုင်သော်လည်း အပြီးအပိုင် မပျောက်နိုင်ပါ)`,o:[["ဆေးအမြဲသောက်၍ ထိန်းမည်",()=>{S.cz[n]=1;return{m:-200,h:-1}},"နှစ်စဉ် ဆေးဖိုးကုန်သော်လည်း အသက်ရှည်စေသည်။"],["မကုဘဲ နေမည်",()=>{S.cz[n]=0;return{}},"မကုလျှင် နှစ်စဉ် ကျန်းမာရေး ဆက်လက်ကျဆင်းသည်။"]]}}
-function upkeep(){soc();eduYear();if(S.a==16){mv(Math.round(S.fw*.05),"မိသားစုမှ ရရှိငွေ");lg("💰 အသက် ၁၆ ပြည့်ပြီ - ကိုယ်ပိုင်ငွေ စတင်ရှိလာသည်။","r")}
+if(d[1]=="a")return {t:`🤒 ${n} ဝင်နေတယ်။ (ရက်တိုရောဂါ - စောစောကုရင် စရိတ်သက်သာပြီး အမြန်သက်သာနိုင်တယ်)`,o:[["ချက်ချင်း ဆေးကုမယ်",{h:-2,m:-d[3]},"စောစောကုတာက စရိတ်လည်းနည်း၊ အမြန်လည်း ပြန်ကောင်းတယ်။"],["အိမ်မှာပဲ စောင့်ကြည့်မယ်",()=>R(100)<d[4]*5?{h:-25,m:-d[3]*5}:{h:-6},"နောက်ကျမှ ကုရင် ပိုဆိုးပြီး စရိတ်ပိုကြီးတတ်တယ်။"]]};
+return {t:`🩺 ${n} ရှိနေတာ စစ်တွေ့ရတယ်။ (ရေရှည်ရောဂါ - ဆေးသောက်ထိန်းလို့ရပေမဲ့ လုံးဝပျောက်ဖို့ ခက်တယ်)`,o:[["ဆေးပုံမှန်သောက်ပြီး ထိန်းမယ်",()=>{S.cz[n]=1;return{m:-200,h:-1}},"နှစ်စဉ် ဆေးဖိုးကုန်ပေမဲ့ ဘဝကို ရှည်ကြာစေတယ်။"],["မကုဘဲ ဒီအတိုင်းနေမယ်",()=>{S.cz[n]=0;return{}},"မကုဘဲ ထားရင် နှစ်စဉ် ကျန်းမာရေး ဆက်ကျလာမယ်။"]]}}
+function upkeep(){soc();eduYear();if(S.a==16){mv(Math.round(S.fw*.05),"မိသားစုပေးငွေ");lg("💰 အသက် ၁၆ ပြည့်ပြီ - ကိုယ့်ဘာသာ ငွေစကိုင်ရပြီ။","r")}
 if(S.fw<0)S.fw=0;if(S.gold)S.gold=Math.round(S.gold*1.03);if(S.car)mv(-150,"ကားထိန်းသိမ်းစရိတ်");
-for(let k in S.hb)if(S.hb[k])lg(`🚬 ${HB[k][2]} ကြောင့် ကုန်ကျစရိတ်နှင့် ကျန်းမာရေး ထိခိုက်သည် (${ap(HB[k][1])})`,"r");
-for(let n in S.cz){if(S.cz[n]){ap({m:-100});lg(`🩺 ${n} - ဆေးသောက်ထိန်းထားသည်။`)}else{lg(`🩺 ${n} - မကုသသဖြင့် ဆိုးလာသည် (${ap({h:-3})})`,"r");if(R(100)<4){S.h=cl(S.h-25);lg(`⚠️ ${n} ပြင်းထန်လာသည်။`,"r")}}}
-if(S.pa&&!S.pp&&S.y>=S.pa+S.pd){S.pp=1;S.pe=S.y+5;lg("🛂 ပတ်စပို့ ရရှိသည်။","r")}
-if(S.ab){let b=S.ab;b.n++;ap({s:-1,w:1});if(S.pp&&!ppv())ap({s:-2});if(b.fam)mv(-Math.round(300*EM()),"မိသားစုပြည်ပနေထိုင်စရိတ်");S.kids.forEach(k=>k.rel=cl(k.rel-(b.fam?0:4)));S.sr=cl(S.sr-(b.fam?0:4));(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel-2)));lg(`🌏 ${b.d}တွင် နေထိုင်နေသည် (${b.n} နှစ်)`)}taxes()}
-E.push({a:[18,80],wt:2,c:()=>S.ab,t:"ပြည်ပတွင် မိသားစုကို လွမ်းဆွတ်သည်။",o:[["မိသားစုထံ ငွေပို့၍ ဖုန်းဆက်မည်",()=>{(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel+8)));return{m:-500,s:2}},"အဝေးမှနေ၍လည်း ချစ်ခင်မှုကို ထိန်းသိမ်းနိုင်သည်။"],["သည်းခံ၍ အလုပ်ဆက်လုပ်မည်",{s:-3}]]});
-const NEWS=[[1918,1947,"ကိုလိုနီအုပ်ချုပ်ရေးအောက်တွင် ဆန်ဈေးနှင့် အခွန်ကြောင့် စီးပွားရေး ခက်ခဲသည်။",{m:-80,s:-1}],[1918,1947,"ကျေးရွာအလိုက် ပညာရေးအခွင့်အလမ်း အကန့်အသတ်ရှိသည်။",{w:-1}],[1948,1961,"လွတ်လပ်ရေးရပြီးနောက် တိုင်းပြည်ပြန်လည်တည်ဆောက်ရေး မျှော်လင့်ချက်ရှိသည်။",{s:2}],[1948,1961,"ပြည်တွင်းပဋိပက္ခကြောင့် ခရီးသွားလာရေး ခက်ခဲသည်။",{s:-1}],[1962,1987,"ကုန်ပစ္စည်းရှားပါး၍ နေ့စဉ်ဘဝ ခက်ခဲသည်။",{m:-80,s:-2}],[1988,2010,"လွတ်လပ်ခွင့်များ ကန့်သတ်ခံရ၍ လူအများ စိုးရိမ်ကြသည်။",{s:-2}],[2011,2020,"အင်တာနက်နှင့် ဖုန်းသုံးခွင့် လွယ်လာ၍ သင်ယူခွင့်တိုးသည်။",{w:2},6],[2011,2020,"စီးပွားရေးဖွင့်လှစ်၍ အလုပ်အခွင့်အလမ်း တိုးလာသည်။",{m:100},16],[2021,2029,"ကုန်ဈေးနှုန်းမြင့်တက်၍ စီးပွားရေး ကျဆင်းသည်။",{m:-150,s:-2}],[2021,2029,"လျှပ်စစ်မီးပြတ်တောက်မှုများကြောင့် လုပ်ကိုင်ရခက်သည်။",{s:-2}],[2030,2200,"ပြုပြင်ပြောင်းလဲရေးကြောင့် ပညာရေးအခွင့်အလမ်း တိုးသည်။",{w:2,s:2},6],[2030,2400,"စီးပွားရေးဖွံ့ဖြိုး၍ အလုပ်အကိုင် တိုးသည်။",{m:150},16],[2401,2499,"စစ်ဘေးကြောင့် စိုးရိမ်ရသည်။",{s:-3}],[2500,3000,"တည်ငြိမ်သောနိုင်ငံ၌ ဘဝ ပျော်ရွှင်သည်။",{s:2}]];
-const PERS=[["မိဘနှင့် ကစားရင်း ပျော်ရွှင်သည်။",{s:2},0,5],["ကျန်းမာစွာ ကြီးထွားသည်။",{h:1},0,12],["ရပ်ကွက်ထဲက ကလေးများနှင့် ကစားသည်။",{s:2},4,12],["စာကြိုးစား၍ ဆရာချီးကျူးခံရသည်။",{w:2,s:1},6,25],["သူငယ်ချင်းကောင်းတစ်ဦးနှင့် ရင်းနှီးလာသည်။",{s:3},8,60],["ဘာသာရေးအဆောက်အအုံတွင် ဆုံးမစကား နာယူ၍ စိတ်ဓာတ်ကြည်လင်သည်။",{s:2},8],["ညဉ့်နက်အထိ စိုးရိမ်၍ အိပ်ရေးပျက်သည်။",{s:-2,h:-1},12],["ဈေးထဲတွင် ပစ္စည်းပျောက်၍ စိတ်မကောင်းဖြစ်သည်။",{m:-60,s:-1},12],["စိတ်ဝင်စားသော အရာကို တွေ့ရှိ၍ စိတ်အားတက်သည်။",{w:2,s:2},12,50],["အလုပ်ပင်ပန်း၍ ညစ်ကျသည်။",{s:-2,h:-1},18,64],["လူငယ်များကို အကြံပေးရင်း ကျေနပ်မှုရသည်။",{s:3},55],["ဒူးနာခြင်းကြောင့် လှုပ်ရှားရခက်သည်။",{h:-2},60],["မြေးများနှင့် အချိန်ကုန်ဆုံး၍ ပျော်ရွှင်သည်။",{s:3},60],["စပါးရိတ်/လယ်ယာလုပ်ငန်းချိန် မိသားစုကို ကူလုပ်ရသည်။",{h:-1,s:1},10,70,1],["မြို့ပေါ်ယာဉ်ကြပ်မှုနှင့် စျေးကြီးမှုကြောင့် ပင်ပန်းသည်။",{s:-1},16,70,0],["ဆက်သွယ်ရေးပြတ်တောက်၍ မိသားစုအတွက် စိုးရိမ်ရသည်။",{s:-3},14,80,2,2021,2029],["ဖုန်းဖြင့် အွန်လိုင်းသင်ခန်းစာ လေ့လာရင်း အသိပညာတိုးသည်။",{w:2},10,60,undefined,2011]];
-function hv(e){if(S.a>=14&&S.a<=70)return e;return mk(`📜 ${S.y} - ${e.t}`,[["ဆက်ရန်",{s:-2},S.a<14?"ကလေးအရွယ်ဖြစ်၍ မိသားစုနှင့်အတူ ဘေးကင်းရာတွင် နေရသည်။":"အသက်ကြီးပြီဖြစ်၍ ကိုယ်တိုင်ပါဝင်၍ မရပါ။ မိသားစုကို စောင့်ရှောက်ပေးသည်။"]])}
-const FAMN=[["မိသားစုတစ်ရပ်လုံး ထမင်းအတူစား၍ ပျော်ရွှင်သည်။",{s:3}],["အိမ်တွင်း စကားများမှုကြောင့် စိတ်ညစ်သည်။",{s:-3}],["ဆွေမျိုးထံ လည်ပတ်ရင်း အားရှိသည်။",{s:2,m:-50}],["မိသားစုဝင်တစ်ဦး ကျန်းမာရေးမကောင်း၍ စိုးရိမ်ရသည်။",{s:-2}],["ပွဲတော်ကာလတွင် မိသားစုနှင့် အလှူပေးသည်။",{s:3,f:1,m:-80}],["မိသားစုအတွက် ငွေကြေးအခက်အခဲ ကြုံရသည်။",{m:-100,s:-2}]];
-function yearly(){let N1=NEWS.filter(n=>S.y>=n[0]&&S.y<=n[1]&&S.a>=(n[4]||0));if(N1.length){let n=N1[R(N1.length)],s=ap(n[3]);lg(`📰 ပြည်တွင်းသတင်း - ${S.a<12?"မိသားစုတွင် ပြောကြသည် - ":""}${n[2]}${s?` (${s})`:""}`)}
-if(R(10)<7){let L=PERS.filter(p=>S.a>=p[2]&&S.a<=(p[3]||120)&&(p[4]===undefined||p[4]==S.rg)&&S.y>=(p[5]||0)&&S.y<=(p[6]||9999)),p=L[R(L.length)],s=ap(p[1]);lg(`🧑 ကိုယ်ရေးကိုယ်တာ - ${p[0]}${s?` (${s})`:""}`)}
+for(let k in S.hb)if(S.hb[k])lg(`🚬 ${HB[k][2]} ကြောင့် စရိတ်ကုန်ပြီး ကျန်းမာရေး ထိခိုက်နေတယ် (${ap(HB[k][1])})`,"r");
+for(let n in S.cz){if(S.cz[n]){ap({m:-100});lg(`🩺 ${n} - ဆေးသောက်ပြီး ထိန်းထားတယ်။`)}else{lg(`🩺 ${n} - မကုဘဲ ထားလို့ ပိုဆိုးလာတယ် (${ap({h:-3})})`,"r");if(R(100)<4){S.h=cl(S.h-25);lg(`⚠️ ${n} ပြင်းထန်လာပြီ။`,"r");shakeScreen()}}}
+if(S.pa&&!S.pp&&S.y>=S.pa+S.pd){S.pp=1;S.pe=S.y+5;lg("🛂 ပတ်စပို့ ထွက်လာပြီ။","r");glowGold($("st"))}
+if(S.ab){let b=S.ab;b.n++;ap({s:-1,w:1});if(S.pp&&!ppv())ap({s:-2});if(b.fam)mv(-Math.round(300*EM()),"မိသားစု နိုင်ငံခြားနေထိုင်စရိတ်");S.kids.forEach(k=>k.rel=cl(k.rel-(b.fam?0:4)));S.sr=cl(S.sr-(b.fam?0:4));(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel-2)));lg(`🌏 ${b.d}မှာ နေနေတာ ${BN(b.n)} နှစ်ရှိပြီ`)}taxes()}
+E.push({a:[18,80],wt:2,c:()=>S.ab,t:"နိုင်ငံခြားမှာ မိသားစုကို အရမ်းလွမ်းနေမိတယ်။",o:[["မိသားစုဆီ ငွေလွှဲပြီး ဖုန်းဆက်မယ်",()=>{(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel+8)));return{m:-500,s:2}},"အဝေးမှာ နေပေမဲ့ ဂရုစိုက်ပြရင် ချစ်ခင်မှု မပြတ်ဘူး။"],["သည်းခံပြီး အလုပ်ဆက်လုပ်မယ်",{s:-3}]]});
+const NEWS=[[1918,1947,"ကိုလိုနီခေတ်မှာ ဆန်ဈေးနဲ့ အခွန်ကြောင့် စီးပွားရေး ကျပ်တည်းနေတယ်။",{m:-80,s:-1}],[1918,1947,"ရွာတွေမှာ ကျောင်းပညာရေး အခွင့်အလမ်း သိပ်မများသေးဘူး။",{w:-1}],[1948,1961,"လွတ်လပ်ရေးရပြီးစ တိုင်းပြည်ပြန်ထူထောင်ဖို့ မျှော်လင့်ချက်တွေ ရှိနေတယ်။",{s:2}],[1948,1961,"ပြည်တွင်းပဋိပက္ခကြောင့် ခရီးသွားလာရတာ ခက်ခဲနေတယ်။",{s:-1}],[1962,1987,"ကုန်ပစ္စည်းတွေ ရှားပါးလာလို့ နေ့စဉ်ဘဝ ခက်ခဲနေတယ်။",{m:-80,s:-2}],[1988,2010,"လွတ်လပ်ခွင့်တွေ အကန့်အသတ် ဖြစ်နေလို့ လူအများ စိုးရိမ်နေကြတယ်။",{s:-2}],[2011,2020,"အင်တာနက်နဲ့ ဖုန်းသုံးရတာ ပိုလွယ်လာလို့ စာလေ့လာရတာ ပိုအဆင်ပြေလာတယ်။",{w:2},6],[2011,2020,"စီးပွားရေး ပွင့်လင်းလာလို့ အလုပ်အကိုင် အခွင့်အလမ်းတွေ ပိုများလာတယ်။",{m:100},16],[2021,2029,"ကုန်ဈေးနှုန်းတွေ တက်လာပြီး စီးပွားရေး ကျပ်တည်းနေတယ်။",{m:-150,s:-2}],[2021,2029,"မီးခဏခဏ ပျက်နေလို့ အလုပ်လုပ်ရတာ ခက်ခဲနေတယ်။",{s:-2}],[2030,2200,"ပြုပြင်ပြောင်းလဲမှုကြောင့် ပညာသင်ခွင့်တွေ ပိုများလာတယ်။",{w:2,s:2},6],[2030,2400,"စီးပွားရေး တိုးတက်လာပြီး အလုပ်အကိုင်တွေ ပိုပေါလာတယ်။",{m:150},16],[2401,2499,"စစ်ဘေးကြောင့် စိုးရိမ်ပူပန်နေရတယ်။",{s:-3}],[2500,3000,"ငြိမ်းချမ်းတည်ငြိမ်တဲ့ နိုင်ငံမှာ ဘဝက အေးချမ်းပျော်ရွှင်နေတယ်။",{s:2}]];
+const PERS=[["မိဘနဲ့ ဆော့ကစားရင်း ပျော်နေတယ်။",{s:2},0,5],["ကျန်းကျန်းမာမာ ကြီးပြင်းလာတယ်။",{h:1},0,12],["ရပ်ကွက်ထဲက ကလေးတွေနဲ့ အတူကစားတယ်။",{s:2},4,12],["စာကြိုးစားလို့ ဆရာချီးကျူးတာ ခံရတယ်။",{w:2,s:1},6,25],["သူငယ်ချင်းကောင်းတစ်ယောက်နဲ့ ရင်းနှီးလာတယ်။",{s:3},8,60],["ဘုန်းကြီးကျောင်း/ဘုရားမှာ ဆုံးမစကား နာယူရလို့ စိတ်ကြည်လင်လာတယ်။",{s:2},8],["ညဉ့်နက်တဲ့အထိ စိုးရိမ်နေမိလို့ အိပ်ရေးပျက်တယ်။",{s:-2,h:-1},12],["ဈေးထဲမှာ ပစ္စည်းပျောက်သွားလို့ စိတ်မကောင်းဖြစ်ရတယ်။",{m:-60,s:-1},12],["ကိုယ်စိတ်ဝင်စားတဲ့အရာ တွေ့လို့ စိတ်အားတက်လာတယ်။",{w:2,s:2},12,50],["အလုပ်ပင်ပန်းပြီး စိတ်ညစ်လာတယ်။",{s:-2,h:-1},18,64],["လူငယ်တွေကို အကြံပေးရင်း ကျေနပ်နေတယ်။",{s:3},55],["ဒူးနာလာလို့ သွားလာရတာ နည်းနည်းခက်လာတယ်။",{h:-2},60],["မြေးတွေနဲ့ အချိန်ကုန်ရင်း ပျော်ရွှင်နေတယ်။",{s:3},60],["စပါးရိတ်/လယ်ယာချိန် မိသားစုကို ဝိုင်းကူလုပ်ပေးရတယ်။",{h:-1,s:1},10,70,1],["မြို့ပေါ်မှာ ကားကျပ်ပြီး ဈေးကြီးလို့ ပင်ပန်းတယ်။",{s:-1},16,70,0],["ဖုန်းလိုင်း/အင်တာနက် ပြတ်တောက်နေလို့ မိသားစုအတွက် စိတ်ပူရတယ်။",{s:-3},14,80,2,2021,2029],["ဖုန်းထဲက အွန်လိုင်းသင်ခန်းစာ လေ့လာရင်း ဗဟုသုတ တိုးလာတယ်။",{w:2},10,60,undefined,2011]];
+function hv(e){if(S.a>=14&&S.a<=70)return e;return mk(`📜 ${S.y} - ${e.t}`,[["ဆက်သွားမယ်",{s:-2},S.a<14?"ကလေးအရွယ်ပဲ ရှိသေးတော့ မိသားစုနဲ့အတူ ဘေးကင်းရာမှာ နေရတယ်။":"အသက်ကြီးပြီမို့ ကိုယ်တိုင်ပါဝင်ဖို့ ခက်တယ်။ မိသားစုကိုပဲ စောင့်ရှောက်ပေးနေတယ်။"]])}
+const FAMN=[["မိသားစုတစ်စုလုံး ထမင်းအတူစားရင်း ပျော်ကြတယ်။",{s:3}],["အိမ်မှာ စကားများမိလို့ စိတ်ညစ်ရတယ်။",{s:-3}],["ဆွေမျိုးအိမ် လည်ရင်း စိတ်အားတက်လာတယ်။",{s:2,m:-50}],["မိသားစုထဲက တစ်ယောက် နေမကောင်းဖြစ်လို့ စိတ်ပူရတယ်။",{s:-2}],["ပွဲတော်ချိန် မိသားစုနဲ့ အတူလှူကြတယ်။",{s:3,f:1,m:-80}],["မိသားစုအတွက် ငွေရေးကြေးရေး ကျပ်တည်းနေတယ်။",{m:-100,s:-2}]];
+function yearly(){let N1=NEWS.filter(n=>S.y>=n[0]&&S.y<=n[1]&&S.a>=(n[4]||0));if(N1.length){let n=N1[R(N1.length)],s=ap(n[3]);lg(`📰 သတင်း - ${S.a<12?"မိသားစုပြောနေတာ ကြားရတယ် - ":""}${n[2]}${s?` (${s})`:""}`)}
+if(R(10)<7){let L=PERS.filter(p=>S.a>=p[2]&&S.a<=(p[3]||120)&&(p[4]===undefined||p[4]==S.rg)&&S.y>=(p[5]||0)&&S.y<=(p[6]||9999)),p=L[R(L.length)],s=ap(p[1]);lg(`🧑 ကိုယ်တွေ့ - ${p[0]}${s?` (${s})`:""}`)}
 if(R(10)<6&&((S.par||[]).some(p=>p.al)||S.kids.length||S.mar)){let f=FAMN[R(FAMN.length)],s=ap(f[1]);lg(`👪 မိသားစု - ${f[0]}${s?` (${s})`:""}`)}}
-function parents(){(S.par||[]).forEach(p=>{if(!p.al)return;p.rel=cl(p.rel-1);let a=S.y-p.by;if(a>62&&R(100)<(a-62)*3){p.al=0;lg(`🕯️ ${p.r} ${p.n} ကွယ်လွန်သည်။`,"r");S.s=cl(S.s-8);if(p.rel>=50){let v=[300,1500,6000][S.f];mv(v,"အမွေ");lg("အမွေ +"+K(v))}}})}
-E.push({a:[18,70],c:()=>(S.par||[]).some(p=>p.al&&S.y-p.by>=65),wt:2,t:"မိဘ အသက်ကြီးပြီး ကျန်းမာရေး ထိခိုက်သည်။",o:[["ဆေးကုစရိတ် ထောက်ပံ့မည်",()=>{S.par.filter(p=>p.al).forEach(p=>p.rel=cl(p.rel+10));return{m:-500}},"မိဘကို စောင့်ရှောက်ခြင်းက ချစ်ခင်မှုကို တည်ဆောက်သည်။"],["မဆက်သွယ်ဘဲ နေမည်",()=>{S.par.filter(p=>p.al).forEach(p=>p.rel=cl(p.rel-15));return{s:-4}},"အဆက်အသွယ်ဖြတ်ခြင်းက နောင်တရစေတတ်သည်။"]]});
-let AU=null,MG=null,SG=null,SO=1,MV=.5,MO=1,MT=null,BT=0;
-const SC=[293.66,329.63,369.99,440,493.88,587.33,659.25],MEL=[3,4,5,4,3,2,3,5,6,5,4,3,2,1,0,1,2,3,4,3,2,0,2,3,3,5,4,3,2,3,1,0],BS=[0,3,2,4];
-function vol(v){MV=v/100;if(MG)MG.gain.value=MV*.6}
-function au(){if(!AU){AU=new(window.AudioContext||window.webkitAudioContext)();MG=AU.createGain();MG.gain.value=MV*.6;MG.connect(AU.destination);SG=AU.createGain();SG.gain.value=.5;SG.connect(AU.destination)}AU.resume()}
-function mus(on){MO=on;clearInterval(MT);MT=null;if(!on)return;try{au();MT=setInterval(tk,380)}catch(e){}}
-function tone(f,t,d,v,ty){let o=AU.createOscillator(),g=AU.createGain();o.type=ty||"sine";o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(v,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(SG);o.start(t);o.stop(t+d+.05)}
-function sfx(k){if(!SO)return;try{au();let t=AU.currentTime,m={click:()=>tone(880,t,.06,.12,"triangle"),event:()=>{tone(523,t,.25,.2,"triangle");tone(784,t+.12,.35,.2,"triangle")},good:()=>{[523,659,784].forEach((f,i)=>tone(f,t+i*.09,.25,.18,"triangle"))},bad:()=>{tone(196,t,.35,.2,"sawtooth");tone(147,t+.1,.4,.16,"sawtooth")},age:()=>{tone(392,t,.5,.2);tone(587,t+.1,.7,.15)}};m[k]&&m[k]()}catch(e){}}
+function parents(){(S.par||[]).forEach(p=>{if(!p.al)return;p.rel=cl(p.rel-1);let a=S.y-p.by;if(a>62&&R(100)<(a-62)*3){p.al=0;lg(`🕯️ ${p.r} ${p.n} ဆုံးပါးသွားပြီ။`,"r");S.s=cl(S.s-8);if(p.rel>=50){let v=[300,1500,6000][S.f];mv(v,"အမွေ");lg("အမွေ +"+K(v))}}})}
+E.push({a:[18,70],c:()=>(S.par||[]).some(p=>p.al&&S.y-p.by>=65),wt:2,t:"မိဘ အသက်ကြီးလာပြီး ကျန်းမာရေး ထိခိုက်လာတယ်။",o:[["ဆေးဖိုး ထောက်ပံ့မယ်",()=>{S.par.filter(p=>p.al).forEach(p=>p.rel=cl(p.rel+10));return{m:-500}},"မိဘကို ဂရုစိုက်ပေးတာက ချစ်ခင်မှုကို ခိုင်မာစေတယ်။"],["အဆက်အသွယ်မလုပ်ဘဲ နေမယ်",()=>{S.par.filter(p=>p.al).forEach(p=>p.rel=cl(p.rel-15));return{s:-4}},"ဝေးကွာသွားရင် နောင်တရတတ်တယ်။"]]});
+
+/* ==========================================================================
+   အသံစနစ်: bgm.mp3 နောက်ခံဂီတ + ပိုအသက်ဝင်တဲ့ Sound Effects
+   ========================================================================== */
+const BGM_SRC = "bgm.mp3";
+let AU=null, MG=null, SG=null, SO=1, MV=.5, MO=1, MT=null, BT=0, BGM_AUDIO=null, BGM_OK=false;
+
+function ensureBgmAudio(){
+  if(BGM_AUDIO)return BGM_AUDIO;
+  let a=new Audio(BGM_SRC);
+  a.loop=true;
+  a.preload="auto";
+  a.volume=Math.min(1, MV*.65);
+  a.addEventListener("canplaythrough", ()=>{ BGM_OK=true; }, {once:true});
+  a.addEventListener("loadeddata", ()=>{ BGM_OK=true; }, {once:true});
+  a.addEventListener("error", ()=>{ BGM_OK=false; });
+  BGM_AUDIO=a;
+  return a;
+}
+
+function startBgmFile(){
+  if(!MO||!BGM_SRC)return false;
+  let a=ensureBgmAudio();
+  a.volume=Math.min(1, MV*.65);
+  let p=a.play();
+  if(p&&p.catch){
+    p.catch(()=>{
+      if(!BGM_OK&&!MT){
+        try{au();MT=setInterval(tk,380)}catch(e){}
+      }
+    });
+  }
+  return true;
+}
+
+function stopBgmFile(){
+  if(BGM_AUDIO){
+    BGM_AUDIO.pause();
+    BGM_AUDIO.currentTime=0;
+  }
+}
+
+function vol(v){
+  MV=v/100;
+  if(MG)MG.gain.value=MV*.6;
+  if(BGM_AUDIO)BGM_AUDIO.volume=Math.min(1, MV*.65);
+}
+
+function au(){
+  if(!AU){
+    AU=new(window.AudioContext||window.webkitAudioContext)();
+    MG=AU.createGain();MG.gain.value=MV*.6;MG.connect(AU.destination);
+    SG=AU.createGain();SG.gain.value=.65;SG.connect(AU.destination);
+  }
+  if(AU.state=="suspended")AU.resume();
+}
+
+function unlockAudio(){
+  try{au()}catch(e){}
+  if(MO&&BGM_AUDIO&&BGM_AUDIO.paused){
+    let p=BGM_AUDIO.play();
+    if(p&&p.catch)p.catch(()=>{});
+  }
+}
+
+function mus(on){
+  MO=on?1:0;
+  clearInterval(MT);MT=null;
+  if(!MO){
+    stopBgmFile();
+    return;
+  }
+  startBgmFile();
+}
+
+function tone(f,t,d,v,ty,slideTo){
+  let o=AU.createOscillator(),g=AU.createGain();
+  o.type=ty||"sine";
+  o.frequency.setValueAtTime(f,t);
+  if(slideTo)o.frequency.exponentialRampToValueAtTime(slideTo,t+d);
+  g.gain.setValueAtTime(.0001,t);
+  g.gain.linearRampToValueAtTime(v,t+.012);
+  g.gain.exponentialRampToValueAtTime(.0001,t+d);
+  o.connect(g);g.connect(SG);
+  o.start(t);o.stop(t+d+.05);
+}
+
+function sfx(k){
+  if(!SO)return;
+  try{
+    au();
+    let t=AU.currentTime;
+    let m={
+      click:()=>{
+        let base=760+(R(9)-4)*28;
+        tone(base,t,.055,.11,"sine",base*1.22);
+        tone(base*1.5,t+.015,.035,.04,"triangle");
+      },
+      event:()=>{
+        [523.25,659.25,783.99].forEach((f,i)=>tone(f,t+i*.07,.24,.16,"triangle"));
+        tone(1046.5,t+.21,.32,.09,"sine");
+      },
+      good:()=>{
+        [523.25,659.25,783.99,1046.5].forEach((f,i)=>tone(f,t+i*.065,.28,.16,"triangle"));
+      },
+      levelup:()=>{
+        [392,523.25,659.25,783.99,1046.5].forEach((f,i)=>tone(f,t+i*.06,.34,.18,"triangle"));
+        tone(1567.98,t+.28,.45,.08,"sine");
+      },
+      cash:()=>{
+        tone(987.77,t,.09,.15,"sine");
+        tone(1318.51,t+.075,.22,.16,"triangle");
+      },
+      bad:()=>{
+        tone(220,t,.24,.18,"sawtooth",135);
+        tone(155.56,t+.08,.32,.15,"triangle",98);
+      },
+      age:()=>{
+        tone(392,t,.42,.15,"sine",440);
+        tone(587.33,t+.09,.55,.12,"triangle");
+      }
+    };
+    m[k]&&m[k]();
+  }catch(e){}
+}
+
 function env(o,t,p,d){let g=AU.createGain();g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(p,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(MG);o.start(t);o.stop(t+d+.1)}
 function pat(f,t,v){let o=AU.createOscillator(),o2=AU.createOscillator();o.type="triangle";o.frequency.value=f;o2.frequency.value=f*3;env(o,t,.2*v,.9);env(o2,t,.05*v,.25)}
 function gong(f,t){[[1,1],[2.76,.3],[5.4,.1]].forEach(x=>{let o=AU.createOscillator();o.frequency.value=f*x[0];env(o,t,.14*x[1],2.2)})}
@@ -367,52 +497,62 @@ function tk(){if(!AU||AU.state!="running")return;let t=AU.currentTime+.05,i=BT%M
 if(R(10)<9){if(R(4)==0)pat(SC[Math.min(6,MEL[i]+1)],t-.07,.5);pat(n,t,1)}
 if(i%4==0)gong(SC[BS[(i/4|0)%4]]/2,t);if(i%8==0)drum(t,1);else if(i%8==4)drum(t,.5);if(i%4==2)clk(t);
 if(i%16==0)hne(n,t,2.4)}
+
 function matric(){let g=S.sys==10?"ဆယ်တန်း":"ဆယ့်နှစ်တန်း";S.mk=Math.max(60,Math.min(580,Math.round(100+S.w*1.9+Math.min(S.ef,25)*12+R(41)-20-(S.w<50?60:0))));
-if(S.mk>=240){S.mu=1;S.mf=0;lg(`📝 ${g} စာမေးပွဲ ရမှတ် ${S.mk}/600 (အောင်မှတ် ၂၄၀) - အောင်မြင်သည် 🎉`,"r")}else{S.mf=1;lg(`📝 ${g} စာမေးပွဲ ရမှတ် ${S.mk}/600 (အောင်မှတ် ၂၄၀) - ကျသွားသည် ❌ ${S.ef<5?"စာကြိုးစားမှု နည်းလွန်းသည်။ ":""}"ပညာ/အလုပ်" tab တွင် ပြန်ဖြေရန် စာရင်းသွင်းနိုင်သည်။`,"r")}}
-E.push({a:[18,80],wt:2,c:()=>S.ab&&!S.ab.fam&&S.kids.length,t:"ပြည်ပရောက်စဉ် မြန်မာပြည်ရှိ ကလေးက သင့်ကို လွမ်း၍ ငိုနေသည်။",o:[["ဗီဒီယိုခေါ်၍ စိတ်ရှည်စွာ ပြောမည်",()=>{S.kids.forEach(k=>k.rel=cl(k.rel+8));return{s:-1}},"အဝေးမှနေ၍လည်း နားထောင်ပေးခြင်းက ချစ်ခင်မှုကို ထိန်းသိမ်းနိုင်သည်။"],["အလုပ်ကြောင့် မအားဟု ပြောမည်",()=>{S.kids.forEach(k=>k.rel=cl(k.rel-10));return{}},"ကလေးကို ဂရုမစိုက်သလို ခံစားရစေပြီး ဆက်ဆံရေးကို ပျက်စေသည်။"]]});
-E.push({a:[30,90],wt:2,c:()=>S.ab&&(S.par||[]).some(p=>p.al&&S.y-p.by>=60),t:"မြန်မာပြည်ရှိ မိဘ ကျန်းမာရေးမကောင်းဟု သတင်းရသည်။",o:[["အမြန်ပြန်လာမည်",()=>{S.ab=null;S.rt=1;S.par.forEach(p=>p.al&&(p.rel=cl(p.rel+12)));return{m:-300,s:2}},"မိသားစုနှင့် အနီးအနားရှိနေခြင်းက ချစ်ခင်မှုကို ခိုင်မာစေသည်။"],["ငွေပို့၍ ဆက်နေမည်",()=>{S.par.forEach(p=>p.al&&(p.rel=cl(p.rel+4)));return{m:-500,s:-3}}]]});
+if(S.mk>=240){S.mu=1;S.mf=0;sfx("levelup");lg(`📝 ${g} စာမေးပွဲ ရမှတ် ${S.mk}/600 (အောင်မှတ် ၂၄၀) - အောင်ပြီ 🎉`,"r");glowGold($("st"))}else{S.mf=1;sfx("bad");lg(`📝 ${g} စာမေးပွဲ ရမှတ် ${S.mk}/600 (အောင်မှတ် ၂၄၀) - ကျသွားပြီ ❌ ${S.ef<5?"စာကြိုးစားမှု နည်းလွန်းလို့ပါ။ ":""}"ပညာ/အလုပ်" tab မှာ ပြန်ဖြေဖို့ စာရင်းသွင်းလို့ရတယ်။`,"r");shakeScreen()}}
+E.push({a:[18,80],wt:2,c:()=>S.ab&&!S.ab.fam&&S.kids.length,t:"နိုင်ငံခြားရောက်နေတုန်း မြန်မာပြည်က ကလေးက လွမ်းလို့ ငိုနေတယ်။",o:[["ဗီဒီယိုခေါ်ပြီး စိတ်ရှည်ရှည် ချော့ပြောမယ်",()=>{S.kids.forEach(k=>k.rel=cl(k.rel+8));return{s:-1}},"အဝေးကနေ နားထောင်ပေးတာလည်း ချစ်ခင်မှုကို ထိန်းထားနိုင်တယ်။"],["အလုပ်မအားဘူးလို့ ပြောမယ်",()=>{S.kids.forEach(k=>k.rel=cl(k.rel-10));return{}},"ကလေးကို ဂရုမစိုက်သလို ဖြစ်သွားပြီး ဆက်ဆံရေး ထိခိုက်တယ်။"]]});
+E.push({a:[30,90],wt:2,c:()=>S.ab&&(S.par||[]).some(p=>p.al&&S.y-p.by>=60),t:"မြန်မာပြည်က မိဘ နေမကောင်းဘူးလို့ ကြားရတယ်။",o:[["အမြန်ပြန်လာမယ်",()=>{S.ab=null;S.rt=1;S.par.forEach(p=>p.al&&(p.rel=cl(p.rel+12)));return{m:-300,s:2}},"မိသားစုနားမှာ ရှိနေပေးတာက ချစ်ခင်မှုကို ပိုခိုင်မာစေတယ်။"],["ငွေပို့ပြီး ဟိုမှာပဲ ဆက်နေမယ်",()=>{S.par.forEach(p=>p.al&&(p.rel=cl(p.rel+4)));return{m:-500,s:-3}}]]});
 function jobYear(){let j=S.job;
-if(j.b){let win=R(100)<40+S.w*.25+S.s*.2-(S.y>=2021&&S.y<2030?15:0),v=Math.round(j.cap*(win?.3+R(5)/10:-.3));mv(v,v>0?"လုပ်ငန်းအမြတ်":"လုပ်ငန်းအရှုံး");j.pf=(j.pf||0)+v;let nl=Math.min(3,Math.floor(Math.max(0,j.pf)/(j.cap*2)));if(nl>(j.lvl||0)){j.lvl=nl;j.n=j.n.split(" - ")[0]+" - "+BLD[nl];lg(`📈 ${BLD[nl]} ဖြစ်လာသည်။`,"r")}lg(`လုပ်ငန်း ${v>0?"အမြတ်":"ရှုံးနိမ့်"} ${K(v)}`);return}
+if(j.b){let win=R(100)<40+S.w*.25+S.s*.2-(S.y>=2021&&S.y<2030?15:0),v=Math.round(j.cap*(win?.3+R(5)/10:-.3));mv(v,v>0?"လုပ်ငန်းအမြတ်":"လုပ်ငန်းအရှုံး");j.pf=(j.pf||0)+v;let nl=Math.min(3,Math.floor(Math.max(0,j.pf)/(j.cap*2)));if(nl>(j.lvl||0)){j.lvl=nl;j.n=j.n.split(" - ")[0]+" - "+BLD[nl];sfx("levelup");lg(`📈 ${BLD[nl]} အဆင့် ရောက်လာပြီ။`,"r");glowGold($("st"))}else if(v>0)sfx("cash");lg(`လုပ်ငန်း ${v>0?"အမြတ်":"ရှုံး"} ${K(v)}`);return}
 mv(Math.round(j.s*EM()*(S.rt?1.2:1)),"လုပ်ခလစာ");S.ex++;if(j.cid>=0)S.exc[j.cid]=(S.exc[j.cid]||0)+1;j.y=(j.y||0)+1;
-if(j.cid>=0){let c=CAR[j.cid],mx=c[1].split("|").length-1,cr=S.co.length?S.co.reduce((a,x)=>a+x.rel,0)/S.co.length:0;if(S.w>=50&&j.lvl<mx&&j.y>=2&&S.ad>=((GATE[j.cid]||{})[j.lvl+1]||0)&&(j.p>=1||R(100)<30+S.w*.2+S.ad*4+(cr>=60?10:0))){j.lvl++;j.y=0;j.p=0;j.s=Math.round(pay(j.cid,j.lvl)*(j.abroad&&S.ab?S.ab.mu:1));j.n=(j.abroad&&S.ab?S.ab.d+" - ":"")+jn(j.cid,j.lvl);if(c[6])ap({f:8});lg(`📈 ရာထူးတိုးသည် → ${j.n}`,"r")}}
-else if(j.p>=2){j.s=Math.round(j.s*1.1);j.p=0;lg("လစာတိုးရသည်။")}}
+if(j.cid>=0){let c=CAR[j.cid],mx=c[1].split("|").length-1,cr=S.co.length?S.co.reduce((a,x)=>a+x.rel,0)/S.co.length:0;if(S.w>=50&&j.lvl<mx&&j.y>=2&&S.ad>=((GATE[j.cid]||{})[j.lvl+1]||0)&&(j.p>=1||R(100)<30+S.w*.2+S.ad*4+(cr>=60?10:0))){j.lvl++;j.y=0;j.p=0;j.s=Math.round(pay(j.cid,j.lvl)*(j.abroad&&S.ab?S.ab.mu:1));j.n=(j.abroad&&S.ab?S.ab.d+" - ":"")+jn(j.cid,j.lvl);if(c[6])ap({f:8});sfx("levelup");lg(`📈 ရာထူးတိုးပြီ → ${j.n}`,"r");glowGold($("st"))}}
+else if(j.p>=2){j.s=Math.round(j.s*1.1);j.p=0;sfx("cash");lg("လစာတိုးလာပြီ။")}}
 function taxes(){if(S.a<16)return;let i=S.yi||0,j=S.job,t=0;if(i>0)t=Math.round(i*(j&&j.b?.22:i>3000?.1:i>1500?.05:.02));if(t)mv(-t,"အခွန်");let p=(S.house?100:0)+(S.car?20:0);if(p)mv(-p,"ပိုင်ဆိုင်မှုအခွန်")}
-function depr(){if(S.s<20&&!S.dep){S.dep=1;lg("😞 စိတ်ဓာတ် အလွန်ကျ၍ စိတ်ကျရောဂါ ဖြစ်လာသည်။","r")}if(S.dep&&S.s>=50){S.dep=0;lg("🌤️ စိတ်ဓာတ် ပြန်ကောင်းလာပြီ။","r")}if(S.dep){let f=S.fr.filter(x=>x.rel>=60).length>=2?5:10;S.h=cl(S.h-f);S.w=cl(S.w-f);S.l=cl(S.l-f);if(S.fm!==null)S.fm=cl(S.fm-f);lg(`😞 စိတ်ကျရောဂါကြောင့် မီတာများ ${BN(f)}% စီ ကျဆင်းသည်။`,"r")}}
-function soc(){if(S.y==2030){if(S.cdm==2&&S.job&&S.job.gov){S.job=null;S.co=[];ap({s:-50});lg("🏛️ ၂၀၃၀ ပြောင်းလဲမှုတွင် CDM မပါခဲ့သဖြင့် အလုပ်ဆုံးရှုံးသည်။ စိတ်ဓာတ် ၅၀% ကျ၍ စိတ်ကျရောဂါ ဖြစ်သည်။","r")}if(S.cdm==1){ap({s:10,f:3});lg("🕊️ CDM ပါဝင်ခဲ့သူများ ပြန်လည်အသိအမှတ်ပြု ခံရသည်။","r")}}
-S.fr.forEach(f=>f.rel=cl(f.rel-3));S.fr=S.fr.filter(f=>{if(f.rel<20){lg(`🧑‍🤝‍🧑 ${f.n} နှင့် ဝေးကွာသွားသည်။`,"r");return false}return true});if(S.a>=5&&R(100)<(S.a>=6&&S.a<=17&&!S.dr?(S.l<50?10:18):(S.l<50?4:8))&&S.fr.length<6){S.fr.push({n:pn(R(2)),rel:50});lg("🧑‍🤝‍🧑 သူငယ်ချင်းသစ်တစ်ဦး ရလာသည်။")}if(S.fr.some(f=>f.rel>=60))ap({s:2});if(!S.fr.length&&S.a>=5)ap({s:-3});
-S.co.forEach(f=>f.rel=cl(f.rel-2));if(S.job&&!S.job.b&&R(100)<50&&S.co.length<6){S.co.push({n:pn(R(2)),rel:50});lg("💼 လုပ်ဖော်ကိုင်ဖက်သစ် ရလာသည်။")}
-if(S.pt){if(S.pt.st!="m"&&S.sr<20){lg(`💔 ${S.pt.n} နှင့် ချစ်ခင်မှုကျ၍ အဆက်ဖြတ်ခဲ့သည်။`,"r");S.pt=null}else if(S.pt.st=="m"){if(S.sr<30&&R(100)<12)divorce(1);else if(S.inl){S.inl.rel=cl(S.inl.rel-2);if(S.inl.rel<50){lg(`👵 ယောက္ခမအိမ်ထောင်စုက ${S.g?"သင့်ကို":"သင့်ဇနီးကို"} ပြဿနာရှာသည် (${ap({s:-6})})`,"r");S.sr=cl(S.sr-3)}}}}}
-function cdmEv(){return mk("၂၀၂၁ အာဏာသိမ်းမှုနောက်ပိုင်း အစိုးရ/စစ်ဘက် ဝန်ထမ်းများက CDM (အာဏာဖီဆန်ရေး) တွင် ပါဝင်မလား ဆုံးဖြတ်ရမည်။",[["CDM တွင် ပါဝင်၍ အလုပ်ထွက်မည်",()=>{S.cdm=1;S.job=null;S.co=[];return{m:-300,s:4,f:3}},"လစာမရတော့သော်လည်း ယုံကြည်ချက်အတွက် ရပ်တည်သည်။ NUG လုပ်ငန်းများတွင် ပါဝင်နိုင်သည်။"],["အလုပ်ဆက်လုပ်မည်",()=>{S.cdm=2;return{s:-2}}]])}
-function chEv(){return mk("အိမ်ထောင်ဖက်နှင့် ချစ်ခင်မှုနည်း၍ အိမ်ထောင်ဖက် ဖောက်ပြန်သည်။",[["ခွင့်လွှတ်၍ ပြန်လည်ဖာထေးမည်",()=>{S.sr=cl(S.sr+12);return{s:-6}}],["ကွာရှင်းမည်",()=>{divorce(0);return{}}],["မသိချင်ယောင်ဆောင်မည်",()=>{S.sr=cl(S.sr-5);return{s:-8}}]])}
-function fpEv(){return mk("နိုင်ငံခြားသား အိမ်ထောင်ဖက်၏ နေထိုင်ခွင့်/အလုပ်လုပ်ခွင့်/ဥပဒေ ပြဿနာများ ကြုံရသည်။",[["ရှေ့နေငှား၍ နေထိုင်ခွင့်လျှောက်မည်",{m:-500,s:-1},"ဥပဒေအရ စီစဉ်ခြင်းက ပြဿနာကို လျှော့စေသည်။"],["ရင်ဆိုင်ကြိုးစားမည်",()=>{S.sr=cl(S.sr-8);return{s:-5}}]])}
-E.push({a:[18,45],wt:2,c:()=>S.g&&S.pt&&S.pt.st=="d"&&S.sr>=60,t:"ချစ်သူက လက်စွပ်ကမ်း၍ လက်ထပ်ရန် တောင်းဆိုသည်။",o:[["လက်ခံမည်",()=>{S.pt.st="e";S.sr=cl(S.sr+5);return{s:3}}],["ငြင်းပယ်မည်",()=>{S.sr=cl(S.sr-15);if(R(10)<3){S.pt=null;lg("ချစ်သူက အဆက်ဖြတ်သွားသည်။","r")}return{s:-2}}]]});
-DZ.push(["နာတာရှည်ရောဂါ (ကျန်းမာရေးအားနည်းခြင်းကြောင့်)","c",()=>S.h<50&&R(100)<35]);
+function depr(){if(S.s<20&&!S.dep){S.dep=1;sfx("bad");lg("😞 စိတ်ဓာတ် အရမ်းကျပြီး စိတ်ကျရောဂါ ဝင်လာပြီ။","r");shakeScreen()}if(S.dep&&S.s>=50){S.dep=0;sfx("good");lg("🌤️ စိတ်ဓာတ် ပြန်ကောင်းလာပြီ။","r");glowGold($("st"))}if(S.dep){let f=S.fr.filter(x=>x.rel>=60).length>=2?5:10;S.h=cl(S.h-f);S.w=cl(S.w-f);S.l=cl(S.l-f);if(S.fm!==null)S.fm=cl(S.fm-f);lg(`😞 စိတ်ကျရောဂါကြောင့် မီတာတွေ ${BN(f)}% စီ လျော့သွားတယ်။`,"r");shakeScreen()}}
+function soc(){if(S.y==2030){if(S.cdm==2&&S.job&&S.job.gov){S.job=null;S.co=[];ap({s:-50});sfx("bad");lg("🏛️ ၂၀၃၀ ပြောင်းလဲမှုမှာ CDM မပါခဲ့လို့ အလုပ်ပြုတ်သွားတယ်။ စိတ်ဓာတ် ၅၀% ကျပြီး စိတ်ကျရောဂါ ဝင်သွားတယ်။","r");shakeScreen()}if(S.cdm==1){ap({s:10,f:3});sfx("levelup");lg("🕊️ CDM ပါဝင်ခဲ့သူတွေကို ပြန်လည်အသိအမှတ်ပြု ဂုဏ်ပြုလိုက်ပြီ။","r");glowGold($("st"))}}
+S.fr.forEach(f=>f.rel=cl(f.rel-3));S.fr=S.fr.filter(f=>{if(f.rel<20){lg(`🧑‍🤝‍🧑 ${f.n} နဲ့ အဆက်အသွယ်ပြတ်သွားတယ်။`,"r");return false}return true});if(S.a>=5&&R(100)<(S.a>=6&&S.a<=17&&!S.dr?(S.l<50?10:18):(S.l<50?4:8))&&S.fr.length<6){S.fr.push({n:pn(R(2)),rel:50});lg("🧑‍🤝‍🧑 သူငယ်ချင်းအသစ်တစ်ယောက် ရလာတယ်။")}if(S.fr.some(f=>f.rel>=60))ap({s:2});if(!S.fr.length&&S.a>=5)ap({s:-3});
+S.co.forEach(f=>f.rel=cl(f.rel-2));if(S.job&&!S.job.b&&R(100)<50&&S.co.length<6){S.co.push({n:pn(R(2)),rel:50});lg("💼 လုပ်ဖော်ကိုင်ဖက်အသစ် ရလာတယ်။")}
+if(S.pt){if(S.pt.st!="m"&&S.sr<20){lg(`💔 ${S.pt.n} နဲ့ ချစ်ခင်မှုနည်းလာလို့ လမ်းခွဲလိုက်ကြတယ်။`,"r");S.pt=null}else if(S.pt.st=="m"){if(S.sr<30&&R(100)<12)divorce(1);else if(S.inl){S.inl.rel=cl(S.inl.rel-2);if(S.inl.rel<50){lg(`👵 ယောက္ခမအိမ်ထောင်စုက ${S.g?"ကိုယ့်ကို":"ကိုယ့်ဇနီးကို"} ပြဿနာရှာနေတယ် (${ap({s:-6})})`,"r");S.sr=cl(S.sr-3)}}}}}
+function cdmEv(){return mk("၂၀၂၁ အာဏာသိမ်းပြီးနောက် အစိုးရ/စစ်ဘက် ဝန်ထမ်းတွေ CDM (အာဏာဖီဆန်ရေး) ပါမလား ဆုံးဖြတ်ရမယ့်အချိန် ရောက်လာပြီ။",[["CDM ပါပြီး အလုပ်ထွက်မယ်",()=>{S.cdm=1;S.job=null;S.co=[];return{m:-300,s:4,f:3}},"လစာမရတော့ပေမဲ့ ကိုယ့်ယုံကြည်ချက်အတွက် ရပ်တည်တယ်။ NUG လုပ်ငန်းတွေမှာလည်း ပါဝင်လို့ရတယ်။"],["အလုပ်ဆက်လုပ်မယ်",()=>{S.cdm=2;return{s:-2}}]])}
+function chEv(){return mk("အိမ်ထောင်ဖက်နဲ့ ချစ်ခင်မှု နည်းလာပြီး အိမ်ထောင်ဖက် ဖောက်ပြန်နေတာ သိလိုက်ရတယ်။",[["ခွင့်လွှတ်ပြီး ပြန်ညှိမယ်",()=>{S.sr=cl(S.sr+12);return{s:-6}}],["ကွာရှင်းမယ်",()=>{divorce(0);return{}}],["မသိချင်ယောင် ဆောင်နေမယ်",()=>{S.sr=cl(S.sr-5);return{s:-8}}]])}
+function fpEv(){return mk("နိုင်ငံခြားသား အိမ်ထောင်ဖက်ရဲ့ နေထိုင်ခွင့်/အလုပ်လုပ်ခွင့်/ဥပဒေပိုင်း ပြဿနာတွေ ကြုံလာတယ်။",[["ရှေ့နေငှားပြီး နေထိုင်ခွင့်လျှောက်မယ်",{m:-500,s:-1},"ဥပဒေလမ်းကြောင်းအတိုင်း လုပ်ရင် ပြဿနာ သက်သာတယ်။"],["ရင်ဆိုင်ကြိုးစားမယ်",()=>{S.sr=cl(S.sr-8);return{s:-5}}]])}
+E.push({a:[18,45],wt:2,c:()=>S.g&&S.pt&&S.pt.st=="d"&&S.sr>=60,t:"ချစ်သူက လက်စွပ်ထိုးပေးပြီး လက်ထပ်ဖို့ တောင်းဆိုလာတယ်။",o:[["လက်ခံမယ်",()=>{S.pt.st="e";S.sr=cl(S.sr+5);sfx("levelup");glowGold($("st"));return{s:3}}],["ငြင်းမယ်",()=>{S.sr=cl(S.sr-15);if(R(10)<3){S.pt=null;lg("ချစ်သူက လမ်းခွဲသွားတယ်။","r")}return{s:-2}}]]});
+DZ.push(["နာတာရှည်ရောဂါ (ကျန်းမာရေး အားနည်းလို့ ဖြစ်တာ)","c",()=>S.h<50&&R(100)<35]);
 function rules(){if(S.h<50){let x=Math.round(150*Math.sqrt(EM()));if(S.a>=16)mv(-x,"ဆေးကုသစရိတ်");else S.fw=Math.max(0,S.fw-x)}
-if(S.s<50&&S.a>=5){[S.fr,S.co,S.kids].forEach(a=>a.forEach(f=>f.rel=cl(f.rel-10)));(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel-10)));if(S.pt)S.sr=cl(S.sr-10);lg("😔 စိတ်ခံစားမှု ၅၀% အောက်ကျ၍ သူငယ်ချင်းနှင့် မိသားစု ချစ်ခင်မှု ၁၀% စီ ကျသည်။","r")}
+if(S.s<50&&S.a>=5){[S.fr,S.co,S.kids].forEach(a=>a.forEach(f=>f.rel=cl(f.rel-10)));(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel-10)));if(S.pt)S.sr=cl(S.sr-10);lg("😔 စိတ်ခွန်အား ၅၀% အောက်ကျသွားလို့ သူငယ်ချင်းနဲ့ မိသားစု ချစ်ခင်မှု ၁၀% စီ လျော့သွားတယ်။","r")}
 if(S.a>65&&!S.pt&&!S.kids.length)ap({s:-2});
-if((S.c>0||S.k>0||Object.values(S.hb).some(x=>x))&&R(100)<25){let e=[["ခိုးယူခံရ/လိမ်လည်ခံရ၍ ပိုင်ဆိုင်ပစ္စည်း ဆုံးရှုံးသည်",{m:-300,s:-4}],["မတော်တဆမှုကြောင့် ဒဏ်ရာရသည်",{h:-10,m:-300}],["နာမည်ပျက်ခြင်းကြောင့် မိတ်ဆွေများ ဝေးကွာသည်",()=>{S.fr.forEach(f=>f.rel=cl(f.rel-15));return{s:-5}}]][R(3)];lg("⚖️ အကျိုးဆက် - "+e[0],"r");ap(e[1])}
-if((S.gd||0)>=3&&R(100)<20){let e=[["မမျှော်လင့်ဘဲ လူကြီးတစ်ဦးက ကူညီပေးသည်",{m:300,s:3}],["ကောင်းမှုကြောင့် ရပ်ရွာက ချီးကျူးသည်",{s:4,f:2}]][R(2)];lg("🍀 ကောင်းမှု၏ အကျိုး - "+e[0],"r");ap(e[1])}
+if((S.c>0||S.k>0||Object.values(S.hb).some(x=>x))&&R(100)<25){let e=[["ခိုးခံရ/လိမ်ခံရလို့ ပစ္စည်းတွေ ဆုံးရှုံးသွားတယ်။",{m:-300,s:-4}],["မတော်တဆ ထိခိုက်မိလို့ ဒဏ်ရာရသွားတယ်။",{h:-10,m:-300}],["နာမည်ပျက်သွားလို့ မိတ်ဆွေတွေ ဝေးကွာသွားတယ်။",()=>{S.fr.forEach(f=>f.rel=cl(f.rel-15));return{s:-5}}]][R(3)];lg("⚖️ အကျိုးဆက် - "+e[0],"r");shakeScreen();ap(e[1])}
+if((S.gd||0)>=3&&R(100)<20){let e=[["မမျှော်လင့်ဘဲ လူကြီးတစ်ယောက်က ကူညီပေးလိုက်တယ်။",{m:300,s:3}],["ကောင်းမှုလုပ်ခဲ့လို့ ရပ်ရွာက ချီးကျူးကြတယ်။",{s:4,f:2}]][R(2)];lg("🍀 ကောင်းမှုအကျိုး - "+e[0],"r");glowGold($("st"));ap(e[1])}
 S.gd=Math.max(0,(S.gd||0)-.3);if(S.fm!==null&&!(S.job&&S.job.cid>=0&&CAR[S.job.cid][6])&&smTotal()<5000)S.fm=cl(S.fm-2);let t=smTotal();if(t>=1000&&S.a>=14)mv(Math.round(t/300),"လူမှုကွန်ယက်ဝင်ငွေ")}
-function lfui(){let L=S.lf,e=EM();return `<button onclick="AM=-1;view()">‹ နောက်သို့</button><div class="c"><b>🏠 နေထိုင်မှုပုံစံနှင့် ပိုင်ဆိုင်မှု</b><br><small>ရွေးချယ်မှုအလိုက် နှစ်စဉ်ကုန်ကျစရိတ်နှင့် ကျန်းမာရေး၊ စိတ်ခွန်အား၊ ရုပ်ရည် ပြောင်းလဲမည်။ သားသမီးနှင့် မိဘထောက်ပံ့စရိတ်မှာ မဖြစ်မနေ ကုန်ကျသည်။ ကျန်သည့်အရာများမှာ ကိုယ်ရွေးချယ်ခွင့်ရှိသည်။</small></div>`+[["h","🏠 နေအိမ်"],["d","🍚 အစားအသောက်"],["c","👘 အဝတ်အစား"]].map(([k,t])=>`<div class="c"><b>${t}</b>${k=="h"&&S.house?" (ကိုယ်ပိုင်အိမ်ရှိသည်)":""}</div>`+LF[k].map((x,j)=>`<button class="${L[k]==j?"pri":""}" onclick="S.lf.${k}=${j};view()">${L[k]==j?"✔ ":""}${x[0]} (တစ်နှစ်လျှင် ${K(x[1]*e)})</button>`).join("")).join("")+`<div class="c"><b>🏦 ပိုင်ဆိုင်မှု</b><br><small>အိမ်ခြံ ${S.house?"ရှိ":"မရှိ"} · ကား ${S.car?"ရှိ":"မရှိ"} · ရွှေ ${K(S.gold||0)} · စုစုပေါင်း ${K(NW(S))}</small></div>`+ACT[7][2].map((x,j)=>S.a>=x[2]?`<button onclick="use(ACT[7][2][${j}][1],ACT[7][2][${j}][0])">${x[0]}</button>`:"").join("")}
+function lfui(){let L=S.lf,e=EM();return `<button onclick="AM=-1;view()">‹ နောက်သို့</button><div class="c"><b>🏠 နေထိုင်မှုနဲ့ ပိုင်ဆိုင်မှု</b><br><small>ရွေးတဲ့ပုံစံအလိုက် နှစ်စဉ်ကုန်ကျစရိတ်နဲ့ ကျန်းမာရေး၊ စိတ်ခွန်အား၊ ရုပ်ရည် ပြောင်းလဲမယ်။ သားသမီးနဲ့ မိဘထောက်ပံ့စရိတ်ကတော့ မဖြစ်မနေ ကုန်မယ်။ ကျန်တာက ကိုယ်ကြိုက်တာ ရွေးလို့ရတယ်။</small></div>`+[["h","🏠 နေအိမ်"],["d","🍚 အစားအသောက်"],["c","👘 အဝတ်အစား"]].map(([k,t])=>`<div class="c"><b>${t}</b>${k=="h"&&S.house?" (ကိုယ်ပိုင်အိမ် ရှိပြီးသား)":""}</div>`+LF[k].map((x,j)=>`<button class="${L[k]==j?"pri":""}" onclick="S.lf.${k}=${j};view()">${L[k]==j?"✔ ":""}${x[0]} (တစ်နှစ် ${K(x[1]*e)})</button>`).join("")).join("")+`<div class="c"><b>🏦 ပိုင်ဆိုင်မှု</b><br><small>အိမ်ခြံ ${S.house?"ရှိ":"မရှိ"} · ကား ${S.car?"ရှိ":"မရှိ"} · ရွှေ ${K(S.gold||0)} · စုစုပေါင်း ${K(NW(S))}</small></div>`+ACT[7][2].map((x,j)=>S.a>=x[2]?`<button onclick="use(ACT[7][2][${j}][1],ACT[7][2][${j}][0])">${x[0]}</button>`:"").join("")}
 const shuf=a=>{for(let i=a.length-1;i>0;i--){let j=R(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
-function nameKid(i){let k=S.kids[i];if(!k)return;let sg=pn(R(2),S.y);sheet(`<b>👶 ကလေးအမည်ပေးရန်</b><div class="c">${S.pt?S.pt.n:"အိမ်ထောင်ဖက်"} အကြံပြုသောအမည် - <b>${sg}</b></div><button class="pri" onclick="nk(${i},'${sg}',1)">${sg} ကို သဘောတူသည်</button><div class="c"><input id="kn" maxlength="20" placeholder="ကိုယ်ပိုင်အမည် ရိုက်ထည့်ပါ"></div><button onclick="nk(${i},'',0)">ကိုယ်ပိုင်အမည်ပေးမည် (အိမ်ထောင်ဖက်၏ သဘောတူညီမှု လိုသည်)</button>`)}
-function nk(i,sg,ok){let k=S.kids[i];if(ok){k.n=sg;S.sr=cl(S.sr+3);lg(`👶 ကလေးအမည်ကို ${sg} ဟု နှစ်ဦးသဘောတူ ပေးလိုက်သည်။`)}else{let v=$("kn").value.trim();if(!v)return alert("အမည်ရိုက်ထည့်ပါ");if(R(100)<Math.max(25,Math.min(95,60+(S.sr-50)*.6))){k.n=v;lg(`👶 ကလေးအမည် ${v} ကို အိမ်ထောင်ဖက် သဘောတူသည်။`)}else{let s2=pn(R(2),S.y);k.n=s2;S.sr=cl(S.sr-4);lg(`👶 ${v} အမည်ကို အိမ်ထောင်ဖက် မသဘောတူ၍ ${s2} ဟု ပေးလိုက်ရသည်။`,"r")}}let m=$("md");if(m)m.remove();view()}
-E.push({a:[18,40],wt:2,c:()=>!S.mar&&(S.par||[]).some(p=>p.al)&&(!S.pt||S.pt.st=="d"),t:"မိဘများက သင့်ကို လက်ထပ်ရန် တိုက်တွန်းသည်။",o:[["မိဘစကားကို နားထောင်၍ ကြိုးစားမည်",()=>{if(R(100)<50){if(S.pt){S.pt.st="e";S.sr=cl(S.sr+5);lg(`💍 ${S.pt.n} နှင့် စေ့စပ်ရန် သဘောတူသည်။`,"r")}else{let g=S.g?0:1;S.pt={n:pn(g,S.y-S.a+R(7)-3),g,nat:"မြန်မာ",st:"e"};S.sr=55+R(15);lg(`💍 မိဘများ မိတ်ဆက်ပေးသူ ${S.pt.n} နှင့် စေ့စပ်ရန် သဘောတူသည်။`,"r")}}else lg("မိဘ၏ ဆန္ဒအတိုင်း မဖြစ်လာပါ။");return{s:-1}}],["ယခု မလက်ထပ်သေးဟု ရှင်းပြမည်",()=>{(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel-4)));return{s:1}}]]});
-if(document.addEventListener)document.addEventListener("click",e=>{let t=e.target;if(t&&t.closest&&t.closest("button,#tb b,.av,.m"))sfx("click")},true);
-function reschool(){let ma=S.sys==10?16:17;if(S.job)return alert("အလုပ်ကို ဦးစွာထွက်ပါ");S.dr=0;S.mf=S.a>ma?1:0;lg("📚 ကျောင်းပြန်တက်ရန် ဆုံးဖြတ်သည်။ စာကြိုးစား၍ စာမေးပွဲ ပြန်ဖြေပါ။","r");view()}
+function nameKid(i){let k=S.kids[i];if(!k)return;let sg=pn(R(2),S.y);sheet(`<b>👶 ကလေးအမည်ပေးမယ်</b><div class="c">${S.pt?S.pt.n:"အိမ်ထောင်ဖက်"} အကြံပြုတဲ့နာမည် - <b>${sg}</b></div><button class="pri" onclick="nk(${i},'${sg}',1)">${sg} လို့ပဲ ပေးမယ်</button><div class="c"><input id="kn" maxlength="20" placeholder="ကိုယ်ပိုင်နာမည် ရိုက်ထည့်ပါ"></div><button onclick="nk(${i},'',0)">ကိုယ်ပိုင်နာမည် ပေးမယ် (အိမ်ထောင်ဖက် သဘောတူမှ ရမယ်)</button>`)}
+function nk(i,sg,ok){let k=S.kids[i];if(ok){k.n=sg;S.sr=cl(S.sr+3);sfx("good");lg(`👶 ကလေးနာမည်ကို ${sg} လို့ နှစ်ယောက်သဘောတူ ပေးလိုက်တယ်။`)}else{let v=$("kn").value.trim();if(!v)return alert("နာမည်ရိုက်ထည့်ပါ");if(R(100)<Math.max(25,Math.min(95,60+(S.sr-50)*.6))){k.n=v;sfx("good");lg(`👶 ကလေးနာမည် ${v} ကို အိမ်ထောင်ဖက် သဘောတူလိုက်တယ်။`)}else{let s2=pn(R(2),S.y);k.n=s2;S.sr=cl(S.sr-4);sfx("bad");lg(`👶 ${v} ဆိုတဲ့နာမည်ကို အိမ်ထောင်ဖက် သဘောမတူလို့ ${s2} လို့ ပေးလိုက်ရတယ်။`,"r")}}let m=$("md");if(m)m.remove();view()}
+E.push({a:[18,40],wt:2,c:()=>!S.mar&&(S.par||[]).some(p=>p.al)&&(!S.pt||S.pt.st=="d"),t:"မိဘတွေက အိမ်ထောင်ပြုဖို့ တိုက်တွန်းနေတယ်။",o:[["မိဘစကားနားထောင်ပြီး ကြိုးစားကြည့်မယ်",()=>{if(R(100)<50){if(S.pt){S.pt.st="e";S.sr=cl(S.sr+5);lg(`💍 ${S.pt.n} နဲ့ စေ့စပ်ဖို့ သဘောတူလိုက်ပြီ။`,"r")}else{let g=S.g?0:1;S.pt={n:pn(g,S.y-S.a+R(7)-3),g,nat:"မြန်မာ",st:"e"};S.sr=55+R(15);lg(`💍 မိဘတွေ မိတ်ဆက်ပေးတဲ့ ${S.pt.n} နဲ့ စေ့စပ်ဖို့ သဘောတူလိုက်ပြီ။`,"r")}}else lg("မိဘဖြစ်စေချင်သလိုတော့ ဖြစ်မလာခဲ့ဘူး။");return{s:-1}}],["အခုတော့ လက်မထပ်သေးဘူးလို့ ရှင်းပြမယ်",()=>{(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel-4)));return{s:1}}]]});
+if(document.addEventListener){
+  document.addEventListener("pointerdown",e=>{
+    unlockAudio();
+    let t=e.target;
+    if(t&&t.closest&&t.closest("button,#tb b,.av,.m")){
+      rip(e);
+      sfx("click");
+    }
+  },true);
+}
+function reschool(){let ma=S.sys==10?16:17;if(S.job)return alert("အလုပ်ကနေ အရင်ထွက်ပါ");S.dr=0;S.mf=S.a>ma?1:0;sfx("good");lg("📚 ကျောင်းပြန်တက်ဖို့ ဆုံးဖြတ်လိုက်ပြီ။ စာကြိုးစားပြီး စာမေးပွဲ ပြန်ဖြေပါ။","r");view()}
 const INS=[["piano","စန္ဒယား"],["guitar","ဂစ်တာ"],["drum","ဒရမ်"],["saung","စောင်း"],["pattala","ပတ္တလား"],["violin","တယော"],["vocal","အဆိုပညာ"]];
 const insLv=k=>Math.min(5,Math.floor(((S.ins||{})[k]||0)/4)),instMax=()=>Math.max(0,...INS.map(x=>insLv(x[0])));
-function practice(k,n){S.ins=S.ins||{};let b=insLv(k);S.ins[k]=(S.ins[k]||0)+1+(S.w>=70?.5:0);let a=insLv(k);lg(`🎵 ${n} လေ့ကျင့်သည် (အဆင့် ${BN(a)})${a>b?" - အဆင့်တက်သည်!":""}`,a>b?"r":"");return{s:2,w:1,m:-100}}
+function practice(k,n){S.ins=S.ins||{};let b=insLv(k);S.ins[k]=(S.ins[k]||0)+1+(S.w>=70?.5:0);let a=insLv(k);lg(`🎵 ${n} လေ့ကျင့်တယ် (အဆင့် ${BN(a)})${a>b?" - အဆင့်တက်သွားပြီ!":""}`,a>b?"r":"");if(a>b){sfx("levelup");glowGold($("st"))}return{s:2,w:1,m:-100}}
 const SMP=[["fb","Facebook",2012],["yt","YouTube",2012],["ig","Instagram",2014],["tt","TikTok",2019]];
 const smTotal=()=>Object.values(S.sm||{}).reduce((a,b)=>a+b,0);
-function post(k,n,y0){if(S.y<y0)return alert(`${n} ကို ${BN(y0)} ခုနှစ်နောက်ပိုင်းမှသာ သုံးနိုင်သည်`),false;S.sm=S.sm||{};let g=Math.round(20+R(60)+S.l*.5+S.w*.3),vir=R(100)<8;if(vir)g*=30+R(120);S.sm[k]=(S.sm[k]||0)+g;let t=smTotal();if(S.fm===null&&t>=5000)S.fm=15;lg(`📱 ${n} တွင် Content ဖန်တီးသည် - ${vir?"လူအများ ဖြန့်ဝေ၍ ကျော်ကြားသွားသည်! ":""}ကြည့်ရှုသူ စုစုပေါင်း ${BN(t)}`,vir?"r":"");return R(10)<1?{s:-2}:{s:1,f:t>=5000?1:0}}
-ACT.push(["🎵","တူရိယာနှင့် အဆိုပညာ",INS.map(x=>[x[1]+" လေ့ကျင့်မည်",()=>practice(x[0],x[1]),5])]);
-ACT.push(["📱","လူမှုကွန်ယက်",SMP.map(x=>[x[1]+" တွင် Content ဖန်တီးမည်",()=>post(x[0],x[1],x[2]),14])]);
-ACT[5][2].push(["အသင်း/ပွဲတော်တွင် လူသစ်များနှင့် မိတ်ဆက်မည်",()=>{if(R(100)<(S.l<50?25:40)&&S.fr.length<6){S.fr.push({n:pn(R(2)),rel:45});lg("🧑‍🤝‍🧑 သူငယ်ချင်းသစ်တစ်ဦး ရလာသည်။")}return{s:2}},10]);
+function post(k,n,y0){if(S.y<y0)return alert(`${n} ကို ${BN(y0)} ခုနှစ်နောက်ပိုင်းမှ သုံးလို့ရမယ်`),false;S.sm=S.sm||{};let g=Math.round(20+R(60)+S.l*.5+S.w*.3),vir=R(100)<8;if(vir)g*=30+R(120);S.sm[k]=(S.sm[k]||0)+g;let t=smTotal();if(S.fm===null&&t>=5000)S.fm=15;lg(`📱 ${n} မှာ Content တင်တယ် - ${vir?"လူတွေ ဝိုင်းရှယ်ကြလို့ လူသိများသွားပြီ! ":""}ကြည့်ရှုသူ စုစုပေါင်း ${BN(t)}`,vir?"r":"");if(vir){sfx("levelup");glowGold($("st"))}return R(10)<1?{s:-2}:{s:1,f:t>=5000?1:0}}
+ACT.push(["🎵","တူရိယာနဲ့ အဆိုပညာ",INS.map(x=>[x[1]+" လေ့ကျင့်မယ်",()=>practice(x[0],x[1]),5])]);
+ACT.push(["📱","လူမှုကွန်ယက်",SMP.map(x=>[x[1]+" မှာ Content တင်မယ်",()=>post(x[0],x[1],x[2]),14])]);
+ACT[5][2].push(["အသင်း/ပွဲတော်မှာ လူသစ်တွေနဲ့ မိတ်ဆက်မယ်",()=>{if(R(100)<(S.l<50?25:40)&&S.fr.length<6){S.fr.push({n:pn(R(2)),rel:45});lg("🧑‍🤝‍🧑 သူငယ်ချင်းအသစ်တစ်ယောက် ရလာတယ်။")}return{s:2}},10]);
 const NEWC=[
 ["ဘာသာရေးခေါင်းဆောင်","ဘာသာရေးအကူ|ဘာသာရေးဆရာ|ဘာသာရေးခေါင်းဆောင်ငယ်|ဘာသာရေးခေါင်းဆောင်|ဘာသာရေးအကြီးအကဲ",()=>S.a>=20,1200,18,0,1],
 ["ရပ်ရွာခေါင်းဆောင်","အသင်းအဖွဲ့ဝင်|ရပ်ကွက်/ကျေးရွာ လူကြီး|အသင်းဥက္ကဋ္ဌ|ရပ်ရွာအကြီးအကဲ|ဒေသလူထုခေါင်းဆောင်",()=>S.a>=25,1200,18,0,1],
-["အနုပညာရှင် (ရုပ်ရှင်/ဇာတ်ခုံ)","အားမွေးအနုပညာရှင်|ဇာတ်ပို့အနုပညာရှင်|နာမည်ရအနုပညာရှင်|ထင်ရှားသောအနုပညာရှင်|ထိပ်တန်းအနုပညာရှင်",()=>S.l>=50||instMax()>=1,1500,18,0,1],
+["အနုပညာရှင် (ရုပ်ရှင်/ဇာတ်ခုံ)","အားမွေးအနုပညာရှင်|ဇာတ်ပို့အနုပညာရှင်|နာမည်ရအနုပညာရှင်|ထင်ရှားတဲ့အနုပညာရှင်|ထိပ်တန်းအနုပညာရှင်",()=>S.l>=50||instMax()>=1,1500,18,0,1],
 ["ဂီတပညာရှင်","လမ်းဘေးတီးမှုတ်သူ|ပွဲတီးဝိုင်းဝင်|ဂီတအဖွဲ့ဝင်|နာမည်ရဂီတပညာရှင်|ထိပ်တန်းဂီတပညာရှင်",()=>instMax()>=2,1500,18,0,1],
 ["စာရေးဆရာ","စာမူရေးသူ|ဝတ္ထုတိုရေးသူ|ဝတ္ထုရှည်စာရေးဆရာ|နာမည်ကြီးစာရေးဆရာ|စာပေဆုရ စာရေးဆရာ",MU,1500,18,0,1],
 ["Content ဖန်တီးသူ (Vlogger)","ဝါသနာအလိုက် ဖန်တီးသူ|နာမည်ရ Content Creator|လူကြိုက်များ Vlogger|ထိပ်တန်း Influencer|မီဒီယာကုမ္ပဏီပိုင်ရှင်",()=>smTotal()>=20000,1000,18,0,1]];
@@ -421,6 +561,6 @@ CAR[6][6]=1;CAR[10][2]=()=>insLv("vocal")>=2;
 const gt=(i,y1,cy)=>{let f=CAR[i][2];CAR[i][2]=()=>f()&&S.y>=y1&&(S.rg==0||S.y>=cy)};
 gt(7,1995,2008);gt(11,1995,2010);gt(16,1995,2010);gt(19,1950,1995);gt(20,1988,1995);gt(21,1990,2010);gt(22,1960,2000);gt(23,1990,1995);gt(24,1948,9999);gt(25,1950,9999);
 function rip(e){let s=document.createElement("span");s.className="rp";s.style.left=e.clientX+"px";s.style.top=e.clientY+"px";document.body.appendChild(s);setTimeout(()=>s.remove(),650)}
-if(document.addEventListener)document.addEventListener("pointerdown",e=>{let t=e.target;if(t&&t.closest&&t.closest("button,#tb b,.av,.m"))rip(e)},true);
+ensureBgmAudio();
 ibar();
 start();

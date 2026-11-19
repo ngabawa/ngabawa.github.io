@@ -1,886 +1,403 @@
 :root {
-  /* Light Mode: နေ့ခင်း ကျေးလက်သနပ်ခါး၊ ပေစာနှင့် ဝါးရောင် */
-  --bg: #dfce9f;
-  --cd: #f9ecc9;
-  --fg: #241307;
-  --sb: #5c3d1e;
-  --bl: #781f12;
-  --gr: #478a36;
-  --or: #b83208;
-  --sp: #c49c59;
-  --gd: #c89628;
-  --hb: #683c1e;
-  --jd: #286325;
-
-  --bamboo-1: #946b38;
-  --bamboo-2: #c9a05d;
-  --bamboo-3: #ecd295;
-  --bamboo-line: #4a2f12;
-
-  /* Card & Button Tokens (Light) */
-  --card-bg: linear-gradient(180deg, #fdf4dc, #f1ddb0);
-  --card-fg: #241307;
-  --card-sub: #5e3f1f;
-  --card-border: #875b28;
-  --card-inner: #d4a656;
-
-  --btn-bg: linear-gradient(180deg, #fff7e2, #edd49b);
-  --btn-fg: #47170a;
-  --btn-border: #875b28;
-
-  --pri-bg: linear-gradient(180deg, #a62c1a, #6e190e);
-  --pri-fg: #fff6dc;
-  --pri-border: #d9a438;
-
-  --bar-bg: #3f250e;
-  --bar-border: #d5ab63;
-  --wood-1: #966b3a;
-  --wood-2: #865c2e;
-  --wood-3: #734c23;
-
-  --sh: 0 3px 9px rgba(58, 35, 12, 0.2), inset 0 1px 0 rgba(255, 252, 240, 0.75);
-  color-scheme: light dark;
-  box-sizing: border-box;
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-/* Dark Mode: ညဘက် ရွှေမီးအိမ်အောက်က ယွန်း/သစ်သားညိုမှောင် (High Contrast) */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #140c06;
-    --cd: #26170d;
-    --fg: #fff2d6;
-    --sb: #e5c38c;
-    --bl: #ffca6e;
-    --gr: #5db349;
-    --or: #ff8c52;
-    --sp: #7a5128;
-    --gd: #eab43c;
-    --hb: #381d0f;
-    --jd: #388233;
-
-    --bamboo-1: #543518;
-    --bamboo-2: #825529;
-    --bamboo-3: #ab753c;
-    --bamboo-line: #0d0703;
-
-    /* Card & Button Tokens (Dark) - နောက်ခံမှောင်ပြီး စာသား အလင်းရောင် ကြည်လင်စေရန် */
-    --card-bg: linear-gradient(180deg, #2b1a0e, #1d1109);
-    --card-fg: #fff2d6;
-    --card-sub: #dfc08d;
-    --card-border: #996930;
-    --card-inner: #593b18;
-
-    --btn-bg: linear-gradient(180deg, #3b2414, #26160c);
-    --btn-fg: #ffe7b3;
-    --btn-border: #a67234;
-
-    --pri-bg: linear-gradient(180deg, #9c2717, #611309);
-    --pri-fg: #fff6dc;
-    --pri-border: #f0bc46;
-
-    --bar-bg: #0f0804;
-    --bar-border: #a37032;
-    --wood-1: #382212;
-    --wood-2: #2d1b0e;
-    --wood-3: #22140a;
-
-    --sh: 0 5px 14px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 220, 140, 0.14);
-  }
-}
-
-:root[data-theme="dark"] {
-  --bg: #140c06;
-  --cd: #26170d;
-  --fg: #fff2d6;
-  --sb: #e5c38c;
-  --bl: #ffca6e;
-  --gr: #5db349;
-  --or: #ff8c52;
-  --sp: #7a5128;
-  --gd: #eab43c;
-  --hb: #381d0f;
-  --jd: #388233;
-  --bamboo-1: #543518;
-  --bamboo-2: #825529;
-  --bamboo-3: #ab753c;
-  --bamboo-line: #0d0703;
-  --card-bg: linear-gradient(180deg, #2b1a0e, #1d1109);
-  --card-fg: #fff2d6;
-  --card-sub: #dfc08d;
-  --card-border: #996930;
-  --card-inner: #593b18;
-  --btn-bg: linear-gradient(180deg, #3b2414, #26160c);
-  --btn-fg: #ffe7b3;
-  --btn-border: #a67234;
-  --pri-bg: linear-gradient(180deg, #9c2717, #611309);
-  --pri-fg: #fff6dc;
-  --pri-border: #f0bc46;
-  --bar-bg: #0f0804;
-  --bar-border: #a37032;
-  --wood-1: #382212;
-  --wood-2: #2d1b0e;
-  --wood-3: #22140a;
-  --sh: 0 5px 14px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 220, 140, 0.14);
+  --bg: #120608;
+  --bg2: #1f0a0e;
+  --card: rgba(38, 14, 19, 0.9);
+  --card2: rgba(54, 20, 27, 0.94);
+  --line: rgba(245, 199, 93, 0.24);
+  --line-gold: rgba(250, 212, 114, 0.6);
+  --txt: #fcf4e6;
+  --mut: #d1b791;
+  --gold: #f5c75d;
+  --gold2: #ffe8a3;
+  --crimson: #b8293d;
+  --jade: #25b879;
 }
 
 * {
+  box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-html,
-body {
-  height: 100%;
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
   background: var(--bg);
-  color: var(--fg);
-  font: 16px/1.65 -apple-system, "Noto Sans Myanmar", "Padauk", sans-serif;
+  color: var(--txt);
+  font-family: "Noto Sans Myanmar", system-ui, -apple-system, sans-serif;
   overflow: hidden;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  -webkit-text-size-adjust: 100%;
 }
 
-/* ဘေးနှစ်ဖက် ဝါးဆစ်တိုင်များပါသော အဓိက App ဘောင် */
+body {
+  background:
+    radial-gradient(circle at 15% 10%, rgba(184, 41, 61, 0.25), transparent 45%),
+    radial-gradient(circle at 85% 15%, rgba(245, 199, 93, 0.18), transparent 45%),
+    linear-gradient(170deg, #1b080b 0%, #100507 70%, #18070a 100%);
+}
+
 #app {
-  max-width: 430px;
-  margin: 0 auto;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--bg);
-  position: relative;
-  padding-left: 14px;
-  padding-right: 14px;
-  box-sizing: border-box;
-  box-shadow: 0 0 32px rgba(0, 0, 0, 0.45);
+  height: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  border-left: 1px solid rgba(245, 199, 93, 0.1);
+  border-right: 1px solid rgba(245, 199, 93, 0.1);
 }
 
-/* ဘယ်/ညာ ဝါးဆစ်တိုင် ဂရပ်ဖစ် */
-#app::before,
-#app::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 14px;
-  z-index: 4;
-  pointer-events: none;
-  background-color: var(--bamboo-2);
-  background-image:
-    linear-gradient(
-      90deg,
-      var(--bamboo-line) 0%,
-      var(--bamboo-2) 32%,
-      var(--bamboo-3) 56%,
-      var(--bamboo-1) 88%,
-      var(--bamboo-line) 100%
-    ),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='120'%3E%3Crect x='0' y='56' width='14' height='4' fill='%23291707'/%3E%3Crect x='0' y='60' width='14' height='2.5' fill='%23f7e2a6' fill-opacity='.5'/%3E%3Crect x='0' y='62.5' width='14' height='2' fill='%23291707'/%3E%3C/svg%3E");
-  background-repeat: repeat-y;
-}
-#app::before {
-  left: 0;
-}
-#app::after {
-  right: 0;
-}
-
-/* ထိပ်ဆုံး ပန်းခွေရွှေတန်း Banner (မြူးကြွစွာ ဖြည်းညှင်းစွာ ရွေ့လျားနေသော ပန်းခွေတန်း) */
+/* ရွေ့နေသော animation မပါစေရန် static ထားထားသည် */
 #ib {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  background-color: #4d2e14;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ccircle cx='18' cy='18' r='13' stroke='%23e2b246' stroke-width='1.5' fill='none'/%3E%3Ccircle cx='18' cy='18' r='8' stroke='%23f7d881' stroke-width='1' fill='none'/%3E%3Cpath d='M18 5C21 11 25 15 31 18C25 21 21 25 18 31C15 25 11 21 5 18C11 15 15 11 18 5Z' stroke='%23e2b246' stroke-width='1.1' fill='none'/%3E%3C/svg%3E"),
-    linear-gradient(180deg, #5c3718, #3b200b);
-  background-size: 34px 34px, 100% 100%;
-  background-repeat: repeat-x, no-repeat;
-  animation: fretScroll 14s linear infinite;
-  color: #fff3d1;
-  font-size: 13px;
-  font-weight: 700;
-  border-bottom: 3px solid var(--bamboo-2);
-  box-shadow: inset 0 -1px 0 var(--bamboo-line);
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 14px;
+  background: linear-gradient(90deg, rgba(184, 41, 61, 0.35), rgba(245, 199, 93, 0.2));
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  animation: none !important;
+  transform: none !important;
 }
-#ib[hidden] {
-  display: none;
-}
+#ib[hidden] { display: none; }
 #ib span {
-  flex: 1;
-  color: #fff3d1;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  animation: none !important;
+  transform: none !important;
+  transition: none !important;
 }
 #ib button {
   width: auto;
   margin: 0;
-  padding: 4px 12px;
-  border: 2px solid var(--gd);
-  border-radius: 10px;
-  background: linear-gradient(180deg, #6e411d, #42230c);
-  color: #fff6dc;
-  font: inherit;
-  font-size: 13px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line-gold);
+  background: rgba(245, 199, 93, 0.22);
+  color: var(--gold2);
   font-weight: 700;
+  font-size: 11.5px;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  transition: transform 0.15s ease;
-}
-#ib button:active {
-  transform: scale(0.94);
 }
 
-/* ကျေးလက်အိမ်မိုးနှင့် သစ်သား Header */
+.kn {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.45;
+}
+
 #hd {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  background:
-    radial-gradient(circle at 85% 20%, rgba(255, 224, 130, 0.18), transparent 50%),
-    linear-gradient(180deg, #784422, #4d2810);
-  color: #fff5d6;
-  position: relative;
-  border-bottom: 4px solid var(--bamboo-2);
-  box-shadow: inset 0 2px 0 rgba(255, 224, 150, 0.2), inset 0 -1px 0 var(--bamboo-line);
-}
-#hd small {
-  display: block;
-  color: #f4d89d;
-  font-size: 12px;
-  line-height: 1.4;
-}
-#hd b {
-  font-family: "Noto Serif Myanmar", "Noto Sans Myanmar", serif;
-  font-size: 17px;
-  color: #fff7dd;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
-}
-.nm {
-  min-width: 0;
+  gap: 12px;
+  padding: 11px 14px;
+  background: linear-gradient(180deg, rgba(48, 18, 24, 0.96), rgba(25, 10, 13, 0.95));
+  border-bottom: 1px solid var(--line);
 }
 
-/* ဇာတ်ကောင်ပုံ Medallion (ရွှေရောင်အလင်းကွင်း ဖြည်းဖြည်းလှည့်နေမည်) */
 .av {
   width: 56px;
   height: 56px;
+  border-radius: 50%;
   flex: none;
   cursor: pointer;
-  border-radius: 50%;
-  overflow: hidden;
-  position: relative;
-  padding: 2.5px;
-  background: linear-gradient(145deg, #ffe599, #b57a1e);
-  border: 2.5px solid var(--bamboo-line);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 12px rgba(234, 180, 60, 0.28);
-  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.av::before {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg 70deg,
-    rgba(255, 234, 155, 0.85) 92deg,
-    transparent 118deg 250deg,
-    rgba(255, 234, 155, 0.65) 272deg,
-    transparent 298deg 360deg
-  );
-  animation: haloSpin 8s linear infinite;
-  pointer-events: none;
-}
-.av:hover {
-  transform: scale(1.05);
-}
-.av:active {
-  transform: scale(0.92);
-}
-.av svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  border-radius: 50%;
-  background: #f9e6b3;
-  position: relative;
-  z-index: 1;
-  animation: bob 3.2s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 232, 163, 0.25), rgba(184, 41, 61, 0.28));
+  border: 2px solid var(--line-gold);
+  box-shadow: 0 0 16px rgba(245, 199, 93, 0.22);
 }
 
-/* ပိုက်ဆံ/ခလုတ် Pill */
-#hd .m {
-  margin-left: auto;
-  background: var(--btn-bg);
-  border: 2px solid var(--btn-border);
-  color: var(--btn-fg);
-  padding: 5px 11px;
-  border-radius: 10px;
+.nm {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.35;
+}
+.nm b {
+  display: block;
+  font-size: 15.5px;
+  color: var(--gold2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nm small {
+  display: block;
+  font-size: 11.5px;
+  color: var(--mut);
+}
+
+.m {
+  padding: 7px 11px;
+  border-radius: 14px;
+  cursor: pointer;
+  flex: none;
+  background: linear-gradient(135deg, rgba(245, 199, 93, 0.2), rgba(184, 41, 61, 0.22));
+  border: 1px solid var(--line-gold);
+  color: var(--gold2);
   font-weight: 700;
   font-size: 12px;
-  white-space: nowrap;
-  cursor: pointer;
-  box-shadow: inset 0 0 0 1px rgba(200, 150, 40, 0.4), 0 2px 5px rgba(0, 0, 0, 0.35);
-  transition: transform 0.15s ease, filter 0.2s ease;
-}
-#hd .m:hover {
-  filter: brightness(1.06);
-}
-#hd .m:active {
-  transform: scale(0.94);
 }
 
-/* ကြာပွင့်နှင့် စိမ်းလန်းသော ဇာပန်းတန်း (မြူးကြွစွာ ဖြည်းညှင်းစွာ လှုပ်ရှားနေမည်) */
-.kn {
-  height: 18px;
-  flex: none;
-  background-color: var(--wood-2);
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='18'%3E%3Cpath d='M0 16C6 6 18 6 24 16C30 6 42 6 48 16' stroke='%234c7c34' stroke-width='2.2' fill='%23639943' fill-opacity='.6'/%3E%3Cpath d='M24 3C28 8 30 12 24 16C18 12 20 8 24 3Z' fill='%23f6cb94' stroke='%238c3b2b' stroke-width='1'/%3E%3Cpath d='M16 9C20 10 22 13 24 16C20 15 17 13 16 9Z' fill='%23eba97e'/%3E%3Cpath d='M32 9C28 10 26 13 24 16C28 15 31 13 32 9Z' fill='%23eba97e'/%3E%3C/svg%3E");
-  background-repeat: repeat-x;
-  background-position: center;
-  animation: fretScrollReverse 18s linear infinite;
-  border-top: 1px solid var(--bamboo-line);
-  border-bottom: 2px solid var(--bamboo-line);
-}
-
-/* Stat / Attribute Bar */
 #st {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5px 12px;
-  padding: 7px 10px 8px;
-  background:
-    repeating-linear-gradient(
-      180deg,
-      var(--wood-1) 0px,
-      var(--wood-2) 14px,
-      var(--wood-3) 15px
-    );
-  border-bottom: 3px solid var(--bamboo-2);
-  box-shadow: inset 0 1px 0 rgba(255, 232, 180, 0.22);
-  position: relative;
-  z-index: 1;
+  grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+  gap: 7px 12px;
+  padding: 9px 14px;
+  background: rgba(20, 8, 11, 0.85);
+  border-bottom: 1px solid var(--line);
 }
+
 .b {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 12px;
+  gap: 7px;
+  font-size: 11.5px;
 }
-.b span {
-  width: 60px;
-  color: #fff6dc;
-  font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
-}
+.b span { width: 64px; flex: none; color: var(--mut); font-weight: 600; }
 .b i {
   flex: 1;
-  height: 10px;
-  background: var(--bar-bg);
-  border: 1.5px solid var(--bar-border);
+  height: 8px;
   border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
   overflow: hidden;
-  position: relative;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.7);
+  display: block;
 }
-.b u {
+.b i u {
   display: block;
   height: 100%;
   border-radius: 999px;
-  position: relative;
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.35), inset 0 -2px 0 rgba(0, 0, 0, 0.28);
-  transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.b u::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.35) 50%,
-    transparent 100%
-  );
-  transform: translateX(-100%);
-  animation: barSheen 3.8s ease-in-out infinite;
+  transition: width 0.4s ease;
 }
 .b em {
-  width: 38px;
-  text-align: right;
   font-style: normal;
-  color: #fff6dc;
+  width: 36px;
+  text-align: right;
   font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
+  font-size: 11px;
 }
-.b.lo em {
-  color: var(--or);
-  animation: dangerBlink 1.2s ease-in-out infinite;
+.b.lo em { color: #ff6b81; }
+
+#tb {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background: rgba(26, 10, 14, 0.96);
+  border-top: 1px solid var(--line);
+}
+#tb b {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 8px 4px;
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--mut);
+  cursor: pointer;
+}
+#tb b span { font-size: 15px; line-height: 1; }
+#tb b.on {
+  color: var(--gold2);
+  background: linear-gradient(180deg, rgba(245, 199, 93, 0.14), transparent);
+}
+#tb b.on::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18%;
+  right: 18%;
+  height: 2.5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2), var(--gold));
 }
 
-/* ပင်မစာမျက်နှာ နောက်ခံ — ကျေးလက်လယ်ကွင်း၊ ကြာပွင့်နှင့် ပန်းခွေ ဂရပ်ဖစ်အလွှာများ (ဓာတ်ပုံမလိုဘဲ မြူးကြွစေရန်) */
 #ct {
   flex: 1;
   overflow-y: auto;
-  padding: 10px 10px 18px;
+  padding: 14px;
   scroll-behavior: smooth;
-  overscroll-behavior: contain;
-  position: relative;
-  background-color: var(--bg);
-  background-image:
-    radial-gradient(circle at 20% 10%, rgba(234, 180, 60, 0.16), transparent 45%),
-    radial-gradient(circle at 82% 88%, rgba(93, 179, 73, 0.14), transparent 48%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84'%3E%3Cpath d='M0 64Q21 52 42 64T84 64' stroke='%23b8862b' stroke-opacity='.14' stroke-width='1.3' fill='none'/%3E%3Cpath d='M0 75Q21 63 42 75T84 75' stroke='%2358a649' stroke-opacity='.13' stroke-width='1.2' fill='none'/%3E%3Cpath d='M42 14C47 22 47 29 42 36C37 29 37 22 42 14Z' fill='%23c89628' fill-opacity='.11'/%3E%3Cpath d='M33 25C38 26 40 30 42 36C37 35 34 31 33 25Z' fill='%23c89628' fill-opacity='.09'/%3E%3Cpath d='M51 25C46 26 44 30 42 36C47 35 50 31 51 25Z' fill='%23c89628' fill-opacity='.09'/%3E%3Ccircle cx='16' cy='22' r='1.8' fill='%23c89628' fill-opacity='.18'/%3E%3Ccircle cx='68' cy='34' r='1.5' fill='%239c2717' fill-opacity='.14'/%3E%3C/svg%3E");
-  animation: meadowDrift 24s ease-in-out infinite alternate;
 }
-#ct::-webkit-scrollbar {
-  width: 4px;
-}
-#ct::-webkit-scrollbar-thumb {
-  background: var(--bamboo-2);
-  border-radius: 999px;
-}
-#ct.in {
-  animation: tabin 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-/* ရွှေပန်းခွေထောင့်ပါ Card (.c) - စာသားအရောင် သီးခြားခွဲထားသည် */
-.c {
-  position: relative;
-  background: var(--card-bg);
-  color: var(--card-fg);
-  border: 2px solid var(--card-border);
-  border-radius: 10px;
-  padding: 11px 14px;
-  margin: 7px 0;
-  box-shadow:
-    inset 0 0 0 1.5px var(--card-inner),
-    var(--sh);
-  transition: transform 0.18s ease, border-color 0.2s ease;
-}
-.c small {
-  color: var(--card-sub);
-}
-.c::before,
-.c::after {
-  content: "";
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  pointer-events: none;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M2 26C2 12 10 3 26 2' stroke='%23d49e2a' stroke-width='1.8' fill='none'/%3E%3Cpath d='M3 18C6 11 11 6 18 3' stroke='%23f2c45a' stroke-width='1.3' fill='none'/%3E%3Cpath d='M6 12C6 8 9 6 13 6' stroke='%23d49e2a' stroke-width='1.2' fill='none'/%3E%3Ccircle cx='5' cy='5' r='2' fill='%23f2c45a'/%3E%3C/svg%3E")
-    no-repeat;
-}
-.c::before {
-  top: 2px;
-  left: 2px;
-}
-.c::after {
-  bottom: 2px;
-  right: 2px;
-  transform: rotate(180deg);
-}
-
-#hd b,
-.hero h2,
-.c b,
-.sh b {
-  font-family: "Noto Serif Myanmar", "Noto Sans Myanmar", serif;
+#ct.in .n { animation: riseIn 0.28s ease both; }
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
 }
 
 .hero {
   text-align: center;
-  padding: 18px 14px;
-  border-width: 2.5px;
+  padding: 22px 16px;
+  background: linear-gradient(160deg, rgba(64, 24, 32, 0.92), rgba(28, 11, 15, 0.96));
+  border: 1px solid var(--line-gold);
+  border-radius: 20px;
+  margin-bottom: 12px;
 }
-.hero h2 {
-  margin: 6px 0 4px;
-  color: var(--bl);
-}
+.hero h2 { margin: 10px 0 6px; font-size: 23px; color: var(--gold2); }
+.hero small { display: block; color: var(--mut); line-height: 1.6; font-size: 13px; }
 
-/* ဇာတ်လမ်းစာကြောင်း Card များ - Light & Dark နှစ်မျိုးလုံး စာသားပြတ်သားစေရန် */
-#ct > div:not(.y):not(.c) {
-  position: relative;
-  background: var(--card-bg);
-  color: var(--card-fg);
-  border: 2px solid var(--card-border);
-  border-radius: 9px;
-  padding: 8px 12px;
-  margin: 6px 0;
-  font-size: 15px;
-  box-shadow:
-    inset 0 0 0 1.5px var(--card-inner),
-    0 2px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.16s ease, border-color 0.2s ease;
+.c {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  line-height: 1.58;
+  font-size: 13.5px;
 }
-#ct > div:not(.y):not(.c) small {
-  color: var(--card-sub);
-}
+.c b { color: var(--gold2); }
+.c small { color: var(--mut); line-height: 1.5; }
+.c.r { border-left: 3.5px solid var(--crimson); background: linear-gradient(90deg, rgba(184, 41, 61, 0.16), var(--card)); }
+.c.y { border-left: 3.5px solid var(--gold); background: linear-gradient(90deg, rgba(245, 199, 93, 0.16), var(--card)); }
 
-.n {
-  animation: popBounce 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-/* ရွေးချယ်စရာ ခလုတ်များ - မြူးကြွသော နှိပ်ချက်နှင့် Hover */
-#ct button,
-#md button {
+button {
   display: block;
   width: 100%;
-  margin: 6px 0;
+  text-align: left;
   padding: 11px 14px;
-  font: inherit;
+  margin-bottom: 8px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(50, 20, 27, 0.92), rgba(31, 12, 16, 0.96));
+  color: var(--txt);
+  font-size: 13.5px;
   font-weight: 600;
-  color: var(--btn-fg);
-  background: var(--btn-bg);
-  border: 2px solid var(--btn-border);
-  border-radius: 10px;
   cursor: pointer;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 0 0 1px rgba(200, 150, 40, 0.35), 0 3px 0 rgba(40, 20, 6, 0.28), 0 3px 6px rgba(0, 0, 0, 0.22);
-  transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
-#ct button:hover,
-#md button:hover {
-  border-color: var(--gd);
-  filter: brightness(1.06);
-  transform: translateY(-1.5px);
-}
-#ct button:active,
-#md button:active {
-  transform: translateY(1.5px) scale(0.97);
-  box-shadow: inset 0 0 0 1px rgba(200, 150, 40, 0.35), 0 1px 0 rgba(40, 20, 6, 0.28);
+button:hover:not(:disabled) { border-color: var(--line-gold); }
+button:active:not(:disabled) { transform: scale(0.985); }
+button:disabled { opacity: 0.42; cursor: not-allowed; }
+button.pri {
+  background: linear-gradient(135deg, #c98a1e 0%, #f5c75d 52%, #d49422 100%);
+  color: #190c06;
+  border: 1px solid #ffe8a3;
+  font-weight: 800;
 }
 
-/* Primary ခလုတ် (ရွှေရောင်အလင်းတန်း ဖြတ်ပြေးမည်) */
-#ct button.pri,
-#md button.pri {
-  background: var(--pri-bg);
-  border-color: var(--pri-border);
-  color: var(--pri-fg);
-  font-weight: 700;
-  box-shadow: inset 0 1px 0 rgba(255, 224, 150, 0.38), 0 3px 0 rgba(35, 8, 4, 0.5), 0 4px 10px rgba(0, 0, 0, 0.35);
-}
-#ct button.pri::after,
-#md button.pri::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 55%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 238, 175, 0.32),
-    transparent
-  );
-  transform: skewX(-20deg);
-  animation: btnSweep 4.2s ease-in-out infinite;
-  pointer-events: none;
-}
-
-/* အသက်နှင့် ခုနှစ် ခေါင်းစဉ်စာတန်း (.y) */
-.y {
-  color: var(--sb);
-  font-size: 12.5px;
-  font-weight: 700;
-  text-align: center;
-  margin: 10px 0 6px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-}
-.y::before,
-.y::after {
-  content: " ✿ ";
-  color: var(--gr);
-}
-.r {
-  color: var(--or);
-  font-weight: 700;
-}
-small {
-  color: var(--sb);
-}
-
-/* အောက်ခြေ အသက် +၁ ခလုတ် အပိုင်း (#dk) */
 #dk {
   display: none;
   align-items: center;
-  gap: 10px;
-  padding: 9px 12px;
-  background:
-    repeating-linear-gradient(
-      180deg,
-      #4b2d15 0px,
-      #3b220f 16px,
-      #2c180a 17px
-    );
-  color: #fff4d2;
-  border-top: 3px solid var(--bamboo-2);
-  box-shadow: inset 0 1px 0 rgba(255, 224, 150, 0.2);
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(24, 10, 13, 0.96);
+  border-top: 1px solid var(--line);
 }
-#dk small {
-  color: #ebd094;
-}
-.bs {
-  flex: 1;
-}
-
-/* အစိမ်းရောင် အဝိုင်းခလုတ် (+ အသက်) - မြူးကြွသော Pulse Animation */
-.ag {
-  width: 64px;
-  height: 64px;
+#dk .bs b { font-size: 13.5px; color: var(--gold2); }
+#dk .bs small { font-size: 11.5px; color: var(--mut); }
+#dk .ag {
+  width: 72px;
+  height: 52px;
   flex: none;
-  border-radius: 50%;
-  border: 3px solid #f7e4b2;
-  background:
-    radial-gradient(circle at 35% 30%, #74cc4e, var(--gr) 62%, var(--jd));
-  color: #ffffff;
-  font-size: 28px;
-  font-weight: 700;
-  font-family: inherit;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow:
-    0 0 0 2px #2b180a,
-    0 4px 10px rgba(0, 0, 0, 0.5);
-  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
-}
-.ag small {
-  display: block;
-  font-size: 11px;
-  font-weight: 700;
-  color: #ffffff;
-  margin-top: 1px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
-}
-.ag:not(:disabled) {
-  animation: pulse 2.2s ease-in-out infinite;
-}
-.ag:hover:not(:disabled) {
-  transform: scale(1.06);
-}
-.ag:active:not(:disabled) {
-  transform: scale(0.9);
-}
-.ag:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-/* အောက်ဆုံး ကြိမ်ယက်ထည် Tab Bar (#tb) */
-#tb {
-  display: flex;
-  position: relative;
-  background-color: var(--wood-2);
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Crect width='12' height='12' fill='%23b57e40' fill-opacity='.55' stroke='%233d230c' stroke-width='1.2'/%3E%3Crect x='12' y='12' width='12' height='12' fill='%23b57e40' fill-opacity='.55' stroke='%233d230c' stroke-width='1.2'/%3E%3Crect x='12' y='0' width='12' height='12' fill='%238c5b27' fill-opacity='.55' stroke='%233d230c' stroke-width='1.2'/%3E%3Crect x='0' y='12' width='12' height='12' fill='%238c5b27' fill-opacity='.55' stroke='%233d230c' stroke-width='1.2'/%3E%3C/svg%3E");
-  border-top: 3px solid var(--bamboo-2);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
-}
-#tb::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: calc(var(--i, 0) * 20%);
-  width: 20%;
-  height: 3.5px;
-  background: linear-gradient(90deg, var(--gr), var(--gd), var(--bl));
-  box-shadow: 0 1px 6px rgba(234, 180, 60, 0.7);
-  transition: left 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-#tb b {
-  flex: 1;
   text-align: center;
-  font-size: 10.5px;
-  padding: 7px 0 6px;
-  color: #f6e7c4;
-  cursor: pointer;
-  font-weight: 700;
-  text-shadow: 0 1px 2px #140b05, 0 0 5px rgba(0, 0, 0, 0.8);
-  transition: transform 0.15s ease, color 0.2s ease;
-}
-#tb b:active {
-  transform: scale(0.92);
-}
-#tb b span {
-  display: block;
-  font-size: 20px;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.75));
-  transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-#tb .on {
-  color: #ffe694;
-}
-#tb .on span {
-  transform: translateY(-3px) scale(1.15);
+  padding: 6px;
+  margin: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--crimson), #7d1524);
+  border: 1.5px solid var(--line-gold);
+  color: var(--gold2);
+  font-size: 17px;
+  font-weight: 800;
 }
 
-/* Toast Notification */
-.ts {
-  position: fixed;
-  left: 50%;
-  bottom: 150px;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, #3b1e0c, #221106);
-  color: #fff5d6;
-  border: 2px solid var(--gd);
-  padding: 8px 16px;
-  border-radius: 12px;
+.funeral-card {
+  padding: 18px 16px;
+  margin-bottom: 14px;
+  border-radius: 20px;
+  background: linear-gradient(170deg, rgba(44, 17, 23, 0.97), rgba(18, 8, 10, 0.99));
+  border: 2px solid var(--gold);
+  box-shadow: inset 0 0 0 3px rgba(184, 41, 61, 0.35);
+  text-align: center;
+}
+.funeral-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--gold2);
+  background: rgba(184, 41, 61, 0.35);
+  border: 1px solid var(--line-gold);
+  margin-bottom: 8px;
+}
+.funeral-title { font-size: 19px; font-weight: 800; color: var(--gold2); margin: 4px 0; }
+.funeral-sub { font-size: 12px; color: var(--mut); margin-bottom: 12px; }
+.funeral-bio {
+  text-align: left;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(245, 199, 93, 0.2);
   font-size: 13px;
-  max-width: 80%;
-  z-index: 9;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
-  animation: toast 2.2s ease both;
+  line-height: 1.65;
+  margin-bottom: 10px;
 }
+.funeral-quote { font-style: italic; font-size: 12.5px; color: var(--gold); }
 
-/* Modal Sheet */
 #md {
   position: fixed;
   inset: 0;
-  background: rgba(10, 6, 2, 0.68);
-  backdrop-filter: blur(2px);
+  z-index: 60;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  z-index: 5;
-  animation: fade 0.25s ease;
+  background: rgba(0, 0, 0, 0.74);
 }
 .sh {
-  background: var(--bg);
-  color: var(--fg);
   width: 100%;
-  max-width: 430px;
-  border-top: 4px solid var(--bamboo-2);
-  border-left: 3px solid var(--bamboo-2);
-  border-right: 3px solid var(--bamboo-2);
-  border-radius: 20px 20px 0 0;
-  padding: 16px 14px 18px;
-  max-height: 85%;
+  max-width: 680px;
+  max-height: 86vh;
   overflow-y: auto;
-  box-sizing: border-box;
-  box-shadow: 0 -8px 26px rgba(0, 0, 0, 0.55);
-  animation: up 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  padding: 16px;
+  border-radius: 22px 22px 0 0;
+  background: linear-gradient(180deg, #2b1117, #15070a);
+  border-top: 1.5px solid var(--line-gold);
+}
+.sh input, .c input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--txt);
+  font-size: 13.5px;
+  margin-top: 6px;
 }
 
-/* Tap Ripple */
+.ts {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #32131a, #17080b);
+  border: 1px solid var(--line-gold);
+  color: var(--gold2);
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .rp {
   position: fixed;
-  width: 12px;
-  height: 12px;
-  margin: -6px 0 0 -6px;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
   border-radius: 50%;
-  border: 1.5px solid var(--gd);
-  background: rgba(234, 180, 60, 0.45);
   pointer-events: none;
-  z-index: 99;
-  animation: rp 0.58s ease-out forwards;
+  z-index: 55;
+  border: 2px solid var(--gold2);
+  animation: ripAnim 0.6s ease-out forwards;
+}
+@keyframes ripAnim {
+  from { opacity: 0.85; transform: scale(0.2); }
+  to { opacity: 0; transform: scale(2.5); }
 }
 
-/* JS ကနေ ထပ်ထည့်သုံးနိုင်တဲ့ Game Feedback Animations (ဥပမာ - .shake, .flash-gold, .pop) */
-.shake {
-  animation: screenShake 0.38s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-}
-.flash-gold {
-  animation: goldGlow 0.65s ease-out;
-}
-
-input:not([type="range"]) {
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: 6px;
-  padding: 10px 12px;
-  font: inherit;
-  border: 2px solid var(--card-border);
-  border-radius: 10px;
-  background: var(--cd);
-  color: var(--fg);
-}
-input:not([type="range"]):focus {
-  outline: none;
-  border-color: var(--gd);
-}
-
-/* Animations */
-@keyframes popBounce {
-  0% { opacity: 0; transform: translateY(10px) scale(0.98); }
-  70% { opacity: 1; transform: translateY(-2px) scale(1.005); }
-  100% { opacity: 1; transform: none; }
-}
-@keyframes tabin {
-  from { opacity: 0; transform: translateX(14px); }
-  to { opacity: 1; transform: none; }
-}
-@keyframes up {
-  from { transform: translateY(100%); }
-  to { transform: none; }
-}
-@keyframes fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(116, 204, 78, 0.6), 0 0 0 2px #2b180a; }
-  50% { box-shadow: 0 0 0 10px rgba(234, 180, 60, 0), 0 0 0 2px #2b180a; }
-}
-@keyframes bob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-2.5px); }
-}
-@keyframes haloSpin {
-  to { transform: rotate(360deg); }
-}
-@keyframes fretScroll {
-  from { background-position: 0px center, 0 0; }
-  to { background-position: 68px center, 0 0; }
-}
-@keyframes fretScrollReverse {
-  from { background-position: 96px center; }
-  to { background-position: 0px center; }
-}
-@keyframes meadowDrift {
-  0% { background-position: 0 0, 0 0, 0px 0px; }
-  100% { background-position: 0 0, 0 0, 24px 12px; }
-}
-@keyframes barSheen {
-  0%, 65% { transform: translateX(-100%); }
-  100% { transform: translateX(220%); }
-}
-@keyframes btnSweep {
-  0%, 68% { left: -120%; }
-  100% { left: 160%; }
-}
-@keyframes dangerBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.55; }
-}
-@keyframes toast {
-  0% { opacity: 0; transform: translate(-50%, 10px); }
-  12%, 85% { opacity: 1; transform: translate(-50%, 0); }
-  100% { opacity: 0; }
-}
-@keyframes rp {
-  from { transform: scale(1); opacity: 0.92; }
-  to { transform: scale(10.5); opacity: 0; }
-}
-@keyframes screenShake {
-  10%, 90% { transform: translate3d(-2px, 0, 0); }
-  20%, 80% { transform: translate3d(3px, 1px, 0); }
-  30%, 50%, 70% { transform: translate3d(-4px, -1px, 0); }
-  40%, 60% { transform: translate3d(4px, 1px, 0); }
-}
-@keyframes goldGlow {
-  0% { box-shadow: 0 0 0 0 rgba(234, 180, 60, 0.75); }
-  100% { box-shadow: 0 0 0 14px rgba(234, 180, 60, 0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
+.shake { animation: shk 0.38s ease; }
+@keyframes shk {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
 }

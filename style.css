@@ -1,107 +1,128 @@
 :root {
+  /* Light Mode: နေ့ခင်း ကျေးလက်သနပ်ခါး၊ ပေစာနှင့် ဝါးရောင် */
   --bg: #dfce9f;
   --cd: #f9ecc9;
-  --fg: #2b180a;
-  --sb: #634424;
-  --bl: #7a2315;
-  --gr: #4c8c3b;
-  --or: #b8370b;
+  --fg: #241307;
+  --sb: #5c3d1e;
+  --bl: #781f12;
+  --gr: #478a36;
+  --or: #b83208;
   --sp: #c49c59;
   --gd: #c89628;
   --hb: #683c1e;
-  --jd: #2c6829;
+  --jd: #286325;
+
   --bamboo-1: #946b38;
   --bamboo-2: #c9a05d;
-  --bamboo-3: #e8cb8e;
-  --bamboo-line: #4e3315;
-  --card-top: #fcf2d8;
-  --card-bot: #f2dfb1;
+  --bamboo-3: #ecd295;
+  --bamboo-line: #4a2f12;
+
+  /* Card & Button Tokens (Light) */
+  --card-bg: linear-gradient(180deg, #fdf4dc, #f1ddb0);
+  --card-fg: #241307;
+  --card-sub: #5e3f1f;
+  --card-border: #875b28;
   --card-inner: #d4a656;
-  --btn-top: #fdf5de;
-  --btn-bot: #eed7a1;
-  --btn-fg: #4b1a0c;
-  --pri-top: #9e2d1c;
-  --pri-bot: #6e1b10;
-  --pri-fg: #fff5d6;
-  --bar-bg: #462b12;
+
+  --btn-bg: linear-gradient(180deg, #fff7e2, #edd49b);
+  --btn-fg: #47170a;
+  --btn-border: #875b28;
+
+  --pri-bg: linear-gradient(180deg, #a62c1a, #6e190e);
+  --pri-fg: #fff6dc;
+  --pri-border: #d9a438;
+
+  --bar-bg: #3f250e;
   --bar-border: #d5ab63;
   --wood-1: #966b3a;
   --wood-2: #865c2e;
   --wood-3: #734c23;
-  --sh: 0 3px 8px rgba(58, 35, 12, 0.2), inset 0 1px 0 rgba(255, 250, 230, 0.7);
+
+  --sh: 0 3px 9px rgba(58, 35, 12, 0.2), inset 0 1px 0 rgba(255, 252, 240, 0.75);
   color-scheme: light dark;
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* Dark Mode: ညဘက် မီးအိမ်နွေးနွေးနှင့် သစ်သားညိုမှောင် အရောင်အတွဲအစပ် */
+/* Dark Mode: ညဘက် ရွှေမီးအိမ်အောက်က ယွန်း/သစ်သားညိုမှောင် (High Contrast) */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #181009;
-    --cd: #2b1b10;
-    --fg: #f8ebd0;
-    --sb: #d6b687;
-    --bl: #f5b963;
-    --gr: #58a649;
-    --or: #ff9d5c;
-    --sp: #6e4a27;
-    --gd: #e2ad3b;
-    --hb: #3a1f11;
-    --jd: #3a8336;
-    --bamboo-1: #5a3a1c;
-    --bamboo-2: #87592c;
-    --bamboo-3: #ad773e;
-    --bamboo-line: #120a05;
-    --card-top: #2f1e12;
-    --card-bot: #22150c;
-    --card-inner: #8c612b;
-    --btn-top: #382415;
-    --btn-bot: #27180d;
-    --btn-fg: #f9e4b4;
-    --pri-top: #8f2618;
-    --pri-bot: #5d150c;
-    --pri-fg: #fff2cf;
-    --bar-bg: #140c06;
-    --bar-border: #96682f;
-    --wood-1: #3b2514;
-    --wood-2: #311e10;
-    --wood-3: #26170c;
-    --sh: 0 4px 12px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 218, 138, 0.12);
+    --bg: #140c06;
+    --cd: #26170d;
+    --fg: #fff2d6;
+    --sb: #e5c38c;
+    --bl: #ffca6e;
+    --gr: #5db349;
+    --or: #ff8c52;
+    --sp: #7a5128;
+    --gd: #eab43c;
+    --hb: #381d0f;
+    --jd: #388233;
+
+    --bamboo-1: #543518;
+    --bamboo-2: #825529;
+    --bamboo-3: #ab753c;
+    --bamboo-line: #0d0703;
+
+    /* Card & Button Tokens (Dark) - နောက်ခံမှောင်ပြီး စာသား အလင်းရောင် ကြည်လင်စေရန် */
+    --card-bg: linear-gradient(180deg, #2b1a0e, #1d1109);
+    --card-fg: #fff2d6;
+    --card-sub: #dfc08d;
+    --card-border: #996930;
+    --card-inner: #593b18;
+
+    --btn-bg: linear-gradient(180deg, #3b2414, #26160c);
+    --btn-fg: #ffe7b3;
+    --btn-border: #a67234;
+
+    --pri-bg: linear-gradient(180deg, #9c2717, #611309);
+    --pri-fg: #fff6dc;
+    --pri-border: #f0bc46;
+
+    --bar-bg: #0f0804;
+    --bar-border: #a37032;
+    --wood-1: #382212;
+    --wood-2: #2d1b0e;
+    --wood-3: #22140a;
+
+    --sh: 0 5px 14px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 220, 140, 0.14);
   }
 }
 
 :root[data-theme="dark"] {
-  --bg: #181009;
-  --cd: #2b1b10;
-  --fg: #f8ebd0;
-  --sb: #d6b687;
-  --bl: #f5b963;
-  --gr: #58a649;
-  --or: #ff9d5c;
-  --sp: #6e4a27;
-  --gd: #e2ad3b;
-  --hb: #3a1f11;
-  --jd: #3a8336;
-  --bamboo-1: #5a3a1c;
-  --bamboo-2: #87592c;
-  --bamboo-3: #ad773e;
-  --bamboo-line: #120a05;
-  --card-top: #2f1e12;
-  --card-bot: #22150c;
-  --card-inner: #8c612b;
-  --btn-top: #382415;
-  --btn-bot: #27180d;
-  --btn-fg: #f9e4b4;
-  --pri-top: #8f2618;
-  --pri-bot: #5d150c;
-  --pri-fg: #fff2cf;
-  --bar-bg: #140c06;
-  --bar-border: #96682f;
-  --wood-1: #3b2514;
-  --wood-2: #311e10;
-  --wood-3: #26170c;
-  --sh: 0 4px 12px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 218, 138, 0.12);
+  --bg: #140c06;
+  --cd: #26170d;
+  --fg: #fff2d6;
+  --sb: #e5c38c;
+  --bl: #ffca6e;
+  --gr: #5db349;
+  --or: #ff8c52;
+  --sp: #7a5128;
+  --gd: #eab43c;
+  --hb: #381d0f;
+  --jd: #388233;
+  --bamboo-1: #543518;
+  --bamboo-2: #825529;
+  --bamboo-3: #ab753c;
+  --bamboo-line: #0d0703;
+  --card-bg: linear-gradient(180deg, #2b1a0e, #1d1109);
+  --card-fg: #fff2d6;
+  --card-sub: #dfc08d;
+  --card-border: #996930;
+  --card-inner: #593b18;
+  --btn-bg: linear-gradient(180deg, #3b2414, #26160c);
+  --btn-fg: #ffe7b3;
+  --btn-border: #a67234;
+  --pri-bg: linear-gradient(180deg, #9c2717, #611309);
+  --pri-fg: #fff6dc;
+  --pri-border: #f0bc46;
+  --bar-bg: #0f0804;
+  --bar-border: #a37032;
+  --wood-1: #382212;
+  --wood-2: #2d1b0e;
+  --wood-3: #22140a;
+  --sh: 0 5px 14px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 220, 140, 0.14);
 }
 
 * {
@@ -131,7 +152,7 @@ body {
   padding-left: 14px;
   padding-right: 14px;
   box-sizing: border-box;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.45);
 }
 
 /* ဘယ်/ညာ ဝါးဆစ်တိုင် ဂရပ်ဖစ် */
@@ -154,7 +175,7 @@ body {
       var(--bamboo-1) 88%,
       var(--bamboo-line) 100%
     ),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='120'%3E%3Crect x='0' y='56' width='14' height='4' fill='%232e1b09'/%3E%3Crect x='0' y='60' width='14' height='2.5' fill='%23f5df9f' fill-opacity='.45'/%3E%3Crect x='0' y='62.5' width='14' height='2' fill='%232e1b09'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='120'%3E%3Crect x='0' y='56' width='14' height='4' fill='%23291707'/%3E%3Crect x='0' y='60' width='14' height='2.5' fill='%23f7e2a6' fill-opacity='.5'/%3E%3Crect x='0' y='62.5' width='14' height='2' fill='%23291707'/%3E%3C/svg%3E");
   background-repeat: repeat-y;
 }
 #app::before {
@@ -164,7 +185,7 @@ body {
   right: 0;
 }
 
-/* ထိပ်ဆုံး ပန်းခွေရွှေတန်း Banner */
+/* ထိပ်ဆုံး ပန်းခွေရွှေတန်း Banner (မြူးကြွစွာ ဖြည်းညှင်းစွာ ရွေ့လျားနေသော ပန်းခွေတန်း) */
 #ib {
   display: flex;
   align-items: center;
@@ -172,10 +193,12 @@ body {
   padding: 6px 10px;
   background-color: #4d2e14;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ccircle cx='18' cy='18' r='13' stroke='%23d8a83e' stroke-width='1.5' fill='none'/%3E%3Ccircle cx='18' cy='18' r='8' stroke='%23f4d378' stroke-width='1' fill='none'/%3E%3Cpath d='M18 5C21 11 25 15 31 18C25 21 21 25 18 31C15 25 11 21 5 18C11 15 15 11 18 5Z' stroke='%23d8a83e' stroke-width='1.1' fill='none'/%3E%3C/svg%3E"),
-    linear-gradient(180deg, #5c3718, #3d220d);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ccircle cx='18' cy='18' r='13' stroke='%23e2b246' stroke-width='1.5' fill='none'/%3E%3Ccircle cx='18' cy='18' r='8' stroke='%23f7d881' stroke-width='1' fill='none'/%3E%3Cpath d='M18 5C21 11 25 15 31 18C25 21 21 25 18 31C15 25 11 21 5 18C11 15 15 11 18 5Z' stroke='%23e2b246' stroke-width='1.1' fill='none'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, #5c3718, #3b200b);
   background-size: 34px 34px, 100% 100%;
-  color: #fcebc0;
+  background-repeat: repeat-x, no-repeat;
+  animation: fretScroll 14s linear infinite;
+  color: #fff3d1;
   font-size: 13px;
   font-weight: 700;
   border-bottom: 3px solid var(--bamboo-2);
@@ -186,8 +209,8 @@ body {
 }
 #ib span {
   flex: 1;
-  color: #fcebc0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
+  color: #fff3d1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 #ib button {
   width: auto;
@@ -195,13 +218,13 @@ body {
   padding: 4px 12px;
   border: 2px solid var(--gd);
   border-radius: 10px;
-  background: linear-gradient(180deg, #6b3f1d, #44250e);
-  color: #fff4d2;
+  background: linear-gradient(180deg, #6e411d, #42230c);
+  color: #fff6dc;
   font: inherit;
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   transition: transform 0.15s ease;
 }
 #ib button:active {
@@ -215,30 +238,30 @@ body {
   gap: 10px;
   padding: 10px 12px;
   background:
-    linear-gradient(180deg, rgba(88, 166, 73, 0.18) 0%, transparent 32%),
-    linear-gradient(180deg, #734220, #4d2911);
+    radial-gradient(circle at 85% 20%, rgba(255, 224, 130, 0.18), transparent 50%),
+    linear-gradient(180deg, #784422, #4d2810);
   color: #fff5d6;
   position: relative;
   border-bottom: 4px solid var(--bamboo-2);
-  box-shadow: inset 0 2px 0 rgba(255, 224, 150, 0.18), inset 0 -1px 0 var(--bamboo-line);
+  box-shadow: inset 0 2px 0 rgba(255, 224, 150, 0.2), inset 0 -1px 0 var(--bamboo-line);
 }
 #hd small {
   display: block;
-  color: #f3d79b;
+  color: #f4d89d;
   font-size: 12px;
   line-height: 1.4;
 }
 #hd b {
   font-family: "Noto Serif Myanmar", "Noto Sans Myanmar", serif;
   font-size: 17px;
-  color: #fff6da;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  color: #fff7dd;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
 .nm {
   min-width: 0;
 }
 
-/* ဇာတ်ကောင်ပုံ Medallion */
+/* ဇာတ်ကောင်ပုံ Medallion (ရွှေရောင်အလင်းကွင်း ဖြည်းဖြည်းလှည့်နေမည်) */
 .av {
   width: 56px;
   height: 56px;
@@ -247,11 +270,30 @@ body {
   border-radius: 50%;
   overflow: hidden;
   position: relative;
-  padding: 2px;
-  background: linear-gradient(145deg, #ffe294, #b57a1e);
+  padding: 2.5px;
+  background: linear-gradient(145deg, #ffe599, #b57a1e);
   border: 2.5px solid var(--bamboo-line);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
-  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 12px rgba(234, 180, 60, 0.28);
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.av::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 70deg,
+    rgba(255, 234, 155, 0.85) 92deg,
+    transparent 118deg 250deg,
+    rgba(255, 234, 155, 0.65) 272deg,
+    transparent 298deg 360deg
+  );
+  animation: haloSpin 8s linear infinite;
+  pointer-events: none;
+}
+.av:hover {
+  transform: scale(1.05);
 }
 .av:active {
   transform: scale(0.92);
@@ -262,14 +304,16 @@ body {
   display: block;
   border-radius: 50%;
   background: #f9e6b3;
-  animation: bob 3.5s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+  animation: bob 3.2s ease-in-out infinite;
 }
 
-/* ပိုက်ဆံ/ခလုတ် Pill — စာသားအရောင်ကို နောက်ခံနဲ့ အမြဲပြတ်သားစေရန် ထိန်းညှိထားသည် */
+/* ပိုက်ဆံ/ခလုတ် Pill */
 #hd .m {
   margin-left: auto;
-  background: linear-gradient(180deg, var(--btn-top), var(--btn-bot));
-  border: 2px solid var(--bamboo-2);
+  background: var(--btn-bg);
+  border: 2px solid var(--btn-border);
   color: var(--btn-fg);
   padding: 5px 11px;
   border-radius: 10px;
@@ -277,22 +321,26 @@ body {
   font-size: 12px;
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: inset 0 0 0 1px rgba(200, 150, 40, 0.45), 0 2px 4px rgba(0, 0, 0, 0.35);
-  transition: transform 0.15s ease;
+  box-shadow: inset 0 0 0 1px rgba(200, 150, 40, 0.4), 0 2px 5px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, filter 0.2s ease;
+}
+#hd .m:hover {
+  filter: brightness(1.06);
 }
 #hd .m:active {
   transform: scale(0.94);
 }
 
-/* ကြာပွင့်နှင့် စိမ်းလန်းသော ဇာပန်းတန်း */
+/* ကြာပွင့်နှင့် စိမ်းလန်းသော ဇာပန်းတန်း (မြူးကြွစွာ ဖြည်းညှင်းစွာ လှုပ်ရှားနေမည်) */
 .kn {
   height: 18px;
   flex: none;
   background-color: var(--wood-2);
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='18'%3E%3Cpath d='M0 16C6 6 18 6 24 16C30 6 42 6 48 16' stroke='%234c7c34' stroke-width='2.2' fill='%23639943' fill-opacity='.55'/%3E%3Cpath d='M24 3C28 8 30 12 24 16C18 12 20 8 24 3Z' fill='%23f3c68f' stroke='%238c3b2b' stroke-width='1'/%3E%3Cpath d='M16 9C20 10 22 13 24 16C20 15 17 13 16 9Z' fill='%23e8a57c'/%3E%3Cpath d='M32 9C28 10 26 13 24 16C28 15 31 13 32 9Z' fill='%23e8a57c'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='18'%3E%3Cpath d='M0 16C6 6 18 6 24 16C30 6 42 6 48 16' stroke='%234c7c34' stroke-width='2.2' fill='%23639943' fill-opacity='.6'/%3E%3Cpath d='M24 3C28 8 30 12 24 16C18 12 20 8 24 3Z' fill='%23f6cb94' stroke='%238c3b2b' stroke-width='1'/%3E%3Cpath d='M16 9C20 10 22 13 24 16C20 15 17 13 16 9Z' fill='%23eba97e'/%3E%3Cpath d='M32 9C28 10 26 13 24 16C28 15 31 13 32 9Z' fill='%23eba97e'/%3E%3C/svg%3E");
   background-repeat: repeat-x;
   background-position: center;
+  animation: fretScrollReverse 18s linear infinite;
   border-top: 1px solid var(--bamboo-line);
   border-bottom: 2px solid var(--bamboo-line);
 }
@@ -325,7 +373,7 @@ body {
   width: 60px;
   color: #fff6dc;
   font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
 }
 .b i {
   flex: 1;
@@ -334,14 +382,29 @@ body {
   border: 1.5px solid var(--bar-border);
   border-radius: 999px;
   overflow: hidden;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.65);
+  position: relative;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.7);
 }
 .b u {
   display: block;
   height: 100%;
   border-radius: 999px;
+  position: relative;
   box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.35), inset 0 -2px 0 rgba(0, 0, 0, 0.28);
   transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.b u::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: barSheen 3.8s ease-in-out infinite;
 }
 .b em {
   width: 38px;
@@ -350,24 +413,27 @@ body {
   color: #fff6dc;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
 }
 .b.lo em {
   color: var(--or);
-  animation: dangerBlink 1.3s ease-in-out infinite;
+  animation: dangerBlink 1.2s ease-in-out infinite;
 }
 
-/* ပင်မစာမျက်နှာ နောက်ခံ */
+/* ပင်မစာမျက်နှာ နောက်ခံ — ကျေးလက်လယ်ကွင်း၊ ကြာပွင့်နှင့် ပန်းခွေ ဂရပ်ဖစ်အလွှာများ (ဓာတ်ပုံမလိုဘဲ မြူးကြွစေရန်) */
 #ct {
   flex: 1;
   overflow-y: auto;
-  padding: 10px 10px 16px;
+  padding: 10px 10px 18px;
   scroll-behavior: smooth;
   overscroll-behavior: contain;
+  position: relative;
   background-color: var(--bg);
   background-image:
-    radial-gradient(circle at 50% 18%, rgba(200, 150, 40, 0.16), transparent 68%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 30Q15 24 30 30T60 30' stroke='%23b8862b' stroke-opacity='.14' fill='none'/%3E%3Cpath d='M0 48Q15 42 30 48T60 48' stroke='%2358a649' stroke-opacity='.11' fill='none'/%3E%3C/svg%3E");
+    radial-gradient(circle at 20% 10%, rgba(234, 180, 60, 0.16), transparent 45%),
+    radial-gradient(circle at 82% 88%, rgba(93, 179, 73, 0.14), transparent 48%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84'%3E%3Cpath d='M0 64Q21 52 42 64T84 64' stroke='%23b8862b' stroke-opacity='.14' stroke-width='1.3' fill='none'/%3E%3Cpath d='M0 75Q21 63 42 75T84 75' stroke='%2358a649' stroke-opacity='.13' stroke-width='1.2' fill='none'/%3E%3Cpath d='M42 14C47 22 47 29 42 36C37 29 37 22 42 14Z' fill='%23c89628' fill-opacity='.11'/%3E%3Cpath d='M33 25C38 26 40 30 42 36C37 35 34 31 33 25Z' fill='%23c89628' fill-opacity='.09'/%3E%3Cpath d='M51 25C46 26 44 30 42 36C47 35 50 31 51 25Z' fill='%23c89628' fill-opacity='.09'/%3E%3Ccircle cx='16' cy='22' r='1.8' fill='%23c89628' fill-opacity='.18'/%3E%3Ccircle cx='68' cy='34' r='1.5' fill='%239c2717' fill-opacity='.14'/%3E%3C/svg%3E");
+  animation: meadowDrift 24s ease-in-out infinite alternate;
 }
 #ct::-webkit-scrollbar {
   width: 4px;
@@ -380,19 +446,22 @@ body {
   animation: tabin 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* ရွှေပန်းခွေထောင့်ပါ Card (.c) */
+/* ရွှေပန်းခွေထောင့်ပါ Card (.c) - စာသားအရောင် သီးခြားခွဲထားသည် */
 .c {
   position: relative;
-  background: linear-gradient(180deg, var(--card-top), var(--card-bot));
-  color: var(--fg);
-  border: 2px solid var(--bamboo-2);
+  background: var(--card-bg);
+  color: var(--card-fg);
+  border: 2px solid var(--card-border);
   border-radius: 10px;
   padding: 11px 14px;
   margin: 7px 0;
   box-shadow:
     inset 0 0 0 1.5px var(--card-inner),
     var(--sh);
-  transition: transform 0.18s ease;
+  transition: transform 0.18s ease, border-color 0.2s ease;
+}
+.c small {
+  color: var(--card-sub);
 }
 .c::before,
 .c::after {
@@ -401,7 +470,7 @@ body {
   width: 28px;
   height: 28px;
   pointer-events: none;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M2 26C2 12 10 3 26 2' stroke='%23c89628' stroke-width='1.8' fill='none'/%3E%3Cpath d='M3 18C6 11 11 6 18 3' stroke='%23e2ad3b' stroke-width='1.3' fill='none'/%3E%3Cpath d='M6 12C6 8 9 6 13 6' stroke='%23c89628' stroke-width='1.2' fill='none'/%3E%3Ccircle cx='5' cy='5' r='2' fill='%23e2ad3b'/%3E%3C/svg%3E")
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M2 26C2 12 10 3 26 2' stroke='%23d49e2a' stroke-width='1.8' fill='none'/%3E%3Cpath d='M3 18C6 11 11 6 18 3' stroke='%23f2c45a' stroke-width='1.3' fill='none'/%3E%3Cpath d='M6 12C6 8 9 6 13 6' stroke='%23d49e2a' stroke-width='1.2' fill='none'/%3E%3Ccircle cx='5' cy='5' r='2' fill='%23f2c45a'/%3E%3C/svg%3E")
     no-repeat;
 }
 .c::before {
@@ -431,26 +500,30 @@ body {
   color: var(--bl);
 }
 
-/* ဇာတ်လမ်းစာကြောင်း Card များ */
+/* ဇာတ်လမ်းစာကြောင်း Card များ - Light & Dark နှစ်မျိုးလုံး စာသားပြတ်သားစေရန် */
 #ct > div:not(.y):not(.c) {
   position: relative;
-  background: linear-gradient(180deg, var(--card-top), var(--card-bot));
-  color: var(--fg);
-  border: 2px solid var(--bamboo-2);
+  background: var(--card-bg);
+  color: var(--card-fg);
+  border: 2px solid var(--card-border);
   border-radius: 9px;
   padding: 8px 12px;
   margin: 6px 0;
   font-size: 15px;
   box-shadow:
     inset 0 0 0 1.5px var(--card-inner),
-    0 2px 5px rgba(0, 0, 0, 0.18);
+    0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.16s ease, border-color 0.2s ease;
+}
+#ct > div:not(.y):not(.c) small {
+  color: var(--card-sub);
 }
 
 .n {
-  animation: rise 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: popBounce 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* ရွေးချယ်စရာ ခလုတ်များ — Light & Dark နှစ်မျိုးလုံး စာသားထင်ရှားစေရန် */
+/* ရွေးချယ်စရာ ခလုတ်များ - မြူးကြွသော နှိပ်ချက်နှင့် Hover */
 #ct button,
 #md button {
   display: block;
@@ -460,32 +533,54 @@ body {
   font: inherit;
   font-weight: 600;
   color: var(--btn-fg);
-  background: linear-gradient(180deg, var(--btn-top), var(--btn-bot));
-  border: 2px solid var(--bamboo-2);
+  background: var(--btn-bg);
+  border: 2px solid var(--btn-border);
   border-radius: 10px;
   cursor: pointer;
   text-align: center;
-  box-shadow: inset 0 0 0 1px rgba(200, 150, 40, 0.35), 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: transform 0.14s ease, filter 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(200, 150, 40, 0.35), 0 3px 0 rgba(40, 20, 6, 0.28), 0 3px 6px rgba(0, 0, 0, 0.22);
+  transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 #ct button:hover,
 #md button:hover {
   border-color: var(--gd);
-  filter: brightness(1.05);
+  filter: brightness(1.06);
+  transform: translateY(-1.5px);
 }
 #ct button:active,
 #md button:active {
-  transform: scale(0.97);
+  transform: translateY(1.5px) scale(0.97);
+  box-shadow: inset 0 0 0 1px rgba(200, 150, 40, 0.35), 0 1px 0 rgba(40, 20, 6, 0.28);
 }
 
-/* Primary ခလုတ် */
+/* Primary ခလုတ် (ရွှေရောင်အလင်းတန်း ဖြတ်ပြေးမည်) */
 #ct button.pri,
 #md button.pri {
-  background: linear-gradient(180deg, var(--pri-top), var(--pri-bot));
-  border-color: var(--gd);
+  background: var(--pri-bg);
+  border-color: var(--pri-border);
   color: var(--pri-fg);
   font-weight: 700;
-  box-shadow: inset 0 1px 0 rgba(255, 224, 150, 0.32), 0 3px 6px rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255, 224, 150, 0.38), 0 3px 0 rgba(35, 8, 4, 0.5), 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+#ct button.pri::after,
+#md button.pri::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 238, 175, 0.32),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: btnSweep 4.2s ease-in-out infinite;
+  pointer-events: none;
 }
 
 /* အသက်နှင့် ခုနှစ် ခေါင်းစဉ်စာတန်း (.y) */
@@ -495,7 +590,12 @@ body {
   font-weight: 700;
   text-align: center;
   margin: 10px 0 6px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+.y::before,
+.y::after {
+  content: " ✿ ";
+  color: var(--gr);
 }
 .r {
   color: var(--or);
@@ -520,16 +620,16 @@ small {
     );
   color: #fff4d2;
   border-top: 3px solid var(--bamboo-2);
-  box-shadow: inset 0 1px 0 rgba(255, 224, 150, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 224, 150, 0.2);
 }
 #dk small {
-  color: #e8cb8e;
+  color: #ebd094;
 }
 .bs {
   flex: 1;
 }
 
-/* အစိမ်းရောင် အဝိုင်းခလုတ် (+ အသက်) */
+/* အစိမ်းရောင် အဝိုင်းခလုတ် (+ အသက်) - မြူးကြွသော Pulse Animation */
 .ag {
   width: 64px;
   height: 64px;
@@ -537,7 +637,7 @@ small {
   border-radius: 50%;
   border: 3px solid #f7e4b2;
   background:
-    radial-gradient(circle at 35% 30%, #6fc24c, var(--gr) 62%, var(--jd));
+    radial-gradient(circle at 35% 30%, #74cc4e, var(--gr) 62%, var(--jd));
   color: #ffffff;
   font-size: 28px;
   font-weight: 700;
@@ -547,7 +647,7 @@ small {
   box-shadow:
     0 0 0 2px #2b180a,
     0 4px 10px rgba(0, 0, 0, 0.5);
-  transition: transform 0.15s ease, opacity 0.3s ease;
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
 }
 .ag small {
   display: block;
@@ -555,13 +655,16 @@ small {
   font-weight: 700;
   color: #ffffff;
   margin-top: 1px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
 }
 .ag:not(:disabled) {
-  animation: pulse 2.4s ease-in-out infinite;
+  animation: pulse 2.2s ease-in-out infinite;
+}
+.ag:hover:not(:disabled) {
+  transform: scale(1.06);
 }
 .ag:active:not(:disabled) {
-  transform: scale(0.91);
+  transform: scale(0.9);
 }
 .ag:disabled {
   opacity: 0.4;
@@ -574,7 +677,7 @@ small {
   position: relative;
   background-color: var(--wood-2);
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Crect width='12' height='12' fill='%23b57e40' fill-opacity='.55' stroke='%2342270f' stroke-width='1.2'/%3E%3Crect x='12' y='12' width='12' height='12' fill='%23b57e40' fill-opacity='.55' stroke='%2342270f' stroke-width='1.2'/%3E%3Crect x='12' y='0' width='12' height='12' fill='%238c5b27' fill-opacity='.55' stroke='%2342270f' stroke-width='1.2'/%3E%3Crect x='0' y='12' width='12' height='12' fill='%238c5b27' fill-opacity='.55' stroke='%2342270f' stroke-width='1.2'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Crect width='12' height='12' fill='%23b57e40' fill-opacity='.55' stroke='%233d230c' stroke-width='1.2'/%3E%3Crect x='12' y='12' width='12' height='12' fill='%23b57e40' fill-opacity='.55' stroke='%233d230c' stroke-width='1.2'/%3E%3Crect x='12' y='0' width='12' height='12' fill='%238c5b27' fill-opacity='.55' stroke='%233d230c' stroke-width='1.2'/%3E%3Crect x='0' y='12' width='12' height='12' fill='%238c5b27' fill-opacity='.55' stroke='%233d230c' stroke-width='1.2'/%3E%3C/svg%3E");
   border-top: 3px solid var(--bamboo-2);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
 }
@@ -585,9 +688,9 @@ small {
   left: calc(var(--i, 0) * 20%);
   width: 20%;
   height: 3.5px;
-  background: var(--gd);
-  box-shadow: 0 1px 5px rgba(226, 173, 59, 0.65);
-  transition: left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  background: linear-gradient(90deg, var(--gr), var(--gd), var(--bl));
+  box-shadow: 0 1px 6px rgba(234, 180, 60, 0.7);
+  transition: left 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 #tb b {
   flex: 1;
@@ -597,7 +700,7 @@ small {
   color: #f6e7c4;
   cursor: pointer;
   font-weight: 700;
-  text-shadow: 0 1px 2px #1c1008, 0 0 5px rgba(0, 0, 0, 0.75);
+  text-shadow: 0 1px 2px #140b05, 0 0 5px rgba(0, 0, 0, 0.8);
   transition: transform 0.15s ease, color 0.2s ease;
 }
 #tb b:active {
@@ -606,14 +709,14 @@ small {
 #tb b span {
   display: block;
   font-size: 20px;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
-  transition: transform 0.22s ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.75));
+  transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 #tb .on {
-  color: #ffe28a;
+  color: #ffe694;
 }
 #tb .on span {
-  transform: translateY(-2px) scale(1.12);
+  transform: translateY(-3px) scale(1.15);
 }
 
 /* Toast Notification */
@@ -622,15 +725,15 @@ small {
   left: 50%;
   bottom: 150px;
   transform: translateX(-50%);
-  background: #2b180a;
-  color: #fff4d2;
+  background: linear-gradient(135deg, #3b1e0c, #221106);
+  color: #fff5d6;
   border: 2px solid var(--gd);
   padding: 8px 16px;
   border-radius: 12px;
   font-size: 13px;
   max-width: 80%;
   z-index: 9;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
   animation: toast 2.2s ease both;
 }
 
@@ -638,7 +741,7 @@ small {
 #md {
   position: fixed;
   inset: 0;
-  background: rgba(12, 7, 3, 0.65);
+  background: rgba(10, 6, 2, 0.68);
   backdrop-filter: blur(2px);
   display: flex;
   align-items: flex-end;
@@ -652,12 +755,14 @@ small {
   width: 100%;
   max-width: 430px;
   border-top: 4px solid var(--bamboo-2);
+  border-left: 3px solid var(--bamboo-2);
+  border-right: 3px solid var(--bamboo-2);
   border-radius: 20px 20px 0 0;
   padding: 16px 14px 18px;
   max-height: 85%;
   overflow-y: auto;
   box-sizing: border-box;
-  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 -8px 26px rgba(0, 0, 0, 0.55);
   animation: up 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -669,10 +774,18 @@ small {
   margin: -6px 0 0 -6px;
   border-radius: 50%;
   border: 1.5px solid var(--gd);
-  background: rgba(226, 173, 59, 0.4);
+  background: rgba(234, 180, 60, 0.45);
   pointer-events: none;
   z-index: 99;
-  animation: rp 0.55s ease-out forwards;
+  animation: rp 0.58s ease-out forwards;
+}
+
+/* JS ကနေ ထပ်ထည့်သုံးနိုင်တဲ့ Game Feedback Animations (ဥပမာ - .shake, .flash-gold, .pop) */
+.shake {
+  animation: screenShake 0.38s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+.flash-gold {
+  animation: goldGlow 0.65s ease-out;
 }
 
 input:not([type="range"]) {
@@ -681,15 +794,21 @@ input:not([type="range"]) {
   margin-top: 6px;
   padding: 10px 12px;
   font: inherit;
-  border: 2px solid var(--bamboo-2);
+  border: 2px solid var(--card-border);
   border-radius: 10px;
   background: var(--cd);
   color: var(--fg);
 }
+input:not([type="range"]):focus {
+  outline: none;
+  border-color: var(--gd);
+}
 
-@keyframes rise {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: none; }
+/* Animations */
+@keyframes popBounce {
+  0% { opacity: 0; transform: translateY(10px) scale(0.98); }
+  70% { opacity: 1; transform: translateY(-2px) scale(1.005); }
+  100% { opacity: 1; transform: none; }
 }
 @keyframes tabin {
   from { opacity: 0; transform: translateX(14px); }
@@ -704,12 +823,35 @@ input:not([type="range"]) {
   to { opacity: 1; }
 }
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(111, 194, 76, 0.55), 0 0 0 2px #2b180a; }
-  50% { box-shadow: 0 0 0 9px rgba(111, 194, 76, 0), 0 0 0 2px #2b180a; }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(116, 204, 78, 0.6), 0 0 0 2px #2b180a; }
+  50% { box-shadow: 0 0 0 10px rgba(234, 180, 60, 0), 0 0 0 2px #2b180a; }
 }
 @keyframes bob {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
+  50% { transform: translateY(-2.5px); }
+}
+@keyframes haloSpin {
+  to { transform: rotate(360deg); }
+}
+@keyframes fretScroll {
+  from { background-position: 0px center, 0 0; }
+  to { background-position: 68px center, 0 0; }
+}
+@keyframes fretScrollReverse {
+  from { background-position: 96px center; }
+  to { background-position: 0px center; }
+}
+@keyframes meadowDrift {
+  0% { background-position: 0 0, 0 0, 0px 0px; }
+  100% { background-position: 0 0, 0 0, 24px 12px; }
+}
+@keyframes barSheen {
+  0%, 65% { transform: translateX(-100%); }
+  100% { transform: translateX(220%); }
+}
+@keyframes btnSweep {
+  0%, 68% { left: -120%; }
+  100% { left: 160%; }
 }
 @keyframes dangerBlink {
   0%, 100% { opacity: 1; }
@@ -721,9 +863,20 @@ input:not([type="range"]) {
   100% { opacity: 0; }
 }
 @keyframes rp {
-  from { transform: scale(1); opacity: 0.9; }
-  to { transform: scale(10); opacity: 0; }
+  from { transform: scale(1); opacity: 0.92; }
+  to { transform: scale(10.5); opacity: 0; }
 }
+@keyframes screenShake {
+  10%, 90% { transform: translate3d(-2px, 0, 0); }
+  20%, 80% { transform: translate3d(3px, 1px, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, -1px, 0); }
+  40%, 60% { transform: translate3d(4px, 1px, 0); }
+}
+@keyframes goldGlow {
+  0% { box-shadow: 0 0 0 0 rgba(234, 180, 60, 0.75); }
+  100% { box-shadow: 0 0 0 14px rgba(234, 180, 60, 0); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation: none !important;

@@ -65,7 +65,7 @@
     --bamboo-3: #ab753c;
     --bamboo-line: #0d0703;
 
-    /* Card & Button Tokens (Dark) - နောက်ခံမှောင်ပြီး စာသား အလင်းရောင် ကြည်လင်စေရန် */
+    /* Card & Button Tokens (Dark) */
     --card-bg: linear-gradient(180deg, #2b1a0e, #1d1109);
     --card-fg: #fff2d6;
     --card-sub: #dfc08d;
@@ -185,7 +185,7 @@ body {
   right: 0;
 }
 
-/* ထိပ်ဆုံး ပန်းခွေရွှေတန်း Banner (မြူးကြွစွာ ဖြည်းညှင်းစွာ ရွေ့လျားနေသော ပန်းခွေတန်း) */
+/* ထိပ်ဆုံး ပန်းခွေရွှေတန်း Banner */
 #ib {
   display: flex;
   align-items: center;
@@ -211,6 +211,8 @@ body {
   flex: 1;
   color: #fff3d1;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  animation: none !important;
+  transform: none !important;
 }
 #ib button {
   width: auto;
@@ -261,7 +263,7 @@ body {
   min-width: 0;
 }
 
-/* ဇာတ်ကောင်ပုံ Medallion (ရွှေရောင်အလင်းကွင်း ဖြည်းဖြည်းလှည့်နေမည်) */
+/* ဇာတ်ကောင်ပုံ Medallion */
 .av {
   width: 56px;
   height: 56px;
@@ -274,7 +276,7 @@ body {
   background: linear-gradient(145deg, #ffe599, #b57a1e);
   border: 2.5px solid var(--bamboo-line);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 12px rgba(234, 180, 60, 0.28);
-  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
 }
 .av::before {
   content: "";
@@ -293,7 +295,8 @@ body {
   pointer-events: none;
 }
 .av:hover {
-  transform: scale(1.05);
+  transform: scale(1.06);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5), 0 0 16px rgba(234, 180, 60, 0.45);
 }
 .av:active {
   transform: scale(0.92);
@@ -322,16 +325,17 @@ body {
   white-space: nowrap;
   cursor: pointer;
   box-shadow: inset 0 0 0 1px rgba(200, 150, 40, 0.4), 0 2px 5px rgba(0, 0, 0, 0.35);
-  transition: transform 0.15s ease, filter 0.2s ease;
+  transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), filter 0.2s ease;
 }
 #hd .m:hover {
   filter: brightness(1.06);
+  transform: translateY(-1px);
 }
 #hd .m:active {
   transform: scale(0.94);
 }
 
-/* ကြာပွင့်နှင့် စိမ်းလန်းသော ဇာပန်းတန်း (မြူးကြွစွာ ဖြည်းညှင်းစွာ လှုပ်ရှားနေမည်) */
+/* ကြာပွင့်နှင့် စိမ်းလန်းသော ဇာပန်းတန်း */
 .kn {
   height: 18px;
   flex: none;
@@ -391,7 +395,7 @@ body {
   border-radius: 999px;
   position: relative;
   box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.35), inset 0 -2px 0 rgba(0, 0, 0, 0.28);
-  transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: width 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .b u::after {
   content: "";
@@ -420,7 +424,7 @@ body {
   animation: dangerBlink 1.2s ease-in-out infinite;
 }
 
-/* ပင်မစာမျက်နှာ နောက်ခံ — ကျေးလက်လယ်ကွင်း၊ ကြာပွင့်နှင့် ပန်းခွေ ဂရပ်ဖစ်အလွှာများ (ဓာတ်ပုံမလိုဘဲ မြူးကြွစေရန်) */
+/* ပင်မစာမျက်နှာ နောက်ခံ */
 #ct {
   flex: 1;
   overflow-y: auto;
@@ -443,10 +447,10 @@ body {
   border-radius: 999px;
 }
 #ct.in {
-  animation: tabin 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation: tabin 0.34s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ရွှေပန်းခွေထောင့်ပါ Card (.c) - စာသားအရောင် သီးခြားခွဲထားသည် */
+/* ရွှေပန်းခွေထောင့်ပါ Card (.c) */
 .c {
   position: relative;
   background: var(--card-bg);
@@ -458,7 +462,7 @@ body {
   box-shadow:
     inset 0 0 0 1.5px var(--card-inner),
     var(--sh);
-  transition: transform 0.18s ease, border-color 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .c small {
   color: var(--card-sub);
@@ -483,6 +487,61 @@ body {
   transform: rotate(180deg);
 }
 
+/* အသုဘဖိတ်စာ Card (.funeral-card) - မူရင်း ရွှေပန်းခွေ/သစ်သား Theme နှင့် ကိုက်ညီစေရန် */
+.funeral-card {
+  position: relative;
+  padding: 16px 14px;
+  margin: 10px 0;
+  border-radius: 14px;
+  background: var(--card-bg);
+  color: var(--card-fg);
+  border: 2.5px solid var(--gd);
+  box-shadow:
+    inset 0 0 0 2px var(--card-inner),
+    0 6px 18px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+.funeral-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--pri-fg);
+  background: var(--pri-bg);
+  border: 1.5px solid var(--pri-border);
+  margin-bottom: 6px;
+}
+.funeral-title {
+  font-family: "Noto Serif Myanmar", "Noto Sans Myanmar", serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--bl);
+  margin: 4px 0 2px;
+}
+.funeral-sub {
+  font-size: 12.5px;
+  color: var(--card-sub);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.funeral-bio {
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(135, 91, 40, 0.1);
+  border: 1px solid var(--card-border);
+  font-size: 13.5px;
+  line-height: 1.65;
+  margin-bottom: 8px;
+}
+.funeral-quote {
+  font-style: italic;
+  font-size: 12.5px;
+  color: var(--sb);
+  font-weight: 600;
+}
+
 #hd b,
 .hero h2,
 .c b,
@@ -494,14 +553,15 @@ body {
   text-align: center;
   padding: 18px 14px;
   border-width: 2.5px;
+  animation: heroFloat 3.8s ease-in-out infinite;
 }
 .hero h2 {
   margin: 6px 0 4px;
   color: var(--bl);
 }
 
-/* ဇာတ်လမ်းစာကြောင်း Card များ - Light & Dark နှစ်မျိုးလုံး စာသားပြတ်သားစေရန် */
-#ct > div:not(.y):not(.c) {
+/* ဇာတ်လမ်းစာကြောင်း Card များ */
+#ct > div:not(.y):not(.c):not(.funeral-card) {
   position: relative;
   background: var(--card-bg);
   color: var(--card-fg);
@@ -513,17 +573,17 @@ body {
   box-shadow:
     inset 0 0 0 1.5px var(--card-inner),
     0 2px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.16s ease, border-color 0.2s ease;
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease;
 }
-#ct > div:not(.y):not(.c) small {
+#ct > div:not(.y):not(.c):not(.funeral-card) small {
   color: var(--card-sub);
 }
 
 .n {
-  animation: popBounce 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: popBounce 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* ရွေးချယ်စရာ ခလုတ်များ - မြူးကြွသော နှိပ်ချက်နှင့် Hover */
+/* ရွေးချယ်စရာ ခလုတ်များ */
 #ct button,
 #md button {
   display: block;
@@ -541,7 +601,7 @@ body {
   position: relative;
   overflow: hidden;
   box-shadow: inset 0 0 0 1px rgba(200, 150, 40, 0.35), 0 3px 0 rgba(40, 20, 6, 0.28), 0 3px 6px rgba(0, 0, 0, 0.22);
-  transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), filter 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 #ct button:hover,
 #md button:hover {
@@ -555,7 +615,7 @@ body {
   box-shadow: inset 0 0 0 1px rgba(200, 150, 40, 0.35), 0 1px 0 rgba(40, 20, 6, 0.28);
 }
 
-/* Primary ခလုတ် (ရွှေရောင်အလင်းတန်း ဖြတ်ပြေးမည်) */
+/* Primary ခလုတ် */
 #ct button.pri,
 #md button.pri {
   background: var(--pri-bg);
@@ -629,7 +689,7 @@ small {
   flex: 1;
 }
 
-/* အစိမ်းရောင် အဝိုင်းခလုတ် (+ အသက်) - မြူးကြွသော Pulse Animation */
+/* အစိမ်းရောင် အဝိုင်းခလုတ် (+ အသက်) */
 .ag {
   width: 64px;
   height: 64px;
@@ -647,7 +707,7 @@ small {
   box-shadow:
     0 0 0 2px #2b180a,
     0 4px 10px rgba(0, 0, 0, 0.5);
-  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+  transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
 }
 .ag small {
   display: block;
@@ -690,7 +750,7 @@ small {
   height: 3.5px;
   background: linear-gradient(90deg, var(--gr), var(--gd), var(--bl));
   box-shadow: 0 1px 6px rgba(234, 180, 60, 0.7);
-  transition: left 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: left 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 #tb b {
   flex: 1;
@@ -710,7 +770,7 @@ small {
   display: block;
   font-size: 20px;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.75));
-  transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
 }
 #tb .on {
   color: #ffe694;
@@ -747,7 +807,7 @@ small {
   align-items: flex-end;
   justify-content: center;
   z-index: 5;
-  animation: fade 0.25s ease;
+  animation: fade 0.22s ease;
 }
 .sh {
   background: var(--bg);
@@ -763,7 +823,7 @@ small {
   overflow-y: auto;
   box-sizing: border-box;
   box-shadow: 0 -8px 26px rgba(0, 0, 0, 0.55);
-  animation: up 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation: up 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Tap Ripple */
@@ -780,7 +840,7 @@ small {
   animation: rp 0.58s ease-out forwards;
 }
 
-/* JS ကနေ ထပ်ထည့်သုံးနိုင်တဲ့ Game Feedback Animations (ဥပမာ - .shake, .flash-gold, .pop) */
+/* Game Feedback Animations */
 .shake {
   animation: screenShake 0.38s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
@@ -811,7 +871,7 @@ input:not([type="range"]):focus {
   100% { opacity: 1; transform: none; }
 }
 @keyframes tabin {
-  from { opacity: 0; transform: translateX(14px); }
+  from { opacity: 0; transform: translateX(12px); }
   to { opacity: 1; transform: none; }
 }
 @keyframes up {
@@ -829,6 +889,10 @@ input:not([type="range"]):focus {
 @keyframes bob {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-2.5px); }
+}
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 }
 @keyframes haloSpin {
   to { transform: rotate(360deg); }

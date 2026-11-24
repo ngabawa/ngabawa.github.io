@@ -129,22 +129,27 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Replace html, body and #app height rules in style.css */
 html,
 body {
   height: 100%;
+  height: 100dvh;
   margin: 0;
   background: var(--bg);
   color: var(--fg);
   font: 16px/1.65 -apple-system, "Noto Sans Myanmar", "Padauk", sans-serif;
   overflow: hidden;
+  touch-action: manipulation;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* ဘေးနှစ်ဖက် ဝါးဆစ်တိုင်များပါသော အဓိက App ဘောင် */
+
 #app {
   max-width: 430px;
   margin: 0 auto;
   height: 100%;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--bg);
@@ -154,6 +159,46 @@ body {
   box-sizing: border-box;
   box-shadow: 0 0 32px rgba(0, 0, 0, 0.45);
 }
+
+/* Add disabled states & milestone badges to style.css */
+#ct button:disabled,
+#md button:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+  filter: grayscale(0.45);
+  transform: none !important;
+  box-shadow: none;
+}
+
+#ct button small.req,
+#md button small.req {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 500;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+.badge-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  background: rgba(200, 150, 40, 0.16);
+  border: 1px solid var(--gd);
+  color: var(--bl);
+}
+
 
 /* ဘယ်/ညာ ဝါးဆစ်တိုင် ဂရပ်ဖစ် */
 #app::before,

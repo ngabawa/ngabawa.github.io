@@ -137,7 +137,8 @@ const BLD=["တစ်ဦးတည်းလုပ်ငန်းရှင်/Free
 const jn=(c,l)=>CAR[c][0]+" - "+CAR[c][1].split("|")[l]+" ("+jobOrgForCid(c)+")";
 const J=[["လယ်သမား/အလုပ်သမား",()=>1,520],["ဆိုင်ဝန်ထမ်း",()=>S.a>=16,780,16],["အလုပ်သင်",()=>S.a>=16,420,16]].concat(CAR.map(c=>[c[0]+" ("+c[1].split("|")[0]+")",()=>c[2]()&&(!c[5]||GV()),c[3],c[4]]));
 const BZ=[["စားသောက်ဆိုင်",3000],["ဆိုင်ကယ်/လျှပ်စစ်ပြင်ဆိုင်",2000],["အွန်လိုင်းရောင်းချရေး",1500]];
-let S=null,TB=0;
+let S=null,TB=0,AM=-1,LS=-1,SLOT=1;
+const SAVE_KEY=slot=>`mml6_slot_${slot}`;
 
 function isArtCareerName(name){
   if(!name)return false;
@@ -176,10 +177,10 @@ function showInfoPopup(title, bodyHtml, isUrgent){
 
 function start(){
   S=null;$("hd").innerHTML="";$("st").innerHTML="";$("st").dataset.k="";$("tb").innerHTML="";$("dk").style.display="none";
-  let v=0;try{v=localStorage.getItem("mml5")}catch(e){}
+  let slots=[1,2,3].map(s=>{try{let r=localStorage.getItem(SAVE_KEY(s))||(s===1?localStorage.getItem("mml5"):null);return r?{s,d:JSON.parse(r)}:null}catch(e){return null}}).filter(Boolean);
   let ct=$("ct");
   ct.innerHTML=`<div class="c hero n">${logo(96)}<h2>ငါ့ဘဝ - မြန်မာ</h2><small>၁၉၂၀ မှ ၂၀၂၆ အထိ မြန်မာ့သမိုင်းနဲ့အတူ ဘဝတစ်ခုချင်းစီကို နှစ်စဉ်ရွေးချယ်ပြီး မျိုးဆက်ပေါင်းများစွာ လက်ဆင့်ကမ်းသွားပါ။</small></div>`
-    +(v?`<button class="pri n" onclick="ld()">▶ ဆက်ကစားမယ်</button>`:"")
+    +slots.map(x=>`<button class="pri n" onclick="ld(${x.s})">▶ Slot ${BN(x.s)} ဆက်ကစားမယ် (${dispName(x.d.S.nm,x.d.S)} · အသက် ${BN(x.d.S.a)} · မျိုးဆက် ${BN(x.d.S.gen)})</button>`).join("")
     +`<div class="c n"><small>ဇာတ်ကောင်အမည် (မမွေးဖွားမီ ပြင်နိုင်တယ်)</small><input id="nmIn" maxlength="20" placeholder="အမည်ထည့်ပါ (မထည့်ရင် ကိုယ့်ဟာကိုယ် ရွေးပေးမယ်)"></div>`
     +`<button class="pri n" onclick="init();mus(1)">🪷 ၁၉၂၀ ကနေ ဘဝစမယ်</button>`
     +`<button class="n" onclick="inst()">📲 ဖုန်းထဲ ထည့်သွင်းမယ် (အခမဲ့)</button>`+RULES;
@@ -197,7 +198,7 @@ function init(){
     pt:null,inl:null,dy:0,bh:[],yb:null,yi:0,dep:0,cdm:0,gv:0,lsy:{},ins:{},sm:{},
     lf:{h:f?1:0,d:f?1:0,c:f?1:0},
     lfMult:{h:1,d:1,c:1},
-    ad:0,ae:0,ct:[],exc:{},pe:0,usedNews:[],
+    ad:0,ae:0,ct:[],exc:{},pe:0,usedNews:[],ach:[],
     nm:(($("nmIn")&&$("nmIn").value.trim())||pn(g,y,1,e,1)),
     gen:(LIN.gen=1),end:0
   };
@@ -211,16 +212,20 @@ function init(){
 }
 
 function lg(t,c){if(S.L.length>200)S.L.shift();S.L.push(`<div class="${c||""}">${t}</div>`)}
-function ap(fx){
+function ap(fx, reason){
   fx=typeof fx=="function"?fx():fx;
   let o=[],bad=0,good=0;
   for(let k in fx){
     let v=fx[k];
     if(k=="f")k="fm";
     if(k=="fm"&&S.fm===null)continue;
-    let t=(k=="m"&&S.a<16)?"fw":k;
-    S[t]=(S[t]||0)+v;
-    if(ST.includes(k))S[k]=cl(S[k]);
+    if(k=="m"&&v){
+      if(S.a<16)S.fw=Math.max(0,(S.fw||0)+v);
+      else mv(v,reason||"လုပ်ဆောင်ချက်/ဖြစ်ရပ်");
+    }else{
+      S[k]=(S[k]||0)+v;
+      if(ST.includes(k))S[k]=cl(S[k]);
+    }
     if(v<0)bad++;
     if(v>0)good++;
     if(N[k]&&v)o.push(k=="m"?"ငွေ "+(v>0?"+":"")+K(v):N[k]+(v>0?" +":" ")+v);
@@ -254,16 +259,45 @@ if("serviceWorker" in navigator&&location.protocol.startsWith("http"))addEventLi
 function cart(z, stObj){
   let st=stObj||S;
   let a=st.a,k=Math.min(1,.5+a/24),old=a>60,m=!st.g,sk=["#f2c9a0","#e0a874","#c98a56"][st.sk||0],hc=old?"#e8e8e8":"#222",ad=a>=18,sd=st.s>60?"M42 58q8 9 16 0":st.s<30?"M43 62q7-6 14 0":"M44 60h12",ck=m?"#f6a8a0":"#f3e9a0";
-  let body=`<rect x="44" y="64" width="12" height="12" fill="${sk}"/><path d="M22 100q0-26 28-26t28 26z" fill="${m?"#fff":"#e0457b"}"/><rect x="26" y="88" width="48" height="12" fill="${m?"#2f6f4f":"#8e44ad"}"/>`+[0,1,2,3,4].map(i=>`<rect x="${30+i*9}" y="88" width="2" height="12" fill="${m?"#1e4d8c":"#f1c40f"}"/>`).join("");
-  let face=`<circle cx="50" cy="46" r="22" fill="${sk}"/><circle cx="29" cy="48" r="4" fill="${sk}"/><circle cx="71" cy="48" r="4" fill="${sk}"/><circle cx="42" cy="44" r="3.2" fill="#222"/><circle cx="58" cy="44" r="3.2" fill="#222"/><circle cx="43" cy="43" r="1" fill="#fff"/><circle cx="59" cy="43" r="1" fill="#fff"/><path d="${sd}" stroke="#a33" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="36" cy="54" r="4.5" fill="${ck}" opacity=".85"/><circle cx="64" cy="54" r="4.5" fill="${ck}" opacity=".85"/>`+(old?'<path d="M38 35q12-5 24 0" stroke="#bbb" stroke-width="2" fill="none"/>':"");
+  let topCol=st.job&&st.job.cid===0?"#f8fafc":(m?"#fff":"#e0457b");
+  let body=`<rect x="44" y="64" width="12" height="12" fill="${sk}"/><path d="M22 100q0-26 28-26t28 26z" fill="${topCol}"/><rect x="26" y="88" width="48" height="12" fill="${m?"#2f6f4f":"#8e44ad"}"/>`+[0,1,2,3,4].map(i=>`<rect x="${30+i*9}" y="88" width="2" height="12" fill="${m?"#1e4d8c":"#f1c40f"}"/>`).join("");
+  let glasses=(st.w>=72||a>=52)?`<circle cx="42" cy="44" r="6.2" fill="none" stroke="#3b230c" stroke-width="1.3"/><circle cx="58" cy="44" r="6.2" fill="none" stroke="#3b230c" stroke-width="1.3"/><line x1="48.2" y1="44" x2="51.8" y2="44" stroke="#3b230c" stroke-width="1.3"/>`:"";
+  let face=`<circle cx="50" cy="46" r="22" fill="${sk}"/><circle cx="29" cy="48" r="4" fill="${sk}"/><circle cx="71" cy="48" r="4" fill="${sk}"/><circle cx="42" cy="44" r="3.2" fill="#222"/><circle cx="58" cy="44" r="3.2" fill="#222"/><circle cx="43" cy="43" r="1" fill="#fff"/><circle cx="59" cy="43" r="1" fill="#fff"/>${glasses}<path d="${sd}" stroke="#a33" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="36" cy="54" r="4.5" fill="${ck}" opacity=".85"/><circle cx="64" cy="54" r="4.5" fill="${ck}" opacity=".85"/>`+(old?'<path d="M38 35q12-5 24 0" stroke="#bbb" stroke-width="2" fill="none"/>':"");
   let hair=m?(ad?`<ellipse cx="50" cy="28" rx="23" ry="11" fill="#f4a6c0"/><circle cx="73" cy="22" r="7" fill="#f4a6c0"/>`:`<path d="M27 40q0-22 23-22t23 22q-8-12-23-12t-23 12z" fill="${hc}"/>`):`<path d="M26 44q-2-26 24-26t24 26q-6-14-24-14t-24 14z" fill="${hc}"/><circle cx="50" cy="14" r="9" fill="${hc}"/><circle cx="58" cy="12" r="4" fill="#ff3b7a"/>`;
-  return `<svg width="${z}" height="${z}" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#ffe3a8" stroke="#c8961e" stroke-width="3" stroke-dasharray="1 5" stroke-linecap="round"/><g transform="translate(50 100) scale(${k}) translate(-50 -100)">${body}${face}${hair}</g></svg>`;
+  let gradCap=(st.deg&&a>=21&&a<=26)?`<polygon points="50,10 24,20 50,28 76,20" fill="#1e1b18"/><rect x="44" y="22" width="12" height="5" fill="#1e1b18"/><line x1="72" y1="21" x2="72" y2="32" stroke="#eab43c" stroke-width="1.8"/>`:"";
+  return `<svg width="${z}" height="${z}" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#ffe3a8" stroke="#c8961e" stroke-width="3" stroke-dasharray="1 5" stroke-linecap="round"/><g transform="translate(50 100) scale(${k}) translate(-50 -100)">${body}${face}${hair}${gradCap}</g></svg>`;
+}
+
+const MILESTONES=[
+  ["phd_doc","🎖️ ဒေါက်တာဘွဲ့/ဆရာဝန်",()=>hasDoctorTitle(S)],
+  ["abroad","🌏 နိုင်ငံခြားအတွေ့အကြုံ",()=>Boolean(S.ab||S.rt)],
+  ["schol","🎓 နိုင်ငံတကာ Scholarship",()=>Boolean(S.schol)],
+  ["tycoon","💎 သိန်း ၅၀၀+ ကြွယ်ဝမှု",()=>NW(S)>=50000],
+  ["polyglot","🗣️ ဘာသာစကား ၂ မျိုး+",()=>Object.values(S.lg||{}).filter(x=>x.lv>=1).length>=2],
+  ["legacy3","🪷 မျိုးဆက် ၃ ဆက်+",()=>(S.gen||1)>=3],
+  ["clean","⚖️ သမာဓိရှင် (အသက် ၆၀+)",()=>S.a>=60&&!S.c&&!S.k]
+];
+
+function checkMilestones(){
+  if(!S)return;
+  S.ach=S.ach||[];
+  LIN.ach=LIN.ach||[];
+  MILESTONES.forEach(([id,label,cond])=>{
+    if(!S.ach.includes(id)&&cond()){
+      S.ach.push(id);
+      if(!LIN.ach.includes(id))LIN.ach.push(id);
+      sfx("levelup");
+      lg(`🏅 <b>အောင်မြင်မှုမှတ်တိုင်သစ်:</b> ${label}`,"y");
+    }
+  });
 }
 
 function pf(){
   let d=document.createElement("div");d.id="md";d.onclick=e=>{if(e.target==d)d.remove()};
   let ed=S.deg?MJ[S.deg-1].n+" ဘွဲ့ရ":S.uni?MJ[S.mj-1].n+" ကျောင်းသား":S.dr?"ကျောင်းထွက်":S.mu?"အခြေခံပညာအောင်":"ကျောင်းသား/ကလေး";
-  d.innerHTML=`<div class="sh"><div style="text-align:center">${cart(150)}<br><b style="font-size:20px">${dispName(S.nm)}</b><br><small>မျိုးဆက် ${BN(S.gen)} · အသက် ${BN(S.a)} · ${BN(S.y)}</small></div><div class="c">${S.g?"အမျိုးသမီး":"အမျိုးသား"} · ${ETH[S.e]} · ${REL[S.r]}<br>${FAM[S.f]}အိမ်ထောင်စု · ${S.ab?S.ab.d+" (နိုင်ငံခြား)":(S.town||"")+" ("+RGN[S.rg]+")"}<br>ခက်ခဲမှု ${"⭐".repeat(S.d+1)}</div><div class="c">📚 ${ed}<br>💼 ${S.job?S.job.n:"အလုပ်မရှိ"}${S.role?" · "+S.role:""}<br>🎓 Scholarship: ${S.schol?`ရရှိပြီး (${BN(S.scholLeft||0)} နှစ်ကျန် · ဘွဲ့တစ်ခုစာ)`:(S.ab&&S.ab.sc?"လျှောက်ထားနိုင်သည်":"မရှိသေး")}<br>🗣️ အင်္ဂလိပ် ${S.lg?S.lg.EN.lv:0}<br>💰 ${S.a<16?"မိဘဆီက တောင်းသုံးရတယ်":K(S.m)}<br>🏠 ${S.house?"အိမ်ပိုင်ရှိ":"အိမ်မရှိ"} · 🚗 ${S.car?"ကားရှိ":"ကားမရှိ"} · 🥇 ${K(S.gold||0)}<br>💍 ${S.mar?"အိမ်ထောင်ရှိ":"လူပျို/အပျို"} · 👶 သားသမီး ${BN(S.kids.length)}</div><div class="c"><small>${RG(S.y)}</small></div><button onclick="this.closest('#md').remove()">ပိတ်မယ်</button></div>`;
+  let unlocked=MILESTONES.filter(m=>(LIN.ach||[]).includes(m[0])||(S.ach||[]).includes(m[0]));
+  let badgeHtml=unlocked.length?`<div class="c"><b>🏅 မျိုးဆက်အောင်မြင်မှုများ</b><div class="badge-grid">${unlocked.map(m=>`<span class="badge-pill">${m[1]}</span>`).join("")}</div></div>`:"";
+  d.innerHTML=`<div class="sh"><div style="text-align:center">${cart(150)}<br><b style="font-size:20px">${dispName(S.nm)}</b><br><small>မျိုးဆက် ${BN(S.gen)} · အသက် ${BN(S.a)} · ${BN(S.y)}</small></div><div class="c">${S.g?"အမျိုးသမီး":"အမျိုးသား"} · ${ETH[S.e]} · ${REL[S.r]}<br>${FAM[S.f]}အိမ်ထောင်စု · ${S.ab?S.ab.d+" (နိုင်ငံခြား)":(S.town||"")+" ("+RGN[S.rg]+")"}<br>ခက်ခဲမှု ${"⭐".repeat(S.d+1)}</div><div class="c">📚 ${ed}<br>💼 ${S.job?S.job.n:"အလုပ်မရှိ"}${S.role?" · "+S.role:""}<br>🎓 Scholarship: ${S.schol?`ရရှိပြီး (${BN(S.scholLeft||0)} နှစ်ကျန် · ဘွဲ့တစ်ခုစာ)`:(S.ab&&S.ab.sc?"လျှောက်ထားနိုင်သည်":"မရှိသေး")}<br>🗣️ အင်္ဂလိပ် ${S.lg?S.lg.EN.lv:0}<br>💰 ${S.a<16?"မိဘဆီက တောင်းသုံးရတယ်":K(S.m)}<br>🏠 ${S.house?"အိမ်ပိုင်ရှိ":"အိမ်မရှိ"} · 🚗 ${S.car?"ကားရှိ":"ကားမရှိ"} · 🥇 ${K(S.gold||0)}<br>💍 ${S.mar?"အိမ်ထောင်ရှိ":"လူပျို/အပျို"} · 👶 သားသမီး ${BN(S.kids.length)}</div>${badgeHtml}<div class="c"><small>${RG(S.y)}</small></div><button onclick="this.closest('#md').remove()">ပိတ်မယ်</button></div>`;
   document.body.appendChild(d);
 }
 
@@ -293,10 +327,21 @@ function dock(){
   $("dk").innerHTML=`<div class="bs"><b>ဒီနှစ် လှုပ်ရှားမှု ${BN(S.T)}/၅</b><br><small>${S.ev?"ဖြစ်လာတဲ့ကိစ္စကို အရင်ဆုံးဖြတ်ပါ":S.end?"ဘဝ ပြီးဆုံးသွားပြီ":"အသက် +၁ နှိပ်ပြီး နောက်တစ်နှစ်သွားမယ်"}</small></div><button class="ag" ${S.ev||S.end?"disabled":""} onclick="next()">+<small>အသက်</small></button>`;
 }
 
-function sv(f){try{if(S&&(f||!S.ev)){S.L=S.L.slice(-120);localStorage.setItem("mml5",JSON.stringify({S,LIN,BGM_STYLE,MO,MV,SO}))}}catch(e){}}
-function ld(){
+function sv(f){
   try{
-    let d=JSON.parse(localStorage.getItem("mml5"));
+    if(S&&(f||!S.ev)){
+      S.L=S.L.slice(-120);
+      localStorage.setItem(SAVE_KEY(SLOT),JSON.stringify({S,LIN,BGM_STYLE,MO,MV,SO,savedAt:Date.now()}));
+      localStorage.setItem("mml6_active",String(SLOT));
+    }
+  }catch(e){}
+}
+function ld(slot){
+  try{
+    SLOT=slot||Number(localStorage.getItem("mml6_active"))||1;
+    let raw=localStorage.getItem(SAVE_KEY(SLOT))||localStorage.getItem("mml5");
+    if(!raw)return start();
+    let d=JSON.parse(raw);
     S=d.S;LIN=d.LIN||LIN;
     if(d.BGM_STYLE!==undefined)BGM_STYLE=d.BGM_STYLE;
     if(d.MO!==undefined)MO=d.MO;
@@ -305,9 +350,19 @@ function ld(){
     S.lf=S.lf||{h:1,d:1,c:1};
     S.lfMult=S.lfMult||{h:1,d:1,c:1};
     S.usedNews=S.usedNews||[];
+    S.ach=S.ach||[];
     syncDoctorTitle();
-    S.eo=null;TB=0;AM=-1;if(MO)mus(1);view();
+    S.eo=null;TB=0;AM=-1;LS=-1;if(MO)mus(1);view();
   }catch(e){start()}
+}
+function exportSave(){
+  if(!S)return;
+  let blob=new Blob([JSON.stringify({S,LIN,BGM_STYLE,MO,MV,SO})],{type:"application/json"});
+  let a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=`ngar-bawa-gen${S.gen}-${S.y}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
 }
 
 function buildObituaryData(){
@@ -359,7 +414,12 @@ function acts(){
   if(AM==7)return lfui();
   if(AM<0)return `<div class="c">ဒီနှစ် လှုပ်ရှားမှု <b>${BN(S.T)}/၅</b><br><small>ကိုယ့်အသက်နဲ့ လိုက်တဲ့ လုပ်ဆောင်ချက်တွေပဲ ပေါ်မယ်</small></div>`+ACT.map((c,i)=>(i==3?S.a>=10:c[2].some(x=>S.a>=x[2]))&&(!c[1].startsWith("NUG")||(S.y>=2021&&S.y<=2029))?`<button onclick="AM=${i};view()">${c[0]} ${c[1]} ›</button>`:"").join("");
   let c=ACT[AM];
-  return `<button onclick="AM=-1;view()">‹ နောက်သို့</button><div class="c"><b>${c[0]} ${c[1]}</b> · ဒီနှစ် လှုပ်ရှားမှု ${BN(S.T)}/၅</div>`+c[2].map((x,j)=>S.a>=x[2]?`<button onclick="use(ACT[${AM}][2][${j}][1],ACT[${AM}][2][${j}][0],${AM==7&&j<=6})">${x[0]}</button>`:"").join("");
+  return `<button onclick="AM=-1;view()">‹ နောက်သို့</button><div class="c"><b>${c[0]} ${c[1]}</b> · ဒီနှစ် လှုပ်ရှားမှု ${BN(S.T)}/၅</div>`+c[2].map((x,j)=>{
+    if(S.a<x[2])return "";
+    let free=(AM==7&&j<=6);
+    let dis=(!free&&S.T<=0)?"disabled":"";
+    return `<button ${dis} onclick="use(ACT[${AM}][2][${j}][1],ACT[${AM}][2][${j}][0],${free})">${x[0]}${free?'<small class="req">လှုပ်ရှားမှု အမှတ် မကုန်ပါ</small>':""}</button>`;
+  }).join("");
 }
 
 function haveChildNow(){
@@ -498,26 +558,29 @@ const MEL=[0,2,3,4,5,4,3,2,1,2,3,4,3,2,1,0];
 const BS=[0,3,4,0];
 
 function sett(){
-  return `<div class="c n"><b>🎵 မြန်မာ့ရိုးရာ နောက်ခံတီးလုံး (၄ မျိုး)</b><br><small>ကိုယ်နှစ်သက်တဲ့ တီးလုံးဟန်ကို ရွေးချယ်နားဆင်နိုင်ပါတယ်</small></div>`
+  return `<div class="c n"><b>💾 ဂိမ်းသိမ်းဆည်းမှု Slot များ (လက်ရှိ: Slot ${BN(SLOT)})</b><br><small>Slot ၃ ခုအထိ ခွဲသိမ်းနိုင်ပြီး JSON အဖြစ်လည်း သိမ်းဆည်းနိုင်ပါတယ်</small></div>`
+    +[1,2,3].map(s=>`<button class="${SLOT==s?"pri":""}" onclick="SLOT=${s};sv(1);alert('Slot ${BN(s)} မှာ သိမ်းပြီးပါပြီ');view()">${SLOT==s?"✔ ":""}💾 Slot ${BN(s)} မှာ သိမ်းမယ်</button>`).join("")
+    +`<button onclick="exportSave()">📤 Save ဖိုင် (JSON) ထုတ်ယူမယ်</button>`
+    +`<div class="c n"><b>🎵 မြန်မာ့ရိုးရာ နောက်ခံတီးလုံး (၄ မျိုး)</b><br><small>ကိုယ်နှစ်သက်တဲ့ တီးလုံးဟန်ကို ရွေးချယ်နားဆင်နိုင်ပါတယ်</small></div>`
     +BGM_MODES.map(m=>`<button class="${BGM_STYLE==m.id?"pri":""}" onclick="setBgmMode(${m.id});view()">${BGM_STYLE==m.id?"✔ ":"🎶 "}${m.name} <small style="display:block;font-weight:400;opacity:.85">${m.desc}</small></button>`).join("")
     +`<button onclick="mus(!MO);view()">${MO?"🔊 နောက်ခံတီးလုံး ပိတ်မယ်":"🔈 နောက်ခံတီးလုံး ဖွင့်မယ်"}</button>`
     +`<div class="c">အသံအတိုးအကျယ် <input type="range" min="0" max="100" value="${Math.round(MV*100)}" oninput="vol(this.value)" style="width:75%"></div>`
     +`<button onclick="SO=!SO;view()">${SO?"🔔 Sound Effect ပိတ်မယ်":"🔕 Sound Effect ဖွင့်မယ်"}</button>`
-    +`<button onclick="sv(1);alert('သိမ်းပြီးပါပြီ')">💾 ဂိမ်းသိမ်းမယ်</button>`
     +`<button class="pri" onclick="inst()">📲 ဖုန်းထဲ ထည့်သွင်းမယ်</button>`
     +`<button onclick="start()">🆕 ဂိမ်းအသစ် (၁၉၂၀ ကနေ)</button>`+RULES;
 }
 
-function pk(i){let x=S.ev.o[i],s=ap(x[1]);lg("➜ "+x[0]+(s?` (${s})`:""));if(x[2])lg(x[2],"r");sfx(/\+/.test(s||"")&&!/ -/.test(s||"")?"good":/ -/.test(s||"")?"bad":"click");S.ev=null;view()}
+function pk(i){let x=S.ev.o[i],s=ap(x[1],x[0]);lg("➜ "+x[0]+(s?` (${s})`:""));if(x[2])lg(x[2],"r");sfx(/\+/.test(s||"")&&!/ -/.test(s||"")?"good":/ -/.test(s||"")?"bad":"click");S.ev=null;checkMilestones();view()}
 function use(fx,l,noTurnCost){
   if(!noTurnCost&&S.T<=0)return noTurns();
   let r=typeof fx=="function"?fx():fx;
   if(r===false)return;
   if(!noTurnCost)S.T--;
   if(r.f>0)S.gd=(S.gd||0)+1;
-  let s=ap(r);
+  let s=ap(r,l);
   lg("• "+l+(s?` (${s})`:""));
   sfx(r.m&&Math.abs(r.m)>=500?"cash":/\+/.test(s||"")&&!/ -/.test(s||"")?"good":"click");
+  checkMilestones();
   view();
 }
 let TV="",ED="";
@@ -870,7 +933,7 @@ function next(){
   if(S.m<0)S.m=0;if(S.m<=0&&S.a>=18)S.s=cl(S.s-3);
   let y=S.y;if(y<1948)S.s=cl(S.s-1);if(y>=1948&&y<1962)S.s=cl(S.s+1);if(y>=1962&&y<2011)mv(-Math.round(S.m*.03),"ငွေတန်ဖိုးကျ");if(y>=2021&&y<2030){mv(-Math.round(S.m*.07),"ငွေတန်ဖိုးကျ (ဈေးနှုန်းတက်)");S.s=cl(S.s-1)}if(y>=2030)S.s=cl(S.s+2);
   if(S.a>45)S.l=cl(S.l-1);if(S.a>55)S.h=cl(S.h-1);
-  rules();depr();
+  rules();depr();checkMilestones();
   if(S.h<=0||(S.a>70&&R(100)<(S.a-70)*4)||S.a>105)return end();
   S.ev=pick()||kidEv();if(S.ev&&S.ev.o.length>1)S.ev.o=shuf(S.ev.o.slice());if(S.ev)setTimeout(()=>sfx("event"),240);if(!S.ev)lg("ဒီနှစ်တော့ အေးအေးဆေးဆေး ကုန်ဆုံးသွားတယ်။");view();
 }
@@ -1155,7 +1218,7 @@ function parents(){
 E.push({a:[18,80],wt:2,c:()=>S.ab,t:"နိုင်ငံခြားမှာ မိသားစုကို အရမ်းလွမ်းနေမိတယ်။",o:[["မိသားစုဆီ ငွေလွှဲပြီး ဖုန်းဆက်မယ်",()=>{(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel+8)));return{m:-500,s:2}}],["သည်းခံပြီး အလုပ်ဆက်လုပ်မယ်",{s:-3}]]});
 
 /* မြန်မာ့ရိုးရာ နောက်ခံတီးလုံး (၄ မျိုး) + Sound Effects */
-let AU=null, MG=null, SG=null, SO=1, MV=.5, MO=1, MT=null, BT=0, BGM_STYLE=0;
+let AU=null, MG=null, SG=null, SO=1, MV=.5, MO=1, MT=null, BT=0, BGM_STYLE=0, NEXT_NOTE_TIME=0, RAF_BGM=null;
 
 function au(){
   if(!AU){
@@ -1169,8 +1232,24 @@ function au(){
 function vol(v){MV=v/100;if(MG)MG.gain.value=MV*.65}
 function setBgmMode(id){BGM_STYLE=id;if(MO){mus(1);sfx("good")}}
 function mus(on){
-  MO=on?1:0;clearInterval(MT);MT=null;if(!MO)return;
-  try{au();let interval=BGM_STYLE===1?460:BGM_STYLE===2?420:BGM_STYLE===3?340:370;MT=setInterval(tk,interval)}catch(e){}
+  MO=on?1:0;
+  if(RAF_BGM){cancelAnimationFrame(RAF_BGM);RAF_BGM=null;}
+  if(!MO)return;
+  try{
+    au();
+    NEXT_NOTE_TIME=AU.currentTime+0.05;
+    const loop=()=>{
+      if(!MO||!AU)return;
+      let stepSec=(BGM_STYLE===1?460:BGM_STYLE===2?420:BGM_STYLE===3?340:370)/1000;
+      if(NEXT_NOTE_TIME<AU.currentTime-0.5)NEXT_NOTE_TIME=AU.currentTime+0.05;
+      while(NEXT_NOTE_TIME<AU.currentTime+0.18){
+        tkAt(NEXT_NOTE_TIME);
+        NEXT_NOTE_TIME+=stepSec;
+      }
+      RAF_BGM=requestAnimationFrame(loop);
+    };
+    RAF_BGM=requestAnimationFrame(loop);
+  }catch(e){}
 }
 
 function tone(f,t,d,v,ty,slideTo){
@@ -1208,11 +1287,11 @@ function hne(f,t,d){let o=AU.createOscillator(),b=AU.createBiquadFilter(),l=AU.c
 function drum(t,v){let o=AU.createOscillator();o.frequency.setValueAtTime(140,t);o.frequency.exponentialRampToValueAtTime(55,t+.18);env(o,t,.22*v,.28)}
 function clk(t){let b=AU.createBuffer(1,1800,AU.sampleRate),d=b.getChannelData(0);for(let i=0;i<1800;i++)d[i]=(Math.random()*2-1)*(1-i/1800);let s=AU.createBufferSource(),f=AU.createBiquadFilter(),g=AU.createGain();s.buffer=b;f.type="highpass";f.frequency.value=3500;g.gain.value=.1;s.connect(f);f.connect(g);g.connect(MG);s.start(t)}
 
-function tk(){
+function tkAt(t){
   if(!AU||AU.state!="running")return;
-  let t=AU.currentTime+.05,i=BT%MEL.length,n=SC[MEL[i]];BT++;
+  let i=BT%MEL.length,n=SC[MEL[i]];BT++;
   if(BGM_STYLE===0){
-    if(R(10)<9){if(R(4)==0)pat(SC[Math.min(6,MEL[i]+1)],t-.07,.5);pat(n,t,1)}
+    if(R(10)<9){if(R(4)==0)pat(SC[Math.min(6,MEL[i]+1)],Math.max(AU.currentTime,t-.07),.5);pat(n,t,1)}
     if(i%4==0)gong(SC[BS[(i/4|0)%4]]/2,t);
     if(i%8==0)drum(t,1);else if(i%8==4)drum(t,.5);
     if(i%4==2)clk(t);
@@ -1376,3 +1455,4 @@ gt(29,1948,1960);gt(30,1948,1962);
 function rip(e){let s=document.createElement("span");s.className="rp";s.style.left=e.clientX+"px";s.style.top=e.clientY+"px";document.body.appendChild(s);setTimeout(()=>s.remove(),650)}
 ibar();
 start();
+Analysing

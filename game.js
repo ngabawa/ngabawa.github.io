@@ -244,7 +244,7 @@ function noTurns(){
 }
 const BN=n=>String(n).replace(/\d/g,d=>"၀၁၂၃၄၅၆၇၈၉"[d]);
 const K=v=>{let k=Math.round(v*1000),s=k<0?"-":"";k=Math.abs(k);if(k<100000)return s+BN(k.toLocaleString("en-US"))+" ကျပ်";let l=Math.floor(k/100000),t=Math.floor(k%100000/10000);return s+BN(l.toLocaleString("en-US"))+"သိန်း"+(t?" "+BN(t)+"သောင်း":"")};
-function mv(v,l){S.m+=v;if(S.yb){S.yb.it[l]=(S.yb.it[l]||0)+v;if(v>0&&["လုပ်ခလစာ","လုပ်ငန်းအမြတ်","ပြည်ပလုပ်ခ"].includes(l))S.yi=(S.yi||0)+v}}
+function mv(v,l){S.m+=v;if(S.yb){S.yb.it[l]=(S.yb.it[l]||0)+v;if(v>0&&(String(l).startsWith("လုပ်ခလစာ")||["လုပ်ငန်းအမြတ်","ပြည်ပလုပ်ခ"].includes(l)))S.yi=(S.yi||0)+v}}
 function fin(){if(S.yb&&S.a>=16){let sum=Object.values(S.yb.it).reduce((a,b)=>a+b,0),net=S.m-S.yb.m0;S.bh.push({a:S.a,y:S.y,it:S.yb.it,ot:net-sum,net});if(S.bh.length>40)S.bh.shift()}S.yb={m0:S.m,it:{}};S.yi=0;S.lsy={}}
 function sheet(h){let d=document.createElement("div");d.id="md";d.onclick=e=>{if(e.target==d)d.remove()};d.innerHTML=`<div class="sh">${h}<button onclick="this.closest('#md').remove()">ပိတ်မယ်</button></div>`;document.body.appendChild(d)}
 function bud(){
@@ -620,9 +620,9 @@ function applyLifestyleYearly(){
   });
 
   let hBase=S.house?[120,260,520][L.h||0]:LF.h[L.h||0][1];
-  let hCost=Math.round(hBase * e * S.lfMult.h);
-  let dCost=Math.round(LF.d[L.d||0][1] * e * S.lfMult.d);
-  let cCost=Math.round(LF.c[L.c||0][1] * e * S.lfMult.c);
+  let hCost=Math.round(hBase * 12 * e * S.lfMult.h);
+  let dCost=Math.round(LF.d[L.d||0][1] * 12 * e * S.lfMult.d);
+  let cCost=Math.round(LF.c[L.c||0][1] * 12 * e * S.lfMult.c);
   let f=(S.ab?1+.25*S.ab.mu:1) * ((S.uni&&S.a<26)?.55:1);
   let tot=Math.round((hCost+dCost+cCost)*f);
   mv(-tot,S.house?"လူနေစရိတ် (အိမ်ပိုင်သက်သာ)":"လူနေစရိတ် (နေထိုင်မှုအလိုက်)");
@@ -650,14 +650,14 @@ function living(){
   applyLifestyleYearly();
   let e=EM();
   if(S.mar&&S.pt){
-    mv(Math.round(680*e),"အိမ်ထောင်ဖက် ဝင်ငွေ");
-    mv(-Math.round(520*e),"အိမ်ထောင်ဖက် စျေးဖိုး/အိမ်စားရိတ်");
+    mv(Math.round(680*12*e),"အိမ်ထောင်ဖက် ဝင်ငွေ (တစ်နှစ်စာ)");
+    mv(-Math.round(520*12*e),"အိမ်ထောင်ဖက် စျေးဖိုး/အိမ်စားရိတ် (တစ်နှစ်စာ)");
   }
   S.kids.forEach(k=>{
     let age=S.y-k.by;
-    if(age<22)mv(-Math.round((age<6?380:540)*e),"ကလေး စျေးဖိုး/အိမ်စားရိတ်");
+    if(age<22)mv(-Math.round((age<6?380:540)*12*e),"ကလေး စျေးဖိုး/အိမ်စားရိတ် (တစ်နှစ်စာ)");
   });
-  if(S.a>=25)(S.par||[]).forEach(p=>{if(p.al&&S.y-p.by>60)mv(-Math.round(280*e),"မိဘထောက်ပံ့စရိတ်")});
+  if(S.a>=25)(S.par||[]).forEach(p=>{if(p.al&&S.y-p.by>60)mv(-Math.round(280*12*e),"မိဘထောက်ပံ့စရိတ် (တစ်နှစ်စာ)")});
 }
 
 function eduYear(){
@@ -1115,9 +1115,9 @@ function dis(){S.cz=S.cz||{};let L=DZ.filter(d=>(d[1]=="a"||S.cz[d[0]]===undefin
 function upkeep(){
   soc();eduYear();
   if(S.a==16){mv(Math.round(S.fw*.05),"မိသားစုပေးငွေ");lg("💰 အသက် ၁၆ ပြည့်ပြီ - ကိုယ့်ဘာသာ ငွေစကိုင်ရပြီ။","r")}
-  if(S.fw<0)S.fw=0;if(S.gold)S.gold=Math.round(S.gold*1.03);if(S.car)mv(-150,"ကားထိန်းသိမ်းစရိတ်");
+  if(S.fw<0)S.fw=0;if(S.gold)S.gold=Math.round(S.gold*1.03);if(S.car)mv(-180*12,"ကားထိန်းသိမ်းစရိတ် (တစ်နှစ်စာ)");
   for(let k in S.hb)if(S.hb[k])lg(`🚬 ${HB[k][2]} ကြောင့် စရိတ်ကုန်ပြီး ကျန်းမာရေး ထိခိုက်နေတယ် (${ap(HB[k][1])})`,"r");
-  for(let n in S.cz){if(S.cz[n]){ap({m:-100});lg(`🩺 ${n} - ဆေးသောက်ပြီး ထိန်းထားတယ်။`)}else{lg(`🩺 ${n} - မကုဘဲ ထားလို့ ပိုဆိုးလာတယ် (${ap({h:-3})})`,"r");if(R(100)<4){S.h=cl(S.h-25);lg(`⚠️ ${n} ပြင်းထန်လာပြီ။`,"r")}}}
+  for(let n in S.cz){if(S.cz[n]){ap({m:-100*12});lg(`🩺 ${n} - ဆေးသောက်ပြီး ထိန်းထားတယ်။`)}else{lg(`🩺 ${n} - မကုဘဲ ထားလို့ ပိုဆိုးလာတယ် (${ap({h:-3})})`,"r");if(R(100)<4){S.h=cl(S.h-25);lg(`⚠️ ${n} ပြင်းထန်လာပြီ။`,"r")}}}
   if(S.pa&&!S.pp&&S.y>=S.pa+S.pd){S.pp=1;S.pe=S.y+5;lg("🛂 ပတ်စပို့ ထွက်လာပြီ။","r")}
   if(S.ab){let b=S.ab;b.n++;ap({s:-1,w:1});if(S.pp&&!ppv())ap({s:-2});if(b.fam)mv(-Math.round(450*EM()),"မိသားစု နိုင်ငံခြားနေထိုင်စရိတ်");S.kids.forEach(k=>k.rel=cl(k.rel-(b.fam?0:4)));S.sr=cl(S.sr-(b.fam?0:4));(S.par||[]).forEach(p=>p.al&&(p.rel=cl(p.rel-2)));lg(`🌏 ${b.d}မှာ နေနေတာ ${BN(b.n)} နှစ်ရှိပြီ`)}
   taxes();
@@ -1328,7 +1328,7 @@ function jobYear(){
     lg(`လုပ်ငန်း ${v>0?"အမြတ်":"ရှုံး"} ${K(v)}`);return;
   }
   let domMult=(j.abroad&&S.ab)?1:0.78;
-  mv(Math.round(j.s*EM()*domMult*(S.rt?1.15:1)),"လုပ်ခလစာ");S.ex++;if(j.cid>=0)S.exc[j.cid]=(S.exc[j.cid]||0)+1;j.y=(j.y||0)+1;
+  mv(Math.round(j.s*12*EM()*domMult*(S.rt?1.15:1)),"လုပ်ခလစာ (တစ်နှစ်စာ)");S.ex++;if(j.cid>=0)S.exc[j.cid]=(S.exc[j.cid]||0)+1;j.y=(j.y||0)+1;
   if(j.cid>=0){
     let c=CAR[j.cid],mx=c[1].split("|").length-1,cr=S.co.length?S.co.reduce((a,x)=>a+x.rel,0)/S.co.length:0;
     if(S.w>=50&&j.lvl<mx&&j.y>=2&&S.ad>=((GATE[j.cid]||{})[j.lvl+1]||0)&&(j.p>=1||R(100)<30+S.w*.2+S.ad*4+(cr>=60?10:0))){
@@ -1340,7 +1340,7 @@ function jobYear(){
   }else if(j.p>=2){j.s=Math.round(j.s*1.1);j.p=0;sfx("cash");lg("လစာတိုးလာပြီ။")}
 }
 
-function taxes(){if(S.a<16)return;let i=S.yi||0,j=S.job,t=0;if(i>0)t=Math.round(i*(j&&j.b?.22:i>3000?.1:i>1500?.05:.02));if(t)mv(-t,"အခွန်");let p=(S.house?100:0)+(S.car?20:0);if(p)mv(-p,"ပိုင်ဆိုင်မှုအခွန်")}
+function taxes(){if(S.a<16)return;let i=S.yi||0,j=S.job,t=0;if(i>0)t=Math.round(i*(j&&j.b?.22:i>36000?.1:i>18000?.05:.02));if(t)mv(-t,"အခွန်");let p=(S.house?100:0)+(S.car?20:0);if(p)mv(-p,"ပိုင်ဆိုင်မှုအခွန်")}
 function depr(){if(S.s<20&&!S.dep){S.dep=1;sfx("bad");lg("😞 စိတ်ဓာတ် အရမ်းကျပြီး စိတ်ကျရောဂါ ဝင်လာပြီ။","r")}if(S.dep&&S.s>=50){S.dep=0;sfx("good");lg("🌤️ စိတ်ဓာတ် ပြန်ကောင်းလာပြီ။","r")}if(S.dep){let f=S.fr.filter(x=>x.rel>=60).length>=2?5:10;S.h=cl(S.h-f);S.w=cl(S.w-f);S.l=cl(S.l-f);if(S.fm!==null)S.fm=cl(S.fm-f);lg(`😞 စိတ်ကျရောဂါကြောင့် မီတာတွေ ${BN(f)}% စီ လျော့သွားတယ်။`,"r")}}
 
 function soc(){
@@ -1456,3 +1456,81 @@ function rip(e){let s=document.createElement("span");s.className="rp";s.style.le
 ibar();
 start();
 Analysing
+
+
+// ── Expanded content pack (append-only for backward-compatible saves) ──
+// The economy stores values in thousand-MMK units. Recurring wages and
+// recurring household budgets are annualized from monthly reference values.
+MJ.push(
+ {n:"စာရင်းကိုင်နှင့် ဘဏ္ဍာရေး",s:"a",min:56,d:3,j:"biz"},
+ {n:"စိတ်ပညာနှင့် လူမှုရေး",s:"a",min:58,d:4,j:"art"},
+ {n:"ပတ်ဝန်းကျင်နှင့် ရာသီဥတု",s:"s",min:54,d:4,j:"sci"},
+ {n:"အစားအသောက်နှင့် ဟိုတယ်စီမံခန့်ခွဲမှု",s:"a",min:50,d:3,j:"biz"},
+ {n:"ဒေတာသိပ္ပံနှင့် AI",s:"s",min:72,d:4,j:"cs"}
+);
+CERTS.push(
+ ["ဒစ်ဂျစ်တယ်စျေးကွက်သင်တန်း",1,420,"marketing"],
+ ["စိုက်ပျိုးရေးနည်းပညာသင်တန်း",1,320,"agri"],
+ ["လျှပ်စစ်နှင့် ဆိုလာပြုပြင်ရေး",2,520,"solar"],
+ ["စက်ပြင်နှင့် EV နည်းပညာ",2,600,"mechanic"],
+ ["အရေးပေါ်ရှေးဦးသူနာပြု",1,260,"firstaid"],
+ ["Project Management သင်တန်း",1,480,"pm"]
+);
+
+const EXTRA_CAREERS=[
+ ["စိုက်ပျိုးရေးနည်းပညာရှင်","စိုက်ပျိုးရေးအကူ|ကွင်းဆင်းနည်းပညာရှင်|စိုက်ပျိုးရေးအကြံပေး|စီမံကိန်းတာဝန်ခံ|စိုက်ပျိုးရေးပညာရှင်",()=>S.a>=18&&S.rg>0||CT("agri"),1250,18,0,1],
+ ["ဆိုလာ/လျှပ်စစ်နည်းပညာရှင်","အလုပ်သင်|လျှပ်စစ်ပြုပြင်ရေးသမား|ဆိုလာတပ်ဆင်ရေးနည်းပညာရှင်|အဖွဲ့ခေါင်းဆောင်|နည်းပညာလုပ်ငန်းပိုင်ရှင်",()=>CT("solar")||HM("eng","sci")(),1650,18,0,1],
+ ["စက်ပြင်/EV နည်းပညာရှင်","အလုပ်သင်စက်ပြင်|စက်ပြင်|အကြီးတန်းစက်ပြင်|ဝပ်ရှော့ကြီးကြပ်သူ|ဝပ်ရှော့ပိုင်ရှင်",()=>CT("mechanic")||HM("eng")(),1500,18,0,1],
+ ["ဒစ်ဂျစ်တယ်စျေးကွက်ကျွမ်းကျင်သူ","Content အကူ|Digital Marketing ဝန်ထမ်း|Campaign Specialist|Marketing Manager|အတိုင်ပင်ခံ",()=>CT("marketing")||HM("biz","bba","cs")(),1800,18,0,1],
+ ["ဒေတာခွဲခြမ်းစိတ်ဖြာသူ","Data Assistant|Junior Data Analyst|Data Analyst|Senior Analyst|Data Science Lead",()=>HM("cs")()&&S.w>=65,2400,18,0,1],
+ ["လူမှုရေး/အကြံပေးဝန်ထမ်း","အကူဝန်ထမ်း|လူမှုရေးဝန်ထမ်း|အကြံပေး|Senior Counsellor|အဖွဲ့ခေါင်းဆောင်",()=>HM("art")()||CT("firstaid"),1450,18,0,1],
+ ["ပို့ကုန်/သွင်းကုန် ကုန်သွယ်ရေး","ဂိုဒေါင်အကူ|ကုန်သွယ်ရေးဝန်ထမ်း|Import/Export Officer|ကုန်သွယ်ရေးမန်နေဂျာ|လုပ်ငန်းရှင်",()=>S.lang>=1&&S.a>=18,1900,18,0,1],
+ ["အွန်လိုင်းသင်ကြားရေးဆရာ","သင်ကြားရေးအကူ|Online Tutor|သင်ရိုးဖန်တီးသူ|ပညာရေးအကြံပေး|သင်ကြားရေးလုပ်ငန်းရှင်",()=>S.w>=65&&S.lang>=1,1550,18,0,1]
+];
+EXTRA_CAREERS.forEach(c=>{CAR.push(c);J.push([c[0]+" ("+c[1].split("|")[0]+")",()=>c[2]()&&(!c[5]||GV()),c[3],c[4]])});
+
+// More event variety with meaningful trade-offs and contextual gates.
+E.push(
+ {a:[16,28],wt:2,c:()=>!S.job&&S.a>=16,t:"မိတ်ဆွေတစ်ဦးက အလုပ်သင်အခွင့်အရေးတစ်ခု မိတ်ဆက်ပေးလာတယ်။",o:[
+  ["အခကြေးငွေနည်းပေမယ့် သင်ယူခွင့်ကောင်းတဲ့ အလုပ်သင်ကို ရွေးမယ်",{w:3,s:2,m:-120}],
+  ["ချက်ချင်းဝင်ငွေရမယ့် အလုပ်ကို ရှာမယ်",{m:180,s:1}],
+  ["ကိုယ်ပိုင် Portfolio တည်ဆောက်မယ်",{w:2,m:-60}]]},
+ {a:[18,45],wt:2,c:()=>S.job&&!S.job.b,t:"လုပ်ငန်းခွင်မှာ Digital Skill အသစ်တစ်ခု သင်ယူဖို့ အခွင့်အရေးရလာတယ်။",o:[
+  ["သင်တန်းတက်ပြီး အချိန်ပေးမယ်",{w:4,m:-180}],
+  ["အလုပ်ပြီးမှ ကိုယ်တိုင်လေ့လာမယ်",{w:2,s:-1}],
+  ["အခုအလုပ်ကိုပဲ အာရုံစိုက်မယ်",{m:80}]]},
+ {a:[20,55],wt:2,c:()=>S.m>500,t:"မိသားစုအိမ်မှာ မိုးယိုပြီး ပြုပြင်ဖို့ လိုလာတယ်။",o:[
+  ["အရေးကြီးတဲ့နေရာတွေကို အရင်ပြင်မယ်",{m:-450,h:2,s:2}],
+  ["အပြည့်အစုံ ပြုပြင်မယ်",{m:-900,s:4}],
+  ["နောက်နှစ်မှ ပြင်မယ်",{s:-3}]]},
+ {a:[18,50],wt:2,c:()=>S.a>=18,t:"ဘဏ်/မိုဘိုင်းငွေကြေးဝန်ဆောင်မှုက စုဆောင်းငွေအစီအစဉ်တစ်ခု ကမ်းလှမ်းလာတယ်။",o:[
+  ["ဝင်ငွေရဲ့ အနည်းငယ်ကို အရေးပေါ်ရန်ပုံငွေ စုမယ်",()=>({m:-Math.min(S.m,Math.round(S.m*.08)),w:1,s:3})],
+  ["လက်ထဲမှာပဲ ငွေထားမယ်",{s:1}],
+  ["အန္တရာယ်မြင့် ရင်းနှီးမြှုပ်နှံမှုကို ရှောင်မယ်",{w:2}]]},
+ {a:[18,60],wt:2,c:()=>S.a>=18&&S.rg===1,t:"ကျေးရွာမှာ ရာသီဥတုမမှန်လို့ စိုက်ပျိုးရေးအထွက်နှုန်း ထိခိုက်လာတယ်။",o:[
+  ["မျိုးစေ့/ရေစီမံခန့်ခွဲမှုနည်းလမ်းသစ် သုံးမယ်",{m:-250,w:3}],
+  ["အလုပ်အကိုင်အပို ရှာမယ်",{m:120,s:-1}],
+  ["ရပ်ရွာနဲ့ အတူကူညီမယ်",{s:3,f:2}]]},
+ {a:[18,40],wt:2,c:()=>S.a>=18&&S.lang>=1,t:"နိုင်ငံတကာအဖွဲ့အစည်းတစ်ခုက အဝေးမှအလုပ်လုပ်ဖို့ အင်တာဗျူးခေါ်တယ်။",o:[
+  ["အင်တာဗျူးအတွက် ပြင်ဆင်မယ်",{w:3,m:-80}],
+  ["အခွင့်အရေးကို လက်ခံစမ်းသပ်မယ်",()=>R(100)<55+S.w*.3?{m:500,w:2,s:2}:{s:-3,m:-100}],
+  ["လက်ရှိအလုပ်ကို ဆက်လုပ်မယ်",{s:1}]]},
+ {a:[25,65],wt:1,c:()=>S.mar&&S.pt,t:"အိမ်ထောင်ဖက်နဲ့ အလုပ်-မိသားစု အချိန်ခွဲဝေမှုအပေါ် သဘောထားကွဲလွဲလာတယ်။",o:[
+  ["တစ်ပတ်တာ အချိန်ဇယား အတူတူရေးဆွဲမယ်",()=>{S.sr=cl(S.sr+8);return{s:2}}],
+  ["အလုပ်ကိုပဲ ဦးစားပေးမယ်",()=>{S.sr=cl(S.sr-8);return{m:100}}],
+  ["မိသားစုနေ့တစ်နေ့ သတ်မှတ်မယ်",()=>{S.sr=cl(S.sr+5);return{m:-80}}]]},
+ {a:[14,22],wt:2,c:()=>S.a>=14&&S.a<=22,t:"ကျောင်း/ရပ်ရွာက ပြိုင်ပွဲတစ်ခုမှာ ပါဝင်ဖို့ ဖိတ်ခေါ်ခံရတယ်။",o:[
+  ["အသင်းနဲ့ ပါဝင်ယှဉ်ပြိုင်မယ်",{w:2,s:3,l:2}],
+  ["စီစဉ်ကူညီသူအဖြစ် ပါဝင်မယ်",{s:3,f:2}],
+  ["စာ/အလုပ်ကို ဦးစားပေးမယ်",{w:1}]]}
+);
+
+// Interactive practical drills: short simulations with probabilistic outcomes.
+const FIELD_DRILLS=[
+ ["အလုပ်အင်တာဗျူး Simulation",()=>{let score=S.w*.45+(S.lang||0)*8+(S.ad||0)*3+R(26);return score>=55?{w:2,s:3,m:180}:{w:1,s:-2,m:-40}}],
+ ["အရေးပေါ်ဘတ်ဂျက် စီမံခြင်း",()=>({m:-Math.min(S.m,Math.round(S.m*.05)),w:3,s:2})],
+ ["လုပ်ငန်းငယ် Market Research",()=>{let score=S.w*.4+S.s*.25+R(35);return score>=55?{w:3,m:220,s:1}:{w:2,m:-80}}],
+ ["Community Project စီစဉ်ခြင်း",()=>{let score=S.s*.45+S.w*.25+R(30);return score>=50?{s:4,f:2,w:1}:{s:1,f:1,m:-60}}],
+ ["ပထမဦးဆုံးအကူအညီ လေ့ကျင့်ခြင်း",()=>({h:2,w:2,s:1,m:-70})]
+];
+ACT.push(["🧩","လက်တွေ့စိန်ခေါ်မှုများ",FIELD_DRILLS.map(x=>[x[0],x[1],14])]);

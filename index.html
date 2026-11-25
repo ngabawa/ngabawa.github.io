@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>ငါ့ဘဝ</title>
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#1a0709">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="ငါ့ဘဝ">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="logo.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&family=Noto+Serif+Myanmar:wght@600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="ib" hidden>
+      <span>📲 ဂိမ်းကို ဖုန်း/ကွန်ပျူတာထဲ ထည့်သွင်း၍ ကစားပါ</span>
+      <button onclick="inst()">ထည့်သွင်းမည်</button>
+    </div>
+    <div id="hd"></div>
+    <div class="kn"></div>
+    <div id="st"></div>
+    <div id="ct"></div>
+    <div id="dk"></div>
+    <div class="kn"></div>
+    <div id="tb"></div>
+  </div>
+  <script>
+    window.addEventListener("error", function (event) {
+      var panel = document.getElementById("ct");
+      if (panel) {
+        panel.innerHTML = '<div class="c"><b>ဂိမ်းဖွင့်ရာတွင် အမှားတစ်ခု ဖြစ်နေသည်။</b><p>စာမျက်နှာကို ပြန်ဖွင့်ပါ။ ပြဿနာ ဆက်ရှိပါက browser console ထဲက error ကို ပေးပို့ပါ။</p><small>' + String(event.message || "Unknown error") + '</small></div>';
+      }
+    });
+  </script>
+  <script src="game.js"></script>
+</body>
+</html>

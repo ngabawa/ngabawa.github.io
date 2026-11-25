@@ -1480,9 +1480,6 @@ gt(7,1995,2008);gt(11,1995,2010);gt(16,1995,2010);gt(19,1950,1995);gt(20,1988,19
 gt(29,1948,1960);gt(30,1948,1962);
 
 function rip(e){let s=document.createElement("span");s.className="rp";s.style.left=e.clientX+"px";s.style.top=e.clientY+"px";document.body.appendChild(s);setTimeout(()=>s.remove(),650)}
-ibar();
-start();
-Analysing
 
 
 // ── Expanded content pack (append-only for backward-compatible saves) ──
@@ -1561,3 +1558,7 @@ const FIELD_DRILLS=[
  ["ပထမဦးဆုံးအကူအညီ လေ့ကျင့်ခြင်း",()=>({h:2,w:2,s:1,m:-70})]
 ];
 ACT.push(["🧩","လက်တွေ့စိန်ခေါ်မှုများ",FIELD_DRILLS.map(x=>[x[0],x[1],14])]);
+
+// Initialize only after all feature data and functions have been registered.
+ibar();
+start();

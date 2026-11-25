@@ -1,0 +1,51 @@
+MYANMAR LIFE SIMULATOR — GAME IDEA PERMISSION
+
+Version 1.0
+
+PERMISSION
+
+The rights holder of the original game design concepts identified below grants
+you permission to use, adapt, combine, develop, and commercially exploit those
+concepts in your own projects. This permission is worldwide, royalty-free,
+perpetual, and requires no attribution.
+
+CONCEPTS COVERED
+
+This permission covers the general game-design ideas used in the project,
+including:
+
+- A life-simulation game following a character through age-based life stages.
+- Choice-driven events that respond to a character's age, work, family,
+  circumstances, and past decisions.
+- Short, age-appropriate city activities and mini-games that use action points,
+  skills, rewards, and collectible progress.
+- Life-simulation systems for skills, work, family, finances, health, and
+  character outcomes.
+- Narrative outcomes that vary with a character's behavior and circumstances.
+
+NOT INCLUDED
+
+This permission does not grant permission to copy, distribute, modify, or
+reuse the game's source or object code, exact written text, stories, dialogue,
+artwork, illustrations, animation, music, sound recordings, fonts, logos,
+game title, branding, or other assets.
+
+It also does not grant rights to third-party material, trademarks, or any
+material that the rights holder does not own or control. Those materials
+require separate permission from their respective owners.
+
+NO ATTRIBUTION REQUIRED
+
+You may use the covered concepts without crediting this game or its creator.
+Credit is welcome but not required.
+
+DISCLAIMER
+
+The concepts are provided without warranty. This notice grants only the
+permission described above and does not transfer ownership of any code,
+creative expression, brand, or other excluded material.
+
+Copyright generally protects original expression rather than ideas, systems,
+or methods of operation. This notice records the rights holder's permission
+and intent for reuse of the covered concepts; it does not create rights in
+material that the rights holder does not own.
